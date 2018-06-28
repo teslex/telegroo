@@ -6,18 +6,84 @@
 
 	<groupId>tech.teslex.telegroo</groupId>
 	<artifactId>telegroo</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.1</version>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<groovy.version>2.5.0</groovy.version>
+		<gmaven.version>1.6</gmaven.version>
+		<deploy.version>2.8.2</deploy.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
-			<version>2.5.0</version>
+			<version>${groovy.version}</version>
+			<scope>provided</scope>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.http-builder-ng</groupId>
+			<artifactId>http-builder-ng-core</artifactId>
+			<version>1.0.3</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<version>${gmaven.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>addSources</goal>
+							<goal>addTestSources</goal>
+							<goal>compile</goal>
+							<goal>compileTests</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>${deploy.version}</version>
+				<configuration>
+					<altDeploymentRepository>
+						internal.repo::default::file://${project.basedir}/${project.name}-maven-repo
+					</altDeploymentRepository>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
