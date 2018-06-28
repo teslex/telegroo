@@ -1,3 +1,6 @@
 .idea/
+target/
 
 *.iml
+bot.groovy
+src/main/groovy/tech/teslex/telegroo/Test.groovy

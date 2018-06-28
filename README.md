@@ -17,7 +17,11 @@ def bot = new Telegroo(token)
 
 bot.with {
 	onCommand(/start/) { update, match ->
-		sendMessage(update.message.chat.id, 'Hello!')
+		sendMessage('Hello!')
+	}
+	
+	onMessage(/hello/) { update, match ->
+		reply('Hey!')
 	}
 	
 	onUpdate { update ->
