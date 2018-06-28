@@ -1,6 +1,6 @@
 # telegroo
 
-Telegram bot framework for [Groovy](://groovy-lang.org)
+Telegram bot framework for [Groovy](http://groovy-lang.org)
 
 Sample bot:
 
