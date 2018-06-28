@@ -1,37 +1,28 @@
 # telegroo
 
-Telegram bot framework for [Groovy](http://groovy-lang.org)
+**Telegram bot framework for [Groovy](http://groovy-lang.org)**
 
 Sample bot:
 
 ```groovy
-
 @GrabResolver(name = 'dk-repo', root = 'https://gitlab.com/david.kohut/maven-repo/raw/master')
 @Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.1')
 
 import tech.teslex.telegroo.Telegroo
 
-token = ''
+TOKEN = ''
 
-def bot = new Telegroo(token)
+def bot = new Telegroo(TOKEN)
 
 bot.with {
-	onCommand(/start/) { update, match ->
-		sendMessage('Hello!')
+	onCommand(/start/) {
+		sendMessage('Welcome!')
 	}
 	
-	onMessage(/hello/) { update, match ->
-		reply('Hey!')
-	}
-	
-	onUpdate { update ->
-		println update
+	onCommand(/echo (.+)/) { update, match ->
+		sendMessage(match[0][1].toString())
 	}
 }
 
-bot.start()
-
-
-
-
+bot.start() // or startAsync()
 ```
