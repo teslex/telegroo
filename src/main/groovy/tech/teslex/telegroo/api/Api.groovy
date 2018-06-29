@@ -58,10 +58,6 @@ class Api {
 
 		MultipartEntityBuilder builder = MultipartEntityBuilder.create()
 
-		params.eachWithIndex { v, i ->
-			builder.addTextBody("$i", "$v")
-		}
-
 		builder.addBinaryBody(type, new FileInputStream(file), ContentType.MULTIPART_FORM_DATA, file.name)
 
 		HttpEntity multipart = builder.build()
