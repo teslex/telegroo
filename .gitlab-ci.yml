@@ -1,0 +1,29 @@
+image: maven:latest
+
+cache:
+ paths:
+  - .m2/repository
+  - target
+
+stages:
+  - package
+  - deploy
+
+package:
+  stage: package
+  script: mvn clean package
+  artifacts:
+   paths:
+    - target/telegroo*.jar
+
+deploy:
+  stage: deploy
+  script:
+    - mvn deploy
+    - git clone https://gitlab.com/david.kohut/maven-repo
+    - cp -r telegroo-maven-repo/* maven-repo
+    - cd maven-repo
+    - git config --global user.email 'devid.kohut@gmail.com'
+    - git add .
+    - git commit -m 'Update telegroo'
+    - git push https://david.kohut:${GITLAB_PRIVATE_KEY}@gitlab.com/david.kohut/maven-repo -f
