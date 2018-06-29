@@ -124,7 +124,7 @@ trait Actions {
 	}
 
 	def sendStickerId(String stickerId, Map params = [:]) {
-		api.go('sendSticker', [chat_id: chatId, sticker: [file_id: stickerId]] + params)
+		api.go('sendSticker', [chat_id: lastUpdate.message.from.id, sticker: [file_id: stickerId]] + params)
 	}
 
 	def sendSticker(def chatId, File sticker, Map params = [:]) {
@@ -227,7 +227,7 @@ trait Actions {
 	/* --- sendChatAction ---*/
 
 	def sendChatAction(String action, Map params = [:]) {
-		api.go('sendChatAction', [chat_id: chatId, action: action] + params)
+		api.go('sendChatAction', [chat_id: lastUpdate.message.from.id, action: action] + params)
 	}
 
 	def sendChatAction(def chatId, String action, Map params = [:]) {
