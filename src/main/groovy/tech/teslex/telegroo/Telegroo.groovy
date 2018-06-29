@@ -1,15 +1,18 @@
 package tech.teslex.telegroo
 
-import tech.teslex.telegroo.api.Api
+import groovy.transform.CompileDynamic
+import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Actions
+import tech.teslex.telegroo.api.Api
 
+@CompileStatic
 class Telegroo implements Bot, Actions {
 
 	String token = ''
 
 	int offset = -1
 
-	def lastUpdate = [:]
+	LinkedHashMap lastUpdate = [:]
 
 	boolean active = false
 
@@ -20,17 +23,18 @@ class Telegroo implements Bot, Actions {
 		this.api = new Api(token)
 	}
 
-	def handles = [
+	LinkedHashMap<String, Object> handles = [
 			message: [:],
 
 			update : []
 	]
 
-	def catchException = { Exception ex ->
+	Closure catchException = { Exception ex ->
 		ex.printStackTrace()
 		stop()
 	}
 
+	@CompileDynamic
 	void start() {
 		if (active)
 			return
@@ -43,6 +47,7 @@ class Telegroo implements Bot, Actions {
 
 				if (!updates.isEmpty()) {
 					updates.each { update ->
+						update = update as LinkedHashMap
 						lastUpdate = update
 
 						if (update.keySet()[1] == 'message') {
@@ -50,7 +55,7 @@ class Telegroo implements Bot, Actions {
 
 							if (handle)
 								if (handle.value.maximumNumberOfParameters == 1)
-									handle.value([update: update, match: update.message.text =~ handle.key ])
+									handle.value([update: update, match: update.message.text =~ handle.key])
 								else
 									handle.value(update, update.message.text =~ handle.key)
 						} else {
@@ -75,7 +80,7 @@ class Telegroo implements Bot, Actions {
 		}
 	}
 
-	def startAsync() {
+	Thread startAsync() {
 		Thread.start {
 			start()
 		}
@@ -88,19 +93,22 @@ class Telegroo implements Bot, Actions {
 		active = false
 	}
 
+	@CompileDynamic
 	void onUpdate(Closure closure) {
 		handles.update.add(closure)
 	}
 
+	@CompileDynamic
 	void onCommand(String command, Closure closure) {
 		handles.message.put(command.startsWith('/') ? command : "/$command", closure)
 	}
 
+	@CompileDynamic
 	void onMessage(String message, Closure closure) {
 		handles.message.put(message, closure)
 	}
 
-	def on(String type, Closure closure) {
+	void on(String type, Closure closure) {
 		handles[type] = closure
 	}
 }
