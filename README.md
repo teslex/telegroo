@@ -2,6 +2,9 @@
 
 **Telegram bot framework for [Groovy](http://groovy-lang.org)**
 
+- [Telegroo Docs](DOCS.md)
+- [Telegram Bot API](https://core.telegram.org/bots/api)
+
 Sample bot:
 
 ```groovy
@@ -10,9 +13,7 @@ Sample bot:
 
 import tech.teslex.telegroo.Telegroo
 
-TOKEN = ''
-
-def bot = new Telegroo(TOKEN)
+def bot = new Telegroo('TOKEN')
 
 bot.with {
 	onCommand(/start/) {
