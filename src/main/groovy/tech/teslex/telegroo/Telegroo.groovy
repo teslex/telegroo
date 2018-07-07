@@ -10,28 +10,28 @@ class Telegroo implements Bot, Actions {
 
 	String token = ''
 
-	int offset = -1
-
-	LinkedHashMap lastUpdate = [:]
+	def lastUpdate = [
+	        update_id: 0
+	]
 
 	boolean active = false
 
 	Api api
 
-	Telegroo(String token) {
-		this.token = token
-		this.api = new Api(token)
-	}
+	def handles = [
+			message: [:] as Map<String, Closure>,
 
-	LinkedHashMap<String, Object> handles = [
-			message: [:],
-
-			update : []
+			update : [] as List<Closure>
 	]
 
 	Closure catchException = { Exception ex ->
 		ex.printStackTrace()
 		stop()
+	}
+
+	Telegroo(String token) {
+		this.token = token
+		this.api = new Api(token)
 	}
 
 	@CompileDynamic
@@ -43,38 +43,37 @@ class Telegroo implements Bot, Actions {
 
 		while (active) {
 			try {
-				def updates = api.go('getUpdates', [offset: offset + 1]).result as List
+				def updates = getUpdates(lastUpdate.update_id + 1).result as List
 
-				if (!updates.isEmpty()) {
-					updates.each { update ->
-						update = update as LinkedHashMap
-						lastUpdate = update
+				updates.each { update ->
 
-						if (update.keySet()[1] == 'message') {
-							def handle = handles[update.keySet()[1] as String].find { update.message.text ==~ it.key }
+					lastUpdate = update as LinkedHashMap
 
-							if (handle)
-								if (handle.value.maximumNumberOfParameters == 1)
-									handle.value([update: update, match: update.message.text =~ handle.key])
-								else
-									handle.value(update, update.message.text =~ handle.key)
-						} else {
-							def handle = handles[update.keySet()[1] as String]
-
-							if (handle)
-								handle(update)
-						}
+					handles.update.each {
+						it(lastUpdate)
 					}
 
-					updates.each { update ->
-						handles.update.each {
-							it(update)
-						}
-					}
+					if (lastUpdate.keySet()[1] == 'message') {
 
-					offset = updates.last().update_id
+						def handle = handles[lastUpdate.keySet()[1] as String].find {
+							lastUpdate.message.text ==~ it.key
+						} as Map.Entry<String, Closure>
+
+						if (handle)
+							if (handle.value.maximumNumberOfParameters == 1)
+								handle.value([lastUpdate: lastUpdate, match: lastUpdate.message.text =~ handle.key])
+							else
+								handle.value(lastUpdate, lastUpdate.message.text =~ handle.key)
+					} else {
+
+						def handle = handles[lastUpdate.keySet()[1] as String]
+
+						if (handle)
+							handle(lastUpdate)
+					}
 				}
-			} catch (Exception ex) {
+			} catch (ex) {
+
 				catchException ex
 			}
 		}

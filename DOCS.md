@@ -2,7 +2,7 @@
 
 ```groovy
 @GrabResolver(name = 'dk-repo', root = 'https://gitlab.com/david.kohut/maven-repo/raw/master')
-@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.1')
+@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.2')
 
 import tech.teslex.telegroo.Telegroo
 
@@ -72,48 +72,48 @@ onMessage(/go/) {
 ```
 
 ## [Methods](https://core.telegram.org/bots/api#available-methods)
-`chat_id`, `[params]` is optional
+args with `?` is optional
 
 - `getMe()`
 
-- `sendMessage(chat_id, text, [params])`
+- `sendMessage(text, chat_id?, [params]?)`
 
-- `forward(from_chat_id, message_id, chat_id, [params])`
+- `forward(from_chat_id?, message_id, chat_id?, [params]?)`
 
-- `reply(chat_id, reply_to_message_id, message, [params])`
+- `reply(reply_to_message_id, message, chat_id?, [params]?)`
 
-- `sendPhoto(chat_id, File, [params])` | `sendPhoto(chat_id, url_to_file, [params])` | `sendPhotoId(chat_id, file_id, [params])`
+- `sendPhoto(File, chat_id?, [params]?)` | `sendPhoto(url_to_file, chat_id?, [params]?)` | `sendPhotoId(file_id, chat_id?, [params]?)`
 
-- `sendAudio(chat_id, File, [params])` | `sendAudio(chat_id, url_to_file, [params])` | `sendAudioId(chat_id, file_id, [params])`
+- `sendAudio(File, chat_id?, [params]?)` | `sendAudio(url_to_file, chat_id?, [params]?)` | `sendAudioId(file_id, chat_id?, [params]?)`
 
-- `sendDocument(chat_id, File, [params])` | `sendDocument(chat_id, url_to_file, [params])` | `sendDocumentId(chat_id, file_id, [params])`
+- `sendDocument(File, chat_id?, [params]?)` | `sendDocument(url_to_file, chat_id?, [params]?)` | `sendDocumentId(file_id, chat_id?, [params]?)`
 
-- `sendSticker(chat_id, File, [params])` | `sendSticker(chat_id, url_to_file, [params])` | `sendStickerId(chat_id, file_id, [params])`
+- `sendSticker(File, chat_id?, [params]?)` | `sendSticker(url_to_file, chat_id?, [params]?)` | `sendStickerId(file_id, chat_id?, [params]?)`
 
-- `sendVideo(chat_id, File, [params])` | `sendVideo(chat_id, url_to_file, [params])` | `sendVideoId(chat_id, file_id, [params])`
+- `sendVideo(File, chat_id?, [params]?)` | `sendVideo(url_to_file, chat_id?, [params]?)` | `sendVideoId(file_id, chat_id?, [params]?)`
 
-- `sendVoice(chat_id, File, [params])` | `sendVoice(chat_id, url_to_file, [params])` | `sendVoiceId(chat_id, file_id, [params])`
+- `sendVoice(File, chat_id?, [params]?)` | `sendVoice(url_to_file, chat_id?, [params]?)` | `sendVoiceId(file_id, chat_id?, [params]?)`
 
-- `sendLocation(chat_id, latitude, longitude, [params])`
+- `sendLocation(latitude, longitude, chat_id?, [params]?)`
 
-- `sendVenue(chat_id, latitude, longitude, title, address, [params])`
+- `sendVenue(latitude, longitude, title, address, chat_id?, [params]?)`
 
-- `sendContact(chat_id, phone_number, first_name, [params])`
+- `sendContact(phone_number?, first_name, chat_id?, [params]?)`
 
-- `sendChatAction(chat_id, action, [params])`
+- `sendChatAction(action, chat_id?, [params]?)`
 
-- `getUserProfilePhotos(user_id, [params])`
+- `getUserProfilePhotos(user_id?, [params]?)`
 
-- `getFile(file_id, [params])`
+- `getFile(file_id, [params]?)`
 
-- `kickChatMember(chat_id, user_id, [params])`
+- `kickChatMember(user_id, chat_id?, [params]?)`
 
-- `unbanChatMember(chat_id, user_id, [params])`
+- `unbanChatMember(user_id, chat_id?, [params]?)`
 
-- `answerCallbackQuery(chat_id, callback_query_id, [params])`
+- `answerCallbackQuery(callback_query_id, chat_id?, [params]?)`
 
-- `editMessageText(chat_id, message_id, text, [params])`
+- `editMessageText(message_id, text, chat_id?, [params]?)`
 
-- `editMessageCaption(chat_id, message_id, caption, [params])`
+- `editMessageCaption(message_id, caption, chat_id?, [params]?)`
 
-- `editMessageReplyMarkup(chat_id, message_id, [replyMarkup], [params])`
+- `editMessageReplyMarkup(message_id, [replyMarkup], chat_id?, [params]?)`

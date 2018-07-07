@@ -1,5 +1,8 @@
 .idea/
+.gradle/
 target/
+out/
+build/
 
 *.iml
 bot.groovy
