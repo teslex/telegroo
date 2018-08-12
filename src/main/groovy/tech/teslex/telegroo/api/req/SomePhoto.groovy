@@ -1,5 +1,8 @@
 package tech.teslex.telegroo.api.req
 
+import groovy.transform.CompileStatic
+
+@CompileStatic
 class SomePhoto extends SomeFile {
 
 	String caption

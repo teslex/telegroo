@@ -1,5 +1,8 @@
 package tech.teslex.telegroo.api.req
 
+import groovy.transform.CompileStatic
+
+@CompileStatic
 class SomeFile extends Some {
 	String type
 	File file

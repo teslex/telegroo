@@ -17,7 +17,7 @@ publish:
     - gradle publish
     - git clone https://gitlab.com/TesLex/repo
     - cp -r build/repo/* repo
-    - cd maven-repo
+    - cd repo
     - git config --global user.name 'David Kohut'
     - git config --global user.email 'devid.kohut@gmail.com'
     - git add .
