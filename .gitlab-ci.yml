@@ -1,29 +1,25 @@
-image: maven:latest
-
-cache:
- paths:
-  - .m2/repository
-  - target
+image: gradle:latest
 
 stages:
-  - package
-  - deploy
+  - build
+  - publish
 
-package:
-  stage: package
-  script: mvn clean package
+build:
+  stage: build
+  script: gradle clean build
   artifacts:
    paths:
-    - target/telegroo*.jar
+    - build/libs/telegroo*.jar
 
-deploy:
-  stage: deploy
+publish:
+  stage: publish
   script:
-    - mvn deploy
-    - git clone https://gitlab.com/david.kohut/maven-repo
-    - cp -r telegroo-maven-repo/* maven-repo
-    - cd maven-repo
+    - gradle publish
+    - git clone https://gitlab.com/TesLex/repo
+    - cp -r build/repo/* repo
+    - cd repo
+    - git config --global user.name 'David Kohut'
     - git config --global user.email 'devid.kohut@gmail.com'
     - git add .
     - git commit -m 'Update telegroo'
-    - git push https://david.kohut:${GITLAB_PRIVATE_KEY}@gitlab.com/david.kohut/maven-repo -f
+    - git push https://david.kohut:${GITLAB_PRIVATE_KEY}@gitlab.com/TesLex/repo -f

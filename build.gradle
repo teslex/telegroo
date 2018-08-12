@@ -1,0 +1,53 @@
+plugins {
+	id 'groovy'
+	id 'java'
+
+	id 'maven-publish'
+
+	id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+
+version = '0.2.1'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	shadow 'org.codehaus.groovy:groovy-all:2.5.1'
+	compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.10'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
+	compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.6'
+	compile group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.5.6'
+}
+
+task sourceJar(type: Jar) {
+	from sourceSets.main.allJava
+	from sourceSets.main.allGroovy
+}
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			groupId 'tech.teslex.telegroo'
+			artifactId 'telegroo'
+			version version
+
+			from components.java
+
+			artifact sourceJar {
+				classifier "sources"
+			}
+		}
+	}
+
+	repositories {
+		maven {
+			url "$buildDir/repo"
+		}
+	}
+}
