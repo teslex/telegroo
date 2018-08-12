@@ -1,8 +1,8 @@
 ## Sample bot:
 
 ```groovy
-@GrabResolver(name = 'dk-repo', root = 'https://gitlab.com/david.kohut/maven-repo/raw/master')
-@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.2')
+@GrabResolver(name = 'dk-repo', root = 'https://gitlab.com/TesLex/repo/raw/master')
+@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.2.1')
 
 import tech.teslex.telegroo.Telegroo
 
@@ -25,6 +25,7 @@ bot.start() // or startAsync()
 
 `api.go(method, [params])` |
 `api.goWithFile(method, File, fieldName, [params])`
+`api.goWithMediaGroup(method, List<Map<String, Object>>, [params])`
 
 ```groovy
 bot.api.go('sendMessage', [chat_id: '1', text: 'message text'])

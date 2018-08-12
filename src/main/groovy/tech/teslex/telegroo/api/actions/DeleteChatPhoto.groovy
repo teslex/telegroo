@@ -1,5 +1,7 @@
 package tech.teslex.telegroo.api.actions
 
+import tech.teslex.telegroo.api.req.Some
+
 trait DeleteChatPhoto {
 
 	def deleteChatPhoto(Map params = [:]) {
@@ -7,6 +9,6 @@ trait DeleteChatPhoto {
 	}
 
 	def deleteChatPhoto(chatId, Map params = [:]) {
-		api.go('deleteChatPhoto', [chat_id: chatId] + params)
+		api.go(new Some('deleteChatPhoto', [chat_id: chatId] + params))
 	}
 }

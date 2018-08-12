@@ -1,5 +1,7 @@
 package tech.teslex.telegroo.api.actions
 
+import tech.teslex.telegroo.api.req.Some
+
 trait KickChatMemeber {
 
 	def kickChatMember(Map params = [:]) {
@@ -7,6 +9,6 @@ trait KickChatMemeber {
 	}
 
 	def kickChatMember(userId, chatId, Map params = [:]) {
-		api.go('kickChatMember', [chat_id: chatId, user_id: userId] + params)
+		api.go(new Some('kickChatMember', [chat_id: chatId, user_id: userId] + params))
 	}
 }

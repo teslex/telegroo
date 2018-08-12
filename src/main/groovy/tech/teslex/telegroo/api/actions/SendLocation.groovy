@@ -1,5 +1,7 @@
 package tech.teslex.telegroo.api.actions
 
+import tech.teslex.telegroo.api.req.Some
+
 trait SendLocation {
 
 	def sendLocation(float latitude, float longitude, Map params = [:]) {
@@ -7,6 +9,6 @@ trait SendLocation {
 	}
 
 	def sendLocation(float latitude, float longitude, chatId, Map params = [:]) {
-		api.go('sendLocation', [chat_id: chatId, latitude: latitude, longitude: longitude] + params)
+		api.go(new Some('sendLocation', [chat_id: chatId, latitude: latitude, longitude: longitude] + params))
 	}
 }

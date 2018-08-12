@@ -1,5 +1,7 @@
 package tech.teslex.telegroo.api.actions
 
+import tech.teslex.telegroo.api.req.Some
+
 trait PromoteChatMember {
 
 	def promoteChatMember(Map params = [:]) {
@@ -7,6 +9,6 @@ trait PromoteChatMember {
 	}
 
 	def promoteChatMember(userId, chatId, Map params = [:]) {
-		api.go('promoteChatMember', [chat_id: chatId, user_id: userId] + params)
+		api.go(new Some('promoteChatMember', [chat_id: chatId, user_id: userId] + params))
 	}
 }

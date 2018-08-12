@@ -1,5 +1,8 @@
 package tech.teslex.telegroo.api.actions
 
+import tech.teslex.telegroo.api.req.Some
+import tech.teslex.telegroo.api.req.SomeVideoNote
+
 trait SendVideoNote {
 
 	def sendVideoNote(File videoNote, Map params = [:]) {
@@ -15,14 +18,14 @@ trait SendVideoNote {
 	}
 
 	def sendVideoNote(File videoNote, chatId, Map params = [:]) {
-		api.goWithFile('sendVideoNote', video_note, 'video_note', [chat_id: chatId] + params)
+		api.go(new SomeVideoNote(videoNote, [chat_id: chatId] + params))
 	}
 
 	def sendVideoNote(String videoNote, chatId, Map params = [:]) {
-		api.go('sendVideoNote', [chat_id: chatId, video_note: video_note] + params)
+		api.go(new Some('sendVideoNote', [chat_id: chatId, video_note: videoNote] + params))
 	}
 
 	def sendVideoNoteId(String videoNoteId, chatId, Map params = [:]) {
-		api.go('sendVideoNote', [chat_id: chatId, video_note: [file_id: video_noteId]] + params)
+		api.go(new Some('sendVideoNote', [chat_id: chatId, video_note: [file_id: videoNoteId]] + params))
 	}
 }

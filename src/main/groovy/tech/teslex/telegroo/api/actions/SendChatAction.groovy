@@ -1,5 +1,7 @@
 package tech.teslex.telegroo.api.actions
 
+import tech.teslex.telegroo.api.req.Some
+
 trait SendChatAction {
 
 	def sendChatAction(String action, Map params = [:]) {
@@ -7,6 +9,6 @@ trait SendChatAction {
 	}
 
 	def sendChatAction(String action, chatId, Map params = [:]) {
-		api.go('sendChatAction', [chat_id: chatId, action: action] + params)
+		api.go(new Some('sendChatAction', [chat_id: chatId, action: action] + params))
 	}
 }

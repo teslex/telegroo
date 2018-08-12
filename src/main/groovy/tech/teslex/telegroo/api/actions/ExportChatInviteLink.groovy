@@ -1,5 +1,7 @@
 package tech.teslex.telegroo.api.actions
 
+import tech.teslex.telegroo.api.req.Some
+
 trait ExportChatInviteLink {
 
 	def exportChatInviteLink(Map params = [:]) {
@@ -7,6 +9,6 @@ trait ExportChatInviteLink {
 	}
 
 	def exportChatInviteLink(chatId, Map params = [:]) {
-		api.go('exportChatInviteLink', [chat_id: chatId] + params)
+		api.go(new Some('exportChatInviteLink', [chat_id: chatId] + params))
 	}
 }

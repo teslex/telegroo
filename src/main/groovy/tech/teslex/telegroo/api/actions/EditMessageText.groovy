@@ -1,5 +1,7 @@
 package tech.teslex.telegroo.api.actions
 
+import tech.teslex.telegroo.api.req.Some
+
 trait EditMessageText {
 
 	def editMessageText(messageId, String text, Map params = [:]) {
@@ -7,6 +9,6 @@ trait EditMessageText {
 	}
 
 	def editMessageText(messageId, String text, chatId, Map params = [:]) {
-		api.go('editMessageText', [chat_id: chatId, message_id: messageId, text: text] + params)
+		api.go(new Some('editMessageText', [chat_id: chatId, message_id: messageId, text: text] + params))
 	}
 }

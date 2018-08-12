@@ -1,5 +1,7 @@
 package tech.teslex.telegroo.api.actions
 
+import tech.teslex.telegroo.api.req.Some
+
 trait SetChatDescription {
 
 	def setChatDescription(String description, Map params = [:]) {
@@ -7,6 +9,6 @@ trait SetChatDescription {
 	}
 
 	def setChatDescription(String description, chatId, Map params = [:]) {
-		api.go('setChatTitle', [chat_id: chatId, description: description] + params)
+		api.go(new Some('setChatTitle', [chat_id: chatId, description: description] + params))
 	}
 }

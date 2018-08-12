@@ -24,7 +24,8 @@ trait Actions implements
 		EditMessageCaption,
 		EditMessageText,
 		EditMessageReplyMarkup,
-		AnswerCallbackQuery {
+		AnswerCallbackQuery,
+		SendMediaGroup {
 
 	def getMe() {
 		api.go('getMe')

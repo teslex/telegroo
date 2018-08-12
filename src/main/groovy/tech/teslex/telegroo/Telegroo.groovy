@@ -1,6 +1,5 @@
 package tech.teslex.telegroo
 
-import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Actions
 import tech.teslex.telegroo.api.Api
@@ -8,33 +7,30 @@ import tech.teslex.telegroo.api.Api
 @CompileStatic
 class Telegroo implements Bot, Actions {
 
-	String token = ''
-
-	def lastUpdate = [
-	        update_id: 0
-	]
-
-	boolean active = false
+	String token
 
 	Api api
 
-	def handles = [
-			message: [:] as Map<String, Closure>,
+	Map lastUpdate = [update_id: 0],
+		handles = [
+				message: [:] as Map<String, Closure>,
+				update : [] as List<Closure>
+		]
 
-			update : [] as List<Closure>
-	]
+	List<Closure<Boolean>> middles = []
 
-	Closure catchException = { Exception ex ->
-		ex.printStackTrace()
+	Closure catchException = { Exception e ->
+		e.printStackTrace()
 		stop()
 	}
+
+	boolean active = false
 
 	Telegroo(String token) {
 		this.token = token
 		this.api = new Api(token)
 	}
 
-	@CompileDynamic
 	void start() {
 		if (active)
 			return
@@ -43,37 +39,15 @@ class Telegroo implements Bot, Actions {
 
 		while (active) {
 			try {
-				def updates = getUpdates(lastUpdate.update_id + 1).result as List
+				def updates = getUpdates((lastUpdate['update_id'] as Integer) + 1)['result'] as List
 
-				updates.each { update ->
+				for (update in updates) {
+					lastUpdate = update as Map
 
-					lastUpdate = update as LinkedHashMap
-
-					handles.update.each {
-						it(lastUpdate)
-					}
-
-					if (lastUpdate.keySet()[1] == 'message') {
-
-						def handle = handles[lastUpdate.keySet()[1] as String].find {
-							lastUpdate.message.text ==~ it.key
-						} as Map.Entry<String, Closure>
-
-						if (handle)
-							if (handle.value.maximumNumberOfParameters == 1)
-								handle.value([lastUpdate: lastUpdate, match: lastUpdate.message.text =~ handle.key])
-							else
-								handle.value(lastUpdate, lastUpdate.message.text =~ handle.key)
-					} else {
-
-						def handle = handles[lastUpdate.keySet()[1] as String]
-
-						if (handle)
-							handle(lastUpdate)
-					}
+					if (checkMid(lastUpdate))
+						solveUpdate(lastUpdate)
 				}
 			} catch (ex) {
-
 				catchException ex
 			}
 		}
@@ -92,22 +66,54 @@ class Telegroo implements Bot, Actions {
 		active = false
 	}
 
-	@CompileDynamic
+	boolean checkMid(Map update) {
+		for (mid in middles)
+			if (!mid(update))
+				return false
+
+		return true
+	}
+
+	void solveUpdate(Map update) {
+		handles.update.each { Closure closure ->
+			closure(update)
+		}
+
+		if (update.keySet()[1] == 'message') {
+			def handle = (handles.message as Map).find {
+				update['message']['text'] ==~ it.key
+			} as Map.Entry<String, Closure>
+
+			if (handle)
+				if (handle.value.maximumNumberOfParameters == 1)
+					(handle.value as Closure)([update: update, match: update['message']['text'] =~ handle.key])
+				else
+					(handle.value as Closure)(update, update['message']['text'] =~ handle.key)
+		} else {
+			def handle = (handles[update.keySet()[1] as String])
+
+			if (handle)
+				(handle as Closure)(update)
+		}
+	}
+
 	void onUpdate(Closure closure) {
-		handles.update.add(closure)
+		(handles.update as List).add(closure)
 	}
 
-	@CompileDynamic
 	void onCommand(String command, Closure closure) {
-		handles.message.put(command.startsWith('/') ? command : "/$command", closure)
+		(handles.message as Map).put(command.startsWith('/') ? command : "/$command", closure)
 	}
 
-	@CompileDynamic
 	void onMessage(String message, Closure closure) {
-		handles.message.put(message, closure)
+		(handles.message as Map).put(message, closure)
 	}
 
 	void on(String type, Closure closure) {
 		handles[type] = closure
+	}
+
+	void middleware(Closure<Boolean> closure) {
+		middles.add(closure)
 	}
 }

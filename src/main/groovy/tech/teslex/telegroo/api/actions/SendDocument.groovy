@@ -1,5 +1,8 @@
 package tech.teslex.telegroo.api.actions
 
+import tech.teslex.telegroo.api.req.Some
+import tech.teslex.telegroo.api.req.SomeDocument
+
 trait SendDocument {
 
 	def sendDocument(File document, Map params = [:]) {
@@ -15,14 +18,14 @@ trait SendDocument {
 	}
 
 	def sendDocument(File document, chatId, Map params = [:]) {
-		api.goWithFile('sendDocument', document, 'document', [chat_id: chatId] + params)
+		api.go(new SomeDocument(document, [chat_id: chatId] + params))
 	}
 
 	def sendDocument(String document, chatId, Map params = [:]) {
-		api.go('sendDocument', [chat_id: chatId, document: document] + params)
+		api.go(new Some('sendDocument', [chat_id: chatId, document: document] + params))
 	}
 
 	def sendDocumentId(String documentId, chatId, Map params = [:]) {
-		api.go('sendDocument', [chat_id: chatId, document: [file_id: documentId]] + params)
+		api.go(new Some('sendDocument', [chat_id: chatId, document: [file_id: documentId]] + params))
 	}
 }

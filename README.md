@@ -8,8 +8,8 @@
 Sample bot:
 
 ```groovy
-@GrabResolver(name = 'dk-repo', root = 'https://gitlab.com/david.kohut/maven-repo/raw/master')
-@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.2')
+@GrabResolver(name = 'dk-repo', root = 'https://gitlab.com/TesLex/repo/raw/master')
+@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.2.1')
 
 import tech.teslex.telegroo.Telegroo
 

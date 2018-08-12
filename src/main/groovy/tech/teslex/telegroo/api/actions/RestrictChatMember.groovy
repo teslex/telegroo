@@ -1,5 +1,7 @@
 package tech.teslex.telegroo.api.actions
 
+import tech.teslex.telegroo.api.req.Some
+
 trait RestrictChatMember {
 
 	def restrictChatMember(Map params = [:]) {
@@ -7,6 +9,6 @@ trait RestrictChatMember {
 	}
 
 	def restrictChatMember(userId, chatId, Map params = [:]) {
-		api.go('restrictChatMember', [chat_id: chatId, user_id: userId] + params)
+		api.go(new Some('restrictChatMember', [chat_id: chatId, user_id: userId] + params))
 	}
 }

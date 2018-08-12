@@ -5,5 +5,5 @@ out/
 build/
 
 *.iml
-bot.groovy
+*.iws
 src/main/groovy/tech/teslex/telegroo/Test.groovy
