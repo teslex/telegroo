@@ -25,9 +25,18 @@ trait Actions implements
 		EditMessageText,
 		EditMessageReplyMarkup,
 		AnswerCallbackQuery,
-		SendMediaGroup {
+		SendMediaGroup,
+		SetWebhook,
+		DeleteWebhook,
+		GetWebhookInfo {
 
 	def getMe() {
+		if (!me)
+			me = api.go('getMe')
+		me
+	}
+
+	def getMeMe() {
 		api.go('getMe')
 	}
 }

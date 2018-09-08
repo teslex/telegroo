@@ -1,8 +1,11 @@
 package tech.teslex.telegroo
 
+import com.sun.net.httpserver.HttpServer
+import groovy.json.JsonSlurper
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Actions
 import tech.teslex.telegroo.api.Api
+import tech.teslex.telegroo.api.WebServer
 
 @CompileStatic
 class Telegroo implements Bot, Actions {
@@ -24,7 +27,13 @@ class Telegroo implements Bot, Actions {
 		stop()
 	}
 
+	Map me = null
+
 	boolean active = false
+
+	boolean isWebhook = false
+
+	HttpServer webhookServer
 
 	Telegroo(String token) {
 		this.token = token
@@ -41,12 +50,8 @@ class Telegroo implements Bot, Actions {
 			try {
 				def updates = getUpdates((lastUpdate['update_id'] as Integer) + 1)['result'] as List
 
-				for (update in updates) {
-					lastUpdate = update as Map
-
-					if (checkMid(lastUpdate))
-						solveUpdate(lastUpdate)
-				}
+				for (update in updates)
+					solve(update as Map)
 			} catch (ex) {
 				catchException ex
 			}
@@ -59,9 +64,38 @@ class Telegroo implements Bot, Actions {
 		}
 	}
 
+	HttpServer startWebhook(int port = 0) {
+		startWebhook('/', port)
+	}
+
+	HttpServer startWebhook(String path, int port = 0) {
+		active = true
+		isWebhook = true
+
+		webhookServer = WebServer.start(path, port, { exchange ->
+			try {
+				def update = new JsonSlurper().parse(exchange.requestBody) as Map
+				solve(update)
+
+				exchange.sendResponseHeaders(200, 0)
+				exchange.responseBody.withWriter('UTF-8') { it.write('OK') }
+			} catch (e) {
+				exchange.sendResponseHeaders(500, 0)
+				exchange.responseBody.withWriter('UTF-8') { it.write('FAIL') }
+
+				catchException e
+			}
+		})
+	}
+
 	void stop() {
 		if (!active)
 			return
+
+		if (isWebhook) {
+			webhookServer.stop(0)
+			deleteWebhook()
+		}
 
 		active = false
 	}
@@ -95,6 +129,12 @@ class Telegroo implements Bot, Actions {
 			if (handle)
 				(handle as Closure)(update)
 		}
+	}
+
+	void solve(Map update) {
+		lastUpdate = update
+		if (checkMid(lastUpdate))
+			solveUpdate(lastUpdate)
 	}
 
 	void onUpdate(Closure closure) {
