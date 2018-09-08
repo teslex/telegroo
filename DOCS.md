@@ -2,7 +2,7 @@
 
 ```groovy
 @GrabResolver(name = 'dk-repo', root = 'https://gitlab.com/TesLex/repo/raw/master')
-@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.2.1')
+@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.3.0')
 
 import tech.teslex.telegroo.Telegroo
 
@@ -19,6 +19,12 @@ bot.with {
 }
 
 bot.start() // or startAsync()
+```
+
+**Webhook:**
+```groovy
+bot.setWebhook('https://kek.localtunnel.me') // setting webhook url
+bot.startWebhook(3000) // starting server on 3000 port
 ```
 
 ## [Telegram api](https://core.telegram.org/bots/api)
