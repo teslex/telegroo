@@ -9,23 +9,23 @@ trait SendDocument {
 		sendDocument(document, lastUpdate.message.chat.id, params)
 	}
 
-	def sendDocument(String document, Map params = [:]) {
-		sendDocument(document, lastUpdate.message.chat.id, params)
+	def sendDocument(document, Map params = [:]) {
+		sendDocument(document.toString(), lastUpdate.message.chat.id, params)
 	}
 
-	def sendDocumentId(String documentId, Map params = [:]) {
-		sendDocumentId(documentId, lastUpdate.message.chat.id, params)
+	def sendDocumentId(documentId, Map params = [:]) {
+		sendDocumentId(documentId.toString(), lastUpdate.message.chat.id, params)
 	}
 
 	def sendDocument(File document, chatId, Map params = [:]) {
 		api.go(new SomeDocument(document, [chat_id: chatId] + params))
 	}
 
-	def sendDocument(String document, chatId, Map params = [:]) {
-		api.go(new Some('sendDocument', [chat_id: chatId, document: document] + params))
+	def sendDocument(document, chatId, Map params = [:]) {
+		api.go(new Some('sendDocument', [chat_id: chatId, document: document.toString()] + params))
 	}
 
-	def sendDocumentId(String documentId, chatId, Map params = [:]) {
-		api.go(new Some('sendDocument', [chat_id: chatId, document: [file_id: documentId]] + params))
+	def sendDocumentId(documentId, chatId, Map params = [:]) {
+		api.go(new Some('sendDocument', [chat_id: chatId, document: [file_id: documentId.toString()]] + params))
 	}
 }

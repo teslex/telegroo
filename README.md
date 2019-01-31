@@ -9,7 +9,7 @@
 Sample bot:
 
 ```groovy
-@GrabResolver(name = 'dk-repo', root = 'https://gitlab.com/TesLex/repo/raw/master')
+@GrabResolver(name = 'teslex-repo', root = 'https://gitlab.com/TesLex/repo/raw/master')
 @Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.3.0')
 
 import tech.teslex.telegroo.Telegroo

@@ -4,12 +4,12 @@ import tech.teslex.telegroo.api.req.Some
 
 trait Reply {
 
-	def reply(String message, Map params = [:]) {
-		reply(message, lastUpdate.message.message_id, params)
+	def reply(message, Map params = [:]) {
+		reply(message.toString(), lastUpdate.message.message_id, params)
 	}
 
-	def reply(String message, replyTo, Map params = [:]) {
-		sendMessage(message, [reply_to_message_id: replyTo] + params)
+	def reply(message, replyTo, Map params = [:]) {
+		sendMessage(message.toString(), [reply_to_message_id: replyTo] + params)
 	}
 
 	def reply(replyTo = lastUpdate.message.message_id, Closure action) {
