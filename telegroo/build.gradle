@@ -1,0 +1,22 @@
+plugins {
+	id 'groovy'
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://jitpack.io' }
+}
+
+
+dependencies {
+	compile project(':api')
+
+	compile group: 'org.codehaus.groovy', name: 'groovy-all', version: groovyVersion
+
+	compile group: 'org.apache.httpcomponents', name: 'httpcore', version: apacheHttpCoreVersion
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: apacheHttpClientVersion
+	compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: apacheHttpFluentHcVersion
+	compile group: 'org.apache.httpcomponents', name: 'httpmime', version: apacheHttpHttpMimeVersion
+
+	testCompile 'org.spockframework.spock:spock-core:spock-1.2'
+}

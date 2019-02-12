@@ -8,8 +8,10 @@ build:
   stage: build
   script: gradle clean build
   artifacts:
-   paths:
-    - build/libs/telegroo*.jar
+    paths:
+      - build/libs/telegroo*.jar
+  only:
+    - master
 
 publish:
   stage: publish
@@ -18,8 +20,8 @@ publish:
     - git clone https://gitlab.com/teslex/repo
     - cp -r build/repo/* repo
     - cd repo
-    - git config --global user.name 'Davyd Kohut'
-    - git config --global user.email 'devid.kohut@gmail.com'
+    - git config --global user.name 'teslex bot'
+    - git config --global user.email 'teslex.bot@gmail.com'
     - git add .
     - git commit -m 'Update telegroo'
-    - git push https://david.kohut:${GITLAB_PRIVATE_KEY}@gitlab.com/teslex/repo -f
+    - git push https://david.kohut:${GITLAB_PRIVATE_KEY}@gitlab.com/teslex/repo

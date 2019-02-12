@@ -1,53 +1,40 @@
-plugins {
-	id 'groovy'
-	id 'java'
+ext {
+	groovyVersion = '2.5.0'
 
-	id 'maven-publish'
+	apacheHttpCoreVersion = '4.4.10'
+	apacheHttpClientVersion = '4.5.6'
+	apacheHttpFluentHcVersion = '4.5.6'
+	apacheHttpHttpMimeVersion = '4.5.6'
 
-	id 'com.github.johnrengelman.shadow' version '2.0.4'
 }
 
-version = '0.3.0'
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-
-repositories {
-	mavenCentral()
+subprojects {
+	version '0.4.0'
 }
 
-dependencies {
-	shadow 'org.codehaus.groovy:groovy-all:2.5.1'
-	compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.10'
-	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
-	compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.6'
-	compile group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.5.6'
-}
+//task sourceJar(type: Jar) {
+//	from sourceSets.main.allJava
+//	from sourceSets.main.allGroovy
+//}
 
-task sourceJar(type: Jar) {
-	from sourceSets.main.allJava
-	from sourceSets.main.allGroovy
-}
-
-publishing {
-	publications {
-		maven(MavenPublication) {
-			groupId 'tech.teslex.telegroo'
-			artifactId 'telegroo'
-			version version
-
-			from components.java
-
-			artifact sourceJar {
-				classifier "sources"
-			}
-		}
-	}
-
-	repositories {
-		maven {
-			url "$buildDir/repo"
-		}
-	}
-}
+//publishing {
+//	publications {
+//		maven(MavenPublication) {
+//			groupId 'tech.teslex.telegroo'
+//			artifactId 'telegroo'
+//			version version
+//
+//			from components.java
+//
+//			artifact sourceJar {
+//				classifier "sources"
+//			}
+//		}
+//	}
+//
+//	repositories {
+//		maven {
+//			url "$buildDir/repo"
+//		}
+//	}
+//}
