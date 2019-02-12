@@ -24,4 +24,4 @@ publish:
     - git config --global user.email 'teslex.bot@gmail.com'
     - git add .
     - git commit -m 'Update telegroo'
-    - git push https://david.kohut:${GITLAB_PRIVATE_KEY}@gitlab.com/teslex/repo
+    - git push https://expexes:${GITLAB_PRIVATE_KEY}@gitlab.com/teslex/repo

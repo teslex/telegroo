@@ -10,31 +10,9 @@ ext {
 
 subprojects {
 	version '0.4.0'
+	
+	repositories {
+		mavenCentral()
+		maven { url 'https://jitpack.io' }
+	}
 }
-
-//task sourceJar(type: Jar) {
-//	from sourceSets.main.allJava
-//	from sourceSets.main.allGroovy
-//}
-
-//publishing {
-//	publications {
-//		maven(MavenPublication) {
-//			groupId 'tech.teslex.telegroo'
-//			artifactId 'telegroo'
-//			version version
-//
-//			from components.java
-//
-//			artifact sourceJar {
-//				classifier "sources"
-//			}
-//		}
-//	}
-//
-//	repositories {
-//		maven {
-//			url "$buildDir/repo"
-//		}
-//	}
-//}

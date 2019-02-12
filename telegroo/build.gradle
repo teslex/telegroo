@@ -1,12 +1,8 @@
 plugins {
 	id 'groovy'
-}
 
-repositories {
-	mavenCentral()
-	maven { url 'https://jitpack.io' }
+	id 'maven-publish'
 }
-
 
 dependencies {
 	compile project(':api')
@@ -19,4 +15,22 @@ dependencies {
 	compile group: 'org.apache.httpcomponents', name: 'httpmime', version: apacheHttpHttpMimeVersion
 
 	testCompile 'org.spockframework.spock:spock-core:spock-1.2'
+}
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			groupId 'tech.teslex.telegroo'
+			artifactId 'telegroo'
+			version version
+
+			from components.java
+		}
+	}
+
+	repositories {
+		maven {
+			url "$buildDir/repo"
+		}
+	}
 }

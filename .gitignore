@@ -6,4 +6,4 @@ build/
 
 *.iml
 *.iws
-src/main/groovy/tech/teslex/telegroo/Test.groovy
+telegroo/src/test/resources/token.txt
