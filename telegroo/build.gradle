@@ -48,7 +48,10 @@ publishing {
 
 	repositories {
 		maven {
-			url "$buildDir/repo"
+			def releasesRepoUrl = "$buildDir/repo"
+			def snapshotsRepoUrl = "$buildDir/repo/snapshots"
+			url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
 		}
 	}
 }

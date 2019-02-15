@@ -22,10 +22,11 @@ bot.with {
 	}
 	
 	onCommand(/echo (.+)/) { res ->
-		res.context.sendMessage(match[0][1])
+		res.context.sendMessage(res.matcher[0][1])
 	}
 }
 
+bot.start()
 ```
 
 **Webhook:**

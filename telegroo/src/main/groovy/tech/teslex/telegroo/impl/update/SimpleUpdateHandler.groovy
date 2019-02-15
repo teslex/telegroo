@@ -25,8 +25,6 @@ class SimpleUpdateHandler implements UpdateHandler {
 			resolver.resolve(new SimpleRes(update, context, telegroo))
 		}
 
-		println(handlers)
-
 		if (update.updateType == 'message') {
 
 			def handler = handlers['message'].find { Map.Entry entry ->
