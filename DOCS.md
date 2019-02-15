@@ -2,19 +2,19 @@
 
 ```groovy
 @GrabResolver(name = 'teslex-repo', root = 'https://teslex.gitlab.io/repo')
-@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.4.0')
+@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.4.0-SNAPSHOT')
 
-import tech.teslex.telegroo.Telegroo
+import tech.teslex.telegroo.SimpleTelegroo
 
-def bot = new Telegroo('TOKEN')
+def bot = new SimpleTelegroo('TOKEN')
 
 bot.with {
 	onCommand(/start/) {
-		sendMessage('Welcome!')
+		it.context.sendMessage('Welcome!')
 	}
 	
-	onCommand(/echo (.+)/) { update, match ->
-		sendMessage(match)
+	onCommand(/echo (.+)/) { res ->
+		res.context.sendMessage(match[0][1])
 	}
 }
 

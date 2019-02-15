@@ -16,7 +16,7 @@ import tech.teslex.telegroo.api.some.SomeMediaGroup
 
 // Rewrite me please
 @CompileStatic
-class TelegrooApi implements Api {
+class SimpleApi implements Api {
 
 	String token
 
@@ -27,7 +27,7 @@ class TelegrooApi implements Api {
 
 	JsonSlurper slurper
 
-	TelegrooApi(String token) {
+	SimpleApi(String token) {
 		this.token = token
 		this.slurper = new JsonSlurper()
 	}

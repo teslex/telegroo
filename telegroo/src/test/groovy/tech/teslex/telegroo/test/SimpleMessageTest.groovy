@@ -2,15 +2,15 @@ package tech.teslex.telegroo.test
 
 import spock.lang.Shared
 import spock.lang.Specification
-import tech.teslex.telegroo.Telegroo
+import tech.teslex.telegroo.SimpleTelegroo
 
 class SimpleMessageTest extends Specification {
 
 	@Shared
-	String token = new File('src/test/resources/token.txt').text
+	def token = new File('src/test/resources/token.txt').text
 
 	@Shared
-	def telegroo = new Telegroo(token)
+	def telegroo = new SimpleTelegroo(token)
 
 	def 'sendMessage test'() {
 		given:

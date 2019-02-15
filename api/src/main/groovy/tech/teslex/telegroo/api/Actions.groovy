@@ -1,4 +1,4 @@
-package tech.teslex.telegroo.impl
+package tech.teslex.telegroo.api
 
 import tech.teslex.telegroo.api.actions.*
 

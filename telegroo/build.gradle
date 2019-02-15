@@ -2,12 +2,14 @@ plugins {
 	id 'groovy'
 
 	id 'maven-publish'
+	id 'com.github.johnrengelman.shadow' version '4.0.4'
 }
 
 dependencies {
-	compile project(':api')
+	shadow project(':api')
 
-	compile group: 'org.codehaus.groovy', name: 'groovy-all', version: groovyVersion
+	compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
+	compile group: 'org.codehaus.groovy', name: 'groovy-json', version: groovyVersion
 
 	compile group: 'org.apache.httpcomponents', name: 'httpcore', version: apacheHttpCoreVersion
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: apacheHttpClientVersion
@@ -15,6 +17,21 @@ dependencies {
 	compile group: 'org.apache.httpcomponents', name: 'httpmime', version: apacheHttpHttpMimeVersion
 
 	testCompile 'org.spockframework.spock:spock-core:spock-1.2'
+}
+
+jar {
+
+}
+
+shadowJar {
+	configurations = [project.configurations.shadow]
+
+	dependencies {
+		exclude(dependency {
+			it.moduleGroup != 'tech.teslex.telegroo' &&
+					it.moduleGroup != 'telegroo'
+		})
+	}
 }
 
 publishing {
@@ -25,6 +42,7 @@ publishing {
 			version version
 
 			from components.java
+			artifact shadowJar
 		}
 	}
 

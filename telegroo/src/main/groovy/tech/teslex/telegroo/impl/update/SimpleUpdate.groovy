@@ -1,12 +1,14 @@
 package tech.teslex.telegroo.impl.update
 
+import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.update.Update
 
-class TelegrooUpdate implements Update {
+@CompileStatic
+class SimpleUpdate implements Update {
 
 	Map updateData
 
-	TelegrooUpdate(Map updateData) {
+	SimpleUpdate(Map updateData) {
 		this.updateData = updateData
 	}
 

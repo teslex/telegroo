@@ -18,7 +18,7 @@ publish:
   script:
     - gradle publish
     - git clone https://gitlab.com/teslex/repo
-    - cp -r build/repo/* repo
+    - cp -r telegroo/build/repo/* repo
     - cd repo
     - git config --global user.name 'teslex bot'
     - git config --global user.email 'teslex.bot@gmail.com'
