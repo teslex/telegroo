@@ -17,4 +17,8 @@ interface Api {
 	def goWithFile(method, file, type, params)
 
 	def goWithMediaGroup(method, media, params)
+
+	void setDefaultParams(Map params)
+
+	Map getDefaultParams()
 }

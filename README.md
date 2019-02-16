@@ -1,5 +1,5 @@
 # telegroo
-| version: 0.3.0
+| version: 0.4.0-SNAPSHOT
 
 **Telegram bot framework for [Groovy](http://groovy-lang.org)**
 
@@ -9,10 +9,10 @@
 Sample bot:
 
 ```groovy
-@GrabResolver(name = 'teslex-repo', root = 'https://teslex.gitlab.io/repo')
+@GrabResolver(name = 'teslex-repo', root = 'https://teslex.gitlab.io/repo/snapshot')
 @Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.4.0-SNAPSHOT')
 
-import tech.teslex.telegroo.SimpleTelegroo
+import tech.teslex.telegroo.simple.SimpleTelegroo
 
 def bot = new SimpleTelegroo('TOKEN')
 
@@ -22,7 +22,7 @@ bot.with {
 	}
 	
 	onCommand(/echo (.+)/) { res ->
-		res.context.sendMessage(res.matcher[0][1])
+		res.context.sendMessage(match[0][1])
 	}
 }
 

@@ -2,7 +2,7 @@ package tech.teslex.telegroo.api
 
 import tech.teslex.telegroo.api.update.Update
 
-interface Context extends Actions {
+interface Context extends Methods {
 
 	Api getApi()
 

@@ -1,10 +1,10 @@
 ## Sample bot:
 
 ```groovy
-@GrabResolver(name = 'teslex-repo', root = 'https://teslex.gitlab.io/repo')
+@GrabResolver(name = 'teslex-repo', root = 'https://teslex.gitlab.io/repo/snapshot')
 @Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.4.0-SNAPSHOT')
 
-import tech.teslex.telegroo.SimpleTelegroo
+import tech.teslex.telegroo.simple.SimpleTelegroo
 
 def bot = new SimpleTelegroo('TOKEN')
 
@@ -26,12 +26,16 @@ bot.setWebhook('https://kek.localtunnel.me') // setting webhook url
 ```
 
 ## [Telegram api](https://core.telegram.org/bots/api)
-
-`api.go(method, [params])` |
-`api.goWithFile(method, File, fieldName, [params])`
-`api.goWithMediaGroup(method, List<Map<String, Object>>, [params])`
+- `api.go(Some)`
+- `api.go(SomeFile)`
+- `api.go(SomeMediaGroup)`
+- `api.go(method, [params])`
+- `api.goWithFile(method, File, fieldName, [params])`
+- `api.goWithMediaGroup(method, List<Map>, [params])`
 
 ```groovy
+bot.api.go(new Some('sendMessage', [chat_id: '1', text: 'message text']))
+// or
 bot.api.go('sendMessage', [chat_id: '1', text: 'message text'])
 ```
 
@@ -51,74 +55,38 @@ bot.api.go('sendMessage', [chat_id: '1', text: 'message text'])
 
 ```groovy
 on('edited_message') {
-	sendMessage('-_-')
+	it.context.sendMessage('-_-')
+}
+
+// or
+import tech.teslex.telegroo.api.enums.UpdateType
+
+on(UpdateType.EDITED_MESSAGE) {
+	it.context.sendMessage('-_-')
 }
 ```
 
 --
 
 ```groovy
-onCommand(/start/) { update, match ->
-	sendMessage('Welcome!')
+onCommand(/start/) { res ->
+	res.context.sendMessage('Welcome!')
+	
+	// res.matcher
+	// res.update
+	// res.telegroo
 }
 ```
-or
-```groovy
-onCommand(/start/) {
-	sendMessage('Welcome!')
-}
 
-// it.update, it.match
-```
 ```groovy
 onMessage(/go/) {
-	reply('go go go!')
+	it.context.reply('go go go!')
 } 
 ```
 
 ## [Methods](https://core.telegram.org/bots/api#available-methods)
 args with `?` are optional
 
-- `getMe()`
-
-- `sendMessage(text, chat_id?, [params]?)`
-
-- `forward(from_chat_id?, message_id, chat_id?, [params]?)`
-
-- `reply(reply_to_message_id, message, chat_id?, [params]?)`
-
-- `sendPhoto(File, chat_id?, [params]?)` | `sendPhoto(url_to_file, chat_id?, [params]?)` | `sendPhotoId(file_id, chat_id?, [params]?)`
-
-- `sendAudio(File, chat_id?, [params]?)` | `sendAudio(url_to_file, chat_id?, [params]?)` | `sendAudioId(file_id, chat_id?, [params]?)`
-
-- `sendDocument(File, chat_id?, [params]?)` | `sendDocument(url_to_file, chat_id?, [params]?)` | `sendDocumentId(file_id, chat_id?, [params]?)`
-
-- `sendSticker(File, chat_id?, [params]?)` | `sendSticker(url_to_file, chat_id?, [params]?)` | `sendStickerId(file_id, chat_id?, [params]?)`
-
-- `sendVideo(File, chat_id?, [params]?)` | `sendVideo(url_to_file, chat_id?, [params]?)` | `sendVideoId(file_id, chat_id?, [params]?)`
-
-- `sendVoice(File, chat_id?, [params]?)` | `sendVoice(url_to_file, chat_id?, [params]?)` | `sendVoiceId(file_id, chat_id?, [params]?)`
-
-- `sendLocation(latitude, longitude, chat_id?, [params]?)`
-
-- `sendVenue(latitude, longitude, title, address, chat_id?, [params]?)`
-
-- `sendContact(phone_number?, first_name, chat_id?, [params]?)`
-
-- `sendChatAction(action, chat_id?, [params]?)`
-
-- `getUserProfilePhotos(user_id?, [params]?)`
-
-- `getFile(file_id, [params]?)`
-
-- `kickChatMember(user_id, chat_id?, [params]?)`
-
-- `unbanChatMember(user_id, chat_id?, [params]?)`
-
-- `answerCallbackQuery(callback_query_id, chat_id?, [params]?)`
-
-- `editMessageText(message_id, text, chat_id?, [params]?)`
-
-- `editMessageCaption(message_id, caption, chat_id?, [params]?)`
-
-- `editMessageReplyMarkup(message_id, [replyMarkup], chat_id?, [params]?)`
+- `getMe()`: [tech.teslex.telegroo.api.methods.GetMe](/api/src/main/groovy/tech/teslex/telegroo/api/methods/GetMe.groovy) / [telegram](https://core.telegram.org/bots/api#getme)
+- more methods: [tech.teslex.telegroo.api.methods](/api/src/main/groovy/tech/teslex/telegroo/api/methods/) and [core.telegram.org/bots#available-methods](https://core.telegram.org/bots/api#available-methods)
+- // todo
