@@ -1,7 +1,7 @@
 ## Sample bot:
 
 ```groovy
-@GrabResolver(name = 'teslex-repo', root = 'https://teslex.gitlab.io/repo/snapshot')
+@GrabResolver(name = 'teslex-repo', root = 'https://teslex.gitlab.io/repo/snapshots')
 @Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.4.0-SNAPSHOT')
 
 import tech.teslex.telegroo.simple.SimpleTelegroo
