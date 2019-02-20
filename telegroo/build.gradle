@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	shadow project(':api')
+	compile project(':api')
 
 	compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
 	compile group: 'org.codehaus.groovy', name: 'groovy-json', version: groovyVersion
@@ -19,20 +19,16 @@ dependencies {
 	testCompile 'org.spockframework.spock:spock-core:spock-1.2'
 }
 
-jar {
-
-}
-
-shadowJar {
-	configurations = [project.configurations.shadow]
-
-	dependencies {
-		exclude(dependency {
-			it.moduleGroup != 'tech.teslex.telegroo' &&
-					it.moduleGroup != 'telegroo'
-		})
-	}
-}
+//shadowJar {
+//	configurations = [project.configurations.shadow]
+//
+//	dependencies {
+//		exclude(dependency {
+//			it.moduleGroup != 'tech.teslex.telegroo' &&
+//					it.moduleGroup != 'telegroo'
+//		})
+//	}
+//}
 
 publishing {
 	publications {
@@ -42,7 +38,7 @@ publishing {
 			version version
 
 			from components.java
-			artifact shadowJar
+//			artifact shadowJar
 		}
 	}
 
@@ -51,7 +47,6 @@ publishing {
 			def releasesRepoUrl = "$buildDir/repo"
 			def snapshotsRepoUrl = "$buildDir/repo/snapshots"
 			url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-
 		}
 	}
 }

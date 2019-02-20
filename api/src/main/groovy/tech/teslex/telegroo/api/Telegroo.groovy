@@ -1,6 +1,8 @@
 package tech.teslex.telegroo.api
 
-import tech.teslex.telegroo.api.res.UpdateResolver
+import tech.teslex.telegroo.api.update.CommandHandler
+import tech.teslex.telegroo.api.update.MessageHandler
+import tech.teslex.telegroo.api.update.UpdateHandler
 
 interface Telegroo {
 
@@ -8,11 +10,11 @@ interface Telegroo {
 
 	def stop()
 
-	def on(String type, UpdateResolver resolver)
+	def on(String type, UpdateHandler handler)
 
-	def onCommand(String command, UpdateResolver resolver)
+	def onUpdate(UpdateHandler handler)
 
-	def onMessage(String message, UpdateResolver resolver)
+	def onCommand(String command, CommandHandler handler)
 
-	def onUpdate(UpdateResolver updateResolver)
+	def onMessage(String message, MessageHandler handler)
 }

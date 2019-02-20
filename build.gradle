@@ -1,18 +1,31 @@
 ext {
-	groovyVersion = '2.5.0'
+	telegrooVersion = '0.4.0'
+	isSnapshot = true
+
+	groovyVersion = '2.5.6'
 
 	apacheHttpCoreVersion = '4.4.10'
 	apacheHttpClientVersion = '4.5.6'
 	apacheHttpFluentHcVersion = '4.5.6'
 	apacheHttpHttpMimeVersion = '4.5.6'
-
 }
 
 subprojects {
-	version '0.4.0-SNAPSHOT'
-	
+	if (isSnapshot)
+		version "$telegrooVersion-${date}-SNAPSHOT"
+	else
+		version telegrooVersion
+
+
 	repositories {
 		mavenCentral()
 		maven { url 'https://jitpack.io' }
+
+		if (version.endsWith('SNAPSHOT'))
+			maven { url 'https://teslex.gitlab.io/repo/snapshots' }
 	}
+}
+
+static getDate() {
+	return new Date().format('yyyyMMddHHmmss')
 }

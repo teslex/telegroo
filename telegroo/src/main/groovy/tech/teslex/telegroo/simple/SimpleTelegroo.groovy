@@ -5,11 +5,9 @@ import tech.teslex.telegroo.api.Api
 import tech.teslex.telegroo.api.Context
 import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.api.enums.UpdateType
-import tech.teslex.telegroo.api.res.UpdateResolver
-import tech.teslex.telegroo.api.update.Update
-import tech.teslex.telegroo.api.update.UpdateHandler
+import tech.teslex.telegroo.api.update.*
 import tech.teslex.telegroo.simple.update.SimpleUpdate
-import tech.teslex.telegroo.simple.update.SimpleUpdateHandler
+import tech.teslex.telegroo.simple.update.SimpleUpdateHandlersSolver
 
 @CompileStatic
 class SimpleTelegroo implements Telegroo, Context {
@@ -19,15 +17,15 @@ class SimpleTelegroo implements Telegroo, Context {
 	Api api
 
 	Map handlers = [
-			message: [:] as Map<String, UpdateResolver>,
-			update : [] as List<UpdateResolver>
+			message: [:] as Map<String, UpdateHandler>,
+			update : [] as List<UpdateHandler>
 	]
 
 	List<Closure<Boolean>> middles = []
 
 	Update lastUpdate
 
-	UpdateHandler updateHandler
+	UpdateHandlersSolver updateHandlersSolver
 
 	boolean active = false
 
@@ -38,7 +36,7 @@ class SimpleTelegroo implements Telegroo, Context {
 		this.token = token
 
 		this.api = new SimpleApi(token)
-		this.updateHandler = new SimpleUpdateHandler(this)
+		this.updateHandlersSolver = new SimpleUpdateHandlersSolver(this)
 		this.lastUpdate = [update_id: 0] as SimpleUpdate
 	}
 
@@ -71,36 +69,36 @@ class SimpleTelegroo implements Telegroo, Context {
 	void solve(Update update) {
 		lastUpdate = update
 		if (checkMid(lastUpdate))
-			updateHandler.handle(lastUpdate, handlers)
+			updateHandlersSolver.solve(lastUpdate, handlers)
 	}
 
-	def onUpdate(UpdateResolver resolver) {
-		(handlers.update as List).add(resolver)
+	def onUpdate(UpdateHandler handler) {
+		(handlers.update as List).add(handler)
 	}
 
-	def onCommand(String command, UpdateResolver resolver) {
-		(handlers.message as Map).put(command.startsWith(commandSymbol) ? command : "$commandSymbol$command", resolver)
+	def onCommand(String command, CommandHandler handler) {
+		(handlers.message as Map).put(command.startsWith(commandSymbol) ? command : "$commandSymbol$command", handler)
 	}
 
-	def onMessage(String message, UpdateResolver resolver) {
-		(handlers.message as Map).put(message, resolver)
+	def onMessage(String message, MessageHandler handler) {
+		(handlers.message as Map).put(message, handler)
 	}
 
-	def on(String type, UpdateResolver resolver) {
+	def on(String type, UpdateHandler handler) {
 		if (handlers.containsKey(type))
-			(handlers[type] as List) << resolver
+			(handlers[type] as List) << handler
 		else
-			handlers[type] = [resolver]
+			handlers[type] = [handler]
 	}
 
 
-	def on(UpdateType updateType, UpdateResolver resolver) {
+	def on(UpdateType updateType, UpdateHandler handler) {
 		String type = updateType.type
 
 		if (handlers.containsKey(type))
-			(handlers[type] as List) << resolver
+			(handlers[type] as List) << handler
 		else
-			handlers[type] = [resolver]
+			handlers[type] = [handler]
 	}
 
 	def middleware(Closure<Boolean> closure) {

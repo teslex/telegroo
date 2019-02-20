@@ -12,6 +12,7 @@ class SimpleUpdate implements Update {
 		this.updateData = updateData
 	}
 
+	@Override
 	def getUpdateType() {
 		updateData.keySet()[1]
 	}

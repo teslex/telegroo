@@ -1,12 +1,11 @@
-package tech.teslex.telegroo.api.res
+package tech.teslex.telegroo.api.update
 
 import tech.teslex.telegroo.api.Context
 import tech.teslex.telegroo.api.Telegroo
-import tech.teslex.telegroo.api.update.Update
 
 import java.util.regex.Matcher
 
-interface Res {
+interface UpdateRes {
 
 	Update getUpdate()
 

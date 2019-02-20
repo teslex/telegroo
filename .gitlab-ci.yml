@@ -16,12 +16,31 @@ build:
 publish:
   stage: publish
   script:
-    - gradle publish
+    - gradle clean publish
     - git clone https://gitlab.com/teslex/repo
     - cp -r telegroo/build/repo/* repo
+    - cp -r api/build/repo/* repo
     - cd repo
-    - git config --global user.name 'teslex bot'
+    - git config --global user.name 'TesLex Bot'
     - git config --global user.email 'teslex.bot@gmail.com'
     - git add .
     - git commit -m 'Update telegroo'
-    - git push https://expexes:${GITLAB_PRIVATE_KEY}@gitlab.com/teslex/repo
+    - git push https://teslex.bot:${GITLAB_PRIVATE_KEY}@gitlab.com/teslex/repo
+  only:
+    - master
+
+publish-snapshot:
+  stage: publish-snapshot
+  script:
+    - gradle clean publish
+    - git clone https://gitlab.com/teslex/repo
+    - cp -r telegroo/build/repo/* repo
+    - cp -r api/build/repo/* repo
+    - cd repo
+    - git config --global user.name 'TesLex Bot'
+    - git config --global user.email 'teslex.bot@gmail.com'
+    - git add .
+    - git commit -m 'Update telegroo'
+    - git push https://teslex.bot:${GITLAB_PRIVATE_KEY}@gitlab.com/teslex/repo
+  except:
+    - master

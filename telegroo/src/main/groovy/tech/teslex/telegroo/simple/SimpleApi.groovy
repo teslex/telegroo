@@ -4,7 +4,6 @@ import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.transform.CompileStatic
 import org.apache.http.HttpEntity
-import org.apache.http.HttpException
 import org.apache.http.client.fluent.Request
 import org.apache.http.entity.ContentType
 import org.apache.http.entity.mime.MultipartEntityBuilder
@@ -12,7 +11,6 @@ import tech.teslex.telegroo.api.Api
 import tech.teslex.telegroo.api.some.Some
 import tech.teslex.telegroo.api.some.SomeFile
 import tech.teslex.telegroo.api.some.SomeMediaGroup
-
 
 // Rewrite me please
 @CompileStatic
@@ -59,7 +57,7 @@ class SimpleApi implements Api {
 				.execute().returnContent().asStream())
 
 		if (!response['ok'])
-			throw new HttpException("${response['error_code']} : ${response['description']}")
+			throw new RuntimeException("${response['error_code']} : ${response['description']}")
 
 		return response
 	}
@@ -88,7 +86,7 @@ class SimpleApi implements Api {
 				.execute().returnContent().asStream())
 
 		if (!response['ok'])
-			throw new HttpException("${response['error_code']} : ${response['description']}")
+			throw new RuntimeException("${response['error_code']} : ${response['description']}")
 
 		return response
 	}
@@ -125,7 +123,7 @@ class SimpleApi implements Api {
 				.execute().returnContent().asStream())
 
 		if (!response['ok'])
-			throw new Exception("${response['error_code']} : ${response['description']}")
+			throw new RuntimeException("${response['error_code']} : ${response['description']}")
 
 		return response
 	}
