@@ -30,7 +30,7 @@ publish:
     - master
 
 publish-snapshot:
-  stage: publish-snapshot
+  stage: publish
   script:
     - gradle clean publish
     - git clone https://gitlab.com/teslex/repo
