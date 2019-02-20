@@ -32,6 +32,7 @@ publish:
 publish-snapshot:
   stage: publish
   script:
+    - "[ $(gradle properties -q | grep 'isSnapshot:' | awk '{print $2}') != 'true' ] && exit 0"
     - gradle clean publish
     - git clone https://gitlab.com/teslex/repo
     - cp -r telegroo/build/repo/* repo
