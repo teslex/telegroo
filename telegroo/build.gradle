@@ -19,17 +19,6 @@ dependencies {
 	testCompile 'org.spockframework.spock:spock-core:spock-1.2'
 }
 
-//shadowJar {
-//	configurations = [project.configurations.shadow]
-//
-//	dependencies {
-//		exclude(dependency {
-//			it.moduleGroup != 'tech.teslex.telegroo' &&
-//					it.moduleGroup != 'telegroo'
-//		})
-//	}
-//}
-
 publishing {
 	publications {
 		maven(MavenPublication) {
@@ -38,7 +27,6 @@ publishing {
 			version version
 
 			from components.java
-//			artifact shadowJar
 		}
 	}
 

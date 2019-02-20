@@ -1,5 +1,5 @@
 # telegroo
-> version: **0.4.0-SNAPSHOT**
+> version: **[0.4.0-SNAPSHOT](https://gitlab.com/teslex/repo/tree/master/snapshots/tech/teslex/telegroo/telegroo)**
 
 **Telegram bot framework for [Groovy](http://groovy-lang.org)**
 
