@@ -53,6 +53,8 @@ trait Methods
 				DeleteWebhook,
 				GetWebhookInfo,
 
+				SendInvoice,
+
 				AnswerCallbackQuery,
 				EditMessageLiveLocation,
 				StopMessageLiveLocation {
