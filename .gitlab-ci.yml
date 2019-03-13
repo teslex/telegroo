@@ -18,8 +18,9 @@ publish:
   script:
     - gradle clean publish
     - git clone https://gitlab.com/teslex/repo
+    - cp -r telegram-api/build/repo/* repo
+    - cp -r telegroo-api/build/repo/* repo
     - cp -r telegroo/build/repo/* repo
-    - cp -r api/build/repo/* repo
     - cd repo
     - git config --global user.name 'TesLex Bot'
     - git config --global user.email 'teslex.bot@gmail.com'
@@ -35,8 +36,9 @@ publish-snapshot:
     - "[ $(gradle properties -q | grep 'isSnapshot:' | awk '{print $2}') != 'true' ] && exit 0"
     - gradle clean publish
     - git clone https://gitlab.com/teslex/repo
+    - cp -r telegram-api/build/repo/* repo
+    - cp -r telegroo-api/build/repo/* repo
     - cp -r telegroo/build/repo/* repo
-    - cp -r api/build/repo/* repo
     - cd repo
     - git config --global user.name 'TesLex Bot'
     - git config --global user.email 'teslex.bot@gmail.com'
