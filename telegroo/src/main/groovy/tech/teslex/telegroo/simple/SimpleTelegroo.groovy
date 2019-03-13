@@ -1,43 +1,41 @@
 package tech.teslex.telegroo.simple
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.api.Api
-import tech.teslex.telegroo.api.Context
 import tech.teslex.telegroo.api.Telegroo
-import tech.teslex.telegroo.api.enums.UpdateType
-import tech.teslex.telegroo.api.update.*
-import tech.teslex.telegroo.simple.update.SimpleUpdate
+import tech.teslex.telegroo.api.update.UpdateHandler
+import tech.teslex.telegroo.api.update.UpdateHandlersSolver
+import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.simple.update.SimpleUpdateHandlersSolver
+import tech.teslex.telegroo.telegram.enums.UpdateType
+import tech.teslex.telegroo.telegram.types.update.Update
 
 @CompileStatic
-class SimpleTelegroo implements Telegroo, Context {
+class SimpleTelegroo extends SimpleContext implements Telegroo {
 
-	String token
+	protected String token
 
-	Api api
-
-	Map handlers = [
-			message: [:] as Map<String, UpdateHandler>,
-			update : [] as List<UpdateHandler>
+	protected Map handlers = [
+			(UpdateType.MESSAGE): [:] as Map<String, UpdateHandler>,
+			(UpdateType.UPDATE) : [] as List<UpdateHandler>
 	]
 
-	List<Closure<Boolean>> middles = []
+	protected List<Closure<Boolean>> middles = []
 
-	Update lastUpdate
+	protected UpdateHandlersSolver updateHandlersSolver
 
-	UpdateHandlersSolver updateHandlersSolver
+	protected Boolean active = false
 
-	boolean active = false
+	public String commandSymbol = '/'
 
-	String commandSymbol = '/'
-
+	private ObjectMapper jacksonObjectMapper
 
 	SimpleTelegroo(String token) {
-		this.token = token
+		super(new SimpleApi(token), new Update(updateId: 0))
 
-		this.api = new SimpleApi(token)
+		this.token = token
 		this.updateHandlersSolver = new SimpleUpdateHandlersSolver(this)
-		this.lastUpdate = [update_id: 0] as SimpleUpdate
+		this.jacksonObjectMapper = new ObjectMapper()
 	}
 
 	def start() {
@@ -47,10 +45,10 @@ class SimpleTelegroo implements Telegroo, Context {
 		active = true
 
 		while (active) {
-			def updates = getUpdates((lastUpdate.updateData['update_id'] as Integer) + 1)['result'] as List<Map>
+			def updates = getUpdates(offset: lastUpdate.updateId + 1)
 
 			for (update in updates)
-				solve(update as SimpleUpdate)
+				solve(update)
 		}
 	}
 
@@ -73,18 +71,20 @@ class SimpleTelegroo implements Telegroo, Context {
 	}
 
 	def onUpdate(UpdateHandler handler) {
-		(handlers.update as List).add(handler)
+		(handlers[UpdateType.UPDATE] as List).add(handler)
 	}
 
-	def onCommand(String command, CommandHandler handler) {
-		(handlers.message as Map).put(command.startsWith(commandSymbol) ? command : "$commandSymbol$command", handler)
+	def onCommand(String command, UpdateHandler handler) {
+		(handlers[UpdateType.MESSAGE] as Map).put(command.startsWith(commandSymbol) ? command : "$commandSymbol$command", handler)
 	}
 
-	def onMessage(String message, MessageHandler handler) {
-		(handlers.message as Map).put(message, handler)
+	def onMessage(String message, UpdateHandler handler) {
+		(handlers[UpdateType.MESSAGE] as Map).put(message, handler)
 	}
 
-	def on(String type, UpdateHandler handler) {
+	def on(String updateType, UpdateHandler handler) {
+		def type = UpdateType.fromString(updateType)
+
 		if (handlers.containsKey(type))
 			(handlers[type] as List) << handler
 		else
@@ -93,15 +93,18 @@ class SimpleTelegroo implements Telegroo, Context {
 
 
 	def on(UpdateType updateType, UpdateHandler handler) {
-		String type = updateType.type
-
-		if (handlers.containsKey(type))
-			(handlers[type] as List) << handler
+		if (handlers.containsKey(updateType))
+			(handlers[updateType] as List) << handler
 		else
-			handlers[type] = [handler]
+			handlers[updateType] = [handler]
 	}
 
 	def middleware(Closure<Boolean> closure) {
 		middles.add(closure)
+	}
+
+	@Override
+	ObjectMapper getJacksonObjectMapper() {
+		this.jacksonObjectMapper
 	}
 }

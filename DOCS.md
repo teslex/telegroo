@@ -59,7 +59,7 @@ on('edited_message') {
 }
 
 // or
-import tech.teslex.telegroo.api.enums.UpdateType
+import tech.teslex.telegroo.telegram.enums.UpdateType
 
 on(UpdateType.EDITED_MESSAGE) {
 	it.context.sendMessage('-_-')
@@ -87,6 +87,6 @@ onMessage(/go/) {
 ## [Methods](https://core.telegram.org/bots/api#available-methods)
 args with `?` are optional
 
-- `getMe()`: [tech.teslex.telegroo.api.methods.GetMe](/api/src/main/groovy/tech/teslex/telegroo/api/methods/GetMe.groovy) / [telegram](https://core.telegram.org/bots/api#getme)
-- more methods: [tech.teslex.telegroo.api.methods](/api/src/main/groovy/tech/teslex/telegroo/api/methods/) and [core.telegram.org/bots#available-methods](https://core.telegram.org/bots/api#available-methods)
+- `getMe()`: [tech.teslex.telegroo.telegram.methods.GetMe](/api/src/main/groovy/tech/teslex/telegroo/api/methods/GetMe.groovy) / [telegram](https://core.telegram.org/bots/api#getme)
+- more methods: [tech.teslex.telegroo.telegram.methods](/api/src/main/groovy/tech/teslex/telegroo/api/methods/) and [core.telegram.org/bots#available-methods](https://core.telegram.org/bots/api#available-methods)
 - // todo

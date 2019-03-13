@@ -1,0 +1,30 @@
+plugins {
+	id 'groovy'
+
+	id 'maven-publish'
+}
+
+dependencies {
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: jacksonVersion
+	compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
+}
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			groupId 'tech.teslex.telegroo'
+			artifactId 'telegram-api'
+			version version
+
+			from components.java
+		}
+	}
+
+	repositories {
+		maven {
+			def releasesRepoUrl = "$buildDir/repo"
+			def snapshotsRepoUrl = "$buildDir/repo/snapshots"
+			url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+		}
+	}
+}
