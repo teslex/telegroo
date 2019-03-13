@@ -14,7 +14,7 @@ dependencies {
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: apacheHttpClientVersion
 	compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: apacheHttpFluentHcVersion
 	compile group: 'org.apache.httpcomponents', name: 'httpmime', version: apacheHttpHttpMimeVersion
-
+	
 	testCompile 'org.spockframework.spock:spock-core:spock-1.2'
 }
 

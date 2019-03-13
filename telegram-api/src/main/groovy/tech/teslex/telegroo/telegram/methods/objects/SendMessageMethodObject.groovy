@@ -6,14 +6,20 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
 import groovy.transform.MapConstructor
 import groovy.transform.ToString
+import groovy.transform.builder.Builder
+import tech.teslex.telegroo.telegram.enums.ParseMode
 import tech.teslex.telegroo.telegram.methods.MethodObject
-import tech.teslex.telegroo.telegram.methods.ParseModeTrait
 
+/**
+ * sendMessage
+ * Use this method to send text messages. On success, the sent Message is returned.
+ */
 @ToString
 @MapConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @CompileStatic
-class SendMessageMethodObject implements MethodObject, ParseModeTrait {
+@Builder
+class SendMessageMethodObject implements MethodObject {
 
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -53,7 +59,22 @@ class SendMessageMethodObject implements MethodObject, ParseModeTrait {
 	@JsonProperty(value = 'reply_markup', required = false)
 	def replyMarkup
 
+	/**
+	 * Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message.
+	 */
+	@JsonProperty(value = 'parse_mode', required = false)
+	String parseMode
+
+	@Override
+	@JsonIgnore
+	String getPathMethod() { 'sendMessage' }
+
+	void setParseMode(String parseMode) {
+		this.parseMode = parseMode
+	}
 
 	@JsonIgnore
-	String pathMethod = 'sendMessage'
+	void setParseMode(ParseMode parseMode) {
+		this.parseMode = parseMode.mode
+	}
 }

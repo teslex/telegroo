@@ -6,6 +6,8 @@ import tech.teslex.telegroo.api.Api
 import tech.teslex.telegroo.api.context.MethodsContext
 import tech.teslex.telegroo.telegram.types.update.Update
 
+import java.util.regex.Matcher
+
 @CompileStatic
 class SimpleContext implements MethodsContext {
 
@@ -14,6 +16,8 @@ class SimpleContext implements MethodsContext {
 	private Update lastUpdate
 
 	private ObjectMapper jacksonObjectMapper
+
+	private Matcher matcher
 
 	protected SimpleContext() {}
 
@@ -24,10 +28,25 @@ class SimpleContext implements MethodsContext {
 		this.jacksonObjectMapper = new ObjectMapper()
 	}
 
+	SimpleContext(Api api, Update lastUpdate, Matcher matcher) {
+		this.api = api
+		this.lastUpdate = lastUpdate
+		this.matcher = matcher
+
+		this.jacksonObjectMapper = new ObjectMapper()
+	}
+
 	SimpleContext(Api api, Update lastUpdate, ObjectMapper jacksonObjectMapper) {
 		this.api = api
 		this.lastUpdate = lastUpdate
 		this.jacksonObjectMapper = jacksonObjectMapper
+	}
+
+	SimpleContext(Api api, Update lastUpdate, ObjectMapper jacksonObjectMapper, Matcher matcher) {
+		this.api = api
+		this.lastUpdate = lastUpdate
+		this.jacksonObjectMapper = jacksonObjectMapper
+		this.matcher = matcher
 	}
 
 	@Override
@@ -42,7 +61,12 @@ class SimpleContext implements MethodsContext {
 
 	@Override
 	ObjectMapper getJacksonObjectMapper() {
-		jacksonObjectMapper
+		this.jacksonObjectMapper
+	}
+
+	@Override
+	Matcher getMatcher() {
+		this.matcher
 	}
 
 	protected void setApi(Api api) {

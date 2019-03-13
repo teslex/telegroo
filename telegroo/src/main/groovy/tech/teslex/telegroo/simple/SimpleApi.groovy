@@ -143,8 +143,11 @@ class SimpleApi implements Api {
 
 				// adding params to body
 				params.each { Map.Entry param ->
-					def value = objectMapper.writeValueAsString(param.value)
-					addTextBody(param.key as String, value)
+					def value = param.value instanceof Number ||
+							param.value instanceof String ||
+							param.value.class.isPrimitive() ? param.value : objectMapper.writeValueAsString(param.value)
+
+					addTextBody(param.key as String, value as String)
 				}
 
 				// adding file to body

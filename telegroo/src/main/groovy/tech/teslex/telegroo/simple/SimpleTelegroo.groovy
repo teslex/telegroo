@@ -3,6 +3,7 @@ package tech.teslex.telegroo.simple
 import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Telegroo
+import tech.teslex.telegroo.api.context.MethodsContext
 import tech.teslex.telegroo.api.update.UpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandlersSolver
 import tech.teslex.telegroo.simple.context.SimpleContext
@@ -15,7 +16,12 @@ class SimpleTelegroo extends SimpleContext implements Telegroo {
 
 	protected String token
 
-	protected Map handlers = [
+	protected Map handlersClosures = [
+			(UpdateType.MESSAGE): [:] as Map<String, Closure>,
+			(UpdateType.UPDATE) : [] as List<Closure>
+	]
+
+	protected Map handlersUpdates = [
 			(UpdateType.MESSAGE): [:] as Map<String, UpdateHandler>,
 			(UpdateType.UPDATE) : [] as List<UpdateHandler>
 	]
@@ -67,39 +73,74 @@ class SimpleTelegroo extends SimpleContext implements Telegroo {
 	void solve(Update update) {
 		lastUpdate = update
 		if (checkMid(lastUpdate))
-			updateHandlersSolver.solve(lastUpdate, handlers)
+			updateHandlersSolver.solve(lastUpdate, handlersClosures, handlersUpdates)
 	}
 
-	def onUpdate(UpdateHandler handler) {
-		(handlers[UpdateType.UPDATE] as List).add(handler)
+	@Override
+	void on(UpdateType updateType, @DelegatesTo(MethodsContext) Closure handler) {
+		if (handlersClosures.containsKey(updateType))
+			(handlersClosures[updateType] as List) << handler
+		else
+			handlersClosures[updateType] = [handler]
 	}
 
-	def onCommand(String command, UpdateHandler handler) {
-		(handlers[UpdateType.MESSAGE] as Map).put(command.startsWith(commandSymbol) ? command : "$commandSymbol$command", handler)
-	}
-
-	def onMessage(String message, UpdateHandler handler) {
-		(handlers[UpdateType.MESSAGE] as Map).put(message, handler)
-	}
-
-	def on(String updateType, UpdateHandler handler) {
+	void on(String updateType, @DelegatesTo(MethodsContext) Closure handler) {
 		def type = UpdateType.fromString(updateType)
 
-		if (handlers.containsKey(type))
-			(handlers[type] as List) << handler
+		if (handlersClosures.containsKey(type))
+			(handlersClosures[type] as List) << handler
 		else
-			handlers[type] = [handler]
+			handlersClosures[type] = [handler]
 	}
 
-
-	def on(UpdateType updateType, UpdateHandler handler) {
-		if (handlers.containsKey(updateType))
-			(handlers[updateType] as List) << handler
-		else
-			handlers[updateType] = [handler]
+	@Override
+	void onUpdate(@DelegatesTo(MethodsContext) Closure handler) {
+		(handlersClosures[UpdateType.UPDATE] as List).add(handler)
 	}
 
-	def middleware(Closure<Boolean> closure) {
+	@Override
+	void onCommand(String command, @DelegatesTo(MethodsContext) Closure handler) {
+		(handlersClosures[UpdateType.MESSAGE] as Map).put(command.startsWith(commandSymbol) ? command : "$commandSymbol$command", handler)
+	}
+
+	@Override
+	void onMessage(String message, @DelegatesTo(MethodsContext) Closure handler) {
+		(handlersClosures[UpdateType.MESSAGE] as Map).put(message, handler)
+	}
+
+	@Override
+	void onUpdateHandler(UpdateType updateType, UpdateHandler handler) {
+		if (handlersUpdates.containsKey(updateType))
+			(handlersUpdates[updateType] as List) << handler
+		else
+			handlersUpdates[updateType] = [handler]
+	}
+
+	void onUpdateHandler(String updateType, UpdateHandler handler) {
+		def type = UpdateType.fromString(updateType)
+
+		if (handlersUpdates.containsKey(type))
+			(handlersUpdates[type] as List) << handler
+		else
+			handlersUpdates[type] = [handler]
+	}
+
+	@Override
+	void onUpdateUpdateHandler(UpdateHandler handler) {
+		(handlersUpdates[UpdateType.UPDATE] as List).add(handler)
+	}
+
+	@Override
+	void onCommandUpdateHandler(String command, UpdateHandler handler) {
+		(handlersUpdates[UpdateType.MESSAGE] as Map).put(command.startsWith(commandSymbol) ? command : "$commandSymbol$command", handler)
+	}
+
+	@Override
+	void onMessageUpdateHandler(String message, UpdateHandler handler) {
+		(handlersUpdates[UpdateType.MESSAGE] as Map).put(message, handler)
+	}
+
+	void middleware(Closure<Boolean> closure) {
 		middles.add(closure)
 	}
 

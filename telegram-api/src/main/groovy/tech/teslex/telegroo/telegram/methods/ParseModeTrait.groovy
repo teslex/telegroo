@@ -12,18 +12,18 @@ trait ParseModeTrait {
 	 * Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message.
 	 */
 	@JsonProperty(value = 'parse_mode', required = false)
-	ParseMode parseMode
+	String parseMode
 
 	String getParseMode() {
-		return parseMode?.mode
+		this.parseMode
 	}
 
 	void setParseMode(String parseMode) {
-		this.parseMode = ParseMode.fromString(parseMode)
+		this.parseMode = parseMode
 	}
 
 	@JsonIgnore
 	void setParseMode(ParseMode parseMode) {
-		this.parseMode = parseMode
+		this.parseMode = parseMode.mode
 	}
 }

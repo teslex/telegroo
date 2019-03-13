@@ -8,7 +8,4 @@ interface MethodObject {
 
 	@JsonIgnore
 	String getPathMethod()
-
-	@JsonIgnore
-	void setPathMethod(String method)
 }

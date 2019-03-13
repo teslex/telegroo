@@ -5,6 +5,8 @@ import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Api
 import tech.teslex.telegroo.telegram.types.update.Update
 
+import java.util.regex.Matcher
+
 @CompileStatic
 interface Context {
 
@@ -13,4 +15,6 @@ interface Context {
 	Update getLastUpdate()
 
 	ObjectMapper getJacksonObjectMapper()
+
+	Matcher getMatcher()
 }

@@ -17,31 +17,66 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 		this.telegroo = telegroo
 	}
 
+	/**
+	 *
+	 * @param update
+	 * @param handlersClosures
+	 * @param handlersUpdates
+	 * @return
+	 */
 	@Override
-	def solve(Update update, Map handlers) {
+	def solve(Update update, Map handlersClosures, Map handlersUpdates = [:]) {
 		def context = new SimpleContext(telegroo.api, update)
+		def res = new SimpleUpdateRes(update, context, telegroo)
 
-		handlers[UpdateType.UPDATE].each { UpdateHandler handler ->
-			handler.handle([update, context, telegroo] as SimpleUpdateRes)
+		handlersClosures[UpdateType.UPDATE].each { Closure handler ->
+			handler.delegate = context
+			handler.call()
+		}
+
+		handlersUpdates[UpdateType.UPDATE].each { UpdateHandler handler ->
+			handler.handle(res)
 		}
 
 		if (update.updateType == UpdateType.MESSAGE) {
 
-			def handler = handlers[UpdateType.MESSAGE].find { Map.Entry entry ->
+			def handlerClosure = handlersClosures[UpdateType.MESSAGE].find { Map.Entry entry ->
+				update.message.text ==~ entry.key
+			} as Map.Entry<String, Closure>
+
+			def handlerUpdate = handlersUpdates[UpdateType.MESSAGE].find { Map.Entry entry ->
 				update.message.text ==~ entry.key
 			} as Map.Entry<String, UpdateHandler>
 
-			if (handler) {
-				def match = update.message.text =~ handler.key
+			if (handlerClosure) {
+				def match = update.message.text =~ handlerClosure.key
+				def handlerClosureEntry = handlerClosure.value
 
-				handler.value.handle([update, context, match, telegroo] as SimpleUpdateRes)
+				context = new SimpleContext(telegroo.api, update, match)
+
+				handlerClosureEntry.delegate = context
+				handlerClosureEntry.call()
+			}
+
+			if (handlerUpdate) {
+				def match = update.message.text =~ handlerUpdate.key
+				def handlerUpdateEntry = handlerUpdate.value
+
+				res = new SimpleUpdateRes(update, context, match, telegroo)
+				handlerUpdateEntry.handle(res)
 			}
 		} else {
 
-			def validHandlers = handlers[update.updateType]
+			def validHandlersClosures = handlersClosures[update.updateType]
+			def validHandlersUpdates = handlersUpdates[update.updateType]
 
-			validHandlers.each { UpdateHandler handler ->
-				handler.handle([update, context, telegroo] as SimpleUpdateRes)
+			validHandlersClosures.each { Closure handler ->
+				handler.delegate = context
+				handler.call()
+			}
+
+			validHandlersUpdates.each { UpdateHandler handler ->
+				handler.handle(res)
 			}
 		}
 	}

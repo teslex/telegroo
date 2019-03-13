@@ -6,5 +6,5 @@ import tech.teslex.telegroo.telegram.types.update.Update
 @CompileStatic
 interface UpdateHandlersSolver {
 
-	def solve(Update update, Map<Object, UpdateHandler> handlers)
+	def solve(Update update, Map handlersClosures, Map handlersUpdates)
 }
