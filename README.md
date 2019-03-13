@@ -16,14 +16,12 @@ import tech.teslex.telegroo.simple.SimpleTelegroo
 
 def bot = new SimpleTelegroo('TOKEN')
 
-bot.with {
-	onCommand(/start/) {
-		sendMessage(text: 'Welcome!')
-	}
+bot.onCommand(/start/) {
+	sendMessage(text: 'Welcome!')
+}
 	
-	onCommand(/echo (.+)/) {
-		sendMessage(text: matcher[0][1])
-	}
+bot.onCommand(/echo (.+)/) {
+	sendMessage(text: matcher[0][1])
 }
 
 bot.start()

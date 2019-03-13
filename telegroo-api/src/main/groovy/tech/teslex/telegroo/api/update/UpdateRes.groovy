@@ -10,11 +10,7 @@ import java.util.regex.Matcher
 @CompileStatic
 interface UpdateRes {
 
-	Update getUpdate()
-
 	MethodsContext getContext()
-
-	Matcher getMatcher()
 
 	Telegroo getTelegroo()
 }

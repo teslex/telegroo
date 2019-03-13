@@ -20,7 +20,7 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 	@Override
 	def solve(Update update, Map handlersClosures, Map handlersUpdates = [:]) {
 		def context = new SimpleContext(telegroo.api, update)
-		def res = new SimpleUpdateRes(update, context, telegroo)
+		def res = new SimpleUpdateRes(context, telegroo)
 
 		handlersClosures[UpdateType.UPDATE].each { Closure handler ->
 			handler.delegate = context
@@ -55,7 +55,9 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 				def match = update.message.text =~ handlerUpdate.key
 				def handlerUpdateEntry = handlerUpdate.value
 
-				res = new SimpleUpdateRes(update, context, match, telegroo)
+				context = new SimpleContext(telegroo.api, update, match)
+
+				res = new SimpleUpdateRes(context, telegroo)
 				handlerUpdateEntry.handle(res)
 			}
 		} else {
