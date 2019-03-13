@@ -1,4 +1,4 @@
-package tech.teslex.telegroo.api
+package tech.teslex.telegroo.telegram
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -20,5 +20,5 @@ class TelegramResult<T> {
 	Integer errorCode
 
 	@JsonProperty(required = false)
-	Object parameters // todo: implement it
+	def parameters // todo: implement it
 }

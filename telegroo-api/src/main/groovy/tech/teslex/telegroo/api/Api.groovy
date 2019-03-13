@@ -4,11 +4,10 @@ import groovy.transform.CompileStatic
 import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.telegram.methods.MethodObject
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
+import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
 
 @CompileStatic
 interface Api {
-
-	Response go(String method)
 
 	Response go(String method, Map parameters)
 
@@ -16,9 +15,7 @@ interface Api {
 
 	Response go(MethodObjectWithFile methodObjectWithFile)
 
-//	Response goWithFile(String method, String type, File file, Map parameters)
-//
-//	Response goWithMedia(String method, String type, List<File> media, Map parameters)
+	Response go(MethodObjectWithMedia methodObjectWithMedia)
 
 	void setDefaultParams(Map params)
 

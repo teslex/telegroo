@@ -2,11 +2,11 @@ package tech.teslex.telegroo.telegram.methods
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.telegram.types.InputFile
+import tech.teslex.telegroo.telegram.types.InputMedia
 
 @CompileStatic
-interface MethodObjectWithFile extends MethodObject {
+interface MethodObjectWithMedia extends MethodObject {
 
 	@JsonIgnore
-	<T> InputFile<T> getFile() // String or File
+	List<InputMedia> getMedia()
 }

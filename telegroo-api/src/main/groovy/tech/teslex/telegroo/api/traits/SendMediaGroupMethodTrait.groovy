@@ -5,14 +5,14 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.objects.SendPhotoMethodObject
+import tech.teslex.telegroo.telegram.methods.objects.SendMediaGroupMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SendPhotoMethodTrait implements Context {
+trait SendMediaGroupMethodTrait implements Context {
 
 	@NamedVariant
-	Message sendPhoto(@NamedDelegate SendPhotoMethodObject data) {
+	Message sendMediaGroup(@NamedDelegate SendMediaGroupMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
 
 		def type = jacksonObjectMapper.typeFactory.constructParametricType(TelegramResult, Message)
@@ -21,7 +21,7 @@ trait SendPhotoMethodTrait implements Context {
 				.readValue(api.go(data).returnContent().asStream(), type) as TelegramResult).result
 	}
 
-	Message sendPhoto(Map data) {
-		sendPhoto(new SendPhotoMethodObject(data))
+	Message sendMediaGroup(Map data) {
+		sendMediaGroup(new SendMediaGroupMethodObject(data))
 	}
 }

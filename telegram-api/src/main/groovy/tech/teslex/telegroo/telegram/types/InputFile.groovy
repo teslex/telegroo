@@ -14,14 +14,20 @@ class InputFile<T> {
 
 	Boolean isId = false
 
-	InputFile(String file, Boolean isId = false) {
-		this.file = file as T
+	Boolean isFile = false
+
+	Boolean isUrl = false
+
+	InputFile(String fileUrl, Boolean isId = false) {
+		this.file = fileUrl as T
 		this.isId = isId
+		this.isUrl = !isId
 	}
 
 	InputFile(File file, String mediaType = 'document') {
 		this.file = file as T
 		this.mediaType = mediaType
+		this.isFile = true
 	}
 
 	static InputFile<String> ofUrl(String fileUrl) {

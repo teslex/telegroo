@@ -8,7 +8,6 @@ import groovy.transform.MapConstructor
 import groovy.transform.ToString
 import groovy.transform.builder.Builder
 import tech.teslex.telegroo.telegram.enums.ParseMode
-import tech.teslex.telegroo.telegram.enums.util.FileTypeMethodWithFile
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.types.InputFile
 
@@ -61,10 +60,6 @@ class SendPhotoMethodObject implements MethodObjectWithFile {
 	@JsonProperty(value = 'reply_to_message_id', required = false)
 	Integer replyToMessageId
 
-	void setParseMode(String parseMode) {
-		this.parseMode = parseMode
-	}
-
 	/**
 	 * Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user.
 	 *
@@ -79,10 +74,8 @@ class SendPhotoMethodObject implements MethodObjectWithFile {
 		return photo
 	}
 
-	@Override
-	@JsonIgnore
-	FileTypeMethodWithFile getFileType() {
-		return FileTypeMethodWithFile.PHOTO
+	void setParseMode(String parseMode) {
+		this.parseMode = parseMode
 	}
 
 	@JsonIgnore

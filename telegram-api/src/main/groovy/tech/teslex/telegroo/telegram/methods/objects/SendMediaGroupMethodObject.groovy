@@ -7,18 +7,19 @@ import groovy.transform.CompileStatic
 import groovy.transform.MapConstructor
 import groovy.transform.ToString
 import groovy.transform.builder.Builder
-import tech.teslex.telegroo.telegram.methods.MethodObject
+import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
+import tech.teslex.telegroo.telegram.types.InputMedia
 
 /**
- * forwardMessage
- * Use this method to forward messages of any kind. On success, the sent Message is returned.
+ * sendMediaGroup
+ * Use this method to send a group of photos or videos as an album. On success, an array of the sent Messages is returned.
  */
 @ToString
 @MapConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @CompileStatic
 @Builder
-class ForwardMessageMethodObject implements MethodObject {
+class SendMediaGroupMethodObject implements MethodObjectWithMedia {
 
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -29,27 +30,26 @@ class ForwardMessageMethodObject implements MethodObject {
 	def chatId
 
 	/**
-	 * Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
-	 *
-	 * Integer or String
+	 * A JSON-serialized array describing photos and videos to be sent, must include 2–10 items
 	 */
-	@JsonProperty(value = 'from_chat_id', required = true)
-	def fromChatId
+	@JsonIgnore
+	List<InputMedia> media
 
 	/**
-	 * Sends the message silently. Users will receive a notification with no sound.
+	 * Sends the messages silently. Users will receive a notification with no sound.
 	 */
 	@JsonProperty(value = 'disable_notification', required = false)
 	Boolean disableNotification
 
 	/**
-	 * Message identifier in the chat specified in from_chat_id
+	 * If the messages are a reply, ID of the original message
 	 */
-	@JsonProperty(value = 'message_id', required = true)
-	Integer messageId
+	@JsonProperty(value = 'reply_to_message_id', required = false)
+	Integer replyToMessageId
 
+	SendMediaGroupMethodObject() { super() }
 
 	@Override
 	@JsonIgnore
-	String getPathMethod() { 'forwardMessage' }
+	String getPathMethod() { 'sendMediaGroup' }
 }

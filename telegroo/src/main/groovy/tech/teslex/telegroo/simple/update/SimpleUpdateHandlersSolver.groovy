@@ -17,13 +17,6 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 		this.telegroo = telegroo
 	}
 
-	/**
-	 *
-	 * @param update
-	 * @param handlersClosures
-	 * @param handlersUpdates
-	 * @return
-	 */
 	@Override
 	def solve(Update update, Map handlersClosures, Map handlersUpdates = [:]) {
 		def context = new SimpleContext(telegroo.api, update)

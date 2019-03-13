@@ -2,7 +2,7 @@
 
 ```groovy
 @GrabResolver(name = 'teslex-repo', root = 'https://teslex.gitlab.io/repo/snapshots')
-@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '0.4.0-SNAPSHOT')
+@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '1.0-SNAPSHOT')
 
 import tech.teslex.telegroo.simple.SimpleTelegroo
 
@@ -10,11 +10,11 @@ def bot = new SimpleTelegroo('TOKEN')
 
 bot.with {
 	onCommand(/start/) {
-		it.context.sendMessage('Welcome!')
+		sendMessage(text: 'Welcome!')
 	}
 	
-	onCommand(/echo (.+)/) { res ->
-		res.context.sendMessage(match[0][1])
+	onCommand(/echo (.+)/) {
+		sendMessage(text: matcher[0][1])
 	}
 }
 
@@ -26,16 +26,12 @@ bot.setWebhook('https://kek.localtunnel.me') // setting webhook url
 ```
 
 ## [Telegram api](https://core.telegram.org/bots/api)
-- `api.go(Some)`
-- `api.go(SomeFile)`
-- `api.go(SomeMediaGroup)`
-- `api.go(method, [params])`
-- `api.goWithFile(method, File, fieldName, [params])`
-- `api.goWithMediaGroup(method, List<Map>, [params])`
+- `Response go(String, Map)`
+- `Response go(MethodObject methodObject)`
+- `Response go(MethodObjectWithFile methodObjectWithFile)`
+- `Response go(MethodObjectWithMedia methodObjectWithMedia)`
 
 ```groovy
-bot.api.go(new Some('sendMessage', [chat_id: '1', text: 'message text']))
-// or
 bot.api.go('sendMessage', [chat_id: '1', text: 'message text'])
 ```
 
@@ -55,37 +51,35 @@ bot.api.go('sendMessage', [chat_id: '1', text: 'message text'])
 
 ```groovy
 on('edited_message') {
-	it.context.sendMessage('-_-')
+	sendMessage('-_-')
 }
 
 // or
 import tech.teslex.telegroo.telegram.enums.UpdateType
 
 on(UpdateType.EDITED_MESSAGE) {
-	it.context.sendMessage('-_-')
+	sendMessage('-_-')
 }
 ```
 
 --
 
 ```groovy
-onCommand(/start/) { res ->
-	res.context.sendMessage('Welcome!')
-	
-	// res.matcher
-	// res.update
-	// res.telegroo
+onCommand(/start/) {
+	sendMessage('Welcome!')
 }
 ```
 
 ```groovy
 onMessage(/go/) {
-	it.context.reply('go go go!')
+	reply('go go go!')
 } 
 ```
 
 ## [Methods](https://core.telegram.org/bots/api#available-methods)
 args with `?` are optional
+
+// todo: 
 
 - `getMe()`: [tech.teslex.telegroo.telegram.methods.GetMe](/api/src/main/groovy/tech/teslex/telegroo/api/methods/GetMe.groovy) / [telegram](https://core.telegram.org/bots/api#getme)
 - more methods: [tech.teslex.telegroo.telegram.methods](/api/src/main/groovy/tech/teslex/telegroo/api/methods/) and [core.telegram.org/bots#available-methods](https://core.telegram.org/bots/api#available-methods)

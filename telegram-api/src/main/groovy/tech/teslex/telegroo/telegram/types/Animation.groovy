@@ -1,6 +1,5 @@
 package tech.teslex.telegroo.telegram.types
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
 import groovy.transform.ToString
