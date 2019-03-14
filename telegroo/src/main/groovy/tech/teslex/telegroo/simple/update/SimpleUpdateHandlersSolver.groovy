@@ -19,16 +19,14 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 
 	@Override
 	def solve(Update update, Map handlersClosures, Map handlersUpdates = [:]) {
-		def context = new SimpleContext(telegroo.api, update)
-		def res = new SimpleUpdateRes(context, telegroo)
 
 		handlersClosures[UpdateType.UPDATE].each { Closure handler ->
-			handler.delegate = context
+			handler.delegate = new SimpleContext(telegroo.api, update)
 			handler.call()
 		}
 
 		handlersUpdates[UpdateType.UPDATE].each { UpdateHandler handler ->
-			handler.handle(res)
+			handler.handle(new SimpleContext(telegroo.api, update))
 		}
 
 		if (update.updateType == UpdateType.MESSAGE) {
@@ -45,9 +43,7 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 				def match = update.message.text =~ handlerClosure.key
 				def handlerClosureEntry = handlerClosure.value
 
-				context = new SimpleContext(telegroo.api, update, match)
-
-				handlerClosureEntry.delegate = context
+				handlerClosureEntry.delegate = new SimpleContext(telegroo.api, update, match)
 				handlerClosureEntry.call()
 			}
 
@@ -55,10 +51,7 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 				def match = update.message.text =~ handlerUpdate.key
 				def handlerUpdateEntry = handlerUpdate.value
 
-				context = new SimpleContext(telegroo.api, update, match)
-
-				res = new SimpleUpdateRes(context, telegroo)
-				handlerUpdateEntry.handle(res)
+				handlerUpdateEntry.handle(new SimpleContext(telegroo.api, update, match))
 			}
 		} else {
 
@@ -66,12 +59,12 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 			def validHandlersUpdates = handlersUpdates[update.updateType]
 
 			validHandlersClosures.each { Closure handler ->
-				handler.delegate = context
+				handler.delegate = new SimpleContext(telegroo.api, update)
 				handler.call()
 			}
 
 			validHandlersUpdates.each { UpdateHandler handler ->
-				handler.handle(res)
+				handler.handle(new SimpleContext(telegroo.api, update))
 			}
 		}
 	}

@@ -16,5 +16,5 @@ interface Context {
 
 	ObjectMapper getJacksonObjectMapper()
 
-	Matcher getMatcher()
+	Optional<Matcher> getMatcher()
 }

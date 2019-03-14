@@ -12,7 +12,7 @@ dependencies {
 	compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: apacheHttpFluentHcVersion
 	
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion
-	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
+	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jacksonVersion
 }
 
 publishing {

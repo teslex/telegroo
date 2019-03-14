@@ -1,6 +1,7 @@
 package tech.teslex.telegroo.simple
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.api.context.MethodsContext
@@ -14,23 +15,23 @@ import tech.teslex.telegroo.telegram.types.update.Update
 @CompileStatic
 class SimpleTelegroo extends SimpleContext implements Telegroo {
 
-	protected String token
+	private String token
 
-	protected Map handlersClosures = [
+	private Map handlersClosures = [
 			(UpdateType.MESSAGE): [:] as Map<String, Closure>,
 			(UpdateType.UPDATE) : [] as List<Closure>
 	]
 
-	protected Map handlersUpdates = [
+	private Map handlersUpdates = [
 			(UpdateType.MESSAGE): [:] as Map<String, UpdateHandler>,
 			(UpdateType.UPDATE) : [] as List<UpdateHandler>
 	]
 
-	protected List<Closure<Boolean>> middles = []
+	private List<Closure<Boolean>> middles = []
 
-	protected UpdateHandlersSolver updateHandlersSolver
+	private UpdateHandlersSolver updateHandlersSolver
 
-	protected Boolean active = false
+	private Boolean active = false
 
 	public String commandSymbol = '/'
 
@@ -42,6 +43,7 @@ class SimpleTelegroo extends SimpleContext implements Telegroo {
 		this.token = token
 		this.updateHandlersSolver = new SimpleUpdateHandlersSolver(this)
 		this.jacksonObjectMapper = new ObjectMapper()
+		this.jacksonObjectMapper.registerModule(new Jdk8Module())
 	}
 
 	def start() {

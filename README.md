@@ -6,6 +6,19 @@
 - [Telegroo Docs](DOCS.md)
 - [Telegram Bot API](https://core.telegram.org/bots/api)
 
+
+**Gradle:**
+
+```groovy
+repositories {
+	maven { url 'https://teslex.gitlab.io/repo/snapshots' }
+}
+
+dependencies {
+	compile 'tech.teslex.telegroo:telegroo:1.0-SNAPSHOT'
+}
+```
+
 Sample bot:
 
 ```groovy
@@ -21,7 +34,7 @@ bot.onCommand(/start/) {
 }
 	
 bot.onCommand(/echo (.+)/) {
-	sendMessage(text: matcher[0][1])
+	sendMessage(text: matcher.get()[0][1])
 }
 
 bot.start()

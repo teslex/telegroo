@@ -1,6 +1,7 @@
 package tech.teslex.telegroo.telegram.types.update
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
 import groovy.transform.ToString
@@ -12,6 +13,7 @@ import tech.teslex.telegroo.telegram.types.payments.ShippingQuery
 
 @ToString
 @CompileStatic
+@JsonInclude(JsonInclude.Include.NON_NULL)
 class Update {
 
 	/**
@@ -80,7 +82,6 @@ class Update {
 
 	@JsonIgnore
 	UpdateType getUpdateType() {
-		// fuck ;(
 		if (message != null)
 			UpdateType.MESSAGE
 		else if (editedMessage != null)

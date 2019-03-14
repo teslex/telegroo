@@ -1,6 +1,7 @@
 package tech.teslex.telegroo.simple.context
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Api
 import tech.teslex.telegroo.api.context.MethodsContext
@@ -34,6 +35,7 @@ class SimpleContext implements MethodsContext {
 		this.matcher = matcher
 
 		this.jacksonObjectMapper = new ObjectMapper()
+		this.jacksonObjectMapper.registerModule(new Jdk8Module())
 	}
 
 	SimpleContext(Api api, Update lastUpdate, ObjectMapper jacksonObjectMapper) {
@@ -65,8 +67,8 @@ class SimpleContext implements MethodsContext {
 	}
 
 	@Override
-	Matcher getMatcher() {
-		this.matcher
+	Optional<Matcher> getMatcher() {
+		Optional.ofNullable(this.matcher)
 	}
 
 	protected void setApi(Api api) {
