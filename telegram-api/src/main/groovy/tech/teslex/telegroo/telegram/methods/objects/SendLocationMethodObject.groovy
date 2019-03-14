@@ -7,46 +7,42 @@ import groovy.transform.CompileStatic
 import groovy.transform.MapConstructor
 import groovy.transform.ToString
 import groovy.transform.builder.Builder
-import tech.teslex.telegroo.telegram.enums.ParseMode
-import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
-import tech.teslex.telegroo.telegram.types.InputFile
+import tech.teslex.telegroo.telegram.methods.MethodObject
 
 /**
- * sendPhoto
- * Use this method to send photos. On success, the sent Message is returned.
+ * sendLocation
+ * Use this method to send point on the map. On success, the sent Message is returned.
  */
 @ToString
 @MapConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @CompileStatic
 @Builder
-class SendPhotoMethodObject implements MethodObjectWithFile {
+class SendLocationMethodObject implements MethodObject {
 
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-	 *
-	 * Integer or String
 	 */
 	@JsonProperty(value = 'chat_id', required = true)
 	def chatId
 
 	/**
-	 * Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. More info on Sending Files »
+	 * Latitude of the location
 	 */
-	@JsonIgnore
-	InputFile photo
+	@JsonProperty(required = true)
+	Float latitude
 
 	/**
-	 * Photo caption (may also be used when resending photos by file_id), 0-1024 characters
+	 * Longitude of the location
 	 */
-	@JsonProperty(required = false)
-	String caption
+	@JsonProperty(required = true)
+	Float longitude
 
 	/**
-	 * Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption.
+	 * Period in seconds for which the location will be updated (see Live Locations, should be between 60 and 86400.
 	 */
-	@JsonProperty(value = 'parse_mode', required = false)
-	String parseMode
+	@JsonProperty(value = 'live_period', required = false)
+	Integer livePeriod
 
 	/**
 	 * Sends the message silently. Users will receive a notification with no sound.
@@ -70,20 +66,5 @@ class SendPhotoMethodObject implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	<T> InputFile<T> getFile() {
-		this.photo
-	}
-
-	void setParseMode(String parseMode) {
-		this.parseMode = parseMode
-	}
-
-	@JsonIgnore
-	void setParseMode(ParseMode parseMode) {
-		this.parseMode = parseMode.mode
-	}
-
-	@Override
-	@JsonIgnore
-	String getPathMethod() { 'sendPhoto' }
+	String getPathMethod() { 'sendLocation' }
 }

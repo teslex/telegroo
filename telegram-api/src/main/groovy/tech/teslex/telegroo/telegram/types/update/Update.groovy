@@ -8,6 +8,8 @@ import groovy.transform.ToString
 import tech.teslex.telegroo.telegram.enums.UpdateType
 import tech.teslex.telegroo.telegram.types.CallbackQuery
 import tech.teslex.telegroo.telegram.types.Message
+import tech.teslex.telegroo.telegram.types.inline.ChosenInlineResult
+import tech.teslex.telegroo.telegram.types.inline.InlineQuery
 import tech.teslex.telegroo.telegram.types.payments.PreCheckoutQuery
 import tech.teslex.telegroo.telegram.types.payments.ShippingQuery
 
@@ -65,19 +67,17 @@ class Update {
 	@JsonProperty(value = 'callback_query', required = false)
 	CallbackQuery callbackQuery
 
+	/**
+	 * Optional. New incoming inline query
+	 */
+	@JsonProperty(value = 'inline_query', required = false)
+	InlineQuery inlineQuery
 
-	// todo: implement
-///**
-// * Optional. New incoming inline query
-// */
-//	@JsonProperty(value = 'inline_query', required = false)
-//	InlineQuery inlineQuery
-
-///**
-// * Optional. The result of an inline query that was chosen by a user and sent to their chat partner. Please see our documentation on the feedback collecting for details on how to enable these updates for your bot.
-// */
-//	@JsonProperty(value = 'chosen_inline_result', required = false)
-//	ChosenInlineResult chosenInlineResult
+	/**
+	 * Optional. The result of an inline query that was chosen by a user and sent to their chat partner. Please see our documentation on the feedback collecting for details on how to enable these updates for your bot.
+	 */
+	@JsonProperty(value = 'chosen_inline_result', required = false)
+	ChosenInlineResult chosenInlineResult
 
 
 	@JsonIgnore
@@ -96,6 +96,10 @@ class Update {
 			UpdateType.PRE_CHECKOUT_QUERY
 		else if (callbackQuery != null)
 			UpdateType.CALLBACK_QUERY
+		else if (inlineQuery != null)
+			UpdateType.INLINE_QUERY
+		else if (chosenInlineResult != null)
+			UpdateType.CHOSEN_INLINE_QUERY
 		else
 			UpdateType.UPDATE
 	}

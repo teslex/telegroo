@@ -12,32 +12,32 @@ import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.types.InputFile
 
 /**
- * sendPhoto
- * Use this method to send photos. On success, the sent Message is returned.
+ * sendAudio
+ * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .mp3 format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+ *
+ * For sending voice messages, use the sendVoice method instead.
  */
 @ToString
 @MapConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @CompileStatic
 @Builder
-class SendPhotoMethodObject implements MethodObjectWithFile {
+class SendAudioMethodObject implements MethodObjectWithFile {
 
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-	 *
-	 * Integer or String
 	 */
 	@JsonProperty(value = 'chat_id', required = true)
 	def chatId
 
 	/**
-	 * Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. More info on Sending Files »
+	 * Audio file to send. Pass a file_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files »
 	 */
 	@JsonIgnore
-	InputFile photo
+	InputFile audio
 
 	/**
-	 * Photo caption (may also be used when resending photos by file_id), 0-1024 characters
+	 * Audio caption, 0-1024 characters
 	 */
 	@JsonProperty(required = false)
 	String caption
@@ -47,6 +47,30 @@ class SendPhotoMethodObject implements MethodObjectWithFile {
 	 */
 	@JsonProperty(value = 'parse_mode', required = false)
 	String parseMode
+
+	/**
+	 * Duration of the audio in seconds
+	 */
+	@JsonProperty(required = false)
+	Integer duration
+
+	/**
+	 * Performer
+	 */
+	@JsonProperty(required = false)
+	String performer
+
+	/**
+	 * Track name
+	 */
+	@JsonProperty(required = false)
+	String title
+
+	/**
+	 * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »
+	 */
+	@JsonIgnore
+	InputFile thumb
 
 	/**
 	 * Sends the message silently. Users will receive a notification with no sound.
@@ -70,9 +94,7 @@ class SendPhotoMethodObject implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	<T> InputFile<T> getFile() {
-		this.photo
-	}
+	String getPathMethod() { 'sendPhoto' }
 
 	void setParseMode(String parseMode) {
 		this.parseMode = parseMode
@@ -85,5 +107,7 @@ class SendPhotoMethodObject implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	String getPathMethod() { 'sendPhoto' }
+	<T> InputFile<T> getFile() {
+		this.audio
+	}
 }

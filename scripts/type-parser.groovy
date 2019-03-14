@@ -1,7 +1,8 @@
-String defaultText = """point\tString\tThe part of the face relative to which the mask should be placed. One of “forehead”, “eyes”, “mouth”, or “chin”.
-x_shift\tFloat number\tShift by X-axis measured in widths of the mask scaled to the face size, from left to right. For example, choosing -1.0 will place mask just to the left of the default mask position.
-y_shift\tFloat number\tShift by Y-axis measured in heights of the mask scaled to the face size, from top to bottom. For example, 1.0 will place the mask just below the default mask position.
-scale\tFloat number\tMask scaling coefficient. For example, 2.0 means double size.
+String defaultText = """result_id\tString\tThe unique identifier for the result that was chosen
+from\tUser\tThe user that chose the result
+location\tLocation\tOptional. Sender location, only for bots that require user location
+inline_message_id\tString\tOptional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message. Will be also received in callback queries and can be used to edit the message.
+query\tString\tThe query that was used to obtain the result
 """
 
 String text = args ? args[0] : defaultText

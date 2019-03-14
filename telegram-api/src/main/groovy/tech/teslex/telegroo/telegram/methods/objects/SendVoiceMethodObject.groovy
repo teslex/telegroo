@@ -12,32 +12,30 @@ import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.types.InputFile
 
 /**
- * sendPhoto
- * Use this method to send photos. On success, the sent Message is returned.
+ * sendVoice
+ * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent as Audio or Document). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
  */
 @ToString
 @MapConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @CompileStatic
 @Builder
-class SendPhotoMethodObject implements MethodObjectWithFile {
+class SendVoiceMethodObject implements MethodObjectWithFile {
 
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-	 *
-	 * Integer or String
 	 */
 	@JsonProperty(value = 'chat_id', required = true)
 	def chatId
 
 	/**
-	 * Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. More info on Sending Files »
+	 * Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files »
 	 */
 	@JsonIgnore
-	InputFile photo
+	InputFile voice
 
 	/**
-	 * Photo caption (may also be used when resending photos by file_id), 0-1024 characters
+	 * Voice message caption, 0-1024 characters
 	 */
 	@JsonProperty(required = false)
 	String caption
@@ -47,6 +45,12 @@ class SendPhotoMethodObject implements MethodObjectWithFile {
 	 */
 	@JsonProperty(value = 'parse_mode', required = false)
 	String parseMode
+
+	/**
+	 * Duration of the voice message in seconds
+	 */
+	@JsonProperty(required = false)
+	Integer duration
 
 	/**
 	 * Sends the message silently. Users will receive a notification with no sound.
@@ -70,9 +74,7 @@ class SendPhotoMethodObject implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	<T> InputFile<T> getFile() {
-		this.photo
-	}
+	String getPathMethod() { 'sendVoice' }
 
 	void setParseMode(String parseMode) {
 		this.parseMode = parseMode
@@ -85,5 +87,7 @@ class SendPhotoMethodObject implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	String getPathMethod() { 'sendPhoto' }
+	<T> InputFile<T> getFile() {
+		this.voice
+	}
 }

@@ -12,41 +12,45 @@ import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.types.InputFile
 
 /**
- * sendPhoto
- * Use this method to send photos. On success, the sent Message is returned.
+ * sendVideoNote
+ * As of v.4.0, Telegram clients support rounded square mp4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
  */
 @ToString
 @MapConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @CompileStatic
 @Builder
-class SendPhotoMethodObject implements MethodObjectWithFile {
+class SendVideoNoteMethodObject implements MethodObjectWithFile {
 
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-	 *
-	 * Integer or String
 	 */
 	@JsonProperty(value = 'chat_id', required = true)
-	def chatId
+	Integer chatId
 
 	/**
-	 * Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. More info on Sending Files »
+	 * Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. More info on Sending Files ». Sending video notes by a URL is currently unsupported
 	 */
 	@JsonIgnore
-	InputFile photo
+	InputFile videoNote
 
 	/**
-	 * Photo caption (may also be used when resending photos by file_id), 0-1024 characters
+	 * Duration of sent video in seconds
 	 */
 	@JsonProperty(required = false)
-	String caption
+	Integer duration
 
 	/**
-	 * Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption.
+	 * Video width and height, i.e. diameter of the video message
 	 */
-	@JsonProperty(value = 'parse_mode', required = false)
-	String parseMode
+	@JsonProperty(required = false)
+	Integer length
+
+	/**
+	 * Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »
+	 */
+	@JsonIgnore
+	InputFile thumb
 
 	/**
 	 * Sends the message silently. Users will receive a notification with no sound.
@@ -70,9 +74,7 @@ class SendPhotoMethodObject implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	<T> InputFile<T> getFile() {
-		this.photo
-	}
+	String getPathMethod() { 'sendVideoNote' }
 
 	void setParseMode(String parseMode) {
 		this.parseMode = parseMode
@@ -85,5 +87,7 @@ class SendPhotoMethodObject implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	String getPathMethod() { 'sendPhoto' }
+	<T> InputFile<T> getFile() {
+		this.videoNote
+	}
 }

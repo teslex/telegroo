@@ -1,52 +1,53 @@
 package tech.teslex.telegroo.telegram.methods.objects
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
 import groovy.transform.MapConstructor
 import groovy.transform.ToString
 import groovy.transform.builder.Builder
-import tech.teslex.telegroo.telegram.enums.ParseMode
-import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
-import tech.teslex.telegroo.telegram.types.InputFile
+import tech.teslex.telegroo.telegram.methods.MethodObject
 
 /**
- * sendPhoto
- * Use this method to send photos. On success, the sent Message is returned.
+ * sendContact
+ * Use this method to send phone contacts. On success, the sent Message is returned.
  */
 @ToString
 @MapConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @CompileStatic
 @Builder
-class SendPhotoMethodObject implements MethodObjectWithFile {
+class SendContactMethodObject implements MethodObject {
 
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-	 *
-	 * Integer or String
 	 */
 	@JsonProperty(value = 'chat_id', required = true)
 	def chatId
 
 	/**
-	 * Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. More info on Sending Files »
+	 * Contact's phone number
 	 */
-	@JsonIgnore
-	InputFile photo
+	@JsonProperty(value = 'phone_number', required = true)
+	String phoneNumber
 
 	/**
-	 * Photo caption (may also be used when resending photos by file_id), 0-1024 characters
+	 * Contact's first name
+	 */
+	@JsonProperty(value = 'first_name', required = true)
+	String firstName
+
+	/**
+	 * Contact's last name
+	 */
+	@JsonProperty(value = 'last_name', required = false)
+	String lastName
+
+	/**
+	 * Additional data about the contact in the form of a vCard, 0-2048 bytes
 	 */
 	@JsonProperty(required = false)
-	String caption
-
-	/**
-	 * Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption.
-	 */
-	@JsonProperty(value = 'parse_mode', required = false)
-	String parseMode
+	String vcard
 
 	/**
 	 * Sends the message silently. Users will receive a notification with no sound.
@@ -69,21 +70,7 @@ class SendPhotoMethodObject implements MethodObjectWithFile {
 	def replyMarkup
 
 	@Override
-	@JsonIgnore
-	<T> InputFile<T> getFile() {
-		this.photo
+	String getPathMethod() {
+		'sendContact'
 	}
-
-	void setParseMode(String parseMode) {
-		this.parseMode = parseMode
-	}
-
-	@JsonIgnore
-	void setParseMode(ParseMode parseMode) {
-		this.parseMode = parseMode.mode
-	}
-
-	@Override
-	@JsonIgnore
-	String getPathMethod() { 'sendPhoto' }
 }

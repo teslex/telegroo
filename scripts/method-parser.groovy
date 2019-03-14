@@ -1,9 +1,5 @@
-String defaultText = """chat_id\tInteger or String\tYes\tUnique identifier for the target chat or username of the target channel (in the format @channelusername)
-photo\tInputFile or String\tYes\tPhoto to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. More info on Sending Files »
-caption\tString\tOptional\tPhoto caption (may also be used when resending photos by file_id), 0-1024 characters
-parse_mode\tString\tOptional\tSend Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption.
-disable_notification\tBoolean\tOptional\tSends the message silently. Users will receive a notification with no sound.
-reply_to_message_id\tInteger\tOptional\tIf the message is a reply, ID of the original message
+String defaultText = """user_id\tInteger\tYes\tUser identifier
+errors\tArray of PassportElementError\tYes\tA JSON-serialized array describing the errors
 """
 
 String text = args ? args[0] : defaultText
