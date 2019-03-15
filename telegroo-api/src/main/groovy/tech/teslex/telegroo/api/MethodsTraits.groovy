@@ -5,11 +5,17 @@ import tech.teslex.telegroo.api.traits.*
 import tech.teslex.telegroo.api.traits.payments.AnswerPreCheckoutQueryMethodTrait
 import tech.teslex.telegroo.api.traits.payments.AnswerShippingQueryMethodTrait
 import tech.teslex.telegroo.api.traits.payments.SendInvoiceMethodTrait
+import tech.teslex.telegroo.api.traits.webhook.DeleteWebhookMethodTrait
+import tech.teslex.telegroo.api.traits.webhook.GetWebhookInfoMethodTrait
+import tech.teslex.telegroo.api.traits.webhook.SetWebhookMethodTrait
 
 @CompileStatic
 trait MethodsTraits implements
 
 		GetUpdatesMethodTrait,
+		SetWebhookMethodTrait,
+		DeleteWebhookMethodTrait,
+		GetWebhookInfoMethodTrait,
 
 		ReplyTrait,
 

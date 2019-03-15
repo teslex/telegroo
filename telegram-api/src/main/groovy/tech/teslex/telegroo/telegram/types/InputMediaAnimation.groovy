@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
-import groovy.transform.ToString
+import groovy.transform.Canonical
 
-@ToString
+@Canonical
 @CompileStatic
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class InputMediaAnimation extends InputMedia {

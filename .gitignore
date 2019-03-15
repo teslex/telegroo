@@ -8,3 +8,4 @@ build/
 *.iws
 telegroo/src/test/resources/token.txt
 telegroo/src/main/groovy/tech/teslex/telegroo/Test.groovy
+telegroo/src/main/groovy/tech/teslex/telegroo/NextTest.groovy

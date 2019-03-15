@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
-import groovy.transform.ToString
+import groovy.transform.Canonical
 import tech.teslex.telegroo.telegram.enums.UpdateType
 import tech.teslex.telegroo.telegram.types.CallbackQuery
 import tech.teslex.telegroo.telegram.types.Message
@@ -13,7 +13,7 @@ import tech.teslex.telegroo.telegram.types.inline.InlineQuery
 import tech.teslex.telegroo.telegram.types.payments.PreCheckoutQuery
 import tech.teslex.telegroo.telegram.types.payments.ShippingQuery
 
-@ToString
+@Canonical
 @CompileStatic
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class Update {

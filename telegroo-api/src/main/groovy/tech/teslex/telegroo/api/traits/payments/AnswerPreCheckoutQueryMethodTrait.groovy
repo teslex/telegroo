@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.payments.AnswerPreCheckoutQueryMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.payments.AnswerPreCheckoutQueryMethodObject
 
 @CompileStatic
@@ -19,5 +20,12 @@ trait AnswerPreCheckoutQueryMethodTrait implements Context {
 
 	TelegramResult<Object> answerPreCheckoutQuery(Map data) {
 		answerPreCheckoutQuery(data as AnswerPreCheckoutQueryMethodObject)
+	}
+
+	TelegramResult<Object> answerPreCheckoutQuery(@DelegatesTo(AnswerPreCheckoutQueryMethodObjectBuilder) Closure closure) {
+		def builder = new AnswerPreCheckoutQueryMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		answerPreCheckoutQuery(builder.build())
 	}
 }

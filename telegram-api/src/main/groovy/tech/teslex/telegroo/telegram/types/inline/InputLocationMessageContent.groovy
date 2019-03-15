@@ -9,7 +9,6 @@ import groovy.transform.builder.Builder
 /**
  * Represents the content of a location message to be sent as the result of an inline query.
  */
-@Builder
 @ToString
 @CompileStatic
 @JsonInclude(JsonInclude.Include.NON_NULL)

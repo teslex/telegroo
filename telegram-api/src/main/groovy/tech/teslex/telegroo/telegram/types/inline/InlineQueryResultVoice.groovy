@@ -3,15 +3,14 @@ package tech.teslex.telegroo.telegram.types.inline
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
-import groovy.transform.ToString
+import groovy.transform.Canonical
 import groovy.transform.builder.Builder
 import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
 
 /**
  * Represents a link to a voice recording in an .ogg container encoded with OPUS. By default, this voice recording will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the the voice message.
  */
-@Builder
-@ToString
+@Canonical
 @CompileStatic
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class InlineQueryResultVoice extends InlineQueryResult {

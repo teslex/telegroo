@@ -2,13 +2,14 @@ package tech.teslex.telegroo.telegram.types.games
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 import groovy.transform.ToString
 import tech.teslex.telegroo.telegram.types.Animation
 import tech.teslex.telegroo.telegram.types.MessageEntity
 import tech.teslex.telegroo.telegram.types.PhotoSize
 
-@ToString
+@Canonical
 @CompileStatic
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class Game {

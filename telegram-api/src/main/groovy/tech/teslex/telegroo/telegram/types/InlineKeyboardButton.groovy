@@ -3,12 +3,12 @@ package tech.teslex.telegroo.telegram.types
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
-import groovy.transform.ToString
+import groovy.transform.Canonical
 import groovy.transform.builder.Builder
 import tech.teslex.telegroo.telegram.types.games.CallbackGame
 
 @Builder
-@ToString
+@Canonical
 @CompileStatic
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class InlineKeyboardButton {

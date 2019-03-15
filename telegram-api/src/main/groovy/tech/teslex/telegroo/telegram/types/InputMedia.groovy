@@ -2,12 +2,10 @@ package tech.teslex.telegroo.telegram.types
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
+import groovy.transform.Canonical
 import groovy.transform.CompileStatic
-import groovy.transform.ToString
-import groovy.transform.builder.Builder
 
-@Builder
-@ToString
+@Canonical
 @CompileStatic
 @JsonInclude(JsonInclude.Include.NON_NULL)
 abstract class InputMedia {

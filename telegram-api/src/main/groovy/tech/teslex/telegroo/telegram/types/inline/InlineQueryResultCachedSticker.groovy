@@ -3,15 +3,14 @@ package tech.teslex.telegroo.telegram.types.inline
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
-import groovy.transform.ToString
+import groovy.transform.Canonical
 import groovy.transform.builder.Builder
 import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
 
 /**
  * Represents a link to a sticker stored on the Telegram servers. By default, this sticker will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the sticker.
  */
-@Builder
-@ToString
+@Canonical
 @CompileStatic
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class InlineQueryResultCachedSticker extends InlineQueryResult {

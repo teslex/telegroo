@@ -2,16 +2,14 @@ package tech.teslex.telegroo.telegram.types.inline
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import groovy.transform.Canonical
 import groovy.transform.CompileStatic
-import groovy.transform.ToString
-import groovy.transform.builder.Builder
 import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
 
 /**
  * Represents a link to a file stored on the Telegram servers. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file.
  */
-@Builder
-@ToString
+@Canonical
 @CompileStatic
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class InlineQueryResultCachedDocument extends InlineQueryResult {

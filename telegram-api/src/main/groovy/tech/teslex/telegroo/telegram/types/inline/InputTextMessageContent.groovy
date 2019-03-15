@@ -3,14 +3,13 @@ package tech.teslex.telegroo.telegram.types.inline
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
-import groovy.transform.ToString
+import groovy.transform.Canonical
 import groovy.transform.builder.Builder
 
 /**
  * Represents the content of a text message to be sent as the result of an inline query.
  */
-@Builder
-@ToString
+@Canonical
 @CompileStatic
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class InputTextMessageContent extends InputMessageContent {

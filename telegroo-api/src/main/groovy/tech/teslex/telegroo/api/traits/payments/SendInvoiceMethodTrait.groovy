@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.payments.SendInvoiceMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.payments.SendInvoiceMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
@@ -22,5 +23,12 @@ trait SendInvoiceMethodTrait implements Context {
 
 	TelegramResult<Message> sendInvoice(Map data) {
 		sendInvoice(data as SendInvoiceMethodObject)
+	}
+
+	TelegramResult<Message> sendInvoice(@DelegatesTo(SendInvoiceMethodObjectBuilder) Closure closure) {
+		def builder = new SendInvoiceMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		sendInvoice(builder.build())
 	}
 }
