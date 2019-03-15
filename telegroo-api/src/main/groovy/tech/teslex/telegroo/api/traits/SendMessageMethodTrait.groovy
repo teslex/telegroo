@@ -21,7 +21,7 @@ trait SendMessageMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendMessage(Map data) {
-		sendMessage(new SendMessageMethodObject(data))
+		sendMessage(data as SendMessageMethodObject)
 	}
 
 	TelegramResult<Message> sendMessage(String text, chatId = lastUpdate[lastUpdate.updateType.type]['chat']['id']) {

@@ -20,6 +20,6 @@ trait SetChatDescriptionMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> setChatDescription(Map data) {
-		setChatDescription(new SetChatDescriptionMethodObject(data))
+		setChatDescription(data as SetChatDescriptionMethodObject)
 	}
 }

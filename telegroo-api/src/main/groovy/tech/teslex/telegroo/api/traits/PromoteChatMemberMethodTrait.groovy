@@ -20,6 +20,6 @@ trait PromoteChatMemberMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> promoteChatMember(Map data) {
-		promoteChatMember(new PromoteChatMemberMethodObject(data))
+		promoteChatMember(data as PromoteChatMemberMethodObject)
 	}
 }

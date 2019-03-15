@@ -41,9 +41,12 @@ class SimpleApi implements Api {
 
 	@Override
 	Response go(MethodObject methodObject) {
+		Map params = objectMapper.convertValue(methodObject, Map)
+		params += defaultParams
+
 		Request.Post(buildUrl(methodObject.pathMethod))
 				.addHeader('Content-Type', 'application/json')
-				.bodyString(objectMapper.writeValueAsString(methodObject), ContentType.APPLICATION_JSON)
+				.bodyString(objectMapper.writeValueAsString(params), ContentType.APPLICATION_JSON)
 				.execute()
 	}
 

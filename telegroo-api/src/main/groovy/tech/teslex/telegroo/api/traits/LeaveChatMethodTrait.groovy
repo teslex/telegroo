@@ -20,6 +20,6 @@ trait LeaveChatMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> leaveChat(Map data) {
-		leaveChat(new LeaveChatMethodObject(data))
+		leaveChat(data as LeaveChatMethodObject)
 	}
 }

@@ -19,6 +19,6 @@ trait UploadStickerFileMethodTrait implements Context {
 	}
 
 	TelegramResult<FileObject> uploadStickerFile(Map data) {
-		uploadStickerFile(new UploadStickerFileMethodObject(data))
+		uploadStickerFile(data as UploadStickerFileMethodObject)
 	}
 }

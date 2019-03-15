@@ -21,6 +21,6 @@ trait StopMessageLiveLocationMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> stopMessageLiveLocation(Map data) {
-		stopMessageLiveLocation(new StopMessageLiveLocationMethodObject(data))
+		stopMessageLiveLocation(data as StopMessageLiveLocationMethodObject)
 	}
 }

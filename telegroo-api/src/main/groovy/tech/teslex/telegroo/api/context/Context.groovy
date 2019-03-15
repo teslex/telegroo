@@ -8,7 +8,7 @@ import tech.teslex.telegroo.telegram.types.update.Update
 import java.util.regex.Matcher
 
 @CompileStatic
-interface Context {
+interface Context extends Cloneable {
 
 	Api getApi()
 
@@ -17,4 +17,6 @@ interface Context {
 	ObjectMapper getJacksonObjectMapper()
 
 	Optional<Matcher> getMatcher()
+
+	Context createNewContext(Api api, Update update, ObjectMapper objectMapper, Matcher matcher)
 }

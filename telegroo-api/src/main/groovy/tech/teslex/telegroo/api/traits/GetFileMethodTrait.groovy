@@ -19,6 +19,6 @@ trait GetFileMethodTrait implements Context {
 	}
 
 	TelegramResult<FileObject> getFile(Map data) {
-		getFile(new GetFileMethodObject(data))
+		getFile(data as GetFileMethodObject)
 	}
 }

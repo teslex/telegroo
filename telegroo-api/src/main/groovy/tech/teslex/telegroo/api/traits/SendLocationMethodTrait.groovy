@@ -21,6 +21,6 @@ trait SendLocationMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendLocation(Map data) {
-		sendLocation(new SendLocationMethodObject(data))
+		sendLocation(data as SendLocationMethodObject)
 	}
 }

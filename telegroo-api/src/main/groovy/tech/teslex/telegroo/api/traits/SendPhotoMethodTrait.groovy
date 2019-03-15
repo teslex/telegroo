@@ -21,6 +21,6 @@ trait SendPhotoMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendPhoto(Map data) {
-		sendPhoto(new SendPhotoMethodObject(data))
+		sendPhoto(data as SendPhotoMethodObject)
 	}
 }

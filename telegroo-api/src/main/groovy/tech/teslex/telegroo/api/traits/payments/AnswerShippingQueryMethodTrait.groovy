@@ -18,6 +18,6 @@ trait AnswerShippingQueryMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> answerShippingQuery(Map data) {
-		answerShippingQuery(new AnswerShippingQueryMethodObject(data))
+		answerShippingQuery(data as AnswerShippingQueryMethodObject)
 	}
 }

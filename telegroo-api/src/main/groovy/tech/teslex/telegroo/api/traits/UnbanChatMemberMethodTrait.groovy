@@ -20,6 +20,6 @@ trait UnbanChatMemberMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> unbanChatMember(Map data) {
-		unbanChatMember(new UnbanChatMemberMethodObject(data))
+		unbanChatMember(data as UnbanChatMemberMethodObject)
 	}
 }

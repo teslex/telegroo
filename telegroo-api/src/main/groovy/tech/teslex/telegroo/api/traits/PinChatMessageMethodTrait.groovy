@@ -20,6 +20,6 @@ trait PinChatMessageMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> pinChatMessage(Map data) {
-		pinChatMessage(new PinChatMessageMethodObject(data))
+		pinChatMessage(data as PinChatMessageMethodObject)
 	}
 }

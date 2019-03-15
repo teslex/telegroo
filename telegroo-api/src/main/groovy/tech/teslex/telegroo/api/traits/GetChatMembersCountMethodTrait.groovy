@@ -20,6 +20,6 @@ trait GetChatMembersCountMethodTrait implements Context {
 	}
 
 	TelegramResult<Integer> getChatMembersCount(Map data) {
-		getChatMembersCount(new GetChatMembersCountMethodObject(data))
+		getChatMembersCount(data as GetChatMembersCountMethodObject)
 	}
 }

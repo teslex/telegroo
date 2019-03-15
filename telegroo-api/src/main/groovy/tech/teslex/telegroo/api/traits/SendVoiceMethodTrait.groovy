@@ -21,6 +21,6 @@ trait SendVoiceMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendVoice(Map data) {
-		sendVoice(new SendVoiceMethodObject(data))
+		sendVoice(data as SendVoiceMethodObject)
 	}
 }

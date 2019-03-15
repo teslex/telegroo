@@ -7,7 +7,7 @@ import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
 
 @CompileStatic
-interface Api {
+interface Api extends Cloneable {
 
 	Response go(String method, Map parameters)
 

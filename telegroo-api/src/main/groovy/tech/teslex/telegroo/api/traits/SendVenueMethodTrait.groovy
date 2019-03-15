@@ -21,6 +21,6 @@ trait SendVenueMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendVenue(Map data) {
-		sendVenue(new SendVenueMethodObject(data))
+		sendVenue(data as SendVenueMethodObject)
 	}
 }

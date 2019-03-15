@@ -18,6 +18,6 @@ trait AddStickerToSetMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> addStickerToSet(Map data) {
-		addStickerToSet(new AddStickerToSetMethodObject(data))
+		addStickerToSet(data as AddStickerToSetMethodObject)
 	}
 }

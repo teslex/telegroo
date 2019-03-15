@@ -20,6 +20,6 @@ trait UnpinChatMessageMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> unpinChatMessage(Map data) {
-		unpinChatMessage(new UnpinChatMessageMethodObject(data))
+		unpinChatMessage(data as UnpinChatMessageMethodObject)
 	}
 }

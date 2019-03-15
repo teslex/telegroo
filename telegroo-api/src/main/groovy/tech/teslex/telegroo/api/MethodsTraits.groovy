@@ -11,6 +11,8 @@ trait MethodsTraits implements
 
 		GetUpdatesMethodTrait,
 
+		ReplyTrait,
+
 		GetMeMethodTrait,
 		SendMessageMethodTrait,
 		ForwardMessageMethodTrait,
@@ -23,7 +25,7 @@ trait MethodsTraits implements
 		SendVideoNoteMethodTrait,
 		SendMediaGroupMethodTrait,
 		SendLocationMethodTrait,
-		EditMessageMediaMethodTrait,
+		EditMessageLiveLocationMethodTrait,
 		StopMessageLiveLocationMethodTrait,
 		SendVenueMethodTrait,
 		SendContactMethodTrait,

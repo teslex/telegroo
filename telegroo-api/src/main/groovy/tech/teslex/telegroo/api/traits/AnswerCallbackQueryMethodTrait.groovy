@@ -18,6 +18,6 @@ trait AnswerCallbackQueryMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> answerCallbackQuery(Map data) {
-		answerCallbackQuery(new AnswerCallbackQueryMethodObject(data))
+		answerCallbackQuery(data as AnswerCallbackQueryMethodObject)
 	}
 }

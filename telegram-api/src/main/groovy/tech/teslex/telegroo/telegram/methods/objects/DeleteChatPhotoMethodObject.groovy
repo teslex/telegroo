@@ -14,9 +14,9 @@ import tech.teslex.telegroo.telegram.methods.MethodObject
  * Use this method to delete a chat photo. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success.
  */
 @ToString
-@MapConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @CompileStatic
+@MapConstructor
 @Builder
 class DeleteChatPhotoMethodObject implements MethodObject {
 

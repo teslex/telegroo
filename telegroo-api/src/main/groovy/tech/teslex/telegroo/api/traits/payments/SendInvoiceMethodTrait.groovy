@@ -21,6 +21,6 @@ trait SendInvoiceMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendInvoice(Map data) {
-		sendInvoice(new SendInvoiceMethodObject(data))
+		sendInvoice(data as SendInvoiceMethodObject)
 	}
 }

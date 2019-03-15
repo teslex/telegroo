@@ -21,6 +21,6 @@ trait SendAnimationMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendAnimation(Map data) {
-		sendAnimation(new SendAnimationMethodObject(data))
+		sendAnimation(data as SendAnimationMethodObject)
 	}
 }

@@ -20,6 +20,6 @@ trait SetChatPhotoMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> setChatPhoto(Map data) {
-		setChatPhoto(new SetChatPhotoMethodObject(data))
+		setChatPhoto(data as SetChatPhotoMethodObject)
 	}
 }

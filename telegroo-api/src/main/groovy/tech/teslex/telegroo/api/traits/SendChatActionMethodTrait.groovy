@@ -20,6 +20,6 @@ trait SendChatActionMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> sendChatAction(Map data) {
-		sendChatAction(new SendChatActionMethodObject(data))
+		sendChatAction(data as SendChatActionMethodObject)
 	}
 }

@@ -22,6 +22,6 @@ trait EditMessageLiveLocationMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> editMessageLiveLocation(Map data) {
-		editMessageLiveLocation(new EditMessageLiveLocationMethodObject(data))
+		editMessageLiveLocation(data as EditMessageLiveLocationMethodObject)
 	}
 }

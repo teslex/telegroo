@@ -21,6 +21,6 @@ trait SendStickerMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendSticker(Map data) {
-		sendSticker(new SendStickerMethodObject(data))
+		sendSticker(data as SendStickerMethodObject)
 	}
 }

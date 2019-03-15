@@ -19,6 +19,6 @@ trait GetStickerSetMethodTrait implements Context {
 	}
 
 	TelegramResult<StickerSet> getStickerSet(Map data) {
-		getStickerSet(new GetStickerSetMethodObject(data))
+		getStickerSet(data as GetStickerSetMethodObject)
 	}
 }

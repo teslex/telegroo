@@ -18,6 +18,6 @@ trait AnswerPreCheckoutQueryMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> answerPreCheckoutQuery(Map data) {
-		answerPreCheckoutQuery(new AnswerPreCheckoutQueryMethodObject(data))
+		answerPreCheckoutQuery(data as AnswerPreCheckoutQueryMethodObject)
 	}
 }

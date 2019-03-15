@@ -20,6 +20,6 @@ trait SetChatStickerSetMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> setChatStickerSet(Map data) {
-		setChatStickerSet(new SetChatStickerSetMethodObject(data))
+		setChatStickerSet(data as SetChatStickerSetMethodObject)
 	}
 }

@@ -22,6 +22,6 @@ trait EditMessageReplyMarkupMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> editMessageReplyMarkup(Map data) {
-		editMessageReplyMarkup(new EditMessageReplyMarkupMethodObject(data))
+		editMessageReplyMarkup(data as EditMessageReplyMarkupMethodObject)
 	}
 }

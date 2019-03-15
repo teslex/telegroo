@@ -22,6 +22,6 @@ trait EditMessageCaptionMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> editMessageCaption(Map data) {
-		editMessageCaption(new EditMessageCaptionMethodObject(data))
+		editMessageCaption(data as EditMessageCaptionMethodObject)
 	}
 }

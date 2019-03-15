@@ -23,6 +23,6 @@ trait GetUpdatesMethodTrait implements Context {
 	}
 
 	TelegramResult<List<Update>> getUpdates(Map data) {
-		getUpdates(new GetUpdatesMethodObject(data))
+		getUpdates(data as GetUpdatesMethodObject)
 	}
 }

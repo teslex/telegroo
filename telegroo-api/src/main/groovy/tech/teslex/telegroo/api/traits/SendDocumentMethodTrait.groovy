@@ -21,6 +21,6 @@ trait SendDocumentMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendDocument(Map data) {
-		sendDocument(new SendDocumentMethodObject(data))
+		sendDocument(data as SendDocumentMethodObject)
 	}
 }

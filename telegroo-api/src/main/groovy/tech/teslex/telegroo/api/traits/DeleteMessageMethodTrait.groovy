@@ -21,6 +21,6 @@ trait DeleteMessageMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> deleteMessage(Map data) {
-		deleteMessage(new DeleteMessageMethodObject(data))
+		deleteMessage(data as DeleteMessageMethodObject)
 	}
 }

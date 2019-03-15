@@ -18,6 +18,6 @@ trait AnswerInlineQueryMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> answerInlineQuery(Map data) {
-		answerInlineQuery(new AnswerInlineQueryMethodObject(data))
+		answerInlineQuery(data as AnswerInlineQueryMethodObject)
 	}
 }

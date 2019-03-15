@@ -21,6 +21,6 @@ trait GetUserProfilePhotosMethodTrait implements Context {
 	}
 
 	TelegramResult<UserProfilePhotos> getUserProfilePhotos(Map data) {
-		getUserProfilePhotos(new GetUserProfilePhotosMethodObject(data))
+		getUserProfilePhotos(data as GetUserProfilePhotosMethodObject)
 	}
 }

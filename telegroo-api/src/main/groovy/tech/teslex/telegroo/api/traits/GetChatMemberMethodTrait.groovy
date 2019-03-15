@@ -21,6 +21,6 @@ trait GetChatMemberMethodTrait implements Context {
 	}
 
 	TelegramResult<ChatMember> getChatMember(Map data) {
-		getChatMember(new GetChatMemberMethodObject(data))
+		getChatMember(data as GetChatMemberMethodObject)
 	}
 }

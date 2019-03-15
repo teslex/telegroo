@@ -18,6 +18,6 @@ trait DeleteStickerFromSetMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> deleteStickerFromSet(Map data) {
-		deleteStickerFromSet(new DeleteStickerFromSetMethodObject(data))
+		deleteStickerFromSet(data as DeleteStickerFromSetMethodObject)
 	}
 }

@@ -22,6 +22,6 @@ trait EditMessageMediaMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> editMessageMedia(Map data) {
-		editMessageMedia(new EditMessageMediaMethodObject(data))
+		editMessageMedia(data as EditMessageMediaMethodObject)
 	}
 }

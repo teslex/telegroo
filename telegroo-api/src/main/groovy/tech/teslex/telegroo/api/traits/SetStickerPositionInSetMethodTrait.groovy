@@ -18,6 +18,6 @@ trait SetStickerPositionInSetMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> setStickerPositionInSet(Map data) {
-		setStickerPositionInSet(new SetStickerPositionInSetMethodObject(data))
+		setStickerPositionInSet(data as SetStickerPositionInSetMethodObject)
 	}
 }

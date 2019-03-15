@@ -21,6 +21,6 @@ trait SendMediaGroupMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendMediaGroup(Map data) {
-		sendMediaGroup(new SendMediaGroupMethodObject(data))
+		sendMediaGroup(data as SendMediaGroupMethodObject)
 	}
 }

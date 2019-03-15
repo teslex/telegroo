@@ -21,6 +21,6 @@ trait SendVideoMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendVideo(Map data) {
-		sendVideo(new SendVideoMethodObject(data))
+		sendVideo(data as SendVideoMethodObject)
 	}
 }

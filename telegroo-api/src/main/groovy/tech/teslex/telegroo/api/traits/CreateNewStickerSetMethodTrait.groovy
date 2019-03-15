@@ -18,6 +18,6 @@ trait CreateNewStickerSetMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> createNewStickerSet(Map data) {
-		createNewStickerSet(new CreateNewStickerSetMethodObject(data))
+		createNewStickerSet(data as CreateNewStickerSetMethodObject)
 	}
 }

@@ -20,6 +20,6 @@ trait DeleteChatPhotoMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> deleteChatPhoto(Map data) {
-		deleteChatPhoto(new DeleteChatPhotoMethodObject(data))
+		deleteChatPhoto(data as DeleteChatPhotoMethodObject)
 	}
 }

@@ -20,6 +20,6 @@ trait ExportChatInviteLinkMethodTrait implements Context {
 	}
 
 	TelegramResult<String> exportChatInviteLink(Map data) {
-		exportChatInviteLink(new ExportChatInviteLinkMethodObject(data))
+		exportChatInviteLink(data as ExportChatInviteLinkMethodObject)
 	}
 }

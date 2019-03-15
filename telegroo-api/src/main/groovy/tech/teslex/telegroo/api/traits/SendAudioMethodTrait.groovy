@@ -21,6 +21,6 @@ trait SendAudioMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendAudio(Map data) {
-		sendAudio(new SendAudioMethodObject(data))
+		sendAudio(data as SendAudioMethodObject)
 	}
 }

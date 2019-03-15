@@ -22,6 +22,6 @@ trait EditMessageTextMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> editMessageText(Map data) {
-		editMessageText(new EditMessageTextMethodObject(data))
+		editMessageText(data as EditMessageTextMethodObject)
 	}
 }

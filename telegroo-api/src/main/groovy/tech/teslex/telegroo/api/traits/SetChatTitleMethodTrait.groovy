@@ -20,6 +20,6 @@ trait SetChatTitleMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> setChatTitle(Map data) {
-		setChatTitle(new SetChatTitleMethodObject(data))
+		setChatTitle(data as SetChatTitleMethodObject)
 	}
 }

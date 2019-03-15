@@ -22,6 +22,6 @@ trait ForwardMessageMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> forwardMessage(Map data) {
-		forwardMessage(new ForwardMessageMethodObject(data))
+		forwardMessage(data as ForwardMessageMethodObject)
 	}
 }

@@ -21,6 +21,6 @@ trait RestrictChatMemberMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> restrictChatMemberMethodTrait(Map data) {
-		restrictChatMemberMethodTrait(new RestrictChatMemberMethodObject(data))
+		restrictChatMemberMethodTrait(data as RestrictChatMemberMethodObject)
 	}
 }

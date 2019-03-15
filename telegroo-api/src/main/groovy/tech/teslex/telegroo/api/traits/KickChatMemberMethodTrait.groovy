@@ -20,6 +20,6 @@ trait KickChatMemberMethodTrait implements Context {
 	}
 
 	TelegramResult<Object> kickChatMember(Map data) {
-		kickChatMember(new KickChatMemberMethodObject(data))
+		kickChatMember(data as KickChatMemberMethodObject)
 	}
 }

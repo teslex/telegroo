@@ -21,6 +21,6 @@ trait SendContactMethodTrait implements Context {
 	}
 
 	TelegramResult<Message> sendContact(Map data) {
-		sendContact(new SendContactMethodObject(data))
+		sendContact(data as SendContactMethodObject)
 	}
 }
