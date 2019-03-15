@@ -12,16 +12,15 @@ import tech.teslex.telegroo.telegram.types.Message
 trait SendPhotoMethodTrait implements Context {
 
 	@NamedVariant
-	Message sendPhoto(@NamedDelegate SendPhotoMethodObject data) {
+	TelegramResult<Message> sendPhoto(@NamedDelegate SendPhotoMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
 
 		def type = jacksonObjectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 
-		(jacksonObjectMapper
-				.readValue(api.go(data).returnContent().asStream(), type) as TelegramResult).result
+		jacksonObjectMapper.readValue(api.go(data).returnContent().asStream(), type)
 	}
 
-	Message sendPhoto(Map data) {
+	TelegramResult<Message> sendPhoto(Map data) {
 		sendPhoto(new SendPhotoMethodObject(data))
 	}
 }

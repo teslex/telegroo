@@ -1,5 +1,6 @@
 package tech.teslex.telegroo.telegram.methods.objects
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
@@ -17,7 +18,7 @@ import tech.teslex.telegroo.telegram.methods.MethodObject
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @CompileStatic
 @Builder
-class UnPinChatMessageMethodObject implements MethodObject {
+class UnpinChatMessageMethodObject implements MethodObject {
 
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -26,6 +27,7 @@ class UnPinChatMessageMethodObject implements MethodObject {
 	def chatId
 
 	@Override
+	@JsonIgnore
 	String getPathMethod() {
 		'unpinChatMessage'
 	}

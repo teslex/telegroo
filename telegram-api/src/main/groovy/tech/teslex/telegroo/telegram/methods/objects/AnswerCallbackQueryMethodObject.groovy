@@ -1,5 +1,6 @@
 package tech.teslex.telegroo.telegram.methods.objects
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
@@ -50,6 +51,7 @@ class AnswerCallbackQueryMethodObject implements MethodObject {
 	Integer cacheTime
 
 	@Override
+	@JsonIgnore
 	String getPathMethod() {
 		'answerCallbackQuery'
 	}

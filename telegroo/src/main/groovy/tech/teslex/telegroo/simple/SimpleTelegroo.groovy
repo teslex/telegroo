@@ -53,10 +53,11 @@ class SimpleTelegroo extends SimpleContext implements Telegroo {
 		active = true
 
 		while (active) {
-			def updates = getUpdates(offset: lastUpdate.updateId + 1)
+			def response = getUpdates(offset: lastUpdate.updateId + 1)
 
-			for (update in updates)
-				solve(update)
+			if (response && response.ok && response.result)
+				for (update in response.result)
+					solve(update)
 		}
 	}
 

@@ -1,5 +1,6 @@
 package tech.teslex.telegroo.telegram.methods.objects
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
@@ -12,7 +13,7 @@ import tech.teslex.telegroo.telegram.types.stickers.MaskPosition
 
 /**
  * addStickerToSet
- * description
+ * Use this method to add a new sticker to a set created by the bot. Returns True on success.
  */
 @ToString
 @MapConstructor
@@ -52,6 +53,7 @@ class AddStickerToSetMethodObject implements MethodObject {
 	MaskPosition maskPosition
 
 	@Override
+	@JsonIgnore
 	String getPathMethod() {
 		'addStickerToSet'
 	}

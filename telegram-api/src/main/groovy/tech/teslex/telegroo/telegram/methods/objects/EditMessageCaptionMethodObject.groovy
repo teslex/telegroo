@@ -59,6 +59,7 @@ class EditMessageCaptionMethodObject implements MethodObject {
 	InlineKeyboardMarkup replyMarkup
 
 	@Override
+	@JsonIgnore
 	String getPathMethod() {
 		'editMessageCaption'
 	}

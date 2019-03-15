@@ -31,6 +31,7 @@ class SetChatPhotoMethodObject implements MethodObjectWithFile {
 	InputFile photo
 
 	@Override
+	@JsonIgnore
 	String getPathMethod() {
 		'setChatPhoto'
 	}

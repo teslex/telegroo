@@ -43,6 +43,7 @@ class SendChatActionMethodObject implements MethodObject {
 	}
 
 	@Override
+	@JsonIgnore
 	String getPathMethod() {
 		'sendChatAction'
 	}

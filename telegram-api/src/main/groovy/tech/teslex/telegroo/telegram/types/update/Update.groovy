@@ -24,7 +24,6 @@ class Update {
 	@JsonProperty(value = 'update_id')
 	Integer updateId
 
-
 	/**
 	 * Optional. New incoming message of any kind — text, photo, sticker, etc.
 	 */

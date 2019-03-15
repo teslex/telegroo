@@ -1,5 +1,6 @@
 package tech.teslex.telegroo.telegram.methods.objects
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
@@ -23,7 +24,7 @@ class SendVenueMethodObject implements MethodObject {
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
 	@JsonProperty(value = 'chat_id', required = true)
-	Integer chatId
+	def chatId
 
 	/**
 	 * Latitude of the venue
@@ -82,5 +83,6 @@ class SendVenueMethodObject implements MethodObject {
 	def replyMarkup
 
 	@Override
+	@JsonIgnore
 	String getPathMethod() { 'sendVenue' }
 }

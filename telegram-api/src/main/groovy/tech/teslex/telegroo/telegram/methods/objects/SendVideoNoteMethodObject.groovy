@@ -26,7 +26,7 @@ class SendVideoNoteMethodObject implements MethodObjectWithFile {
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
 	@JsonProperty(value = 'chat_id', required = true)
-	Integer chatId
+	def chatId
 
 	/**
 	 * Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. More info on Sending Files ». Sending video notes by a URL is currently unsupported

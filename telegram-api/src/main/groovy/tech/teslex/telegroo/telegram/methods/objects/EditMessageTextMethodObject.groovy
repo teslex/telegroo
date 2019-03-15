@@ -65,6 +65,7 @@ class EditMessageTextMethodObject implements MethodObject {
 	InlineKeyboardMarkup replyMarkup
 
 	@Override
+	@JsonIgnore
 	String getPathMethod() {
 		'editMessageText'
 	}

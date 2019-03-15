@@ -1,5 +1,6 @@
 package tech.teslex.telegroo.telegram.methods.objects.payments
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
@@ -38,6 +39,7 @@ class AnswerPreCheckoutQueryMethodObject implements MethodObject {
 	String errorMessage
 
 	@Override
+	@JsonIgnore
 	String getPathMethod() {
 		'answerPreCheckoutQuery'
 	}

@@ -8,10 +8,9 @@ import tech.teslex.telegroo.telegram.types.User
 @CompileStatic
 trait GetMeMethodTrait implements Context {
 
-	User getMe() {
+	TelegramResult<User> getMe() {
 		def type = jacksonObjectMapper.typeFactory.constructParametricType(TelegramResult, User)
 
-		(jacksonObjectMapper
-				.readValue(api.go('getMe', [:]).returnContent().asStream(), type) as TelegramResult).result
+		jacksonObjectMapper.readValue(api.go('getMe', [:]).returnContent().asStream(), type)
 	}
 }

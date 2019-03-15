@@ -11,19 +11,18 @@ import tech.teslex.telegroo.telegram.types.update.Update
 @CompileStatic
 trait GetUpdatesMethodTrait implements Context {
 
-	List<Update> getUpdates() {
+	TelegramResult<List<Update>> getUpdates() {
 		getUpdates(new GetUpdatesMethodObject())
 	}
 
 	@NamedVariant
-	List<Update> getUpdates(@NamedDelegate GetUpdatesMethodObject data) {
+	TelegramResult<List<Update>> getUpdates(@NamedDelegate GetUpdatesMethodObject data) {
 		def type = jacksonObjectMapper.typeFactory.constructParametricType(TelegramResult, jacksonObjectMapper.typeFactory.constructCollectionLikeType(ArrayList, Update))
 
-		(jacksonObjectMapper
-				.readValue(api.go(data).returnContent().asStream(), type) as TelegramResult).result
+		jacksonObjectMapper.readValue(api.go(data).returnContent().asStream(), type)
 	}
 
-	List<Update> getUpdates(Map data) {
+	TelegramResult<List<Update>> getUpdates(Map data) {
 		getUpdates(new GetUpdatesMethodObject(data))
 	}
 }

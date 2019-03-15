@@ -12,16 +12,15 @@ import tech.teslex.telegroo.telegram.types.Message
 trait SendMediaGroupMethodTrait implements Context {
 
 	@NamedVariant
-	Message sendMediaGroup(@NamedDelegate SendMediaGroupMethodObject data) {
+	TelegramResult<Message> sendMediaGroup(@NamedDelegate SendMediaGroupMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
 
 		def type = jacksonObjectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 
-		(jacksonObjectMapper
-				.readValue(api.go(data).returnContent().asStream(), type) as TelegramResult).result
+		jacksonObjectMapper.readValue(api.go(data).returnContent().asStream(), type)
 	}
 
-	Message sendMediaGroup(Map data) {
+	TelegramResult<Message> sendMediaGroup(Map data) {
 		sendMediaGroup(new SendMediaGroupMethodObject(data))
 	}
 }

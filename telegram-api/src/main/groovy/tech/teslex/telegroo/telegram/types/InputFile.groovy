@@ -27,7 +27,10 @@ class InputFile<T> {
 	InputFile(File file, String mediaType = 'document') {
 		this.file = file as T
 		this.mediaType = mediaType
+
 		this.isFile = true
+		this.isId = false
+		this.isUrl = false
 	}
 
 	static InputFile<String> ofUrl(String fileUrl) {
@@ -92,5 +95,13 @@ class InputFile<T> {
 
 	static InputFile<File> ofVoice(String photoFile) {
 		ofDocument(photoFile, 'voice')
+	}
+
+	static InputFile<File> ofAudio(File photoFile) {
+		ofDocument(photoFile, 'audio')
+	}
+
+	static InputFile<File> ofAudio(String photoFile) {
+		ofDocument(photoFile, 'audio')
 	}
 }

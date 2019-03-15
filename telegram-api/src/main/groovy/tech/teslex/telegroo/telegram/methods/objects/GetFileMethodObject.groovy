@@ -1,5 +1,6 @@
 package tech.teslex.telegroo.telegram.methods.objects
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
@@ -19,7 +20,6 @@ import tech.teslex.telegroo.telegram.methods.MethodObject
 @Builder
 class GetFileMethodObject implements MethodObject {
 
-
 	/**
 	 * File identifier to get info about
 	 */
@@ -27,6 +27,7 @@ class GetFileMethodObject implements MethodObject {
 	String fileId
 
 	@Override
+	@JsonIgnore
 	String getPathMethod() {
 		'getFile'
 	}

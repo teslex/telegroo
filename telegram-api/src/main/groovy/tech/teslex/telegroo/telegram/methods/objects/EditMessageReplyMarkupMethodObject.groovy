@@ -1,5 +1,6 @@
 package tech.teslex.telegroo.telegram.methods.objects
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
@@ -45,6 +46,7 @@ class EditMessageReplyMarkupMethodObject implements MethodObject {
 	InlineKeyboardMarkup replyMarkup
 
 	@Override
+	@JsonIgnore
 	String getPathMethod() {
 		'editMessageReplyMarkup'
 	}
