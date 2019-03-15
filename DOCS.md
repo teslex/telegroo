@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-	compile 'tech.teslex.telegroo:telegroo:1.0-SNAPSHOT'
+	compile 'tech.teslex.telegroo:telegroo:1.0-{timestamp}-SNAPSHOT'
 }
 ```
 
@@ -16,7 +16,7 @@ dependencies {
 
 ```groovy
 @GrabResolver(name = 'teslex-repo', root = 'https://teslex.gitlab.io/repo/snapshots')
-@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '1.0-SNAPSHOT')
+@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '1.0-{timestamp}-SNAPSHOT')
 
 import tech.teslex.telegroo.simple.SimpleTelegroo
 

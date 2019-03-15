@@ -1,5 +1,5 @@
 # telegroo
-> version: **[1.0-SNAPSHOT](https://gitlab.com/teslex/repo/tree/master/snapshots/tech/teslex/telegroo/telegroo)**
+> version: **[1.0-{timestamp}-SNAPSHOT](https://gitlab.com/teslex/repo/tree/master/snapshots/tech/teslex/telegroo/telegroo)**
 
 **Telegram bot framework for [Groovy](http://groovy-lang.org)**
 
@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-	compile 'tech.teslex.telegroo:telegroo:1.0-SNAPSHOT'
+	compile 'tech.teslex.telegroo:telegroo:1.0-{timestamp}-SNAPSHOT'
 }
 ```
 
@@ -23,9 +23,9 @@ Sample bot:
 
 ```groovy
 @GrabResolver(name = 'teslex-repo', root = 'https://teslex.gitlab.io/repo/snapshots')
-@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '1.0-SNAPSHOT')
+@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '1.0-{timestamp}-SNAPSHOT')
 
-import tech.teslex.telegroo.simple.SimpleTelegroo
+import tech.teslex.telegroo.simple.SimpleTelegroo1.0-SNAPSHOT
 
 def bot = new SimpleTelegroo('TOKEN')
 
