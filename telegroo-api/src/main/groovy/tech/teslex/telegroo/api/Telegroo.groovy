@@ -4,6 +4,7 @@ import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.context.MethodsContext
 import tech.teslex.telegroo.api.update.UpdateHandler
 import tech.teslex.telegroo.telegram.enums.UpdateType
+import tech.teslex.telegroo.telegram.types.update.Update
 
 @CompileStatic
 interface Telegroo {
@@ -11,6 +12,9 @@ interface Telegroo {
 	def start()
 
 	def stop()
+
+
+	void solveUpdate(Update update)
 
 
 	void on(UpdateType type, @DelegatesTo(MethodsContext) Closure handler)

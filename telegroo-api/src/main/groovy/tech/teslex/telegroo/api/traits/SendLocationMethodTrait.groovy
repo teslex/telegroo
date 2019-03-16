@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.SendLocationMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.SendLocationMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
@@ -22,5 +23,12 @@ trait SendLocationMethodTrait implements Context {
 
 	TelegramResult<Message> sendLocation(Map data) {
 		sendLocation(data as SendLocationMethodObject)
+	}
+
+	TelegramResult<Message> sendLocation(@DelegatesTo(SendLocationMethodObjectBuilder) Closure closure) {
+		def builder = new SendLocationMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		sendLocation(builder.build())
 	}
 }

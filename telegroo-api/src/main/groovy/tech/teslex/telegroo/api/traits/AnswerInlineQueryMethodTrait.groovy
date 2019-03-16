@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.AnswerInlineQueryMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.AnswerInlineQueryMethodObject
 
 @CompileStatic
@@ -19,5 +20,12 @@ trait AnswerInlineQueryMethodTrait implements Context {
 
 	TelegramResult<Object> answerInlineQuery(Map data) {
 		answerInlineQuery(data as AnswerInlineQueryMethodObject)
+	}
+
+	TelegramResult<Object> answerInlineQuery(@DelegatesTo(AnswerInlineQueryMethodObjectBuilder) Closure closure) {
+		def builder = new AnswerInlineQueryMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		answerInlineQuery(builder.build())
 	}
 }

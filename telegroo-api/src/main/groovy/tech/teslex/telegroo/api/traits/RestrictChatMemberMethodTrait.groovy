@@ -5,14 +5,14 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.RestrictChatMemberMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.RestrictChatMemberMethodObject
-import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
 trait RestrictChatMemberMethodTrait implements Context {
 
 	@NamedVariant
-	TelegramResult<Object> restrictChatMemberMethodTrait(@NamedDelegate RestrictChatMemberMethodObject data) {
+	TelegramResult<Object> restrictChatMemberMethod(@NamedDelegate RestrictChatMemberMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
 
 		def type = jacksonObjectMapper.typeFactory.constructParametricType(TelegramResult, Object)
@@ -20,7 +20,14 @@ trait RestrictChatMemberMethodTrait implements Context {
 		jacksonObjectMapper.readValue(api.go(data).returnContent().asStream(), type)
 	}
 
-	TelegramResult<Object> restrictChatMemberMethodTrait(Map data) {
-		restrictChatMemberMethodTrait(data as RestrictChatMemberMethodObject)
+	TelegramResult<Object> restrictChatMemberMethod(Map data) {
+		restrictChatMemberMethod(data as RestrictChatMemberMethodObject)
+	}
+
+	TelegramResult<Object> restrictChatMemberMethod(@DelegatesTo(RestrictChatMemberMethodObjectBuilder) Closure closure) {
+		def builder = new RestrictChatMemberMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		restrictChatMemberMethod(builder.build())
 	}
 }

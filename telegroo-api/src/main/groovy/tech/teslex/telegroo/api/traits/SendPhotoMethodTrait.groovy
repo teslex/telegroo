@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.SendPhotoMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.SendPhotoMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
@@ -22,5 +23,12 @@ trait SendPhotoMethodTrait implements Context {
 
 	TelegramResult<Message> sendPhoto(Map data) {
 		sendPhoto(data as SendPhotoMethodObject)
+	}
+
+	TelegramResult<Message> sendPhoto(@DelegatesTo(SendPhotoMethodObjectBuilder) Closure closure) {
+		def builder = new SendPhotoMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		sendPhoto(builder.build())
 	}
 }

@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.ForwardMessageMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.ForwardMessageMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
@@ -23,5 +24,12 @@ trait ForwardMessageMethodTrait implements Context {
 
 	TelegramResult<Message> forwardMessage(Map data) {
 		forwardMessage(data as ForwardMessageMethodObject)
+	}
+
+	TelegramResult<Message> forwardMessage(@DelegatesTo(ForwardMessageMethodObjectBuilder) Closure closure) {
+		def builder = new ForwardMessageMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		forwardMessage(builder.build())
 	}
 }

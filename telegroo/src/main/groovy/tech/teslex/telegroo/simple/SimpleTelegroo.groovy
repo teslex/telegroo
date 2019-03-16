@@ -57,7 +57,7 @@ class SimpleTelegroo extends SimpleContext implements Telegroo {
 
 			if (response && response.ok && response.result)
 				for (update in response.result)
-					solve(update)
+					solveUpdate(update)
 		}
 	}
 
@@ -73,7 +73,8 @@ class SimpleTelegroo extends SimpleContext implements Telegroo {
 		return true
 	}
 
-	void solve(Update update) {
+	@Override
+	void solveUpdate(Update update) {
 		lastUpdate = update
 		if (checkMid(lastUpdate))
 			updateHandlersSolver.solve(lastUpdate, handlersClosures, handlersUpdates)

@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.GetFileMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.GetFileMethodObject
 import tech.teslex.telegroo.telegram.types.FileObject
 
@@ -20,5 +21,12 @@ trait GetFileMethodTrait implements Context {
 
 	TelegramResult<FileObject> getFile(Map data) {
 		getFile(data as GetFileMethodObject)
+	}
+
+	TelegramResult<FileObject> getFile(@DelegatesTo(GetFileMethodObjectBuilder) Closure closure) {
+		def builder = new GetFileMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		getFile(builder.build())
 	}
 }

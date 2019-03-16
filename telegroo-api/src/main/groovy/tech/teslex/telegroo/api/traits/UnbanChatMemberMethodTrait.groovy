@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.UnbanChatMemberMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.UnbanChatMemberMethodObject
 
 @CompileStatic
@@ -21,5 +22,12 @@ trait UnbanChatMemberMethodTrait implements Context {
 
 	TelegramResult<Object> unbanChatMember(Map data) {
 		unbanChatMember(data as UnbanChatMemberMethodObject)
+	}
+
+	TelegramResult<Object> unbanChatMember(@DelegatesTo(UnbanChatMemberMethodObjectBuilder) Closure closure) {
+		def builder = new UnbanChatMemberMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		unbanChatMember(builder.build())
 	}
 }

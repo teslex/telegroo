@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.LeaveChatMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.LeaveChatMethodObject
 
 @CompileStatic
@@ -21,5 +22,12 @@ trait LeaveChatMethodTrait implements Context {
 
 	TelegramResult<Object> leaveChat(Map data) {
 		leaveChat(data as LeaveChatMethodObject)
+	}
+
+	TelegramResult<Object> leaveChat(@DelegatesTo(LeaveChatMethodObjectBuilder) Closure closure) {
+		def builder = new LeaveChatMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		leaveChat(builder.build())
 	}
 }

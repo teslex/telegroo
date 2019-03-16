@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.SendAnimationMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.SendAnimationMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
@@ -22,5 +23,12 @@ trait SendAnimationMethodTrait implements Context {
 
 	TelegramResult<Message> sendAnimation(Map data) {
 		sendAnimation(data as SendAnimationMethodObject)
+	}
+
+	TelegramResult<Message> sendAnimation(@DelegatesTo(SendAnimationMethodObjectBuilder) Closure closure) {
+		def builder = new SendAnimationMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		sendAnimation(builder.build())
 	}
 }

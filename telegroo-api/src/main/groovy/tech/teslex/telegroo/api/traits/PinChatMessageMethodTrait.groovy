@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.PinChatMessageMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.PinChatMessageMethodObject
 
 @CompileStatic
@@ -21,5 +22,12 @@ trait PinChatMessageMethodTrait implements Context {
 
 	TelegramResult<Object> pinChatMessage(Map data) {
 		pinChatMessage(data as PinChatMessageMethodObject)
+	}
+
+	TelegramResult<Object> pinChatMessage(@DelegatesTo(PinChatMessageMethodObjectBuilder) Closure closure) {
+		def builder = new PinChatMessageMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		pinChatMessage(builder.build())
 	}
 }

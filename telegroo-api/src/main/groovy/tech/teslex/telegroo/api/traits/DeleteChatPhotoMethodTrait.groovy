@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.DeleteChatPhotoMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.DeleteChatPhotoMethodObject
 
 @CompileStatic
@@ -21,5 +22,12 @@ trait DeleteChatPhotoMethodTrait implements Context {
 
 	TelegramResult<Object> deleteChatPhoto(Map data) {
 		deleteChatPhoto(data as DeleteChatPhotoMethodObject)
+	}
+
+	TelegramResult<Object> deleteChatPhoto(@DelegatesTo(DeleteChatPhotoMethodObjectBuilder) Closure closure) {
+		def builder = new DeleteChatPhotoMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		deleteChatPhoto(builder.build())
 	}
 }

@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.DeleteStickerFromSetMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.DeleteStickerFromSetMethodObject
 
 @CompileStatic
@@ -19,5 +20,12 @@ trait DeleteStickerFromSetMethodTrait implements Context {
 
 	TelegramResult<Object> deleteStickerFromSet(Map data) {
 		deleteStickerFromSet(data as DeleteStickerFromSetMethodObject)
+	}
+
+	TelegramResult<Object> deleteStickerFromSet(@DelegatesTo(DeleteStickerFromSetMethodObjectBuilder) Closure closure) {
+		def builder = new DeleteStickerFromSetMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		deleteStickerFromSet(builder.build())
 	}
 }

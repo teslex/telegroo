@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.EditMessageCaptionMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.EditMessageCaptionMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
@@ -23,5 +24,12 @@ trait EditMessageCaptionMethodTrait implements Context {
 
 	TelegramResult<Message> editMessageCaption(Map data) {
 		editMessageCaption(data as EditMessageCaptionMethodObject)
+	}
+
+	TelegramResult<Message> editMessageCaption(@DelegatesTo(EditMessageCaptionMethodObjectBuilder) Closure closure) {
+		def builder = new EditMessageCaptionMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		editMessageCaption(builder.build())
 	}
 }

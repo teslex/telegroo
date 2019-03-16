@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.SendAudioMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.SendAudioMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
@@ -22,5 +23,12 @@ trait SendAudioMethodTrait implements Context {
 
 	TelegramResult<Message> sendAudio(Map data) {
 		sendAudio(data as SendAudioMethodObject)
+	}
+
+	TelegramResult<Message> sendAudio(@DelegatesTo(SendAudioMethodObjectBuilder) Closure closure) {
+		def builder = new SendAudioMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		sendAudio(builder.build())
 	}
 }

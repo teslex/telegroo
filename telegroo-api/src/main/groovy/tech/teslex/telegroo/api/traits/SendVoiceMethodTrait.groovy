@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.builders.SendVoiceMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.SendVoiceMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
@@ -22,5 +23,12 @@ trait SendVoiceMethodTrait implements Context {
 
 	TelegramResult<Message> sendVoice(Map data) {
 		sendVoice(data as SendVoiceMethodObject)
+	}
+
+	TelegramResult<Message> sendVoice(@DelegatesTo(SendVoiceMethodObjectBuilder) Closure closure) {
+		def builder = new SendVoiceMethodObjectBuilder()
+		closure.delegate = builder
+		closure.call()
+		sendVoice(builder.build())
 	}
 }
