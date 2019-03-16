@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.KickChatMemberMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.KickChatMemberMethodObject
 
 @CompileStatic
@@ -24,10 +23,10 @@ trait KickChatMemberMethodTrait implements Context {
 		kickChatMember(data as KickChatMemberMethodObject)
 	}
 
-	TelegramResult<Object> kickChatMember(@DelegatesTo(KickChatMemberMethodObjectBuilder) Closure closure) {
-		def builder = new KickChatMemberMethodObjectBuilder()
+	TelegramResult<Object> kickChatMember(@DelegatesTo(KickChatMemberMethodObject) Closure closure) {
+		def builder = KickChatMemberMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		kickChatMember(builder.build())
+		kickChatMember(builder)
 	}
 }

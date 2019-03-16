@@ -3,9 +3,9 @@ package tech.teslex.telegroo.telegram.methods.objects
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 import groovy.transform.MapConstructor
-import groovy.transform.ToString
 import groovy.transform.builder.Builder
 import tech.teslex.telegroo.telegram.enums.ParseMode
 import tech.teslex.telegroo.telegram.methods.MethodObject
@@ -14,7 +14,7 @@ import tech.teslex.telegroo.telegram.methods.MethodObject
  * sendMessage
  * Use this method to send text messages. On success, the sent Message is returned.
  */
-@ToString
+@Canonical
 @MapConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @CompileStatic

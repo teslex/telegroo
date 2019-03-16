@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.webhook.SetWebhookMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.webhook.SetWebhookMethodObject
 
 @CompileStatic
@@ -22,10 +21,10 @@ trait SetWebhookMethodTrait implements Context {
 		setWebhook(data as SetWebhookMethodObject)
 	}
 
-	TelegramResult<Object> setWebhook(@DelegatesTo(SetWebhookMethodObjectBuilder) Closure closure) {
-		def builder = new SetWebhookMethodObjectBuilder()
+	TelegramResult<Object> setWebhook(@DelegatesTo(SetWebhookMethodObject) Closure closure) {
+		def builder = SetWebhookMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		setWebhook(builder.build())
+		setWebhook(builder)
 	}
 }

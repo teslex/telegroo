@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.UploadStickerFileMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.UploadStickerFileMethodObject
 import tech.teslex.telegroo.telegram.types.FileObject
 
@@ -23,10 +22,10 @@ trait UploadStickerFileMethodTrait implements Context {
 		uploadStickerFile(data as UploadStickerFileMethodObject)
 	}
 
-	TelegramResult<FileObject> uploadStickerFile(@DelegatesTo(UploadStickerFileMethodObjectBuilder) Closure closure) {
-		def builder = new UploadStickerFileMethodObjectBuilder()
+	TelegramResult<FileObject> uploadStickerFile(@DelegatesTo(UploadStickerFileMethodObject) Closure closure) {
+		def builder = UploadStickerFileMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		uploadStickerFile(builder.build())
+		uploadStickerFile(builder)
 	}
 }

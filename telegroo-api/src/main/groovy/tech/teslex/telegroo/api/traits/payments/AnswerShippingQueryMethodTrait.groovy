@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.payments.AnswerShippingQueryMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.payments.AnswerShippingQueryMethodObject
 
 @CompileStatic
@@ -22,10 +21,10 @@ trait AnswerShippingQueryMethodTrait implements Context {
 		answerShippingQuery(data as AnswerShippingQueryMethodObject)
 	}
 
-	TelegramResult<Object> answerShippingQuery(@DelegatesTo(AnswerShippingQueryMethodObjectBuilder) Closure closure) {
-		def builder = new AnswerShippingQueryMethodObjectBuilder()
+	TelegramResult<Object> answerShippingQuery(@DelegatesTo(AnswerShippingQueryMethodObject) Closure closure) {
+		def builder = AnswerShippingQueryMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		answerShippingQuery(builder.build())
+		answerShippingQuery(builder)
 	}
 }

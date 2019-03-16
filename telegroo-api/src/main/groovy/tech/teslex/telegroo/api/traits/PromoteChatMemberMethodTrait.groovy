@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.PromoteChatMemberMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.PromoteChatMemberMethodObject
 
 @CompileStatic
@@ -24,10 +23,10 @@ trait PromoteChatMemberMethodTrait implements Context {
 		promoteChatMember(data as PromoteChatMemberMethodObject)
 	}
 
-	TelegramResult<Object> promoteChatMember(@DelegatesTo(PromoteChatMemberMethodObjectBuilder) Closure closure) {
-		def builder = new PromoteChatMemberMethodObjectBuilder()
+	TelegramResult<Object> promoteChatMember(@DelegatesTo(PromoteChatMemberMethodObject) Closure closure) {
+		def builder = PromoteChatMemberMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		promoteChatMember(builder.build())
+		promoteChatMember(builder)
 	}
 }

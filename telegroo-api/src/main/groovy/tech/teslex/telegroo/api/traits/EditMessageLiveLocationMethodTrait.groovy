@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.EditMessageLiveLocationMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.EditMessageLiveLocationMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
@@ -26,10 +25,10 @@ trait EditMessageLiveLocationMethodTrait implements Context {
 		editMessageLiveLocation(data as EditMessageLiveLocationMethodObject)
 	}
 
-	TelegramResult<Message> editMessageLiveLocation(@DelegatesTo(EditMessageLiveLocationMethodObjectBuilder) Closure closure) {
-		def builder = new EditMessageLiveLocationMethodObjectBuilder()
+	TelegramResult<Message> editMessageLiveLocation(@DelegatesTo(EditMessageLiveLocationMethodObject) Closure closure) {
+		def builder = EditMessageLiveLocationMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		editMessageLiveLocation(builder.build())
+		editMessageLiveLocation(builder)
 	}
 }

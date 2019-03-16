@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.GetUpdatesMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.GetUpdatesMethodObject
 import tech.teslex.telegroo.telegram.types.update.Update
 
@@ -13,7 +12,7 @@ import tech.teslex.telegroo.telegram.types.update.Update
 trait GetUpdatesMethodTrait implements Context {
 
 	TelegramResult<List<Update>> getUpdates() {
-		getUpdates(new GetUpdatesMethodObject())
+		getUpdates(GetUpdatesMethodObject.newInstance())
 	}
 
 	@NamedVariant
@@ -27,10 +26,10 @@ trait GetUpdatesMethodTrait implements Context {
 		getUpdates(data as GetUpdatesMethodObject)
 	}
 
-	TelegramResult<List<Update>> getUpdates(@DelegatesTo(GetUpdatesMethodObjectBuilder) Closure closure) {
-		def builder = new GetUpdatesMethodObjectBuilder()
+	TelegramResult<List<Update>> getUpdates(@DelegatesTo(GetUpdatesMethodObject) Closure closure) {
+		def builder = GetUpdatesMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		getUpdates(builder.build())
+		getUpdates(builder)
 	}
 }

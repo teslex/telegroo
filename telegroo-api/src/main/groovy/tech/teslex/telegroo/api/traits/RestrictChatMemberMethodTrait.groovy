@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.RestrictChatMemberMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.RestrictChatMemberMethodObject
 
 @CompileStatic
@@ -24,10 +23,10 @@ trait RestrictChatMemberMethodTrait implements Context {
 		restrictChatMemberMethod(data as RestrictChatMemberMethodObject)
 	}
 
-	TelegramResult<Object> restrictChatMemberMethod(@DelegatesTo(RestrictChatMemberMethodObjectBuilder) Closure closure) {
-		def builder = new RestrictChatMemberMethodObjectBuilder()
+	TelegramResult<Object> restrictChatMemberMethod(@DelegatesTo(RestrictChatMemberMethodObject) Closure closure) {
+		def builder = RestrictChatMemberMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		restrictChatMemberMethod(builder.build())
+		restrictChatMemberMethod(builder)
 	}
 }

@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.GetChatMembersCountMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.GetChatMembersCountMethodObject
 
 @CompileStatic
@@ -24,10 +23,10 @@ trait GetChatMembersCountMethodTrait implements Context {
 		getChatMembersCount(data as GetChatMembersCountMethodObject)
 	}
 
-	TelegramResult<Integer> getChatMembersCount(@DelegatesTo(GetChatMembersCountMethodObjectBuilder) Closure closure) {
-		def builder = new GetChatMembersCountMethodObjectBuilder()
+	TelegramResult<Integer> getChatMembersCount(@DelegatesTo(GetChatMembersCountMethodObject) Closure closure) {
+		def builder = GetChatMembersCountMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		getChatMembersCount(builder.build())
+		getChatMembersCount(builder)
 	}
 }

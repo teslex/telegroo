@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.GetChatMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.GetChatMethodObject
 import tech.teslex.telegroo.telegram.types.Chat
 
@@ -25,10 +24,10 @@ trait GetChatMethodTrait implements Context {
 		getChat(data as GetChatMethodObject)
 	}
 
-	TelegramResult<Chat> getChat(@DelegatesTo(GetChatMethodObjectBuilder) Closure closure) {
-		def builder = new GetChatMethodObjectBuilder()
+	TelegramResult<Chat> getChat(@DelegatesTo(GetChatMethodObject) Closure closure) {
+		def builder = GetChatMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		getChat(builder.build())
+		getChat(builder)
 	}
 }

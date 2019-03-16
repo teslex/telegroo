@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.EditMessageReplyMarkupMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.EditMessageReplyMarkupMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
@@ -26,10 +25,10 @@ trait EditMessageReplyMarkupMethodTrait implements Context {
 		editMessageReplyMarkup(data as EditMessageReplyMarkupMethodObject)
 	}
 
-	TelegramResult<Message> editMessageReplyMarkup(@DelegatesTo(EditMessageReplyMarkupMethodObjectBuilder) Closure closure) {
-		def builder = new EditMessageReplyMarkupMethodObjectBuilder()
+	TelegramResult<Message> editMessageReplyMarkup(@DelegatesTo(EditMessageReplyMarkupMethodObject) Closure closure) {
+		def builder = EditMessageReplyMarkupMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		editMessageReplyMarkup(builder.build())
+		editMessageReplyMarkup(builder)
 	}
 }

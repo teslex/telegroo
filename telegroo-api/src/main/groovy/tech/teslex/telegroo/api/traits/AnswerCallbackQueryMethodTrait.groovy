@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.AnswerCallbackQueryMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.AnswerCallbackQueryMethodObject
 
 @CompileStatic
@@ -22,10 +21,10 @@ trait AnswerCallbackQueryMethodTrait implements Context {
 		answerCallbackQuery(data as AnswerCallbackQueryMethodObject)
 	}
 
-	TelegramResult<Object> answerCallbackQuery(@DelegatesTo(AnswerCallbackQueryMethodObjectBuilder) Closure closure) {
-		def builder = new AnswerCallbackQueryMethodObjectBuilder()
+	TelegramResult<Object> answerCallbackQuery(@DelegatesTo(AnswerCallbackQueryMethodObject) Closure closure) {
+		def builder = AnswerCallbackQueryMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		answerCallbackQuery(builder.build())
+		answerCallbackQuery(builder)
 	}
 }

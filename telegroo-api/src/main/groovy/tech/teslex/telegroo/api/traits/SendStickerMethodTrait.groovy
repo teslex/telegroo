@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.SendStickerMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.SendStickerMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
@@ -25,10 +24,10 @@ trait SendStickerMethodTrait implements Context {
 		sendSticker(data as SendStickerMethodObject)
 	}
 
-	TelegramResult<Message> sendSticker(@DelegatesTo(SendStickerMethodObjectBuilder) Closure closure) {
-		def builder = new SendStickerMethodObjectBuilder()
+	TelegramResult<Message> sendSticker(@DelegatesTo(SendStickerMethodObject) Closure closure) {
+		def builder = SendStickerMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		sendSticker(builder.build())
+		sendSticker(builder)
 	}
 }

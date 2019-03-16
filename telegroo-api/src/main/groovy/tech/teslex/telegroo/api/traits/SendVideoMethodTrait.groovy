@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.SendVideoMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.SendVideoMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
@@ -25,10 +24,10 @@ trait SendVideoMethodTrait implements Context {
 		sendVideo(data as SendVideoMethodObject)
 	}
 
-	TelegramResult<Message> sendVideo(@DelegatesTo(SendVideoMethodObjectBuilder) Closure closure) {
-		def builder = new SendVideoMethodObjectBuilder()
+	TelegramResult<Message> sendVideo(@DelegatesTo(SendVideoMethodObject) Closure closure) {
+		def builder = SendVideoMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		sendVideo(builder.build())
+		sendVideo(builder)
 	}
 }

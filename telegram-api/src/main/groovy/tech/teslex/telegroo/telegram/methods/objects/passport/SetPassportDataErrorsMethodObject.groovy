@@ -19,6 +19,7 @@ import tech.teslex.telegroo.telegram.types.passport.error.PassportElementError
 @MapConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @CompileStatic
+@Builder
 class SetPassportDataErrorsMethodObject implements MethodObject {
 
 	/**

@@ -1,6 +1,8 @@
 package tech.teslex.telegroo.simple
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
 import org.apache.http.HttpEntity
 import org.apache.http.client.fluent.Request
@@ -28,6 +30,8 @@ class SimpleApi implements Api {
 		this.token = token
 
 		this.objectMapper = new ObjectMapper()
+		this.objectMapper.registerModule(new Jdk8Module())
+		this.objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
 	}
 
 	SimpleApi(String token, ObjectMapper objectMapper) {

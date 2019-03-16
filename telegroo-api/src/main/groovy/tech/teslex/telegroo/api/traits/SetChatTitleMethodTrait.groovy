@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.SetChatTitleMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.SetChatTitleMethodObject
 
 @CompileStatic
@@ -24,10 +23,10 @@ trait SetChatTitleMethodTrait implements Context {
 		setChatTitle(data as SetChatTitleMethodObject)
 	}
 
-	TelegramResult<Object> setChatTitle(@DelegatesTo(SetChatTitleMethodObjectBuilder) Closure closure) {
-		def builder = new SetChatTitleMethodObjectBuilder()
+	TelegramResult<Object> setChatTitle(@DelegatesTo(SetChatTitleMethodObject) Closure closure) {
+		def builder = SetChatTitleMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		setChatTitle(builder.build())
+		setChatTitle(builder)
 	}
 }

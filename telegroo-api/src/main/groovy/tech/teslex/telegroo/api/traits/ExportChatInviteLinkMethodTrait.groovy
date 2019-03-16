@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.ExportChatInviteLinkMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.ExportChatInviteLinkMethodObject
 
 @CompileStatic
@@ -24,10 +23,10 @@ trait ExportChatInviteLinkMethodTrait implements Context {
 		exportChatInviteLink(data as ExportChatInviteLinkMethodObject)
 	}
 
-	TelegramResult<String> exportChatInviteLink(@DelegatesTo(ExportChatInviteLinkMethodObjectBuilder) Closure closure) {
-		def builder = new ExportChatInviteLinkMethodObjectBuilder()
+	TelegramResult<String> exportChatInviteLink(@DelegatesTo(ExportChatInviteLinkMethodObject) Closure closure) {
+		def builder = ExportChatInviteLinkMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		exportChatInviteLink(builder.build())
+		exportChatInviteLink(builder)
 	}
 }

@@ -5,7 +5,6 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.builders.SetStickerPositionInSetMethodObjectBuilder
 import tech.teslex.telegroo.telegram.methods.objects.SetStickerPositionInSetMethodObject
 
 @CompileStatic
@@ -22,10 +21,10 @@ trait SetStickerPositionInSetMethodTrait implements Context {
 		setStickerPositionInSet(data as SetStickerPositionInSetMethodObject)
 	}
 
-	TelegramResult<Object> setStickerPositionInSet(@DelegatesTo(SetStickerPositionInSetMethodObjectBuilder) Closure closure) {
-		def builder = new SetStickerPositionInSetMethodObjectBuilder()
+	TelegramResult<Object> setStickerPositionInSet(@DelegatesTo(SetStickerPositionInSetMethodObject) Closure closure) {
+		def builder = SetStickerPositionInSetMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		setStickerPositionInSet(builder.build())
+		setStickerPositionInSet(builder)
 	}
 }
