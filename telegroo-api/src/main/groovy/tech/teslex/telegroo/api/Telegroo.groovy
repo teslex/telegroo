@@ -7,7 +7,7 @@ import tech.teslex.telegroo.telegram.enums.UpdateType
 import tech.teslex.telegroo.telegram.types.update.Update
 
 @CompileStatic
-interface Telegroo {
+interface Telegroo extends MethodsContext {
 
 	def start()
 
