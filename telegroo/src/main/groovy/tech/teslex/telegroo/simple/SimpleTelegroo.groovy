@@ -1,6 +1,7 @@
 package tech.teslex.telegroo.simple
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Telegroo
@@ -44,6 +45,7 @@ class SimpleTelegroo extends SimpleContext implements Telegroo {
 		this.updateHandlersSolver = new SimpleUpdateHandlersSolver(this)
 		this.jacksonObjectMapper = new ObjectMapper()
 		this.jacksonObjectMapper.registerModule(new Jdk8Module())
+		this.jacksonObjectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
 	}
 
 	def start() {

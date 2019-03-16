@@ -1,6 +1,7 @@
 package tech.teslex.telegroo.simple.context
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Api
@@ -28,6 +29,8 @@ class SimpleContext implements MethodsContext {
 		this.lastUpdate = lastUpdate
 
 		this.jacksonObjectMapper = new ObjectMapper()
+		this.jacksonObjectMapper.registerModule(new Jdk8Module())
+		this.jacksonObjectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
 	}
 
 	SimpleContext(Api api, Update lastUpdate, Matcher matcher) {

@@ -22,7 +22,7 @@ class ${clazz}Builder {}
 """
 	}
 
-	new File("$buildersPath", "${fileName}Builder.groovy").withWriter('utf-8') {
-		it.write(template(fileName))
-	}
+//	new File("$buildersPath", "${fileName}Builder.groovy").withWriter('utf-8') {
+//		it.write(template(fileName))
+//	}
 }
