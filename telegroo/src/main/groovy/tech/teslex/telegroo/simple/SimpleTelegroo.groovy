@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.api.Api
 import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.api.context.MethodsContext
 import tech.teslex.telegroo.api.update.CommandUpdateHandler
@@ -31,8 +30,6 @@ class SimpleTelegroo extends SimpleContext implements Telegroo {
 	UpdateHandlersSolver updateHandlersSolver = new SimpleUpdateHandlersSolver(this)
 
 	Boolean active = false
-
-	String commandSymbol = '/'
 
 	SimpleTelegroo(String token) {
 		this.jacksonObjectMapper = new ObjectMapper()
@@ -66,21 +63,6 @@ class SimpleTelegroo extends SimpleContext implements Telegroo {
 	}
 
 	@Override
-	void setApi(Api api) {
-		this.api = api
-	}
-
-	@Override
-	void setLastUpdate(Update update) {
-		this.lastUpdate = lastUpdate
-	}
-
-	@Override
-	void setJacksonObjectMapper(ObjectMapper objectMapper) {
-		this.jacksonObjectMapper = objectMapper
-	}
-
-	@Override
 	void solveUpdate(Update update) {
 		lastUpdate = update
 		if (checkMid(lastUpdate))
@@ -103,7 +85,7 @@ class SimpleTelegroo extends SimpleContext implements Telegroo {
 
 	@Override
 	void onCommand(String command, @DelegatesTo(MethodsContext) Closure handler) {
-		handlers<< new SimpleClosureCommandUpdateHandler((command.startsWith(commandSymbol) ? command : "$commandSymbol$command") as String, handler)
+		handlers << new SimpleClosureCommandUpdateHandler(command, handler)
 	}
 
 	@Override

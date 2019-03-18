@@ -1,6 +1,7 @@
 package tech.teslex.telegroo.simple.update
 
 import groovy.transform.CompileStatic
+import tech.teslex.telegroo.api.update.CommandUpdateHandler
 import tech.teslex.telegroo.api.update.MessageUpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandlersSolver
@@ -29,10 +30,21 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 
 			MessageUpdateHandler handler = handlers
 					.findAll { it instanceof MessageUpdateHandler }
-					.find { update.message.text ==~ (it as MessageUpdateHandler).pattern } as MessageUpdateHandler
+					.find {
+						if (it instanceof CommandUpdateHandler) {
+							update.message.text ==~ (it as CommandUpdateHandler).useCommandSymbol() ? "${(it as CommandUpdateHandler).commandSymbol}${it.pattern}" : it.pattern
+						} else {
+							update.message.text ==~ (it as MessageUpdateHandler).pattern
+						}
+					} as MessageUpdateHandler
 
 			if (handler) {
-				handler.handle(new SimpleContext(telegroo.api, update, update.message.text =~ handler.pattern))
+				if (handler instanceof CommandUpdateHandler) {
+					def pattern = (handler as CommandUpdateHandler).useCommandSymbol() ? "${(handler as CommandUpdateHandler).commandSymbol}${handler.pattern}" : handler.pattern
+					handler.handle(new SimpleContext(telegroo.api, update, update.message.text =~ pattern))
+				} else {
+					update.message.text ==~ handler.pattern
+				}
 			}
 		} else {
 

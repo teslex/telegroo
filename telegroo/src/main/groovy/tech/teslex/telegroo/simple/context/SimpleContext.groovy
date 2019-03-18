@@ -84,4 +84,12 @@ class SimpleContext implements MethodsContext {
 	Context createNewContext(Api api, Update update, ObjectMapper objectMapper, Matcher matcher) {
 		new SimpleContext(api, update, objectMapper, matcher)
 	}
+
+	protected void setJacksonObjectMapper(ObjectMapper objectMapper) {
+		this.jacksonObjectMapper = objectMapper
+	}
+
+	protected void setLastUpdate(Update update) {
+		this.lastUpdate = update
+	}
 }
