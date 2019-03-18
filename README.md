@@ -25,7 +25,7 @@ Sample bot:
 @GrabResolver(name = 'teslex-repo', root = 'https://teslex.gitlab.io/repo/snapshots')
 @Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '1.0-{timestamp}-SNAPSHOT')
 
-import tech.teslex.telegroo.simple.SimpleTelegroo1.0-SNAPSHOT
+import tech.teslex.telegroo.simple.SimpleTelegroo
 
 def bot = new SimpleTelegroo('TOKEN')
 
