@@ -4,7 +4,7 @@ import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.context.MethodsContext
 
 @CompileStatic
-interface UpdateHandler {
+interface UpdateHandler extends UpdateGetTypeTrait {
 
-	void handle(MethodsContext context)
+	void handle(MethodsContext context);
 }

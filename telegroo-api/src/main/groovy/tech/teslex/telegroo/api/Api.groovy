@@ -9,15 +9,15 @@ import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
 @CompileStatic
 interface Api extends Cloneable {
 
-	Response go(String method, Map parameters)
+	Response go(String method, Map parameters);
 
-	Response go(MethodObject methodObject)
+	Response go(MethodObject methodObject);
 
-	Response go(MethodObjectWithFile methodObjectWithFile)
+	Response go(MethodObjectWithFile methodObjectWithFile);
 
-	Response go(MethodObjectWithMedia methodObjectWithMedia)
+	Response go(MethodObjectWithMedia methodObjectWithMedia);
 
-	void setDefaultParams(Map params)
+	Map getDefaultParams();
 
-	Map getDefaultParams()
+	void setDefaultParams(Map params);
 }

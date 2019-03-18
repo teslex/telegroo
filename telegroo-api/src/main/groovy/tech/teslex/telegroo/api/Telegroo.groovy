@@ -1,7 +1,10 @@
 package tech.teslex.telegroo.api
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.context.MethodsContext
+import tech.teslex.telegroo.api.update.CommandUpdateHandler
+import tech.teslex.telegroo.api.update.MessageUpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandler
 import tech.teslex.telegroo.telegram.enums.UpdateType
 import tech.teslex.telegroo.telegram.types.update.Update
@@ -9,28 +12,34 @@ import tech.teslex.telegroo.telegram.types.update.Update
 @CompileStatic
 interface Telegroo extends MethodsContext {
 
-	def start()
+	void start();
 
-	def stop()
-
-
-	void solveUpdate(Update update)
+	void stop();
 
 
-	void on(UpdateType type, @DelegatesTo(MethodsContext) Closure handler)
+	void setLastUpdate(Update update);
 
-	void onUpdate(@DelegatesTo(MethodsContext) Closure handler)
-
-	void onCommand(String command, @DelegatesTo(MethodsContext) Closure handler)
-
-	void onMessage(String message, @DelegatesTo(MethodsContext) Closure handler)
+	void setJacksonObjectMapper(ObjectMapper objectMapper);
 
 
-	void onUpdateHandler(UpdateType type, UpdateHandler handler)
+	void solveUpdate(Update update);
 
-	void onUpdateUpdateHandler(UpdateHandler handler)
 
-	void onCommandUpdateHandler(String command, UpdateHandler handler)
+	void on(UpdateType type, @DelegatesTo(MethodsContext) Closure handler);
 
-	void onMessageUpdateHandler(String message, UpdateHandler handler)
+	void onUpdate(@DelegatesTo(MethodsContext) Closure handler);
+
+	void onCommand(String command, @DelegatesTo(MethodsContext) Closure handler);
+
+	void onMessage(String message, @DelegatesTo(MethodsContext) Closure handler);
+
+
+	void onUpdateHandler(UpdateHandler handler);
+
+	void onCommandUpdateHandler(CommandUpdateHandler handler);
+
+	void onMessageUpdateHandler(MessageUpdateHandler handler);
+
+
+	void middleware(Closure<Boolean> closure);
 }

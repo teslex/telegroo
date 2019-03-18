@@ -10,7 +10,7 @@ dependencies {
 	compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
 
 	compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: apacheHttpFluentHcVersion
-	
+
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion
 	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jacksonVersion
 }
@@ -32,5 +32,5 @@ publishing {
 			def snapshotsRepoUrl = "$buildDir/repo/snapshots"
 			url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 		}
-	}
+	} as Action<? super RepositoryHandler>
 }

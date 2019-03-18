@@ -5,18 +5,21 @@ import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Api
 import tech.teslex.telegroo.telegram.types.update.Update
 
+import java.util.Optional
 import java.util.regex.Matcher
 
 @CompileStatic
 interface Context extends Cloneable {
 
-	Api getApi()
+	Api getApi();
 
-	Update getLastUpdate()
+	void setApi(Api api);
 
-	ObjectMapper getJacksonObjectMapper()
+	Update getLastUpdate();
 
-	Optional<Matcher> getMatcher()
+	ObjectMapper getJacksonObjectMapper();
 
-	Context createNewContext(Api api, Update update, ObjectMapper objectMapper, Matcher matcher)
+	Optional<Matcher> getMatcher();
+
+	Context createNewContext(Api api, Update update, ObjectMapper objectMapper, Matcher matcher);
 }

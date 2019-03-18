@@ -4,4 +4,5 @@ import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.MethodsTraits
 
 @CompileStatic
-interface MethodsContext extends Context, MethodsTraits {}
+interface MethodsContext extends Context, MethodsTraits {
+}

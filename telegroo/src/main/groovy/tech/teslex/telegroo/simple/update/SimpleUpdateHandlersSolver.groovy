@@ -1,6 +1,7 @@
 package tech.teslex.telegroo.simple.update
 
 import groovy.transform.CompileStatic
+import tech.teslex.telegroo.api.update.MessageUpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandlersSolver
 import tech.teslex.telegroo.simple.SimpleTelegroo
@@ -18,53 +19,25 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 	}
 
 	@Override
-	def solve(Update update, Map handlersClosures, Map handlersUpdates = [:]) {
+	void solve(Update update, List<UpdateHandler> handlers) {
 
-		handlersClosures[UpdateType.UPDATE].each { Closure handler ->
-			handler.delegate = new SimpleContext(telegroo.api, update)
-			handler.call()
-		}
-
-		handlersUpdates[UpdateType.UPDATE].each { UpdateHandler handler ->
-			handler.handle(new SimpleContext(telegroo.api, update))
+		handlers.findAll { it.type == UpdateType.UPDATE }.each {
+			it.handle(new SimpleContext(telegroo.api, update))
 		}
 
 		if (update.updateType == UpdateType.MESSAGE) {
 
-			def handlerClosure = handlersClosures[UpdateType.MESSAGE].find { Map.Entry entry ->
-				update.message.text ==~ entry.key
-			} as Map.Entry<String, Closure>
+			MessageUpdateHandler handler = handlers
+					.findAll { it instanceof MessageUpdateHandler }
+					.find { update.message.text ==~ (it as MessageUpdateHandler).pattern } as MessageUpdateHandler
 
-			def handlerUpdate = handlersUpdates[UpdateType.MESSAGE].find { Map.Entry entry ->
-				update.message.text ==~ entry.key
-			} as Map.Entry<String, UpdateHandler>
-
-			if (handlerClosure) {
-				def match = update.message.text =~ handlerClosure.key
-				def handlerClosureEntry = handlerClosure.value
-
-				handlerClosureEntry.delegate = new SimpleContext(telegroo.api, update, match)
-				handlerClosureEntry.call()
-			}
-
-			if (handlerUpdate) {
-				def match = update.message.text =~ handlerUpdate.key
-				def handlerUpdateEntry = handlerUpdate.value
-
-				handlerUpdateEntry.handle(new SimpleContext(telegroo.api, update, match))
+			if (handler) {
+				handler.handle(new SimpleContext(telegroo.api, update, update.message.text =~ handler.pattern))
 			}
 		} else {
 
-			def validHandlersClosures = handlersClosures[update.updateType]
-			def validHandlersUpdates = handlersUpdates[update.updateType]
-
-			validHandlersClosures.each { Closure handler ->
-				handler.delegate = new SimpleContext(telegroo.api, update)
-				handler.call()
-			}
-
-			validHandlersUpdates.each { UpdateHandler handler ->
-				handler.handle(new SimpleContext(telegroo.api, update))
+			handlers.findAll { it.type == update.updateType }.each {
+				it.handle(new SimpleContext(telegroo.api, update))
 			}
 		}
 	}

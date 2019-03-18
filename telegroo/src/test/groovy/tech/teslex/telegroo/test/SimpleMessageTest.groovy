@@ -17,21 +17,7 @@ class SimpleMessageTest /* extends Specification */ {
 		def text = 'Hello, Groovy!'
 
 		when:
-		def response = telegroo.sendMessage(text, chatId)
-
-		then:
-		response['ok'] == true
-		response['result']['text'] == text
-	}
-
-	def 'reply test'() {
-		given:
-		def chatId = -347437795
-		def messageId = 983
-		def text = 'Hello, Groovy!'
-
-		when:
-		def response = telegroo.reply(text, messageId, chatId)
+		def response = telegroo.sendMessage(text: text, chatId: chatId)
 
 		then:
 		response['ok'] == true
@@ -42,12 +28,13 @@ class SimpleMessageTest /* extends Specification */ {
 		given:
 		def chatId = -347437795
 		def messageId = 983
+		def text = 'Hello, Groovy!'
 
 		when:
-		def response = telegroo.forward(chatId, messageId, chatId)
+		def response = telegroo.forwardMessage(fromChatId: chatId, messageId: messageId, chatId: chatId)
 
 		then:
-		response['ok'] == true
-		response['result']['text'] == text
+		response.ok
+		response.result.text == text
 	}
 }
