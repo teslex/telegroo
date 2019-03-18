@@ -45,5 +45,5 @@ publish-snapshot:
     - git add .
     - git commit -m 'Update telegroo'
     - git push https://teslex.bot:${GITLAB_PRIVATE_KEY}@gitlab.com/teslex/repo
-  except:
-    - master
+  only:
+    - '1.0'
