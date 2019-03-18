@@ -103,7 +103,7 @@ class SimpleTelegroo extends SimpleContext implements Telegroo {
 
 	@Override
 	void onCommand(String command, @DelegatesTo(MethodsContext) Closure handler) {
-		handlers.add(new SimpleClosureCommandUpdateHandler(command.startsWith(commandSymbol) ? command : "$commandSymbol$command", handler))
+		handlers<< new SimpleClosureCommandUpdateHandler((command.startsWith(commandSymbol) ? command : "$commandSymbol$command") as String, handler)
 	}
 
 	@Override
