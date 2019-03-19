@@ -3,13 +3,14 @@ package tech.teslex.telegroo.api.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
+import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.GetChatAdministratorsMethodObject
 import tech.teslex.telegroo.telegram.types.ChatMember
 
 @CompileStatic
-trait GetChatAdministratorsMethodTrait implements Context {
+trait GetChatAdministratorsMethodTrait implements Context<Response> {
 
 	@NamedVariant
 	TelegramResult<List<ChatMember>> getChatAdministrators(@NamedDelegate GetChatAdministratorsMethodObject data) {

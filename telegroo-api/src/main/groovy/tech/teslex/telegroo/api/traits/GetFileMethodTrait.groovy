@@ -3,13 +3,14 @@ package tech.teslex.telegroo.api.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
+import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.GetFileMethodObject
 import tech.teslex.telegroo.telegram.types.FileObject
 
 @CompileStatic
-trait GetFileMethodTrait implements Context {
+trait GetFileMethodTrait implements Context<Response> {
 
 	@NamedVariant
 	TelegramResult<FileObject> getFile(@NamedDelegate GetFileMethodObject data) {

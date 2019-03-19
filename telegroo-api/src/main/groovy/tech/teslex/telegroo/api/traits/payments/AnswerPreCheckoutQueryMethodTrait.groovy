@@ -3,12 +3,13 @@ package tech.teslex.telegroo.api.traits.payments
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
+import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.payments.AnswerPreCheckoutQueryMethodObject
 
 @CompileStatic
-trait AnswerPreCheckoutQueryMethodTrait implements Context {
+trait AnswerPreCheckoutQueryMethodTrait implements Context<Response> {
 
 	@NamedVariant
 	TelegramResult<Object> answerPreCheckoutQuery(@NamedDelegate AnswerPreCheckoutQueryMethodObject data) {

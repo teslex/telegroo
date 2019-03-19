@@ -3,12 +3,13 @@ package tech.teslex.telegroo.api.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
+import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.ExportChatInviteLinkMethodObject
 
 @CompileStatic
-trait ExportChatInviteLinkMethodTrait implements Context {
+trait ExportChatInviteLinkMethodTrait implements Context<Response> {
 
 	@NamedVariant
 	TelegramResult<String> exportChatInviteLink(@NamedDelegate ExportChatInviteLinkMethodObject data) {

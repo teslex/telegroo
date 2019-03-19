@@ -1,12 +1,13 @@
 package tech.teslex.telegroo.api.traits
 
 import groovy.transform.CompileStatic
+import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.Api
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.api.context.MethodsContext
 
 @CompileStatic
-trait ReplyTrait implements Context {
+trait ReplyTrait implements Context<Response> {
 
 	/**
 	 * fixme

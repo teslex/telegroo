@@ -3,12 +3,13 @@ package tech.teslex.telegroo.api.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
+import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.UnbanChatMemberMethodObject
 
 @CompileStatic
-trait UnbanChatMemberMethodTrait implements Context {
+trait UnbanChatMemberMethodTrait implements Context<Response> {
 
 	@NamedVariant
 	TelegramResult<Object> unbanChatMember(@NamedDelegate UnbanChatMemberMethodObject data) {

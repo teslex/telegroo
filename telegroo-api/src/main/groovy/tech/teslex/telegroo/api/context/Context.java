@@ -7,9 +7,9 @@ import tech.teslex.telegroo.telegram.types.update.Update;
 import java.util.Optional;
 import java.util.regex.Matcher;
 
-public interface Context extends Cloneable {
+public interface Context<T> extends Cloneable {
 
-	Api getApi();
+	Api<T> getApi();
 
 	void setApi(Api api);
 

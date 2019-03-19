@@ -3,13 +3,14 @@ package tech.teslex.telegroo.api.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
+import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.SendLocationMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SendLocationMethodTrait implements Context {
+trait SendLocationMethodTrait implements Context<Response> {
 
 	@NamedVariant
 	TelegramResult<Message> sendLocation(@NamedDelegate SendLocationMethodObject data) {
