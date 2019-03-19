@@ -3,26 +3,29 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import org.apache.http.client.fluent.Response
-import tech.teslex.telegroo.api.context.Context
+import tech.teslex.telegroo.api.methods.UploadStickerFileMethod
+import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.UploadStickerFileMethodObject
 import tech.teslex.telegroo.telegram.types.FileObject
 
 @CompileStatic
-trait UploadStickerFileMethodTrait implements Context<Response> {
+trait UploadStickerFileMethodTrait implements UploadStickerFileMethod<TelegramResult<FileObject>>, ContextWithObjectMapper {
 
+	@Override
 	@NamedVariant
 	TelegramResult<FileObject> uploadStickerFile(@NamedDelegate UploadStickerFileMethodObject data) {
-		def type = jacksonObjectMapper.typeFactory.constructParametricType(TelegramResult, FileObject)
+		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, FileObject)
 
-		jacksonObjectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
 	}
 
+	@Override
 	TelegramResult<FileObject> uploadStickerFile(Map data) {
 		uploadStickerFile(data as UploadStickerFileMethodObject)
 	}
 
+	@Override
 	TelegramResult<FileObject> uploadStickerFile(@DelegatesTo(UploadStickerFileMethodObject) Closure closure) {
 		def builder = UploadStickerFileMethodObject.newInstance()
 		closure.delegate = builder

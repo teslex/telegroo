@@ -17,7 +17,7 @@ class SimpleContext implements MethodsContext {
 
 	private Update lastUpdate
 
-	private ObjectMapper jacksonObjectMapper
+	private ObjectMapper objectMapper
 
 	private Matcher matcher
 
@@ -27,9 +27,9 @@ class SimpleContext implements MethodsContext {
 		this.api = api
 		this.lastUpdate = lastUpdate
 
-		this.jacksonObjectMapper = new ObjectMapper()
-		this.jacksonObjectMapper.registerModule(new Jdk8Module())
-		this.jacksonObjectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+		this.objectMapper = new ObjectMapper()
+		this.objectMapper.registerModule(new Jdk8Module())
+		this.objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
 	}
 
 	SimpleContext(Api api, Update lastUpdate, Matcher matcher) {
@@ -37,21 +37,21 @@ class SimpleContext implements MethodsContext {
 		this.lastUpdate = lastUpdate
 		this.matcher = matcher
 
-		this.jacksonObjectMapper = new ObjectMapper()
-		this.jacksonObjectMapper.registerModule(new Jdk8Module())
-		this.jacksonObjectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+		this.objectMapper = new ObjectMapper()
+		this.objectMapper.registerModule(new Jdk8Module())
+		this.objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
 	}
 
 	SimpleContext(Api api, Update lastUpdate, ObjectMapper jacksonObjectMapper) {
 		this.api = api
 		this.lastUpdate = lastUpdate
-		this.jacksonObjectMapper = jacksonObjectMapper
+		this.objectMapper = jacksonObjectMapper
 	}
 
 	SimpleContext(Api api, Update lastUpdate, ObjectMapper jacksonObjectMapper, Matcher matcher) {
 		this.api = api
 		this.lastUpdate = lastUpdate
-		this.jacksonObjectMapper = jacksonObjectMapper
+		this.objectMapper = jacksonObjectMapper
 		this.matcher = matcher
 	}
 
@@ -70,9 +70,8 @@ class SimpleContext implements MethodsContext {
 		this.lastUpdate
 	}
 
-	@Override
-	ObjectMapper getJacksonObjectMapper() {
-		this.jacksonObjectMapper
+	ObjectMapper getObjectMapper() {
+		this.objectMapper
 	}
 
 	@Override
@@ -81,12 +80,12 @@ class SimpleContext implements MethodsContext {
 	}
 
 	@Override
-	Context createNewContext(Api api, Update update, ObjectMapper objectMapper, Matcher matcher) {
-		new SimpleContext(api, update, objectMapper, matcher)
+	Context createNewContext(Api api, Update update, Matcher matcher) {
+		new SimpleContext(api, update, matcher)
 	}
 
-	protected void setJacksonObjectMapper(ObjectMapper objectMapper) {
-		this.jacksonObjectMapper = objectMapper
+	protected void setObjectMapper(ObjectMapper objectMapper) {
+		this.objectMapper = objectMapper
 	}
 
 	protected void setLastUpdate(Update update) {

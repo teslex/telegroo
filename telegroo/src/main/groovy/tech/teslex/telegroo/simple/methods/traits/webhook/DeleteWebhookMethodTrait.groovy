@@ -1,17 +1,18 @@
 package tech.teslex.telegroo.simple.methods.traits.webhook
 
 import groovy.transform.CompileStatic
-import org.apache.http.client.fluent.Response
-import tech.teslex.telegroo.api.context.Context
+import tech.teslex.telegroo.api.methods.webhook.DeleteWebhookMethod
+import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.webhook.DeleteWebhookMethodObject
 
 @CompileStatic
-trait DeleteWebhookMethodTrait implements Context<Response> {
+trait DeleteWebhookMethodTrait implements DeleteWebhookMethod<TelegramResult<Object>>, ContextWithObjectMapper {
 
+	@Override
 	TelegramResult<Object> deleteWebhook() {
-		def type = jacksonObjectMapper.typeFactory.constructParametricType(TelegramResult, Object)
+		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 
-		jacksonObjectMapper.readValue(api.go(new DeleteWebhookMethodObject()).returnContent().asStream(), type)
+		objectMapper.readValue(api.go(new DeleteWebhookMethodObject()).returnContent().asStream(), type)
 	}
 }

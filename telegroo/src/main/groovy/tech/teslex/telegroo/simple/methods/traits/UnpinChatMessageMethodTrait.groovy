@@ -3,27 +3,30 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import org.apache.http.client.fluent.Response
-import tech.teslex.telegroo.api.context.Context
+import tech.teslex.telegroo.api.methods.UnpinChatMessageMethod
+import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.UnpinChatMessageMethodObject
 
 @CompileStatic
-trait UnpinChatMessageMethodTrait implements Context<Response> {
+trait UnpinChatMessageMethodTrait implements UnpinChatMessageMethod<TelegramResult<Object>>, ContextWithObjectMapper {
 
+	@Override
 	@NamedVariant
 	TelegramResult<Object> unpinChatMessage(@NamedDelegate UnpinChatMessageMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
 
-		def type = jacksonObjectMapper.typeFactory.constructParametricType(TelegramResult, Object)
+		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 
-		jacksonObjectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
 	}
 
+	@Override
 	TelegramResult<Object> unpinChatMessage(Map data) {
 		unpinChatMessage(data as UnpinChatMessageMethodObject)
 	}
 
+	@Override
 	TelegramResult<Object> unpinChatMessage(@DelegatesTo(UnpinChatMessageMethodObject) Closure closure) {
 		def builder = UnpinChatMessageMethodObject.newInstance()
 		closure.delegate = builder

@@ -5,11 +5,11 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Telegroo
-import tech.teslex.telegroo.simple.context.MethodsContext
 import tech.teslex.telegroo.api.update.CommandUpdateHandler
 import tech.teslex.telegroo.api.update.MessageUpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandlersSolver
+import tech.teslex.telegroo.simple.context.MethodsContext
 import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.simple.update.SimpleUpdateHandlersSolver
 import tech.teslex.telegroo.simple.update.closure.SimpleClosureCommandUpdateHandler
@@ -19,7 +19,7 @@ import tech.teslex.telegroo.telegram.enums.UpdateType
 import tech.teslex.telegroo.telegram.types.update.Update
 
 @CompileStatic
-class SimpleTelegroo extends SimpleContext implements Telegroo {
+class SimpleTelegroo extends SimpleContext implements Telegroo, MethodsContext {
 
 	String token
 
@@ -32,13 +32,13 @@ class SimpleTelegroo extends SimpleContext implements Telegroo {
 	Boolean active = false
 
 	SimpleTelegroo(String token) {
-		this.jacksonObjectMapper = new ObjectMapper()
-		this.jacksonObjectMapper.registerModule(new Jdk8Module())
-		this.jacksonObjectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+		this.objectMapper = new ObjectMapper()
+		this.objectMapper.registerModule(new Jdk8Module())
+		this.objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
 
 		this.token = token
 		this.lastUpdate = new Update(updateId: 0)
-		this.api = new SimpleApi(token, jacksonObjectMapper)
+		this.api = new SimpleApi(token, objectMapper)
 	}
 
 	@Override

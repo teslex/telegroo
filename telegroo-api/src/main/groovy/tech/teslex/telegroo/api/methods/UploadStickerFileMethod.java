@@ -1,0 +1,19 @@
+package tech.teslex.telegroo.api.methods;
+
+import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
+import groovy.transform.NamedDelegate;
+import groovy.transform.NamedVariant;
+import tech.teslex.telegroo.telegram.methods.objects.UploadStickerFileMethodObject;
+
+import java.util.Map;
+
+public interface UploadStickerFileMethod<R> {
+
+	R uploadStickerFile(Map data);
+
+	@NamedVariant
+	R uploadStickerFile(@NamedDelegate UploadStickerFileMethodObject data);
+
+	R uploadStickerFile(@DelegatesTo(UploadStickerFileMethodObject.class) Closure closure);
+}

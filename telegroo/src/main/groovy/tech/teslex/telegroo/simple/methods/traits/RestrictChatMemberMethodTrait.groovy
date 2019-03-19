@@ -3,31 +3,34 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import org.apache.http.client.fluent.Response
-import tech.teslex.telegroo.api.context.Context
+import tech.teslex.telegroo.api.methods.RestrictChatMemberMethod
+import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.RestrictChatMemberMethodObject
 
 @CompileStatic
-trait RestrictChatMemberMethodTrait implements Context<Response> {
+trait RestrictChatMemberMethodTrait implements RestrictChatMemberMethod<TelegramResult<Object>>, ContextWithObjectMapper {
 
+	@Override
 	@NamedVariant
-	TelegramResult<Object> restrictChatMemberMethod(@NamedDelegate RestrictChatMemberMethodObject data) {
+	TelegramResult<Object> restrictChatMember(@NamedDelegate RestrictChatMemberMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
 
-		def type = jacksonObjectMapper.typeFactory.constructParametricType(TelegramResult, Object)
+		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 
-		jacksonObjectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
 	}
 
-	TelegramResult<Object> restrictChatMemberMethod(Map data) {
-		restrictChatMemberMethod(data as RestrictChatMemberMethodObject)
+	@Override
+	TelegramResult<Object> restrictChatMember(Map data) {
+		restrictChatMember(data as RestrictChatMemberMethodObject)
 	}
 
-	TelegramResult<Object> restrictChatMemberMethod(@DelegatesTo(RestrictChatMemberMethodObject) Closure closure) {
+	@Override
+	TelegramResult<Object> restrictChatMember(@DelegatesTo(RestrictChatMemberMethodObject) Closure closure) {
 		def builder = RestrictChatMemberMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
-		restrictChatMemberMethod(builder)
+		restrictChatMember(builder)
 	}
 }

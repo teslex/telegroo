@@ -1,6 +1,5 @@
 package tech.teslex.telegroo.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import groovy.lang.Closure;
 import tech.teslex.telegroo.api.update.CommandUpdateHandler;
 import tech.teslex.telegroo.api.update.MessageUpdateHandler;
@@ -15,8 +14,6 @@ public interface Telegroo {
 	void stop();
 
 	void setLastUpdate(Update update);
-
-	void setJacksonObjectMapper(ObjectMapper objectMapper);
 
 	void solveUpdate(Update update);
 

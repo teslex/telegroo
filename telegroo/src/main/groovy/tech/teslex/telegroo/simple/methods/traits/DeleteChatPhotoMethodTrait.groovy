@@ -3,27 +3,30 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import org.apache.http.client.fluent.Response
-import tech.teslex.telegroo.api.context.Context
+import tech.teslex.telegroo.api.methods.DeleteChatPhotoMethod
+import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.DeleteChatPhotoMethodObject
 
 @CompileStatic
-trait DeleteChatPhotoMethodTrait implements Context<Response> {
+trait DeleteChatPhotoMethodTrait implements DeleteChatPhotoMethod<TelegramResult<Object>>, ContextWithObjectMapper {
 
+	@Override
 	@NamedVariant
 	TelegramResult<Object> deleteChatPhoto(@NamedDelegate DeleteChatPhotoMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
 
-		def type = jacksonObjectMapper.typeFactory.constructParametricType(TelegramResult, Object)
+		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 
-		jacksonObjectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
 	}
 
+	@Override
 	TelegramResult<Object> deleteChatPhoto(Map data) {
 		deleteChatPhoto(data as DeleteChatPhotoMethodObject)
 	}
 
+	@Override
 	TelegramResult<Object> deleteChatPhoto(@DelegatesTo(DeleteChatPhotoMethodObject) Closure closure) {
 		def builder = DeleteChatPhotoMethodObject.newInstance()
 		closure.delegate = builder

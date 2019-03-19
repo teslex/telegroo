@@ -1,6 +1,5 @@
 package tech.teslex.telegroo.api.context;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import tech.teslex.telegroo.api.Api;
 import tech.teslex.telegroo.telegram.types.update.Update;
 
@@ -15,9 +14,7 @@ public interface Context<T> extends Cloneable {
 
 	Update getLastUpdate();
 
-	ObjectMapper getJacksonObjectMapper();
-
 	Optional<Matcher> getMatcher();
 
-	Context createNewContext(Api api, Update update, ObjectMapper objectMapper, Matcher matcher);
+	Context createNewContext(Api api, Update update, Matcher matcher);
 }
