@@ -10,11 +10,11 @@ import java.util.regex.Pattern
 @CompileStatic
 class SimpleClosureMessageUpdateHandler implements MessageUpdateHandler<MethodsContext> {
 
-	final UpdateType updateType
+	UpdateType updateType
 
-	final Pattern pattern
+	Pattern pattern
 
-	final Closure closure
+	Closure closure
 
 	SimpleClosureMessageUpdateHandler(Pattern pattern, Closure closure) {
 		this.updateType = UpdateType.MESSAGE

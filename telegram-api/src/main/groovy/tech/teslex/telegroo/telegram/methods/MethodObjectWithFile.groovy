@@ -8,5 +8,5 @@ import tech.teslex.telegroo.telegram.types.InputFile
 interface MethodObjectWithFile extends MethodObject {
 
 	@JsonIgnore
-	<T> InputFile<T> getFile() // String or File
+	<T> InputFile<T> getFile()
 }

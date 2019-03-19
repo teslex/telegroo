@@ -81,14 +81,14 @@ class SimpleContext implements MethodsContext {
 
 	@Override
 	Context createNewContext(Api api, Update update, Matcher matcher) {
-		new SimpleContext(api, update, matcher)
+		new SimpleContext(api, update, objectMapper, matcher)
 	}
 
-	protected void setObjectMapper(ObjectMapper objectMapper) {
+	void setObjectMapper(ObjectMapper objectMapper) {
 		this.objectMapper = objectMapper
 	}
 
-	protected void setLastUpdate(Update update) {
+	void setLastUpdate(Update update) {
 		this.lastUpdate = update
 	}
 }

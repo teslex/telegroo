@@ -15,7 +15,7 @@ import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
 
 @CompileStatic
-class SimpleApi implements Api {
+class SimpleApi implements Api<Response> {
 
 	private String token
 
@@ -45,17 +45,35 @@ class SimpleApi implements Api {
 
 	@Override
 	Response go(MethodObject methodObject) {
-		Map params = objectMapper.convertValue(methodObject, Map)
-		params += defaultParams
-
-		Request.Post(buildUrl(methodObject.pathMethod))
-				.addHeader('Content-Type', 'application/json')
-				.bodyString(objectMapper.writeValueAsString(params), ContentType.APPLICATION_JSON)
-				.execute()
+		makeRequest(methodObject).execute()
 	}
 
 	@Override
 	Response go(MethodObjectWithFile methodObjectWithFile) {
+		makeRequest(methodObjectWithFile).execute()
+	}
+
+	@Override
+	Response go(MethodObjectWithMedia methodObjectWithMedia) {
+		makeRequest(methodObjectWithMedia).execute()
+	}
+
+	@Override
+	Response go(String method, Map parameters) {
+		makeRequest(method, parameters).execute()
+	}
+
+	Request makeRequest(MethodObject methodObject) {
+		Map params = objectMapper.convertValue(methodObject, Map)
+		params += defaultParams
+
+		Request.Post(buildUrl(methodObject.pathMethod))
+				.useExpectContinue()
+				.addHeader('Content-Type', 'application/json')
+				.bodyString(objectMapper.writeValueAsString(params), ContentType.APPLICATION_JSON)
+	}
+
+	Request makeRequest(MethodObjectWithFile methodObjectWithFile) {
 		Map params = objectMapper.convertValue(methodObjectWithFile, Map)
 		params += defaultParams
 
@@ -77,19 +95,17 @@ class SimpleApi implements Api {
 
 			Request.Post(buildUrl(methodObjectWithFile.pathMethod))
 					.body(entity)
-					.execute()
 		} else {
 			if (methodObjectWithFile.file.isId)
 				params += [photo: [file_id: methodObjectWithFile.file.file]]
 			else
 				params += [photo: methodObjectWithFile.file.file]
 
-			go(methodObjectWithFile.pathMethod, params)
+			makeRequest(methodObjectWithFile.pathMethod, params)
 		}
 	}
 
-	@Override
-	Response go(MethodObjectWithMedia methodObjectWithMedia) {
+	Request makeRequest(MethodObjectWithMedia methodObjectWithMedia) {
 		Map params = objectMapper.convertValue(methodObjectWithMedia, Map)
 		params += defaultParams
 
@@ -121,14 +137,11 @@ class SimpleApi implements Api {
 
 		Request.Post(buildUrl(methodObjectWithMedia.pathMethod))
 				.body(entity)
-				.execute()
 	}
 
-	@Override
-	Response go(String method, Map parameters) {
+	Request makeRequest(String method, Map parameters) {
 		Request.Post(buildUrl(method))
 				.addHeader('Content-Type', 'application/json')
 				.bodyString(objectMapper.writeValueAsString(parameters), ContentType.APPLICATION_JSON)
-				.execute()
 	}
 }

@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
 import groovy.transform.Canonical
 
+/**
+ * This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual way that files are uploaded via the browser.
+ */
 @Canonical
 @CompileStatic
 @JsonInclude(JsonInclude.Include.NON_NULL)
