@@ -40,6 +40,7 @@ class SimpleContext implements MethodsContext {
 
 		this.jacksonObjectMapper = new ObjectMapper()
 		this.jacksonObjectMapper.registerModule(new Jdk8Module())
+		this.jacksonObjectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
 	}
 
 	SimpleContext(Api api, Update lastUpdate, ObjectMapper jacksonObjectMapper) {
