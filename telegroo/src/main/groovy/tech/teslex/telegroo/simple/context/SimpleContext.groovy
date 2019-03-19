@@ -6,7 +6,6 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Api
 import tech.teslex.telegroo.api.context.Context
-import tech.teslex.telegroo.api.context.MethodsContext
 import tech.teslex.telegroo.telegram.types.update.Update
 
 import java.util.regex.Matcher

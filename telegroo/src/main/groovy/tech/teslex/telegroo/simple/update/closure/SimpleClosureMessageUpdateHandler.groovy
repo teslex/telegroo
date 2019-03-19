@@ -1,14 +1,14 @@
 package tech.teslex.telegroo.simple.update.closure
 
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.api.context.MethodsContext
+import tech.teslex.telegroo.simple.context.MethodsContext
 import tech.teslex.telegroo.api.update.MessageUpdateHandler
 import tech.teslex.telegroo.telegram.enums.UpdateType
 
 import java.util.regex.Pattern
 
 @CompileStatic
-class SimpleClosureMessageUpdateHandler implements MessageUpdateHandler {
+class SimpleClosureMessageUpdateHandler implements MessageUpdateHandler<MethodsContext> {
 
 	final UpdateType updateType
 

@@ -1,0 +1,35 @@
+package tech.teslex.telegroo.simple.methods.traits
+
+import groovy.transform.CompileStatic
+import groovy.transform.NamedDelegate
+import groovy.transform.NamedVariant
+import org.apache.http.client.fluent.Response
+import tech.teslex.telegroo.api.context.Context
+import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.objects.EditMessageReplyMarkupMethodObject
+import tech.teslex.telegroo.telegram.types.Message
+
+@CompileStatic
+trait EditMessageReplyMarkupMethodTrait implements Context<Response> {
+
+	@NamedVariant
+	TelegramResult<Message> editMessageReplyMarkup(@NamedDelegate EditMessageReplyMarkupMethodObject data) {
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.messageId = data.messageId ?: lastUpdate[lastUpdate.updateType.type]['messageId'] as Integer
+
+		def type = jacksonObjectMapper.typeFactory.constructParametricType(TelegramResult, Message)
+
+		jacksonObjectMapper.readValue(api.go(data).returnContent().asStream(), type)
+	}
+
+	TelegramResult<Message> editMessageReplyMarkup(Map data) {
+		editMessageReplyMarkup(data as EditMessageReplyMarkupMethodObject)
+	}
+
+	TelegramResult<Message> editMessageReplyMarkup(@DelegatesTo(EditMessageReplyMarkupMethodObject) Closure closure) {
+		def builder = EditMessageReplyMarkupMethodObject.newInstance()
+		closure.delegate = builder
+		closure.call()
+		editMessageReplyMarkup(builder)
+	}
+}

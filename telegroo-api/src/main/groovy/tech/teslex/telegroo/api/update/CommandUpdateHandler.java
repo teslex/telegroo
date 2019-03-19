@@ -1,6 +1,8 @@
 package tech.teslex.telegroo.api.update;
 
-public interface CommandUpdateHandler extends MessageUpdateHandler {
+import tech.teslex.telegroo.api.context.Context;
+
+public interface CommandUpdateHandler<T extends Context> extends MessageUpdateHandler<T> {
 
 	default Boolean useCommandSymbol() {
 		return true;
