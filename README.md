@@ -3,12 +3,14 @@
 	<h1>telegroo</h1>
 </p>
 
-> version: **[1.0-{timestamp}-SNAPSHOT](https://gitlab.com/teslex/repo/tree/master/snapshots/tech/teslex/telegroo/telegroo)**
-
 **Telegram bot framework for [Groovy](http://groovy-lang.org)**
+
+> Version: **[1.0-{timestamp}-SNAPSHOT](https://gitlab.com/teslex/repo/tree/master/snapshots/tech/teslex/telegroo/telegroo)**
 
 - [Telegroo Docs](DOCS.md)
 - [Telegram Bot API](https://core.telegram.org/bots/api)
+- Examples:
+	* [Telegroo & Micronaut](https://gitlab.com/teslex/telegroo/micronaut-example)
 
 
 **Gradle:**
@@ -42,9 +44,4 @@ bot.onCommand(/echo (.+)/) {
 }
 
 bot.start()
-```
-
-**Webhook:**
-```groovy
-bot.setWebhook('https://kek.localtunnel.me') // setting webhook url
 ```

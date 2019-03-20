@@ -19,6 +19,12 @@ publishing {
 			version version
 
 			from components.java
+
+			pom {
+				name = 'telegroo'
+				description = 'Telegram Bot framework for Groovy'
+				url = 'https://gitlab.com/teslex/telegroo/telegroo'
+			}
 		}
 	}
 
