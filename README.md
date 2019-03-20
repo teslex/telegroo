@@ -7,7 +7,7 @@
 
 > Version: **[1.0-{timestamp}-SNAPSHOT](https://gitlab.com/teslex/repo/tree/master/snapshots/tech/teslex/telegroo/telegroo)**
 
-- [Telegroo Docs](DOCS.md)
+- [Telegroo Docs](https://gitlab.com/teslex/telegroo/telegroo/wikis)
 - [Telegram Bot API](https://core.telegram.org/bots/api)
 - Examples:
 	* [Telegroo & Micronaut](https://gitlab.com/teslex/telegroo/micronaut-example)
