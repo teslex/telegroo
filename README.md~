@@ -1,4 +1,4 @@
-[![telegroo.png](/telegroo.png)]
+![telegroo.png](/images/telegroo-small.png)
 <center><h1>telegroo</h1><center>
 
 > version: **[1.0-{timestamp}-SNAPSHOT](https://gitlab.com/teslex/repo/tree/master/snapshots/tech/teslex/telegroo/telegroo)**

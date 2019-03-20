@@ -1,5 +1,7 @@
-![telegroo.png](/images/telegroo-small.png)
-<center><h1>telegroo</h1><center>
+<p align="center">
+	<img src="/images/telegroo-small.png">
+	<h1>telegroo</h1>
+</p>
 
 > version: **[1.0-{timestamp}-SNAPSHOT](https://gitlab.com/teslex/repo/tree/master/snapshots/tech/teslex/telegroo/telegroo)**
 
