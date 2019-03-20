@@ -1,9 +1,9 @@
 package tech.teslex.telegroo.simple.methods.traits.webhook
 
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.api.methods.webhook.DeleteWebhookMethod
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.webhook.DeleteWebhookMethod
 import tech.teslex.telegroo.telegram.methods.objects.webhook.DeleteWebhookMethodObject
 
 @CompileStatic

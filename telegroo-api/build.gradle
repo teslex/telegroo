@@ -23,10 +23,10 @@ publishing {
 	}
 
 	repositories {
-		maven {
+		maven{
 			def releasesRepoUrl = "$buildDir/repo"
 			def snapshotsRepoUrl = "$buildDir/repo/snapshots"
 			url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 		}
-	} as Action<? super RepositoryHandler>
+	}
 }

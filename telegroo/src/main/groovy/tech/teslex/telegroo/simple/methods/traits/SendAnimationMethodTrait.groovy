@@ -3,7 +3,7 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.api.methods.SendAnimationMethod
+import tech.teslex.telegroo.telegram.methods.interfaces.SendAnimationMethod
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.SendAnimationMethodObject

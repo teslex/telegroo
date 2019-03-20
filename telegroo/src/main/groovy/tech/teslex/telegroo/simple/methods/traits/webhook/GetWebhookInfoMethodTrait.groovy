@@ -1,9 +1,9 @@
 package tech.teslex.telegroo.simple.methods.traits.webhook
 
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.api.methods.webhook.GetWebhookInfoMethod
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.webhook.GetWebhookInfoMethod
 import tech.teslex.telegroo.telegram.methods.objects.webhook.GetWebhookInfoMethodObject
 import tech.teslex.telegroo.telegram.types.WebhookInfo
 

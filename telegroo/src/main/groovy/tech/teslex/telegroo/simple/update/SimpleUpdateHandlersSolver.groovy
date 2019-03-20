@@ -35,7 +35,7 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 				} else if (it instanceof MessageUpdateHandler) {
 					(it as MessageUpdateHandler).pattern.matcher(update.message.text)
 				} else {
-					return false
+					false
 				}
 			}
 

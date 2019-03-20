@@ -3,9 +3,9 @@ package tech.teslex.telegroo.simple.methods.traits.payments
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.api.methods.payments.AnswerShippingQueryMethod
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerShippingQueryMethod
 import tech.teslex.telegroo.telegram.methods.objects.payments.AnswerShippingQueryMethodObject
 
 @CompileStatic

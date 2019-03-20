@@ -3,7 +3,7 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.api.methods.SetChatTitleMethod
+import tech.teslex.telegroo.telegram.methods.interfaces.SetChatTitleMethod
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.objects.SetChatTitleMethodObject
