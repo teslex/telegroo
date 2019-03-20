@@ -12,7 +12,7 @@ ext {
 	apacheHttpHttpMimeVersion = '4.5.6'
 }
 
-subprojects {	
+subprojects {
 	if (isSnapshot)
 		version "$telegrooVersion-${snapshotId}-SNAPSHOT"
 	else

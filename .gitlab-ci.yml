@@ -4,6 +4,7 @@ stages:
   - build
   - publish
 
+---
 build:
   stage: build
   script: gradle clean build
@@ -13,6 +14,7 @@ build:
   only:
     - master
 
+---
 publish:
   stage: publish
   script:
@@ -30,6 +32,17 @@ publish:
   only:
     - master
 
+
+---
+publish-central:
+  stage: publish-central
+  script:
+    - echo ok
+  only:
+    - master
+
+
+---
 publish-snapshot:
   stage: publish
   script:
