@@ -3,7 +3,6 @@ image: gradle:latest
 stages:
   - build
   - publish
-  - publish-central
 
 
 build:
