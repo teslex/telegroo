@@ -3,7 +3,6 @@ image: gradle:latest
 stages:
   - build
   - publish
-  - publish-central
 
 
 build:
@@ -16,7 +15,7 @@ build:
     - master
 
 
-publish:
+publish-teslex:
   stage: publish
   script:
     - gradle clean publish
@@ -34,20 +33,10 @@ publish:
     - master
 
 
-
-publish-central:
-  stage: publish-central
-  script:
-    - echo ok
-  only:
-    - master
-
-
-
-publish-snapshot:
+publish-teslex-snapshot:
   stage: publish
   script:
-    - "[ $(gradle properties -q | grep 'isSnapshot:' | awk '{print $2}') != 'true' ] && exit 0"
+    - "[ $(gradle properties -q | grep 'isSnapshot:' | awk '{print $2}') != 'true' ] && exit 1"
     - gradle clean publish
     - git clone https://gitlab.com/teslex/repo
     - cp -r telegram-api/build/repo/* repo
@@ -61,3 +50,13 @@ publish-snapshot:
     - git push https://teslex.bot:${GITLAB_PRIVATE_KEY}@gitlab.com/teslex/repo
   only:
     - '1.0'
+
+
+bintray-upload:
+  stage: publish
+  script:
+    - "[ $(gradle properties -q | grep 'isSnapshot:' | awk '{print $2}') == 'true' ] && exit 1"
+    - gradle test
+    - gradle bintrayUpload
+  only:
+    - master
