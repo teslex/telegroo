@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="/images/telegroo-small.png">
+	<img src="https://gitlab.com/teslex/telegroo/assets/raw/master/images/telegroo-small.png">
 	<h1>telegroo</h1>
 </p>
 
@@ -40,7 +40,7 @@ bot.onCommand(/start/) {
 }
 	
 bot.onCommand(/echo (.+)/) {
-	sendMessage(text: matcher.get()[0][1])
+	sendMessage(text: matcher[0][1])
 }
 
 bot.start()

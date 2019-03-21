@@ -2,6 +2,9 @@ package tech.teslex.telegroo.test
 
 import spock.lang.Shared
 import tech.teslex.telegroo.simple.SimpleTelegroo
+import tech.teslex.telegroo.telegram.types.InlineKeyboardButton
+import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
+import tech.teslex.telegroo.telegram.types.InputFile
 
 class SimpleMessageTest /* extends Specification */ {
 
@@ -11,30 +14,65 @@ class SimpleMessageTest /* extends Specification */ {
 	@Shared
 	def telegroo = new SimpleTelegroo(token)
 
-	def 'sendMessage test'() {
+	@Shared
+	def testChatId = -347437795
+
+	def 'send message'() {
 		given:
-		def chatId = -347437795
-		def text = 'Hello, Groovy!'
+		def testText = 'Hello, Groovy!'
 
 		when:
-		def response = telegroo.sendMessage(text: text, chatId: chatId)
-
-		then:
-		response['ok'] == true
-		response['result']['text'] == text
-	}
-
-	def 'forward test'() {
-		given:
-		def chatId = -347437795
-		def messageId = 983
-		def text = 'Hello, Groovy!'
-
-		when:
-		def response = telegroo.forwardMessage(fromChatId: chatId, messageId: messageId, chatId: chatId)
+		def response = telegroo.sendMessage {
+			text = testText
+			chatId = testChatId
+		}
 
 		then:
 		response.ok
-		response.result.text == text
+		response.result.text == testText
+	}
+
+	def 'send message with markup'() {
+		given:
+		def testText = 'Message with url button!'
+		def testMarkup = InlineKeyboardMarkup
+				.builder()
+				.inlineKeyboard([
+						[
+								InlineKeyboardButton.builder()
+										.text('GitLab')
+										.url('https://gitlab.com/teslex/telegroo')
+										.build()
+						]
+				]).build()
+
+		when:
+		def response = telegroo.sendMessage {
+			text = testText
+			chatId = testChatId
+			replyMarkup = testMarkup
+		}
+
+		then:
+		response.ok
+		response.result.text == testText
+	}
+
+	def 'send photo by url'() {
+		given:
+		def testCaption = 'TesLex'
+		def testPhoto = InputFile.ofUrl('https://assets.gitlab-static.net/uploads/-/system/group/avatar/1593121/CAGK4xZfg_M.jpg?width=64')
+
+		when:
+		def response = telegroo.sendPhoto {
+			chatId = testChatId
+			caption = testCaption
+			photo = testPhoto
+		}
+
+		then:
+		response.ok
+		response.result.photo
+		response.result.caption == testCaption
 	}
 }

@@ -22,5 +22,5 @@ class TelegramResult<T> {
 	Integer errorCode
 
 	@JsonProperty(required = false)
-	def parameters // todo: implement it
+	def parameters
 }

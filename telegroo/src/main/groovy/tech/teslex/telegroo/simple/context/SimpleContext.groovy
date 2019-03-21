@@ -75,8 +75,8 @@ class SimpleContext implements MethodsContext {
 	}
 
 	@Override
-	Optional<Matcher> getMatcher() {
-		Optional.ofNullable(this.matcher)
+	Matcher getMatcher() {
+		this.matcher
 	}
 
 	@Override

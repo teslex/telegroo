@@ -14,7 +14,7 @@ public interface Context<T> extends Cloneable {
 
 	Update getLastUpdate();
 
-	Optional<Matcher> getMatcher();
+	Matcher getMatcher();
 
 	Context createNewContext(Api api, Update update, Matcher matcher);
 }
