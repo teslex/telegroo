@@ -15,7 +15,7 @@ trait SendVoiceMethodTrait implements SendVoiceMethod<TelegramResult<Message>>, 
 	@Override
 	@NamedVariant
 	TelegramResult<Message> sendVoice(@NamedDelegate SendVoiceMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 

@@ -13,13 +13,13 @@ enum FileTypeMethodWithFile {
 	VOICE('voice'),
 	VIDEO_NOTE('video_note')
 
-	private String type
+	private String value
 
-	String getType() {
-		return this.type
+	String getValue() {
+		return this.value
 	}
 
-	private FileTypeMethodWithFile(String type) {
-		this.type = type
+	private FileTypeMethodWithFile(String value) {
+		this.value = value
 	}
 }

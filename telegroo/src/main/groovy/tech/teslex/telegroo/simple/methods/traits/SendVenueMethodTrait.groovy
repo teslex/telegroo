@@ -15,7 +15,7 @@ trait SendVenueMethodTrait implements SendVenueMethod<TelegramResult<Message>>, 
 	@Override
 	@NamedVariant
 	TelegramResult<Message> sendVenue(@NamedDelegate SendVenueMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 

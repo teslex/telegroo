@@ -40,7 +40,7 @@ class InputVenueMessageContent extends InputMessageContent {
 	String foursquareId
 
 	/**
-	 * Optional. Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+	 * Optional. Foursquare value of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
 	 */
 	@JsonProperty(value = 'foursquare_type', required = false)
 	String foursquareType

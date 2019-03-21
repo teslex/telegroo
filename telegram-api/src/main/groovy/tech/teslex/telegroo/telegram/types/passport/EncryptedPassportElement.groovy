@@ -11,7 +11,7 @@ import groovy.transform.Canonical
 class EncryptedPassportElement {
 
 	/**
-	 * Element type. One of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”, “address”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration”, “phone_number”, “email”.
+	 * Element value. One of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”, “address”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration”, “phone_number”, “email”.
 	 */
 	String type
 
@@ -22,13 +22,13 @@ class EncryptedPassportElement {
 	String data
 
 	/**
-	 * Optional. User's verified phone number, available only for “phone_number” type
+	 * Optional. User's verified phone number, available only for “phone_number” value
 	 */
 	@JsonProperty(value = 'phone_number', required = false)
 	String phoneNumber
 
 	/**
-	 * Optional. User's verified email address, available only for “email” type
+	 * Optional. User's verified email address, available only for “email” value
 	 */
 	@JsonProperty(required = false)
 	String email

@@ -13,7 +13,7 @@ import tech.teslex.telegroo.telegram.types.InputFile
 
 /**
  * sendDocument
- * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+ * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any value of up to 50 MB in size, this limit may be changed in the future.
  */
 @ToString
 @MapConstructor
@@ -76,7 +76,7 @@ class SendDocumentMethodObject implements MethodObjectWithFile {
 
 	@JsonIgnore
 	void setParseMode(ParseMode parseMode) {
-		this.parseMode = parseMode.mode
+		this.parseMode = parseMode.value
 	}
 
 	@Override

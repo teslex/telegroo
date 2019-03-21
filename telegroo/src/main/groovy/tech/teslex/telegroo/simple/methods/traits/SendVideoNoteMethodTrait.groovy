@@ -15,7 +15,7 @@ trait SendVideoNoteMethodTrait implements SendVideoNoteMethod<TelegramResult<Mes
 	@Override
 	@NamedVariant
 	TelegramResult<Message> sendVideoNote(@NamedDelegate SendVideoNoteMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 

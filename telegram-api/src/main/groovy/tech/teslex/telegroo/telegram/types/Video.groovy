@@ -38,7 +38,7 @@ class Video {
 	PhotoSize thumb
 
 	/**
-	 * Optional. Mime type of a file as defined by sender
+	 * Optional. Mime value of a file as defined by sender
 	 */
 	@JsonProperty(value = 'mime_type', required = false)
 	String mimeType

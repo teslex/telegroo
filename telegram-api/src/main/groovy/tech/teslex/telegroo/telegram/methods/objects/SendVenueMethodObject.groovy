@@ -57,7 +57,7 @@ class SendVenueMethodObject implements MethodObject {
 	String foursquareId
 
 	/**
-	 * Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+	 * Foursquare value of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
 	 */
 	@JsonProperty(value = 'foursquare_type', required = false)
 	String foursquareType

@@ -14,7 +14,7 @@ trait SetChatPhotoMethodTrait implements SetChatPhotoMethod<TelegramResult<Objec
 	@Override
 	@NamedVariant
 	TelegramResult<Object> setChatPhoto(@NamedDelegate SetChatPhotoMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 

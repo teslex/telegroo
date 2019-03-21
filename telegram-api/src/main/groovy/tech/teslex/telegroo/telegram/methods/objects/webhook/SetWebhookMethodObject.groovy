@@ -42,7 +42,7 @@ class SetWebhookMethodObject implements MethodObject {
 	Integer maxConnections
 
 	/**
-	 * List the types of updates you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.
+	 * List the types of updates you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of value (default). If not specified, the previous setting will be used.
 	 */
 	@JsonProperty(value = 'allowed_updates', required = false)
 	List<String> allowedUpdates

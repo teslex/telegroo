@@ -15,7 +15,7 @@ trait SendMediaGroupMethodTrait implements SendMediaGroupMethod<TelegramResult<M
 	@Override
 	@NamedVariant
 	TelegramResult<Message> sendMediaGroup(@NamedDelegate SendMediaGroupMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 

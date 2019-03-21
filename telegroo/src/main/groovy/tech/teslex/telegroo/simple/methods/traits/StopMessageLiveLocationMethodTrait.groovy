@@ -15,7 +15,7 @@ trait StopMessageLiveLocationMethodTrait implements StopMessageLiveLocationMetho
 	@Override
 	@NamedVariant
 	TelegramResult<Message> stopMessageLiveLocation(@NamedDelegate StopMessageLiveLocationMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 

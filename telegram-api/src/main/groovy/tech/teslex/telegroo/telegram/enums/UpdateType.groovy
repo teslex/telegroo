@@ -17,17 +17,17 @@ enum UpdateType {
 	SHIPPING_QUERY('shippingQuery'),
 	PRE_CHECKOUT_QUERY('preCheckoutQuery')
 
-	private String type
+	private String value
 
-	String getType() {
-		return this.type
+	String getValue() {
+		return this.value
 	}
 
-	private UpdateType(String type) {
-		this.type = type
+	private UpdateType(String value) {
+		this.value = value
 	}
 
 	static UpdateType fromString(String string) {
-		values().find { it.type == string }
+		values().find { it.value == string }
 	}
 }

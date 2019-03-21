@@ -15,7 +15,7 @@ trait SendDocumentMethodTrait implements SendDocumentMethod<TelegramResult<Messa
 	@Override
 	@NamedVariant
 	TelegramResult<Message> sendDocument(@NamedDelegate SendDocumentMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 

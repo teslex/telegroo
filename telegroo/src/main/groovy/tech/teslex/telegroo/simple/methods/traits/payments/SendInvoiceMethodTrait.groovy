@@ -15,7 +15,7 @@ trait SendInvoiceMethodTrait implements SendInvoiceMethod<TelegramResult<Message
 	@Override
 	@NamedVariant
 	TelegramResult<Message> sendInvoice(@NamedDelegate SendInvoiceMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id'] as Integer
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id'] as Integer
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 

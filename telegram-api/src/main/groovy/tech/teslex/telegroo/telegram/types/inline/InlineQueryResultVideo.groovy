@@ -32,7 +32,7 @@ class InlineQueryResultVideo extends InlineQueryResult {
 	String videoUrl
 
 	/**
-	 * Mime type of the content of video url, “text/html” or “video/mp4”
+	 * Mime value of the content of video url, “text/html” or “video/mp4”
 	 */
 	@JsonProperty(value = 'mime_type')
 	String mimeType

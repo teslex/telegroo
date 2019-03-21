@@ -106,7 +106,7 @@ class SendVideoMethodObject implements MethodObjectWithFile {
 
 	@JsonIgnore
 	void setParseMode(ParseMode parseMode) {
-		this.parseMode = parseMode.mode
+		this.parseMode = parseMode.value
 	}
 
 	@Override

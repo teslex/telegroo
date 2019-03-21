@@ -236,13 +236,13 @@ class Message {
 	Boolean channelChatCreated
 
 	/**
-	 * Optional. The group has been migrated to a supergroup with the specified identifier. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier.
+	 * Optional. The group has been migrated to a supergroup with the specified identifier. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float value are safe for storing this identifier.
 	 */
 	@JsonProperty(value = 'migrate_to_chat_id', required = false)
 	Integer migrateToChatId
 
 	/**
-	 * Optional. The supergroup has been migrated from a group with the specified identifier. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier.
+	 * Optional. The supergroup has been migrated from a group with the specified identifier. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float value are safe for storing this identifier.
 	 */
 	@JsonProperty(value = 'migrate_from_chat_id', required = false)
 	Integer migrateFromChatId

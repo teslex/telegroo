@@ -28,7 +28,7 @@ trait ReplyTrait implements ContextWithObjectMapper {
 	 * @param closure
 	 */
 	void reply(@DelegatesTo(MethodsContext) Closure closure) {
-		reply(lastUpdate[lastUpdate.updateType.type]['messageId'], closure)
+		reply(lastUpdate[lastUpdate.updateType.value]['messageId'], closure)
 	}
 
 	/**
@@ -37,7 +37,7 @@ trait ReplyTrait implements ContextWithObjectMapper {
 	 * @param replyTo
 	 * @return
 	 */
-	MethodsContext reply(replyTo = lastUpdate[lastUpdate.updateType.type]['messageId']) {
+	MethodsContext reply(replyTo = lastUpdate[lastUpdate.updateType.value]['messageId']) {
 		def nextApi = api.with {
 			clone()
 		} as Api

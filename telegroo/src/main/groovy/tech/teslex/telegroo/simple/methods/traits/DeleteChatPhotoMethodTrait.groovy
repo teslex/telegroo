@@ -14,7 +14,7 @@ trait DeleteChatPhotoMethodTrait implements DeleteChatPhotoMethod<TelegramResult
 	@Override
 	@NamedVariant
 	TelegramResult<Object> deleteChatPhoto(@NamedDelegate DeleteChatPhotoMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 

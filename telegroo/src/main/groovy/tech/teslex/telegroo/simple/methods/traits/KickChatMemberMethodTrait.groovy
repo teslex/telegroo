@@ -14,7 +14,7 @@ trait KickChatMemberMethodTrait implements KickChatMemberMethod<TelegramResult<O
 	@Override
 	@NamedVariant
 	TelegramResult<Object> kickChatMember(@NamedDelegate KickChatMemberMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 

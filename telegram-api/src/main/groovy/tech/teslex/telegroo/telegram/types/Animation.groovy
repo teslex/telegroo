@@ -47,7 +47,7 @@ class Animation {
 	String fileName
 
 	/**
-	 * Optional. MIME type of the file as defined by sender
+	 * Optional. MIME value of the file as defined by sender
 	 */
 	@JsonProperty(value = 'mime_type', required = false)
 	String mimeType

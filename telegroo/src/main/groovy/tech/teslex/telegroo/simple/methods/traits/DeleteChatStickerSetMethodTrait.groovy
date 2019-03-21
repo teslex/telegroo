@@ -14,7 +14,7 @@ trait DeleteChatStickerSetMethodTrait implements DeleteChatStickerSetMethod<Tele
 	@Override
 	@NamedVariant
 	TelegramResult<Object> deleteChatStickerSet(@NamedDelegate DeleteChatStickerSetMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 

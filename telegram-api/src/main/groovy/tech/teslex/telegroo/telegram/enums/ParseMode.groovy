@@ -8,17 +8,17 @@ enum ParseMode {
 	MARKDOWN('Markdown'),
 	HTML('HTML')
 
-	private String mode
+	private String value
 
-	String getMode() {
-		return this.mode
+	String getValue() {
+		return this.value
 	}
 
-	private ParseMode(String mode) {
-		this.mode = mode
+	private ParseMode(String value) {
+		this.value = value
 	}
 
 	static ParseMode fromString(String string) {
-		values().find { it.mode == string }
+		values().find { it.value == string }
 	}
 }

@@ -14,7 +14,7 @@ trait SetChatDescriptionMethodTrait implements SetChatDescriptionMethod<Telegram
 	@Override
 	@NamedVariant
 	TelegramResult<Object> setChatDescription(@NamedDelegate SetChatDescriptionMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 

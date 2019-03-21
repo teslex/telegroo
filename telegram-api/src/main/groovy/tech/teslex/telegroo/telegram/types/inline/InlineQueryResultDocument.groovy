@@ -49,7 +49,7 @@ class InlineQueryResultDocument extends InlineQueryResult {
 	String documentUrl
 
 	/**
-	 * Mime type of the content of the file, either “application/pdf” or “application/zip”
+	 * Mime value of the content of the file, either “application/pdf” or “application/zip”
 	 */
 	@JsonProperty(value = 'mime_type')
 	String mimeType

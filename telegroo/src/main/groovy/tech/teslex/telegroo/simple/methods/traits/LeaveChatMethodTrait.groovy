@@ -14,7 +14,7 @@ trait LeaveChatMethodTrait implements LeaveChatMethod<TelegramResult<Object>>, C
 	@Override
 	@NamedVariant
 	TelegramResult<Object> leaveChat(@NamedDelegate LeaveChatMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 

@@ -2,6 +2,9 @@ package tech.teslex.telegroo.simple.methods
 
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.simple.methods.traits.*
+import tech.teslex.telegroo.simple.methods.traits.games.GetGameHighScoresMethodTrait
+import tech.teslex.telegroo.simple.methods.traits.games.SendGameMethodTrait
+import tech.teslex.telegroo.simple.methods.traits.games.SetGameScoreMethodTrait
 import tech.teslex.telegroo.simple.methods.traits.payments.AnswerPreCheckoutQueryMethodTrait
 import tech.teslex.telegroo.simple.methods.traits.payments.AnswerShippingQueryMethodTrait
 import tech.teslex.telegroo.simple.methods.traits.payments.SendInvoiceMethodTrait
@@ -74,4 +77,8 @@ trait MethodsTraits implements
 
 		SendInvoiceMethodTrait,
 		AnswerShippingQueryMethodTrait,
-		AnswerPreCheckoutQueryMethodTrait {}
+		AnswerPreCheckoutQueryMethodTrait,
+
+		SendGameMethodTrait,
+		SetGameScoreMethodTrait,
+		GetGameHighScoresMethodTrait {}

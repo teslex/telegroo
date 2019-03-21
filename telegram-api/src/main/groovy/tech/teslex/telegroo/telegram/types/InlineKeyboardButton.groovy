@@ -49,7 +49,7 @@ class InlineKeyboardButton {
 	/**
 	 * Optional. Description of the game that will be launched when the user presses the button.
 	 *
-	 * NOTE: This type of button must always be the first button in the first row.
+	 * NOTE: This value of button must always be the first button in the first row.
 	 */
 	@JsonProperty(value = 'callback_game', required = false)
 	CallbackGame callbackGame
@@ -57,7 +57,7 @@ class InlineKeyboardButton {
 	/**
 	 * Optional. Specify True, to send a Pay button.
 	 *
-	 * NOTE: This type of button must always be the first button in the first row.
+	 * NOTE: This value of button must always be the first button in the first row.
 	 */
 	Boolean pay
 }

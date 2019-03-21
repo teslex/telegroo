@@ -15,7 +15,7 @@ trait GetChatMethodTrait implements GetChatMethod<TelegramResult<Chat>>, Context
 	@Override
 	@NamedVariant
 	TelegramResult<Chat> getChat(@NamedDelegate GetChatMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Chat)
 

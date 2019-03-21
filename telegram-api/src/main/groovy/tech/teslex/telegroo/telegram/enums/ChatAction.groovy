@@ -16,17 +16,17 @@ enum ChatAction {
 	RECORD_VIDEO_NOTE('record_video_note'),
 	UPLOAD_VIDEO_NOTE('upload_video_note')
 
-	private String action
+	private String value
 
-	String getAction() {
-		this.action
+	String getValue() {
+		this.value
 	}
 
-	private ChatAction(String action) {
-		this.action = action
+	private ChatAction(String value) {
+		this.value = value
 	}
 
 	static ChatAction fromString(String string) {
-		values().find { it.action == string }
+		values().find { it.value == string }
 	}
 }

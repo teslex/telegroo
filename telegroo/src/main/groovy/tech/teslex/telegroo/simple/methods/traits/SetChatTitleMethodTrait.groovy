@@ -14,7 +14,7 @@ trait SetChatTitleMethodTrait implements SetChatTitleMethod<TelegramResult<Objec
 	@Override
 	@NamedVariant
 	TelegramResult<Object> setChatTitle(@NamedDelegate SetChatTitleMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 

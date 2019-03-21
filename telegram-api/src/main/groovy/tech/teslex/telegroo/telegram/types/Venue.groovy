@@ -32,7 +32,7 @@ class Venue {
 	String foursquareId
 
 	/**
-	 * Optional. Foursquare type of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+	 * Optional. Foursquare value of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
 	 */
 	@JsonProperty(value = 'foursquare_type', required = false)
 	String foursquareType

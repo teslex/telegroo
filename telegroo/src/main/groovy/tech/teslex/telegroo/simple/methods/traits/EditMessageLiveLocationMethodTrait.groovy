@@ -15,8 +15,8 @@ trait EditMessageLiveLocationMethodTrait implements EditMessageLiveLocationMetho
 	@Override
 	@NamedVariant
 	TelegramResult<Message> editMessageLiveLocation(@NamedDelegate EditMessageLiveLocationMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
-		data.messageId = data.messageId ?: lastUpdate[lastUpdate.updateType.type]['messageId'] as Integer
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
+		data.messageId = data.messageId ?: lastUpdate[lastUpdate.updateType.value]['messageId'] as Integer
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 

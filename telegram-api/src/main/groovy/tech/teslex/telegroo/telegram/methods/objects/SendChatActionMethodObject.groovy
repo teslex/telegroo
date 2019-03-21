@@ -39,7 +39,7 @@ class SendChatActionMethodObject implements MethodObject {
 
 	@JsonIgnore
 	void setAction(ChatAction action) {
-		this.action = action.action
+		this.action = action.value
 	}
 
 	@Override

@@ -15,7 +15,7 @@ trait SendStickerMethodTrait implements SendStickerMethod<TelegramResult<Message
 	@Override
 	@NamedVariant
 	TelegramResult<Message> sendSticker(@NamedDelegate SendStickerMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.type]['chat']['id']
+		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 
