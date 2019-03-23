@@ -1,7 +1,7 @@
 image: gradle:latest
 
 stages:
-  - test  
+  - test
   - build
   - publish
 
@@ -12,16 +12,6 @@ test:
     - mkdir -p telegroo/src/test/resources/
     - echo "token=${TEST_BOT_TOKEN}" >> telegroo/src/test/resources/test.properties
     - gradle test
-
-
-build:
-  stage: build
-  script: gradle clean build
-  artifacts:
-    paths:
-      - build/libs/telegroo*.jar
-  only:
-    - master
 
 
 publish-teslex:
