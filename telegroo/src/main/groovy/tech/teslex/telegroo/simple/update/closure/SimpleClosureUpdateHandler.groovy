@@ -1,8 +1,8 @@
 package tech.teslex.telegroo.simple.update.closure
 
 import groovy.transform.CompileStatic
+import tech.teslex.telegroo.api.context.MethodsContext
 import tech.teslex.telegroo.api.update.UpdateHandler
-import tech.teslex.telegroo.simple.context.MethodsContext
 import tech.teslex.telegroo.telegram.enums.UpdateType
 
 @CompileStatic

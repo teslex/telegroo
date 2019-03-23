@@ -1,13 +1,14 @@
 package tech.teslex.telegroo.api;
 
 import groovy.lang.Closure;
+import tech.teslex.telegroo.api.context.MethodsContext;
 import tech.teslex.telegroo.api.update.CommandUpdateHandler;
 import tech.teslex.telegroo.api.update.MessageUpdateHandler;
 import tech.teslex.telegroo.api.update.UpdateHandler;
 import tech.teslex.telegroo.telegram.enums.UpdateType;
 import tech.teslex.telegroo.telegram.types.update.Update;
 
-public interface Telegroo {
+public interface Telegroo<T> extends MethodsContext<T> {
 
 	void start();
 

@@ -4,14 +4,17 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
+import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.Api
 import tech.teslex.telegroo.api.context.Context
+import tech.teslex.telegroo.api.context.MethodsContext
+import tech.teslex.telegroo.simple.methods.MethodsTraits
 import tech.teslex.telegroo.telegram.types.update.Update
 
 import java.util.regex.Matcher
 
 @CompileStatic
-class SimpleContext implements MethodsContext {
+class SimpleContext implements MethodsContext<Response>, ContextWithObjectMapper, MethodsTraits {
 
 	private Api api
 

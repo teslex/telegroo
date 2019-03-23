@@ -3,11 +3,11 @@
 	<h1>telegroo</h1>
 </p>
 
-**Telegram bot framework for [Groovy](http://groovy-lang.org)**
+**Telegram Bot framework for Groovy [Groovy](http://groovy-lang.org)**
 
 > Version: **[1.0-{timestamp}-SNAPSHOT](https://gitlab.com/teslex/repo/tree/master/snapshots/tech/teslex/telegroo/telegroo)**
 
-- [Telegroo Docs](https://gitlab.com/teslex/telegroo/telegroo/wikis)
+- [Telegroo Docs](https://teslex.gitlab.io/telegroo)
 - [Telegram Bot API](https://core.telegram.org/bots/api)
 - Examples:
 	* [Telegroo & Micronaut](https://gitlab.com/teslex/telegroo/micronaut-example)

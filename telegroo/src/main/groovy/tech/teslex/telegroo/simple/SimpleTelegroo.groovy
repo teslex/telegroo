@@ -4,12 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
+import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.Telegroo
+import tech.teslex.telegroo.api.context.MethodsContext
 import tech.teslex.telegroo.api.update.CommandUpdateHandler
 import tech.teslex.telegroo.api.update.MessageUpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandlersSolver
-import tech.teslex.telegroo.simple.context.MethodsContext
 import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.simple.update.SimpleUpdateHandlersSolver
 import tech.teslex.telegroo.simple.update.closure.SimpleClosureCommandUpdateHandler
@@ -19,7 +20,7 @@ import tech.teslex.telegroo.telegram.enums.UpdateType
 import tech.teslex.telegroo.telegram.types.update.Update
 
 @CompileStatic
-class SimpleTelegroo extends SimpleContext implements Telegroo, MethodsContext {
+class SimpleTelegroo extends SimpleContext implements Telegroo<Response> {
 
 	String token
 

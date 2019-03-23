@@ -1,8 +1,16 @@
 image: gradle:latest
 
 stages:
+  - test
   - build
   - publish
+
+
+test:
+  stage: test
+  script:
+    - echo "token=${TEST_BOT_TOKEN}" >> telegroo/src/test/resources/test.properties
+    - gradle test
 
 
 build:

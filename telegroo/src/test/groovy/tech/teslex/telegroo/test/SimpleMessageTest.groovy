@@ -1,15 +1,20 @@
 package tech.teslex.telegroo.test
 
+
 import spock.lang.Shared
+import spock.lang.Specification
 import tech.teslex.telegroo.simple.SimpleTelegroo
 import tech.teslex.telegroo.telegram.types.InlineKeyboardButton
 import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
 import tech.teslex.telegroo.telegram.types.InputFile
 
-class SimpleMessageTest /* extends Specification */ {
+class SimpleMessageTest extends Specification {
 
 	@Shared
-	def token = new File('src/test/resources/token.txt').text
+	def props = new Properties().tap { load(new File('src/test/resources/test.properties').newInputStream()) }
+
+	@Shared
+	String token = props.token
 
 	@Shared
 	def telegroo = new SimpleTelegroo(token)
