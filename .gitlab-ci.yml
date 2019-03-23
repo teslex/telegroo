@@ -19,6 +19,11 @@ publish-teslex:
   script:
     - gradle clean publish
     - git clone https://gitlab.com/teslex/repo
+
+    - cd repo/snapshots/tech/teslex/telegroo/telegroo && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf ; cd -
+    - cd repo/snapshots/tech/teslex/telegroo/telegroo-api && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf ; cd -
+    - cd repo/snapshots/tech/teslex/telegroo/telegram-api && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf ; cd -
+
     - cp -r telegram-api/build/repo/* repo
     - cp -r telegroo-api/build/repo/* repo
     - cp -r telegroo/build/repo/* repo
