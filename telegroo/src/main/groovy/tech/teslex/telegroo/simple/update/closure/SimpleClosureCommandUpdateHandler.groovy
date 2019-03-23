@@ -2,13 +2,13 @@ package tech.teslex.telegroo.simple.update.closure
 
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.context.MethodsContext
-import tech.teslex.telegroo.api.update.CommandUpdateHandler
+import tech.teslex.telegroo.simple.update.SimpleCommandUpdateHandler
 import tech.teslex.telegroo.telegram.enums.UpdateType
 
 import java.util.regex.Pattern
 
 @CompileStatic
-class SimpleClosureCommandUpdateHandler implements CommandUpdateHandler<MethodsContext> {
+class SimpleClosureCommandUpdateHandler implements SimpleCommandUpdateHandler {
 
 	UpdateType updateType
 

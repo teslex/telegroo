@@ -10,16 +10,16 @@ import tech.teslex.telegroo.telegram.methods.objects.games.SendGameMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SendGameMethodTrait implements SendGameMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+trait SendGameMethodTrait implements SendGameMethod<TelegramResult<Object>>, ContextWithObjectMapper {
 
 	@Override
-	TelegramResult<Message> sendGame(Map data) {
+	TelegramResult<Object> sendGame(Map data) {
 		sendGame(data as SendGameMethodObject)
 	}
 
 	@Override
 	@NamedVariant
-	TelegramResult<Message> sendGame(@NamedDelegate SendGameMethodObject data) {
+	TelegramResult<Object> sendGame(@NamedDelegate SendGameMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
@@ -28,7 +28,7 @@ trait SendGameMethodTrait implements SendGameMethod<TelegramResult<Message>>, Co
 	}
 
 	@Override
-	TelegramResult<Message> sendGame(@DelegatesTo(SendGameMethodObject) Closure closure) {
+	TelegramResult<Object> sendGame(@DelegatesTo(SendGameMethodObject) Closure closure) {
 		def builder = SendGameMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()

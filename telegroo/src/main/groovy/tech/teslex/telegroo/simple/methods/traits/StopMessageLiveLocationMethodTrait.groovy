@@ -10,11 +10,11 @@ import tech.teslex.telegroo.telegram.methods.objects.StopMessageLiveLocationMeth
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait StopMessageLiveLocationMethodTrait implements StopMessageLiveLocationMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+trait StopMessageLiveLocationMethodTrait implements StopMessageLiveLocationMethod<TelegramResult<Object>>, ContextWithObjectMapper {
 
 	@Override
 	@NamedVariant
-	TelegramResult<Message> stopMessageLiveLocation(@NamedDelegate StopMessageLiveLocationMethodObject data) {
+	TelegramResult<Object> stopMessageLiveLocation(@NamedDelegate StopMessageLiveLocationMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
@@ -23,12 +23,12 @@ trait StopMessageLiveLocationMethodTrait implements StopMessageLiveLocationMetho
 	}
 
 	@Override
-	TelegramResult<Message> stopMessageLiveLocation(Map data) {
+	TelegramResult<Object> stopMessageLiveLocation(Map data) {
 		stopMessageLiveLocation(data as StopMessageLiveLocationMethodObject)
 	}
 
 	@Override
-	TelegramResult<Message> stopMessageLiveLocation(@DelegatesTo(StopMessageLiveLocationMethodObject) Closure closure) {
+	TelegramResult<Object> stopMessageLiveLocation(@DelegatesTo(StopMessageLiveLocationMethodObject) Closure closure) {
 		def builder = StopMessageLiveLocationMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()

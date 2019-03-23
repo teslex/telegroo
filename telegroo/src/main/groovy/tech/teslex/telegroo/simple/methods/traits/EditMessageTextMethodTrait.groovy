@@ -10,11 +10,11 @@ import tech.teslex.telegroo.telegram.methods.objects.EditMessageTextMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait EditMessageTextMethodTrait implements EditMessageTextMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+trait EditMessageTextMethodTrait implements EditMessageTextMethod<TelegramResult<Object>>, ContextWithObjectMapper {
 
 	@Override
 	@NamedVariant
-	TelegramResult<Message> editMessageText(@NamedDelegate EditMessageTextMethodObject data) {
+	TelegramResult<Object> editMessageText(@NamedDelegate EditMessageTextMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 		data.messageId = data.messageId ?: lastUpdate[lastUpdate.updateType.value]['messageId'] as Integer
 
@@ -24,12 +24,12 @@ trait EditMessageTextMethodTrait implements EditMessageTextMethod<TelegramResult
 	}
 
 	@Override
-	TelegramResult<Message> editMessageText(Map data) {
+	TelegramResult<Object> editMessageText(Map data) {
 		editMessageText(data as EditMessageTextMethodObject)
 	}
 
 	@Override
-	TelegramResult<Message> editMessageText(@DelegatesTo(EditMessageTextMethodObject) Closure closure) {
+	TelegramResult<Object> editMessageText(@DelegatesTo(EditMessageTextMethodObject) Closure closure) {
 		def builder = EditMessageTextMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()

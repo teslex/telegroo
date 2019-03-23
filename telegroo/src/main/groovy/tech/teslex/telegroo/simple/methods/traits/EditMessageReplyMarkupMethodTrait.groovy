@@ -10,11 +10,11 @@ import tech.teslex.telegroo.telegram.methods.objects.EditMessageReplyMarkupMetho
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait EditMessageReplyMarkupMethodTrait implements EditMessageReplyMarkupMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+trait EditMessageReplyMarkupMethodTrait implements EditMessageReplyMarkupMethod<TelegramResult<Object>>, ContextWithObjectMapper {
 
 	@Override
 	@NamedVariant
-	TelegramResult<Message> editMessageReplyMarkup(@NamedDelegate EditMessageReplyMarkupMethodObject data) {
+	TelegramResult<Object> editMessageReplyMarkup(@NamedDelegate EditMessageReplyMarkupMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 		data.messageId = data.messageId ?: lastUpdate[lastUpdate.updateType.value]['messageId'] as Integer
 
@@ -24,12 +24,12 @@ trait EditMessageReplyMarkupMethodTrait implements EditMessageReplyMarkupMethod<
 	}
 
 	@Override
-	TelegramResult<Message> editMessageReplyMarkup(Map data) {
+	TelegramResult<Object> editMessageReplyMarkup(Map data) {
 		editMessageReplyMarkup(data as EditMessageReplyMarkupMethodObject)
 	}
 
 	@Override
-	TelegramResult<Message> editMessageReplyMarkup(@DelegatesTo(EditMessageReplyMarkupMethodObject) Closure closure) {
+	TelegramResult<Object> editMessageReplyMarkup(@DelegatesTo(EditMessageReplyMarkupMethodObject) Closure closure) {
 		def builder = EditMessageReplyMarkupMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()

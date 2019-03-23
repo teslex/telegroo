@@ -10,11 +10,11 @@ import tech.teslex.telegroo.telegram.methods.objects.EditMessageMediaMethodObjec
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait EditMessageMediaMethodTrait implements EditMessageMediaMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+trait EditMessageMediaMethodTrait implements EditMessageMediaMethod<TelegramResult<Object>>, ContextWithObjectMapper {
 
 	@Override
 	@NamedVariant
-	TelegramResult<Message> editMessageMedia(@NamedDelegate EditMessageMediaMethodObject data) {
+	TelegramResult<Object> editMessageMedia(@NamedDelegate EditMessageMediaMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 		data.messageId = data.messageId ?: lastUpdate[lastUpdate.updateType.value]['messageId'] as Integer
 
@@ -24,12 +24,12 @@ trait EditMessageMediaMethodTrait implements EditMessageMediaMethod<TelegramResu
 	}
 
 	@Override
-	TelegramResult<Message> editMessageMedia(Map data) {
+	TelegramResult<Object> editMessageMedia(Map data) {
 		editMessageMedia(data as EditMessageMediaMethodObject)
 	}
 
 	@Override
-	TelegramResult<Message> editMessageMedia(@DelegatesTo(EditMessageMediaMethodObject) Closure closure) {
+	TelegramResult<Object> editMessageMedia(@DelegatesTo(EditMessageMediaMethodObject) Closure closure) {
 		def builder = EditMessageMediaMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()

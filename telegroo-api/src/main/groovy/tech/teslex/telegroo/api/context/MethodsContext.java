@@ -1,23 +1,25 @@
-package tech.teslex.telegroo.api.context
+package tech.teslex.telegroo.api.context;
 
-import tech.teslex.telegroo.api.methods.ReplyMethod
-import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.interfaces.*
-import tech.teslex.telegroo.telegram.methods.interfaces.games.GetGameHighScoresMethod
-import tech.teslex.telegroo.telegram.methods.interfaces.games.SendGameMethod
-import tech.teslex.telegroo.telegram.methods.interfaces.games.SetGameScoreMethod
-import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerPreCheckoutQueryMethod
-import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerShippingQueryMethod
-import tech.teslex.telegroo.telegram.methods.interfaces.payments.SendInvoiceMethod
-import tech.teslex.telegroo.telegram.methods.interfaces.webhook.DeleteWebhookMethod
-import tech.teslex.telegroo.telegram.methods.interfaces.webhook.GetWebhookInfoMethod
-import tech.teslex.telegroo.telegram.methods.interfaces.webhook.SetWebhookMethod
-import tech.teslex.telegroo.telegram.types.*
-import tech.teslex.telegroo.telegram.types.games.GameHighScore
-import tech.teslex.telegroo.telegram.types.stickers.StickerSet
-import tech.teslex.telegroo.telegram.types.update.Update
+import tech.teslex.telegroo.api.methods.ReplyMethod;
+import tech.teslex.telegroo.telegram.TelegramResult;
+import tech.teslex.telegroo.telegram.methods.interfaces.*;
+import tech.teslex.telegroo.telegram.methods.interfaces.games.GetGameHighScoresMethod;
+import tech.teslex.telegroo.telegram.methods.interfaces.games.SendGameMethod;
+import tech.teslex.telegroo.telegram.methods.interfaces.games.SetGameScoreMethod;
+import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerPreCheckoutQueryMethod;
+import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerShippingQueryMethod;
+import tech.teslex.telegroo.telegram.methods.interfaces.payments.SendInvoiceMethod;
+import tech.teslex.telegroo.telegram.methods.interfaces.webhook.DeleteWebhookMethod;
+import tech.teslex.telegroo.telegram.methods.interfaces.webhook.GetWebhookInfoMethod;
+import tech.teslex.telegroo.telegram.methods.interfaces.webhook.SetWebhookMethod;
+import tech.teslex.telegroo.telegram.types.*;
+import tech.teslex.telegroo.telegram.types.games.GameHighScore;
+import tech.teslex.telegroo.telegram.types.stickers.StickerSet;
+import tech.teslex.telegroo.telegram.types.update.Update;
 
-interface MethodsContext<T> extends Context<T>,
+import java.util.List;
+
+public interface MethodsContext<T> extends Context<T>,
 
 		GetUpdatesMethod<TelegramResult<List<Update>>>,
 
@@ -67,14 +69,14 @@ interface MethodsContext<T> extends Context<T>,
 		SetChatStickerSetMethod<TelegramResult<Object>>,
 		DeleteChatStickerSetMethod<TelegramResult<Object>>,
 
-		EditMessageTextMethod<TelegramResult<Message>>,
-		EditMessageCaptionMethod<TelegramResult<Message>>,
-		EditMessageMediaMethod<TelegramResult<Message>>,
-		EditMessageReplyMarkupMethod<TelegramResult<Message>>,
+		EditMessageTextMethod<TelegramResult<Object>>, // True or Message
+		EditMessageCaptionMethod<TelegramResult<Object>>, // True or Message
+		EditMessageMediaMethod<TelegramResult<Message>>, // True or Message
+		EditMessageReplyMarkupMethod<TelegramResult<Message>>, // True or Message
 		DeleteMessageMethod<TelegramResult<Object>>,
 
-		EditMessageLiveLocationMethod<TelegramResult<Message>>,
-		StopMessageLiveLocationMethod<TelegramResult<Message>>,
+		EditMessageLiveLocationMethod<TelegramResult<Object>>, // True or Message
+		StopMessageLiveLocationMethod<TelegramResult<Object>>, // True or Message
 
 		SendStickerMethod<TelegramResult<Message>>,
 		GetStickerSetMethod<TelegramResult<StickerSet>>,
@@ -89,7 +91,7 @@ interface MethodsContext<T> extends Context<T>,
 		AnswerShippingQueryMethod<TelegramResult<Object>>,
 		AnswerPreCheckoutQueryMethod<TelegramResult<Object>>,
 
-		SendGameMethod<TelegramResult<Message>>,
+		SendGameMethod<TelegramResult<Object>>, // True or Message
 		SetGameScoreMethod<TelegramResult<Object>>, // True or Message
 		GetGameHighScoresMethod<TelegramResult<List<GameHighScore>>> {
 }

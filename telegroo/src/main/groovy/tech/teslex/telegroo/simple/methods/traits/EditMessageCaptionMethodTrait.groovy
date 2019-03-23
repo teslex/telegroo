@@ -10,11 +10,11 @@ import tech.teslex.telegroo.telegram.methods.objects.EditMessageCaptionMethodObj
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait EditMessageCaptionMethodTrait implements EditMessageCaptionMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+trait EditMessageCaptionMethodTrait implements EditMessageCaptionMethod<TelegramResult<Object>>, ContextWithObjectMapper {
 
 	@Override
 	@NamedVariant
-	TelegramResult<Message> editMessageCaption(@NamedDelegate EditMessageCaptionMethodObject data) {
+	TelegramResult<Object> editMessageCaption(@NamedDelegate EditMessageCaptionMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 		data.messageId = data.messageId ?: lastUpdate[lastUpdate.updateType.value]['messageId'] as Integer
 
@@ -24,12 +24,12 @@ trait EditMessageCaptionMethodTrait implements EditMessageCaptionMethod<Telegram
 	}
 
 	@Override
-	TelegramResult<Message> editMessageCaption(Map data) {
+	TelegramResult<Object> editMessageCaption(Map data) {
 		editMessageCaption(data as EditMessageCaptionMethodObject)
 	}
 
 	@Override
-	TelegramResult<Message> editMessageCaption(@DelegatesTo(EditMessageCaptionMethodObject) Closure closure) {
+	TelegramResult<Object> editMessageCaption(@DelegatesTo(EditMessageCaptionMethodObject) Closure closure) {
 		def builder = EditMessageCaptionMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()

@@ -10,11 +10,11 @@ import tech.teslex.telegroo.telegram.methods.objects.EditMessageLiveLocationMeth
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait EditMessageLiveLocationMethodTrait implements EditMessageLiveLocationMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+trait EditMessageLiveLocationMethodTrait implements EditMessageLiveLocationMethod<TelegramResult<Object>>, ContextWithObjectMapper {
 
 	@Override
 	@NamedVariant
-	TelegramResult<Message> editMessageLiveLocation(@NamedDelegate EditMessageLiveLocationMethodObject data) {
+	TelegramResult<Object> editMessageLiveLocation(@NamedDelegate EditMessageLiveLocationMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
 		data.messageId = data.messageId ?: lastUpdate[lastUpdate.updateType.value]['messageId'] as Integer
 
@@ -24,12 +24,12 @@ trait EditMessageLiveLocationMethodTrait implements EditMessageLiveLocationMetho
 	}
 
 	@Override
-	TelegramResult<Message> editMessageLiveLocation(Map data) {
+	TelegramResult<Object> editMessageLiveLocation(Map data) {
 		editMessageLiveLocation(data as EditMessageLiveLocationMethodObject)
 	}
 
 	@Override
-	TelegramResult<Message> editMessageLiveLocation(@DelegatesTo(EditMessageLiveLocationMethodObject) Closure closure) {
+	TelegramResult<Object> editMessageLiveLocation(@DelegatesTo(EditMessageLiveLocationMethodObject) Closure closure) {
 		def builder = EditMessageLiveLocationMethodObject.newInstance()
 		closure.delegate = builder
 		closure.call()
