@@ -2,6 +2,7 @@ package tech.teslex.telegroo.simple.update.closure
 
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.context.MethodsContext
+import tech.teslex.telegroo.simple.context.SimpleMethodsContext
 import tech.teslex.telegroo.simple.update.SimpleMessageUpdateHandler
 import tech.teslex.telegroo.telegram.enums.UpdateType
 
@@ -29,7 +30,7 @@ class SimpleClosureMessageUpdateHandler implements SimpleMessageUpdateHandler {
 	}
 
 	@Override
-	void handle(MethodsContext context) {
+	void handle(SimpleMethodsContext context) {
 		closure.delegate = context
 		closure()
 	}
