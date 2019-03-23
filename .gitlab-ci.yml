@@ -1,7 +1,7 @@
 image: gradle:latest
 
 stages:
-#  - test
+  - test  
   - build
   - publish
 
