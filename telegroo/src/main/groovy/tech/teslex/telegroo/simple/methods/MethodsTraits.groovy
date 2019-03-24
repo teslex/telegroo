@@ -72,6 +72,8 @@ trait MethodsTraits implements
 		CreateNewStickerSetMethodTrait,
 		AddStickerToSetMethodTrait,
 		SetStickerPositionInSetMethodTrait,
+		DeleteStickerFromSetMethodTrait,
+		UploadStickerFileMethodTrait,
 
 		AnswerInlineQueryMethodTrait,
 

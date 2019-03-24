@@ -83,6 +83,8 @@ public interface MethodsContext<T> extends Context<T>,
 		CreateNewStickerSetMethod<TelegramResult<Object>>,
 		AddStickerToSetMethod<TelegramResult<Object>>,
 		SetStickerPositionInSetMethod<TelegramResult<Object>>,
+		DeleteStickerFromSetMethod<TelegramResult<Object>>,
+		UploadStickerFileMethod<TelegramResult<FileObject>>,
 
 		AnswerCallbackQueryMethod<TelegramResult<Object>>,
 		AnswerInlineQueryMethod<TelegramResult<Object>>,
