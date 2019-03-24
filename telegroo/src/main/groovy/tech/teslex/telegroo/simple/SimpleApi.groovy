@@ -17,7 +17,7 @@ import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
 @CompileStatic
 class SimpleApi implements Api<Response> {
 
-	private String token
+	String token
 
 	String proto = 'https'
 	String url = 'api.telegram.org'

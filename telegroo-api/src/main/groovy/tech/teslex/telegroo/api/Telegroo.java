@@ -18,6 +18,9 @@ public interface Telegroo<T> extends MethodsContext<T> {
 
 	void solveUpdate(Update update);
 
+	String getDefaultCommandSymbol();
+
+
 	void on(UpdateType type, Closure handler);
 
 	void onUpdate(Closure handler);
@@ -25,6 +28,9 @@ public interface Telegroo<T> extends MethodsContext<T> {
 	void onCommand(String command, Closure handler);
 
 	void onMessage(String message, Closure handler);
+
+	void onMessage(Closure handler);
+
 
 	void onUpdateHandler(UpdateHandler handler);
 

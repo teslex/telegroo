@@ -14,11 +14,6 @@ import tech.teslex.telegroo.telegram.types.Message
 trait SendPhotoMethodTrait implements SendPhotoMethod<TelegramResult<Message>>, ContextWithObjectMapper {
 
 	@Override
-	TelegramResult<Message> sendPhoto(InputFile photo) {
-		sendPhoto([photo: photo] as SendPhotoMethodObject)
-	}
-
-	@Override
 	@NamedVariant
 	TelegramResult<Message> sendPhoto(@NamedDelegate SendPhotoMethodObject data) {
 		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']

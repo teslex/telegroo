@@ -32,6 +32,8 @@ class SimpleTelegroo extends SimpleContext implements Telegroo<Response> {
 
 	Boolean active = false
 
+	String defaultCommandSymbol = '/'
+
 	SimpleTelegroo(String token) {
 		this.objectMapper = new ObjectMapper()
 		this.objectMapper.registerModule(new Jdk8Module())
@@ -92,6 +94,11 @@ class SimpleTelegroo extends SimpleContext implements Telegroo<Response> {
 	@Override
 	void onMessage(String message, @DelegatesTo(MethodsContext) Closure handler) {
 		handlers << new SimpleClosureMessageUpdateHandler(message, handler)
+	}
+
+	@Override
+	void onMessage(@DelegatesTo(MethodsContext) Closure handler) {
+		handlers << new SimpleClosureUpdateHandler(UpdateType.MESSAGE, handler)
 	}
 
 	@Override

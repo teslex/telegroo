@@ -2,10 +2,12 @@ package tech.teslex.telegroo.simple.methods.traits
 
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Api
+import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.api.context.MethodsContext
-import tech.teslex.telegroo.api.methods.ReplyMethod
+import tech.teslex.telegroo.api.methods.reply.ReplyMethod
+import tech.teslex.telegroo.simple.SimpleApi
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
-import tech.teslex.telegroo.simple.context.SimpleContext
+import tech.teslex.telegroo.simple.context.SimpleMethodsContext
 
 @CompileStatic
 trait ReplyTrait implements ReplyMethod, ContextWithObjectMapper {
@@ -13,21 +15,19 @@ trait ReplyTrait implements ReplyMethod, ContextWithObjectMapper {
 	/**
 	 * example: reply(12343) { sendMessage(text: 'Nice') }*/
 	@Override
-	void reply(replyTo, @DelegatesTo(MethodsContext) Closure closure) {
-		def nextApi = api.with { // fixme
-			clone()
-		} as Api
-
+	void reply(replyTo, @DelegatesTo(SimpleMethodsContext) Closure closure) {
+		Api nextApi = new SimpleApi((api as SimpleApi).token, objectMapper)
 		nextApi.defaultParams.put('reply_to_message_id', replyTo)
+		Context nextContext = createNewContext(nextApi, lastUpdate, null)
 
-		closure.delegate = createNewContext(nextApi, lastUpdate, matcher ?: null)
-		closure.call()
+		closure.delegate = nextContext
+		closure()
 	}
 
 	/**
 	 * example: reply { sendMessage(text: 'Nice') }*/
 	@Override
-	void reply(@DelegatesTo(MethodsContext) Closure closure) {
+	void reply(@DelegatesTo(SimpleMethodsContext) Closure closure) {
 		reply(lastUpdate[lastUpdate.updateType.value]['messageId'], closure)
 	}
 
@@ -36,13 +36,11 @@ trait ReplyTrait implements ReplyMethod, ContextWithObjectMapper {
 	 * example: reply(34225).sendMessage(text: 'Nice')
 	 */
 	@Override
-	SimpleContext reply(replyTo = lastUpdate[lastUpdate.updateType.value]['messageId']) {
-		def nextApi = api.with { // fixme
-			clone()
-		} as Api
+	MethodsContext reply(replyTo = lastUpdate[lastUpdate.updateType.value]['messageId']) {
+		Api nextApi = new SimpleApi((api as SimpleApi).token, objectMapper)
 
 		nextApi.defaultParams.put('reply_to_message_id', replyTo)
 
-		createNewContext(nextApi, lastUpdate, matcher ?: null) as SimpleContext
+		createNewContext(nextApi, lastUpdate, null) as MethodsContext
 	}
 }

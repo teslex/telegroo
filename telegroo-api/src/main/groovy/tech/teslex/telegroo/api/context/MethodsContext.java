@@ -1,6 +1,6 @@
 package tech.teslex.telegroo.api.context;
 
-import tech.teslex.telegroo.api.methods.ReplyMethod;
+import tech.teslex.telegroo.api.methods.reply.ReplyMethod;
 import tech.teslex.telegroo.telegram.TelegramResult;
 import tech.teslex.telegroo.telegram.methods.interfaces.*;
 import tech.teslex.telegroo.telegram.methods.interfaces.games.GetGameHighScoresMethod;

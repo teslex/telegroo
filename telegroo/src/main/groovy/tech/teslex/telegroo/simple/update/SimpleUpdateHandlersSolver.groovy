@@ -29,6 +29,15 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 		}
 
 		if (update.updateType == UpdateType.MESSAGE) {
+
+			// handle all message handlers
+			handlers.findAll {
+				(!(it instanceof CommandUpdateHandler) && !(it instanceof MessageUpdateHandler) && it.type == UpdateType.MESSAGE)
+			}.each {
+				it.handle(new SimpleContext(telegroo.api, update, telegroo.objectMapper))
+			}
+
+			// find with patterns
 			def handler = handlers.find {
 				if (it instanceof CommandUpdateHandler) {
 					((it as CommandUpdateHandler).useCommandSymbol() ? Pattern.compile("${(it as CommandUpdateHandler).commandSymbol}${it.pattern}") : it.pattern).matcher(update.message.text)
