@@ -1,25 +1,25 @@
-package tech.teslex.telegroo.api.context;
+package tech.teslex.telegroo.api.context
 
-import tech.teslex.telegroo.api.methods.reply.ReplyMethod;
-import tech.teslex.telegroo.telegram.TelegramResult;
-import tech.teslex.telegroo.telegram.methods.interfaces.*;
-import tech.teslex.telegroo.telegram.methods.interfaces.games.GetGameHighScoresMethod;
-import tech.teslex.telegroo.telegram.methods.interfaces.games.SendGameMethod;
-import tech.teslex.telegroo.telegram.methods.interfaces.games.SetGameScoreMethod;
-import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerPreCheckoutQueryMethod;
-import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerShippingQueryMethod;
-import tech.teslex.telegroo.telegram.methods.interfaces.payments.SendInvoiceMethod;
-import tech.teslex.telegroo.telegram.methods.interfaces.webhook.DeleteWebhookMethod;
-import tech.teslex.telegroo.telegram.methods.interfaces.webhook.GetWebhookInfoMethod;
-import tech.teslex.telegroo.telegram.methods.interfaces.webhook.SetWebhookMethod;
-import tech.teslex.telegroo.telegram.types.*;
-import tech.teslex.telegroo.telegram.types.games.GameHighScore;
-import tech.teslex.telegroo.telegram.types.stickers.StickerSet;
-import tech.teslex.telegroo.telegram.types.update.Update;
+import groovy.transform.CompileStatic
+import tech.teslex.telegroo.api.methods.reply.ReplyMethod
+import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.*
+import tech.teslex.telegroo.telegram.methods.interfaces.games.GetGameHighScoresMethod
+import tech.teslex.telegroo.telegram.methods.interfaces.games.SendGameMethod
+import tech.teslex.telegroo.telegram.methods.interfaces.games.SetGameScoreMethod
+import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerPreCheckoutQueryMethod
+import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerShippingQueryMethod
+import tech.teslex.telegroo.telegram.methods.interfaces.payments.SendInvoiceMethod
+import tech.teslex.telegroo.telegram.methods.interfaces.webhook.DeleteWebhookMethod
+import tech.teslex.telegroo.telegram.methods.interfaces.webhook.GetWebhookInfoMethod
+import tech.teslex.telegroo.telegram.methods.interfaces.webhook.SetWebhookMethod
+import tech.teslex.telegroo.telegram.types.*
+import tech.teslex.telegroo.telegram.types.games.GameHighScore
+import tech.teslex.telegroo.telegram.types.stickers.StickerSet
+import tech.teslex.telegroo.telegram.types.update.Update
 
-import java.util.List;
-
-public interface MethodsContext<T> extends Context<T>,
+@CompileStatic
+interface MethodsContext<T> extends Context<T>,
 
 		GetUpdatesMethod<TelegramResult<List<Update>>>,
 

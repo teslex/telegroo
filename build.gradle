@@ -1,9 +1,9 @@
 ext {
-	telegrooVersion = '1.0'
+	telegrooVersion = '1.0-3.0.0-alpha-4'
 	isSnapshot = true
 	snapshotId = date
 
-	groovyVersion = '2.5.6'
+	groovyVersion = '3.0.0-alpha-4'
 	jacksonVersion = '2.9.6'
 
 	apacheHttpCoreVersion = '4.4.10'
