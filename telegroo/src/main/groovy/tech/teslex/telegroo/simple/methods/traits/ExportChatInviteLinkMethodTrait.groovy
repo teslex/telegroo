@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.ExportChatInviteLinkMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.ExportChatInviteLinkMethod
 import tech.teslex.telegroo.telegram.methods.objects.ExportChatInviteLinkMethodObject
 
 @CompileStatic
-trait ExportChatInviteLinkMethodTrait implements ExportChatInviteLinkMethod<TelegramResult<String>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait ExportChatInviteLinkMethodTrait implements ExportChatInviteLinkMethod<TelegramResult<String>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait ExportChatInviteLinkMethodTrait implements ExportChatInviteLinkMethod<Tele
 
 	@Override
 	TelegramResult<String> exportChatInviteLink(@DelegatesTo(ExportChatInviteLinkMethodObject) Closure closure) {
-		def builder = ExportChatInviteLinkMethodObject.newInstance()
+		ExportChatInviteLinkMethodObject builder = new ExportChatInviteLinkMethodObject()
 		closure.delegate = builder
 		closure.call()
 		exportChatInviteLink(builder)

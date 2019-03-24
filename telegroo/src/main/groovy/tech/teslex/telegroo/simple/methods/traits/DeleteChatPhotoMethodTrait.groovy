@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.DeleteChatPhotoMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.DeleteChatPhotoMethod
 import tech.teslex.telegroo.telegram.methods.objects.DeleteChatPhotoMethodObject
 
 @CompileStatic
-trait DeleteChatPhotoMethodTrait implements DeleteChatPhotoMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait DeleteChatPhotoMethodTrait implements DeleteChatPhotoMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait DeleteChatPhotoMethodTrait implements DeleteChatPhotoMethod<TelegramResult
 
 	@Override
 	TelegramResult<Object> deleteChatPhoto(@DelegatesTo(DeleteChatPhotoMethodObject) Closure closure) {
-		def builder = DeleteChatPhotoMethodObject.newInstance()
+		DeleteChatPhotoMethodObject builder = new DeleteChatPhotoMethodObject()
 		closure.delegate = builder
 		closure.call()
 		deleteChatPhoto(builder)

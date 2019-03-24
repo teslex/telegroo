@@ -6,7 +6,7 @@ import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia;
 
 import java.util.Map;
 
-public interface Api<T> extends Cloneable {
+public interface Api<T> {
 
 	T go(String method, Map parameters);
 

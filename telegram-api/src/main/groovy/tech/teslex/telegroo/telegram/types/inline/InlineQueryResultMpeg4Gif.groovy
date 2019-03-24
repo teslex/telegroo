@@ -1,18 +1,14 @@
 package tech.teslex.telegroo.telegram.types.inline
 
-import com.fasterxml.jackson.annotation.JsonInclude
+
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.CompileStatic
-import groovy.transform.Canonical
-import groovy.transform.builder.Builder
+import tech.teslex.telegroo.telegram.TypeAnnotations
 import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
 
 /**
  * Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
  */
-@Canonical
-@CompileStatic
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@TypeAnnotations
 class InlineQueryResultMpeg4Gif extends InlineQueryResult {
 
 	/**

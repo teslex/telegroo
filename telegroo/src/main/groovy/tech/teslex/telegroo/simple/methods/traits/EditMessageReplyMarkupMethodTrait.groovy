@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.EditMessageReplyMarkupMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.EditMessageReplyMarkupMethod
 import tech.teslex.telegroo.telegram.methods.objects.EditMessageReplyMarkupMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait EditMessageReplyMarkupMethodTrait implements EditMessageReplyMarkupMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait EditMessageReplyMarkupMethodTrait implements EditMessageReplyMarkupMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -30,7 +32,7 @@ trait EditMessageReplyMarkupMethodTrait implements EditMessageReplyMarkupMethod<
 
 	@Override
 	TelegramResult<Object> editMessageReplyMarkup(@DelegatesTo(EditMessageReplyMarkupMethodObject) Closure closure) {
-		def builder = EditMessageReplyMarkupMethodObject.newInstance()
+		EditMessageReplyMarkupMethodObject builder = new EditMessageReplyMarkupMethodObject()
 		closure.delegate = builder
 		closure.call()
 		editMessageReplyMarkup(builder)

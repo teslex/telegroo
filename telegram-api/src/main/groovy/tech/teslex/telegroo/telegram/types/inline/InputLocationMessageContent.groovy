@@ -1,17 +1,13 @@
 package tech.teslex.telegroo.telegram.types.inline
 
-import com.fasterxml.jackson.annotation.JsonInclude
+
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.CompileStatic
-import groovy.transform.ToString
-import groovy.transform.builder.Builder
+import tech.teslex.telegroo.telegram.TypeAnnotations
 
 /**
  * Represents the content of a location message to be sent as the result of an inline query.
  */
-@ToString
-@CompileStatic
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@TypeAnnotations
 class InputLocationMessageContent extends InputMessageContent {
 
 	/**

@@ -3,6 +3,7 @@ package tech.teslex.telegroo.simple.methods.traits.games
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.games.SetGameScoreMethod
@@ -10,7 +11,8 @@ import tech.teslex.telegroo.telegram.methods.objects.games.SetGameScoreMethodObj
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SetGameScoreMethodTrait implements SetGameScoreMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SetGameScoreMethodTrait implements SetGameScoreMethod<TelegramResult<Object>> {
 
 	@Override
 	TelegramResult<Object> setGameScore(Map data) {
@@ -27,7 +29,7 @@ trait SetGameScoreMethodTrait implements SetGameScoreMethod<TelegramResult<Objec
 
 	@Override
 	TelegramResult<Object> setGameScore(@DelegatesTo(SetGameScoreMethodObject) Closure closure) {
-		def builder = SetGameScoreMethodObject.newInstance()
+		SetGameScoreMethodObject builder = new SetGameScoreMethodObject()
 		closure.delegate = builder
 		closure.call()
 		setGameScore(builder)

@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.UnbanChatMemberMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.UnbanChatMemberMethod
 import tech.teslex.telegroo.telegram.methods.objects.UnbanChatMemberMethodObject
 
 @CompileStatic
-trait UnbanChatMemberMethodTrait implements UnbanChatMemberMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait UnbanChatMemberMethodTrait implements UnbanChatMemberMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait UnbanChatMemberMethodTrait implements UnbanChatMemberMethod<TelegramResult
 
 	@Override
 	TelegramResult<Object> unbanChatMember(@DelegatesTo(UnbanChatMemberMethodObject) Closure closure) {
-		def builder = UnbanChatMemberMethodObject.newInstance()
+		UnbanChatMemberMethodObject builder = new UnbanChatMemberMethodObject()
 		closure.delegate = builder
 		closure.call()
 		unbanChatMember(builder)

@@ -1,23 +1,15 @@
 package tech.teslex.telegroo.telegram.methods.objects.payments
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.CompileStatic
-import groovy.transform.MapConstructor
-import groovy.transform.ToString
-import groovy.transform.builder.Builder
 import tech.teslex.telegroo.telegram.methods.MethodObject
+import tech.teslex.telegroo.telegram.methods.MethodObjectAnnotations
 
 /**
  * answerPreCheckoutQuery
  * Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an Update with the field pre_checkout_query. Use this method to respond to such pre-checkout queries. On success, True is returned. Note: The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
  */
-@ToString
-@MapConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@CompileStatic
-@Builder
+@MethodObjectAnnotations
 class AnswerPreCheckoutQueryMethodObject implements MethodObject {
 
 	/**

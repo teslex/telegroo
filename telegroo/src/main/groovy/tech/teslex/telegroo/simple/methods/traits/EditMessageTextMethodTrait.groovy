@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.EditMessageTextMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.EditMessageTextMethod
 import tech.teslex.telegroo.telegram.methods.objects.EditMessageTextMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait EditMessageTextMethodTrait implements EditMessageTextMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait EditMessageTextMethodTrait implements EditMessageTextMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -30,7 +32,7 @@ trait EditMessageTextMethodTrait implements EditMessageTextMethod<TelegramResult
 
 	@Override
 	TelegramResult<Object> editMessageText(@DelegatesTo(EditMessageTextMethodObject) Closure closure) {
-		def builder = EditMessageTextMethodObject.newInstance()
+		EditMessageTextMethodObject builder = new EditMessageTextMethodObject()
 		closure.delegate = builder
 		closure.call()
 		editMessageText(builder)

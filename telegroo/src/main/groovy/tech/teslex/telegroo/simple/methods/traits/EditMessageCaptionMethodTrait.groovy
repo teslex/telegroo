@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.EditMessageCaptionMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.EditMessageCaptionMethod
 import tech.teslex.telegroo.telegram.methods.objects.EditMessageCaptionMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait EditMessageCaptionMethodTrait implements EditMessageCaptionMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait EditMessageCaptionMethodTrait implements EditMessageCaptionMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -30,7 +32,7 @@ trait EditMessageCaptionMethodTrait implements EditMessageCaptionMethod<Telegram
 
 	@Override
 	TelegramResult<Object> editMessageCaption(@DelegatesTo(EditMessageCaptionMethodObject) Closure closure) {
-		def builder = EditMessageCaptionMethodObject.newInstance()
+		EditMessageCaptionMethodObject builder = new EditMessageCaptionMethodObject()
 		closure.delegate = builder
 		closure.call()
 		editMessageCaption(builder)

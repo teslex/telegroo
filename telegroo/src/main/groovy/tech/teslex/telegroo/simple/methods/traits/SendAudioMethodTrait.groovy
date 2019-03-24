@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.SendAudioMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.SendAudioMethod
 import tech.teslex.telegroo.telegram.methods.objects.SendAudioMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SendAudioMethodTrait implements SendAudioMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SendAudioMethodTrait implements SendAudioMethod<TelegramResult<Message>> {
 
 	@Override
 	@NamedVariant
@@ -29,7 +31,7 @@ trait SendAudioMethodTrait implements SendAudioMethod<TelegramResult<Message>>, 
 
 	@Override
 	TelegramResult<Message> sendAudio(@DelegatesTo(SendAudioMethodObject) Closure closure) {
-		def builder = SendAudioMethodObject.newInstance()
+		SendAudioMethodObject builder = new SendAudioMethodObject()
 		closure.delegate = builder
 		closure.call()
 		sendAudio(builder)

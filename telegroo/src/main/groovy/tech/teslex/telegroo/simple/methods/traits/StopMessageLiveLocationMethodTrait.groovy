@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.StopMessageLiveLocationMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.StopMessageLiveLocationMethod
 import tech.teslex.telegroo.telegram.methods.objects.StopMessageLiveLocationMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait StopMessageLiveLocationMethodTrait implements StopMessageLiveLocationMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait StopMessageLiveLocationMethodTrait implements StopMessageLiveLocationMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -29,7 +31,7 @@ trait StopMessageLiveLocationMethodTrait implements StopMessageLiveLocationMetho
 
 	@Override
 	TelegramResult<Object> stopMessageLiveLocation(@DelegatesTo(StopMessageLiveLocationMethodObject) Closure closure) {
-		def builder = StopMessageLiveLocationMethodObject.newInstance()
+		StopMessageLiveLocationMethodObject builder = new StopMessageLiveLocationMethodObject()
 		closure.delegate = builder
 		closure.call()
 		stopMessageLiveLocation(builder)

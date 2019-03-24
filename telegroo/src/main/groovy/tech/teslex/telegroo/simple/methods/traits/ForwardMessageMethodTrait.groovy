@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.ForwardMessageMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.ForwardMessageMethod
 import tech.teslex.telegroo.telegram.methods.objects.ForwardMessageMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait ForwardMessageMethodTrait implements ForwardMessageMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait ForwardMessageMethodTrait implements ForwardMessageMethod<TelegramResult<Message>> {
 
 	@Override
 	@NamedVariant
@@ -30,7 +32,7 @@ trait ForwardMessageMethodTrait implements ForwardMessageMethod<TelegramResult<M
 
 	@Override
 	TelegramResult<Message> forwardMessage(@DelegatesTo(ForwardMessageMethodObject) Closure closure) {
-		def builder = ForwardMessageMethodObject.newInstance()
+		ForwardMessageMethodObject builder = new ForwardMessageMethodObject()
 		closure.delegate = builder
 		closure.call()
 		forwardMessage(builder)

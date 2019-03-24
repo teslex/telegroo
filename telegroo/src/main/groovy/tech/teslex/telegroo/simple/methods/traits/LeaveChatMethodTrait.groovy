@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.LeaveChatMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.LeaveChatMethod
 import tech.teslex.telegroo.telegram.methods.objects.LeaveChatMethodObject
 
 @CompileStatic
-trait LeaveChatMethodTrait implements LeaveChatMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait LeaveChatMethodTrait implements LeaveChatMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait LeaveChatMethodTrait implements LeaveChatMethod<TelegramResult<Object>>, C
 
 	@Override
 	TelegramResult<Object> leaveChat(@DelegatesTo(LeaveChatMethodObject) Closure closure) {
-		def builder = LeaveChatMethodObject.newInstance()
+		LeaveChatMethodObject builder = new LeaveChatMethodObject()
 		closure.delegate = builder
 		closure.call()
 		leaveChat(builder)

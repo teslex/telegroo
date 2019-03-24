@@ -1,13 +1,8 @@
 package tech.teslex.telegroo.telegram.methods.objects
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.CompileStatic
-import groovy.transform.MapConstructor
-import groovy.transform.ToString
-import groovy.transform.builder.Builder
-import tech.teslex.telegroo.telegram.enums.ParseMode
+import tech.teslex.telegroo.telegram.methods.MethodObjectAnnotations
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.types.InputFile
 
@@ -15,11 +10,7 @@ import tech.teslex.telegroo.telegram.types.InputFile
  * sendVideoNote
  * As of v.4.0, Telegram clients support rounded square mp4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
  */
-@ToString
-@MapConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@CompileStatic
-@Builder
+@MethodObjectAnnotations
 class SendVideoNoteMethodObject implements MethodObjectWithFile {
 
 	/**
@@ -80,10 +71,6 @@ class SendVideoNoteMethodObject implements MethodObjectWithFile {
 		this.parseMode = parseMode
 	}
 
-	@JsonIgnore
-	void setParseMode(ParseMode parseMode) {
-		this.parseMode = parseMode.value
-	}
 
 	@Override
 	@JsonIgnore

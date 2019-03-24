@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.EditMessageLiveLocationMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.EditMessageLiveLocationMethod
 import tech.teslex.telegroo.telegram.methods.objects.EditMessageLiveLocationMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait EditMessageLiveLocationMethodTrait implements EditMessageLiveLocationMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait EditMessageLiveLocationMethodTrait implements EditMessageLiveLocationMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -30,7 +32,7 @@ trait EditMessageLiveLocationMethodTrait implements EditMessageLiveLocationMetho
 
 	@Override
 	TelegramResult<Object> editMessageLiveLocation(@DelegatesTo(EditMessageLiveLocationMethodObject) Closure closure) {
-		def builder = EditMessageLiveLocationMethodObject.newInstance()
+		EditMessageLiveLocationMethodObject builder = new EditMessageLiveLocationMethodObject()
 		closure.delegate = builder
 		closure.call()
 		editMessageLiveLocation(builder)

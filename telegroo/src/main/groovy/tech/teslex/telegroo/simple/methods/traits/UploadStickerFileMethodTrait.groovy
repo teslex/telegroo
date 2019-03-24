@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.UploadStickerFileMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.UploadStickerFileMethod
 import tech.teslex.telegroo.telegram.methods.objects.UploadStickerFileMethodObject
 import tech.teslex.telegroo.telegram.types.FileObject
 
 @CompileStatic
-trait UploadStickerFileMethodTrait implements UploadStickerFileMethod<TelegramResult<FileObject>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait UploadStickerFileMethodTrait implements UploadStickerFileMethod<TelegramResult<FileObject>> {
 
 	@Override
 	@NamedVariant
@@ -27,7 +29,7 @@ trait UploadStickerFileMethodTrait implements UploadStickerFileMethod<TelegramRe
 
 	@Override
 	TelegramResult<FileObject> uploadStickerFile(@DelegatesTo(UploadStickerFileMethodObject) Closure closure) {
-		def builder = UploadStickerFileMethodObject.newInstance()
+		UploadStickerFileMethodObject builder = new UploadStickerFileMethodObject()
 		closure.delegate = builder
 		closure.call()
 		uploadStickerFile(builder)

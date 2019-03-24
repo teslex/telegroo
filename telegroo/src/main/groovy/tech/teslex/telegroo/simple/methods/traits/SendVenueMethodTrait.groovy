@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.SendVenueMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.SendVenueMethod
 import tech.teslex.telegroo.telegram.methods.objects.SendVenueMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SendVenueMethodTrait implements SendVenueMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SendVenueMethodTrait implements SendVenueMethod<TelegramResult<Message>> {
 
 	@Override
 	@NamedVariant
@@ -29,7 +31,7 @@ trait SendVenueMethodTrait implements SendVenueMethod<TelegramResult<Message>>, 
 
 	@Override
 	TelegramResult<Message> sendVenue(@DelegatesTo(SendVenueMethodObject) Closure closure) {
-		def builder = SendVenueMethodObject.newInstance()
+		SendVenueMethodObject builder = new SendVenueMethodObject()
 		closure.delegate = builder
 		closure.call()
 		sendVenue(builder)

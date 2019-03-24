@@ -3,6 +3,7 @@ package tech.teslex.telegroo.simple.methods.traits.payments
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.payments.SendInvoiceMethod
@@ -10,7 +11,8 @@ import tech.teslex.telegroo.telegram.methods.objects.payments.SendInvoiceMethodO
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SendInvoiceMethodTrait implements SendInvoiceMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SendInvoiceMethodTrait implements SendInvoiceMethod<TelegramResult<Message>> {
 
 	@Override
 	@NamedVariant
@@ -29,7 +31,7 @@ trait SendInvoiceMethodTrait implements SendInvoiceMethod<TelegramResult<Message
 
 	@Override
 	TelegramResult<Message> sendInvoice(@DelegatesTo(SendInvoiceMethodObject) Closure closure) {
-		def builder = SendInvoiceMethodObject.newInstance()
+		SendInvoiceMethodObject builder = new SendInvoiceMethodObject()
 		closure.delegate = builder
 		closure.call()
 		sendInvoice(builder)

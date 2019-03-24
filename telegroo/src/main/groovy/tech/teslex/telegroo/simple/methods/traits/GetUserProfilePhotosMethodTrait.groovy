@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.GetUserProfilePhotosMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.GetUserProfilePhotosMethod
 import tech.teslex.telegroo.telegram.methods.objects.GetUserProfilePhotosMethodObject
 import tech.teslex.telegroo.telegram.types.UserProfilePhotos
 
 @CompileStatic
-trait GetUserProfilePhotosMethodTrait implements GetUserProfilePhotosMethod<TelegramResult<UserProfilePhotos>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait GetUserProfilePhotosMethodTrait implements GetUserProfilePhotosMethod<TelegramResult<UserProfilePhotos>> {
 
 	@NamedVariant
 	TelegramResult<UserProfilePhotos> getUserProfilePhotos(@NamedDelegate GetUserProfilePhotosMethodObject data) {
@@ -26,7 +28,7 @@ trait GetUserProfilePhotosMethodTrait implements GetUserProfilePhotosMethod<Tele
 	}
 
 	TelegramResult<UserProfilePhotos> getUserProfilePhotos(@DelegatesTo(GetUserProfilePhotosMethodObject) Closure closure) {
-		def builder = GetUserProfilePhotosMethodObject.newInstance()
+		GetUserProfilePhotosMethodObject builder = new GetUserProfilePhotosMethodObject()
 		closure.delegate = builder
 		closure.call()
 		getUserProfilePhotos(builder)

@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.PromoteChatMemberMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.PromoteChatMemberMethod
 import tech.teslex.telegroo.telegram.methods.objects.PromoteChatMemberMethodObject
 
 @CompileStatic
-trait PromoteChatMemberMethodTrait implements PromoteChatMemberMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait PromoteChatMemberMethodTrait implements PromoteChatMemberMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait PromoteChatMemberMethodTrait implements PromoteChatMemberMethod<TelegramRe
 
 	@Override
 	TelegramResult<Object> promoteChatMember(@DelegatesTo(PromoteChatMemberMethodObject) Closure closure) {
-		def builder = PromoteChatMemberMethodObject.newInstance()
+		PromoteChatMemberMethodObject builder = new PromoteChatMemberMethodObject()
 		closure.delegate = builder
 		closure.call()
 		promoteChatMember(builder)

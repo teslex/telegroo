@@ -1,6 +1,7 @@
 package tech.teslex.telegroo.simple.methods.traits.webhook
 
 import groovy.transform.CompileStatic
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.webhook.GetWebhookInfoMethod
@@ -8,7 +9,8 @@ import tech.teslex.telegroo.telegram.methods.objects.webhook.GetWebhookInfoMetho
 import tech.teslex.telegroo.telegram.types.WebhookInfo
 
 @CompileStatic
-trait GetWebhookInfoMethodTrait implements GetWebhookInfoMethod<TelegramResult<WebhookInfo>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait GetWebhookInfoMethodTrait implements GetWebhookInfoMethod<TelegramResult<WebhookInfo>> {
 
 	@Override
 	TelegramResult<WebhookInfo> getWebhookInfo() {

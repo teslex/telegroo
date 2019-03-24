@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.GetUpdatesMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.GetUpdatesMethod
 import tech.teslex.telegroo.telegram.methods.objects.GetUpdatesMethodObject
 import tech.teslex.telegroo.telegram.types.update.Update
 
 @CompileStatic
-trait GetUpdatesMethodTrait implements GetUpdatesMethod<TelegramResult<List<Update>>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait GetUpdatesMethodTrait implements GetUpdatesMethod<TelegramResult<List<Update>>> {
 
 	@Override
 	TelegramResult<List<Update>> getUpdates() {
@@ -32,7 +34,7 @@ trait GetUpdatesMethodTrait implements GetUpdatesMethod<TelegramResult<List<Upda
 
 	@Override
 	TelegramResult<List<Update>> getUpdates(@DelegatesTo(GetUpdatesMethodObject) Closure closure) {
-		def builder = GetUpdatesMethodObject.newInstance()
+		GetUpdatesMethodObject builder = new GetUpdatesMethodObject()
 		closure.delegate = builder
 		closure.call()
 		getUpdates(builder)

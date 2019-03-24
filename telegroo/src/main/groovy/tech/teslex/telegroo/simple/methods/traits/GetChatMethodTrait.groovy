@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.GetChatMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.GetChatMethod
 import tech.teslex.telegroo.telegram.methods.objects.GetChatMethodObject
 import tech.teslex.telegroo.telegram.types.Chat
 
 @CompileStatic
-trait GetChatMethodTrait implements GetChatMethod<TelegramResult<Chat>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait GetChatMethodTrait implements GetChatMethod<TelegramResult<Chat>> {
 
 	@Override
 	@NamedVariant
@@ -29,7 +31,7 @@ trait GetChatMethodTrait implements GetChatMethod<TelegramResult<Chat>>, Context
 
 	@Override
 	TelegramResult<Chat> getChat(@DelegatesTo(GetChatMethodObject) Closure closure) {
-		def builder = GetChatMethodObject.newInstance()
+		GetChatMethodObject builder = new GetChatMethodObject()
 		closure.delegate = builder
 		closure.call()
 		getChat(builder)

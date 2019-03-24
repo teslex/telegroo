@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.EditMessageMediaMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.EditMessageMediaMethod
 import tech.teslex.telegroo.telegram.methods.objects.EditMessageMediaMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait EditMessageMediaMethodTrait implements EditMessageMediaMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait EditMessageMediaMethodTrait implements EditMessageMediaMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -30,7 +32,7 @@ trait EditMessageMediaMethodTrait implements EditMessageMediaMethod<TelegramResu
 
 	@Override
 	TelegramResult<Object> editMessageMedia(@DelegatesTo(EditMessageMediaMethodObject) Closure closure) {
-		def builder = EditMessageMediaMethodObject.newInstance()
+		EditMessageMediaMethodObject builder = new EditMessageMediaMethodObject()
 		closure.delegate = builder
 		closure.call()
 		editMessageMedia(builder)

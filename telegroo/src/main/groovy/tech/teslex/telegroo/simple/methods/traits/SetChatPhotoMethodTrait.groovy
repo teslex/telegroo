@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.SetChatPhotoMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.SetChatPhotoMethod
 import tech.teslex.telegroo.telegram.methods.objects.SetChatPhotoMethodObject
 
 @CompileStatic
-trait SetChatPhotoMethodTrait implements SetChatPhotoMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SetChatPhotoMethodTrait implements SetChatPhotoMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait SetChatPhotoMethodTrait implements SetChatPhotoMethod<TelegramResult<Objec
 
 	@Override
 	TelegramResult<Object> setChatPhoto(@DelegatesTo(SetChatPhotoMethodObject) Closure closure) {
-		def builder = SetChatPhotoMethodObject.newInstance()
+		SetChatPhotoMethodObject builder = new SetChatPhotoMethodObject()
 		closure.delegate = builder
 		closure.call()
 		setChatPhoto(builder)

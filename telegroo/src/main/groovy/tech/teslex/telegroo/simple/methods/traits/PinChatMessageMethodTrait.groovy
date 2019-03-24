@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.PinChatMessageMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.PinChatMessageMethod
 import tech.teslex.telegroo.telegram.methods.objects.PinChatMessageMethodObject
 
 @CompileStatic
-trait PinChatMessageMethodTrait implements PinChatMessageMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait PinChatMessageMethodTrait implements PinChatMessageMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait PinChatMessageMethodTrait implements PinChatMessageMethod<TelegramResult<O
 
 	@Override
 	TelegramResult<Object> pinChatMessage(@DelegatesTo(PinChatMessageMethodObject) Closure closure) {
-		def builder = PinChatMessageMethodObject.newInstance()
+		PinChatMessageMethodObject builder = new PinChatMessageMethodObject()
 		closure.delegate = builder
 		closure.call()
 		pinChatMessage(builder)

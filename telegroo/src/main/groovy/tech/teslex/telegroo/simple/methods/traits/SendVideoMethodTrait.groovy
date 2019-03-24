@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.SendVideoMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.SendVideoMethod
 import tech.teslex.telegroo.telegram.methods.objects.SendVideoMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SendVideoMethodTrait implements SendVideoMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SendVideoMethodTrait implements SendVideoMethod<TelegramResult<Message>> {
 
 	@Override
 	@NamedVariant
@@ -29,7 +31,7 @@ trait SendVideoMethodTrait implements SendVideoMethod<TelegramResult<Message>>, 
 
 	@Override
 	TelegramResult<Message> sendVideo(@DelegatesTo(SendVideoMethodObject) Closure closure) {
-		def builder = SendVideoMethodObject.newInstance()
+		SendVideoMethodObject builder = new SendVideoMethodObject()
 		closure.delegate = builder
 		closure.call()
 		sendVideo(builder)

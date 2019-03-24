@@ -1,23 +1,15 @@
 package tech.teslex.telegroo.telegram.methods.objects
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.CompileStatic
-import groovy.transform.MapConstructor
-import groovy.transform.ToString
-import groovy.transform.builder.Builder
 import tech.teslex.telegroo.telegram.methods.MethodObject
+import tech.teslex.telegroo.telegram.methods.MethodObjectAnnotations
 
 /**
  * answerCallbackQuery
  * Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned.
  */
-@ToString
-@MapConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@CompileStatic
-@Builder
+@MethodObjectAnnotations
 class AnswerCallbackQueryMethodObject implements MethodObject {
 
 	/**

@@ -1,13 +1,9 @@
 package tech.teslex.telegroo.telegram.methods.objects.webhook
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.CompileStatic
-import groovy.transform.MapConstructor
-import groovy.transform.ToString
-import groovy.transform.builder.Builder
 import tech.teslex.telegroo.telegram.methods.MethodObject
+import tech.teslex.telegroo.telegram.methods.MethodObjectAnnotations
 import tech.teslex.telegroo.telegram.types.InputFile
 
 /**
@@ -16,11 +12,7 @@ import tech.teslex.telegroo.telegram.types.InputFile
  *
  * If you'd like to make sure that the Webhook request comes from Telegram, we recommend using a secret path in the URL, e.g. https://www.example.com/<token>. Since nobody else knows your bot‘s token, you can be pretty sure it’s us.
  */
-@ToString
-@MapConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@CompileStatic
-@Builder
+@MethodObjectAnnotations
 class SetWebhookMethodObject implements MethodObject {
 
 	/**

@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits.payments
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerShippingQueryMethod
 import tech.teslex.telegroo.telegram.methods.objects.payments.AnswerShippingQueryMethodObject
 
 @CompileStatic
-trait AnswerShippingQueryMethodTrait implements AnswerShippingQueryMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait AnswerShippingQueryMethodTrait implements AnswerShippingQueryMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -26,7 +28,7 @@ trait AnswerShippingQueryMethodTrait implements AnswerShippingQueryMethod<Telegr
 
 	@Override
 	TelegramResult<Object> answerShippingQuery(@DelegatesTo(AnswerShippingQueryMethodObject) Closure closure) {
-		def builder = AnswerShippingQueryMethodObject.newInstance()
+		AnswerShippingQueryMethodObject builder = new AnswerShippingQueryMethodObject()
 		closure.delegate = builder
 		closure.call()
 		answerShippingQuery(builder)

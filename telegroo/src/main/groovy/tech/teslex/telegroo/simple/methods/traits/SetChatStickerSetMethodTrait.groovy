@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.SetChatStickerSetMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.SetChatStickerSetMethod
 import tech.teslex.telegroo.telegram.methods.objects.SetChatStickerSetMethodObject
 
 @CompileStatic
-trait SetChatStickerSetMethodTrait implements SetChatStickerSetMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SetChatStickerSetMethodTrait implements SetChatStickerSetMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait SetChatStickerSetMethodTrait implements SetChatStickerSetMethod<TelegramRe
 
 	@Override
 	TelegramResult<Object> setChatStickerSet(@DelegatesTo(SetChatStickerSetMethodObject) Closure closure) {
-		def builder = SetChatStickerSetMethodObject.newInstance()
+		SetChatStickerSetMethodObject builder = new SetChatStickerSetMethodObject()
 		closure.delegate = builder
 		closure.call()
 		setChatStickerSet(builder)

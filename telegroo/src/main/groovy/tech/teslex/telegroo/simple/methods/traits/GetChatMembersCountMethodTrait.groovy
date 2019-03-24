@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.GetChatMembersCountMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.GetChatMembersCountMethod
 import tech.teslex.telegroo.telegram.methods.objects.GetChatMembersCountMethodObject
 
 @CompileStatic
-trait GetChatMembersCountMethodTrait implements GetChatMembersCountMethod<TelegramResult<Integer>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait GetChatMembersCountMethodTrait implements GetChatMembersCountMethod<TelegramResult<Integer>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait GetChatMembersCountMethodTrait implements GetChatMembersCountMethod<Telegr
 
 	@Override
 	TelegramResult<Integer> getChatMembersCount(@DelegatesTo(GetChatMembersCountMethodObject) Closure closure) {
-		def builder = GetChatMembersCountMethodObject.newInstance()
+		GetChatMembersCountMethodObject builder = new GetChatMembersCountMethodObject()
 		closure.delegate = builder
 		closure.call()
 		getChatMembersCount(builder)

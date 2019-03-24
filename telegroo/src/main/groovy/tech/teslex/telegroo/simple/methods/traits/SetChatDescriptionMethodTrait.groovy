@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.SetChatDescriptionMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.SetChatDescriptionMethod
 import tech.teslex.telegroo.telegram.methods.objects.SetChatDescriptionMethodObject
 
 @CompileStatic
-trait SetChatDescriptionMethodTrait implements SetChatDescriptionMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SetChatDescriptionMethodTrait implements SetChatDescriptionMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait SetChatDescriptionMethodTrait implements SetChatDescriptionMethod<Telegram
 
 	@Override
 	TelegramResult<Object> setChatDescription(@DelegatesTo(SetChatDescriptionMethodObject) Closure closure) {
-		def builder = SetChatDescriptionMethodObject.newInstance()
+		SetChatDescriptionMethodObject builder = new SetChatDescriptionMethodObject()
 		closure.delegate = builder
 		closure.call()
 		setChatDescription(builder)

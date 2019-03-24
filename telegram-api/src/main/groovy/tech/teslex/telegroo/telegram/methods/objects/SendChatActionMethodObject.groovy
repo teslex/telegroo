@@ -1,24 +1,16 @@
 package tech.teslex.telegroo.telegram.methods.objects
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.CompileStatic
-import groovy.transform.MapConstructor
-import groovy.transform.ToString
-import groovy.transform.builder.Builder
 import tech.teslex.telegroo.telegram.enums.ChatAction
 import tech.teslex.telegroo.telegram.methods.MethodObject
+import tech.teslex.telegroo.telegram.methods.MethodObjectAnnotations
 
 /**
  * sendChatAction
  * Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns True on success.
  */
-@ToString
-@MapConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@CompileStatic
-@Builder
+@MethodObjectAnnotations
 class SendChatActionMethodObject implements MethodObject {
 
 	/**

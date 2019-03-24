@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.KickChatMemberMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.KickChatMemberMethod
 import tech.teslex.telegroo.telegram.methods.objects.KickChatMemberMethodObject
 
 @CompileStatic
-trait KickChatMemberMethodTrait implements KickChatMemberMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait KickChatMemberMethodTrait implements KickChatMemberMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait KickChatMemberMethodTrait implements KickChatMemberMethod<TelegramResult<O
 
 	@Override
 	TelegramResult<Object> kickChatMember(@DelegatesTo(KickChatMemberMethodObject) Closure closure) {
-		def builder = KickChatMemberMethodObject.newInstance()
+		KickChatMemberMethodObject builder = new KickChatMemberMethodObject()
 		closure.delegate = builder
 		closure.call()
 		kickChatMember(builder)

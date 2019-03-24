@@ -1,13 +1,8 @@
 package tech.teslex.telegroo.telegram.methods.objects
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.CompileStatic
-import groovy.transform.MapConstructor
-import groovy.transform.ToString
-import groovy.transform.builder.Builder
-import tech.teslex.telegroo.telegram.enums.ParseMode
+import tech.teslex.telegroo.telegram.methods.MethodObjectAnnotations
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.types.InputFile
 
@@ -15,11 +10,7 @@ import tech.teslex.telegroo.telegram.types.InputFile
  * sendVoice
  * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent as Audio or Document). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
  */
-@ToString
-@MapConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@CompileStatic
-@Builder
+@MethodObjectAnnotations
 class SendVoiceMethodObject implements MethodObjectWithFile {
 
 	/**
@@ -78,11 +69,6 @@ class SendVoiceMethodObject implements MethodObjectWithFile {
 
 	void setParseMode(String parseMode) {
 		this.parseMode = parseMode
-	}
-
-	@JsonIgnore
-	void setParseMode(ParseMode parseMode) {
-		this.parseMode = parseMode.value
 	}
 
 	@Override

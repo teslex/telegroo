@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.AnswerCallbackQueryMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.AnswerCallbackQueryMethod
 import tech.teslex.telegroo.telegram.methods.objects.AnswerCallbackQueryMethodObject
 
 @CompileStatic
-trait AnswerCallbackQueryMethodTrait implements AnswerCallbackQueryMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait AnswerCallbackQueryMethodTrait implements AnswerCallbackQueryMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -26,7 +28,7 @@ trait AnswerCallbackQueryMethodTrait implements AnswerCallbackQueryMethod<Telegr
 
 	@Override
 	TelegramResult<Object> answerCallbackQuery(@DelegatesTo(AnswerCallbackQueryMethodObject) Closure closure) {
-		def builder = AnswerCallbackQueryMethodObject.newInstance()
+		AnswerCallbackQueryMethodObject builder = new AnswerCallbackQueryMethodObject()
 		closure.delegate = builder
 		closure.call()
 		answerCallbackQuery(builder)

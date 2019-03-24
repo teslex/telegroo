@@ -3,6 +3,7 @@ package tech.teslex.telegroo.simple.methods.traits.games
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.games.SendGameMethod
@@ -10,7 +11,8 @@ import tech.teslex.telegroo.telegram.methods.objects.games.SendGameMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SendGameMethodTrait implements SendGameMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SendGameMethodTrait implements SendGameMethod<TelegramResult<Object>> {
 
 	@Override
 	TelegramResult<Object> sendGame(Map data) {
@@ -29,7 +31,7 @@ trait SendGameMethodTrait implements SendGameMethod<TelegramResult<Object>>, Con
 
 	@Override
 	TelegramResult<Object> sendGame(@DelegatesTo(SendGameMethodObject) Closure closure) {
-		def builder = SendGameMethodObject.newInstance()
+		SendGameMethodObject builder = new SendGameMethodObject()
 		closure.delegate = builder
 		closure.call()
 		sendGame(builder)

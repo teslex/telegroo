@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.SendVoiceMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.SendVoiceMethod
 import tech.teslex.telegroo.telegram.methods.objects.SendVoiceMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SendVoiceMethodTrait implements SendVoiceMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SendVoiceMethodTrait implements SendVoiceMethod<TelegramResult<Message>> {
 
 	@Override
 	@NamedVariant
@@ -29,7 +31,7 @@ trait SendVoiceMethodTrait implements SendVoiceMethod<TelegramResult<Message>>, 
 
 	@Override
 	TelegramResult<Message> sendVoice(@DelegatesTo(SendVoiceMethodObject) Closure closure) {
-		def builder = SendVoiceMethodObject.newInstance()
+		SendVoiceMethodObject builder = new SendVoiceMethodObject()
 		closure.delegate = builder
 		closure.call()
 		sendVoice(builder)

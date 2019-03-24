@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.UnpinChatMessageMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.UnpinChatMessageMethod
 import tech.teslex.telegroo.telegram.methods.objects.UnpinChatMessageMethodObject
 
 @CompileStatic
-trait UnpinChatMessageMethodTrait implements UnpinChatMessageMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait UnpinChatMessageMethodTrait implements UnpinChatMessageMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait UnpinChatMessageMethodTrait implements UnpinChatMessageMethod<TelegramResu
 
 	@Override
 	TelegramResult<Object> unpinChatMessage(@DelegatesTo(UnpinChatMessageMethodObject) Closure closure) {
-		def builder = UnpinChatMessageMethodObject.newInstance()
+		UnpinChatMessageMethodObject builder = new UnpinChatMessageMethodObject()
 		closure.delegate = builder
 		closure.call()
 		unpinChatMessage(builder)

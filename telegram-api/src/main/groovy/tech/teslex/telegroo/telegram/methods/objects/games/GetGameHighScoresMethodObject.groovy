@@ -1,13 +1,9 @@
 package tech.teslex.telegroo.telegram.methods.objects.games
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.CompileStatic
-import groovy.transform.MapConstructor
-import groovy.transform.ToString
-import groovy.transform.builder.Builder
 import tech.teslex.telegroo.telegram.methods.MethodObject
+import tech.teslex.telegroo.telegram.methods.MethodObjectAnnotations
 
 /**
  * getGameHighScores
@@ -15,11 +11,7 @@ import tech.teslex.telegroo.telegram.methods.MethodObject
  *
  * This method will currently return scores for the target user, plus two of his closest neighbors on each side. Will also return the top three users if the user and his neighbors are not among them. Please note that this behavior is subject to change.
  */
-@ToString
-@MapConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@CompileStatic
-@Builder
+@MethodObjectAnnotations
 class GetGameHighScoresMethodObject implements MethodObject {
 
 	/**

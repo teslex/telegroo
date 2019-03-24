@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.SendChatActionMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.SendChatActionMethod
 import tech.teslex.telegroo.telegram.methods.objects.SendChatActionMethodObject
 
 @CompileStatic
-trait SendChatActionMethodTrait implements SendChatActionMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SendChatActionMethodTrait implements SendChatActionMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -28,7 +30,7 @@ trait SendChatActionMethodTrait implements SendChatActionMethod<TelegramResult<O
 
 	@Override
 	TelegramResult<Object> sendChatAction(@DelegatesTo(SendChatActionMethodObject) Closure closure) {
-		def builder = SendChatActionMethodObject.newInstance()
+		SendChatActionMethodObject builder = new SendChatActionMethodObject()
 		closure.delegate = builder
 		closure.call()
 		sendChatAction(builder)

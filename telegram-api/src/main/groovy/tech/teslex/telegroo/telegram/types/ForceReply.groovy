@@ -1,13 +1,9 @@
 package tech.teslex.telegroo.telegram.types
 
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.CompileStatic
-import groovy.transform.Canonical
+import tech.teslex.telegroo.telegram.TypeAnnotations
 
-@Canonical
-@CompileStatic
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@TypeAnnotations
 class ForceReply {
 
 	/**

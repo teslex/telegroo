@@ -1,18 +1,15 @@
 package tech.teslex.telegroo.telegram.types.inline
 
-import com.fasterxml.jackson.annotation.JsonInclude
+
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.Canonical
-import groovy.transform.CompileStatic
+import tech.teslex.telegroo.telegram.TypeAnnotations
 import tech.teslex.telegroo.telegram.types.Location
 import tech.teslex.telegroo.telegram.types.User
 
 /**
  * Represents a result of an inline query that was chosen by the user and sent to their chat partner.
  */
-@Canonical
-@CompileStatic
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@TypeAnnotations
 class ChosenInlineResult {
 
 	/**

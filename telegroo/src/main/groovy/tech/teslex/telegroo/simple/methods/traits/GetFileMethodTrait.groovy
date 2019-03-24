@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.GetFileMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.GetFileMethod
 import tech.teslex.telegroo.telegram.methods.objects.GetFileMethodObject
 import tech.teslex.telegroo.telegram.types.FileObject
 
 @CompileStatic
-trait GetFileMethodTrait implements GetFileMethod<TelegramResult<FileObject>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait GetFileMethodTrait implements GetFileMethod<TelegramResult<FileObject>> {
 
 	@Override
 	@NamedVariant
@@ -27,7 +29,7 @@ trait GetFileMethodTrait implements GetFileMethod<TelegramResult<FileObject>>, C
 
 	@Override
 	TelegramResult<FileObject> getFile(@DelegatesTo(GetFileMethodObject) Closure closure) {
-		def builder = GetFileMethodObject.newInstance()
+		GetFileMethodObject builder = new GetFileMethodObject()
 		closure.delegate = builder
 		closure.call()
 		getFile(builder)

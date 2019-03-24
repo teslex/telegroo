@@ -1,6 +1,5 @@
 package tech.teslex.telegroo.test
 
-
 import spock.lang.Shared
 import spock.lang.Specification
 import tech.teslex.telegroo.simple.SimpleTelegroo

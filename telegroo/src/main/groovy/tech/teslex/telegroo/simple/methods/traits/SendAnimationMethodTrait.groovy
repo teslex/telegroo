@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.SendAnimationMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.SendAnimationMethod
 import tech.teslex.telegroo.telegram.methods.objects.SendAnimationMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SendAnimationMethodTrait implements SendAnimationMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SendAnimationMethodTrait implements SendAnimationMethod<TelegramResult<Message>> {
 
 	@Override
 	@NamedVariant
@@ -29,7 +31,7 @@ trait SendAnimationMethodTrait implements SendAnimationMethod<TelegramResult<Mes
 
 	@Override
 	TelegramResult<Message> sendAnimation(@DelegatesTo(SendAnimationMethodObject) Closure closure) {
-		def builder = SendAnimationMethodObject.newInstance()
+		SendAnimationMethodObject builder = new SendAnimationMethodObject()
 		closure.delegate = builder
 		closure.call()
 		sendAnimation(builder)

@@ -1,8 +1,7 @@
 package tech.teslex.telegroo.telegram.types.inline
 
-import com.fasterxml.jackson.annotation.JsonInclude
-import groovy.transform.CompileStatic
-import groovy.transform.Canonical
+
+import tech.teslex.telegroo.telegram.TypeAnnotations
 
 /**
  * This object represents one result of an inline query. Telegram clients currently support results of the following 20 types:
@@ -28,8 +27,6 @@ import groovy.transform.Canonical
  * InlineQueryResultVideo
  * InlineQueryResultVoice
  */
-@Canonical
-@CompileStatic
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@TypeAnnotations
 abstract class InlineQueryResult {
 }

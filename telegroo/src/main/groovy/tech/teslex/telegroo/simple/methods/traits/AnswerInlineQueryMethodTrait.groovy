@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.AnswerInlineQueryMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.AnswerInlineQueryMethod
 import tech.teslex.telegroo.telegram.methods.objects.AnswerInlineQueryMethodObject
 
 @CompileStatic
-trait AnswerInlineQueryMethodTrait implements AnswerInlineQueryMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait AnswerInlineQueryMethodTrait implements AnswerInlineQueryMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -26,7 +28,7 @@ trait AnswerInlineQueryMethodTrait implements AnswerInlineQueryMethod<TelegramRe
 
 	@Override
 	TelegramResult<Object> answerInlineQuery(@DelegatesTo(AnswerInlineQueryMethodObject) Closure closure) {
-		def builder = AnswerInlineQueryMethodObject.newInstance()
+		AnswerInlineQueryMethodObject builder = new AnswerInlineQueryMethodObject()
 		closure.delegate = builder
 		closure.call()
 		answerInlineQuery(builder)

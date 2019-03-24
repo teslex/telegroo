@@ -1,8 +1,7 @@
 package tech.teslex.telegroo.telegram.types.inline
 
-import com.fasterxml.jackson.annotation.JsonInclude
-import groovy.transform.CompileStatic
-import groovy.transform.Canonical
+
+import tech.teslex.telegroo.telegram.TypeAnnotations
 
 /**
  * This object represents the content of a message to be sent as a result of an inline query. Telegram clients currently support the following 4 types:
@@ -12,8 +11,6 @@ import groovy.transform.Canonical
  * InputVenueMessageContent
  * InputContactMessageContent
  */
-@Canonical
-@CompileStatic
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@TypeAnnotations
 abstract class InputMessageContent {
 }

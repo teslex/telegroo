@@ -3,15 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.SendPhotoMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.SendPhotoMethod
 import tech.teslex.telegroo.telegram.methods.objects.SendPhotoMethodObject
-import tech.teslex.telegroo.telegram.types.InputFile
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SendPhotoMethodTrait implements SendPhotoMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SendPhotoMethodTrait implements SendPhotoMethod<TelegramResult<Message>> {
 
 	@Override
 	@NamedVariant
@@ -30,7 +31,7 @@ trait SendPhotoMethodTrait implements SendPhotoMethod<TelegramResult<Message>>, 
 
 	@Override
 	TelegramResult<Message> sendPhoto(@DelegatesTo(SendPhotoMethodObject) Closure closure) {
-		def builder = SendPhotoMethodObject.newInstance()
+		SendPhotoMethodObject builder = new SendPhotoMethodObject()
 		closure.delegate = builder
 		closure.call()
 		sendPhoto(builder)

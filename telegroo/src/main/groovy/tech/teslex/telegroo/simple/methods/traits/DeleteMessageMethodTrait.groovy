@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.DeleteMessageMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.DeleteMessageMethod
 import tech.teslex.telegroo.telegram.methods.objects.DeleteMessageMethodObject
 
 @CompileStatic
-trait DeleteMessageMethodTrait implements DeleteMessageMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait DeleteMessageMethodTrait implements DeleteMessageMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -29,7 +31,7 @@ trait DeleteMessageMethodTrait implements DeleteMessageMethod<TelegramResult<Obj
 
 	@Override
 	TelegramResult<Object> deleteMessage(@DelegatesTo(DeleteMessageMethodObject) Closure closure) {
-		def builder = DeleteMessageMethodObject.newInstance()
+		DeleteMessageMethodObject builder = new DeleteMessageMethodObject()
 		closure.delegate = builder
 		closure.call()
 		deleteMessage(builder)

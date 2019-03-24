@@ -1,16 +1,13 @@
 package tech.teslex.telegroo.telegram.types
 
-import com.fasterxml.jackson.annotation.JsonInclude
+
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.CompileStatic
-import groovy.transform.Canonical
+import tech.teslex.telegroo.telegram.TypeAnnotations
 
 /**
  * This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
  */
-@Canonical
-@CompileStatic
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@TypeAnnotations
 class Animation {
 
 	/**

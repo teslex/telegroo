@@ -1,18 +1,15 @@
 package tech.teslex.telegroo.telegram.types
 
-import com.fasterxml.jackson.annotation.JsonInclude
+
 import com.fasterxml.jackson.annotation.JsonProperty
-import groovy.transform.CompileStatic
-import groovy.transform.Canonical
+import tech.teslex.telegroo.telegram.TypeAnnotations
 import tech.teslex.telegroo.telegram.types.games.Game
 import tech.teslex.telegroo.telegram.types.passport.PassportData
 import tech.teslex.telegroo.telegram.types.payments.Invoice
 import tech.teslex.telegroo.telegram.types.payments.SuccessfulPayment
 import tech.teslex.telegroo.telegram.types.stickers.Sticker
 
-@Canonical
-@CompileStatic
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@TypeAnnotations
 class Message {
 
 	/**

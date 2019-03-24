@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits.payments
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerPreCheckoutQueryMethod
 import tech.teslex.telegroo.telegram.methods.objects.payments.AnswerPreCheckoutQueryMethodObject
 
 @CompileStatic
-trait AnswerPreCheckoutQueryMethodTrait implements AnswerPreCheckoutQueryMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait AnswerPreCheckoutQueryMethodTrait implements AnswerPreCheckoutQueryMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -26,7 +28,7 @@ trait AnswerPreCheckoutQueryMethodTrait implements AnswerPreCheckoutQueryMethod<
 
 	@Override
 	TelegramResult<Object> answerPreCheckoutQuery(@DelegatesTo(AnswerPreCheckoutQueryMethodObject) Closure closure) {
-		def builder = AnswerPreCheckoutQueryMethodObject.newInstance()
+		AnswerPreCheckoutQueryMethodObject builder = new AnswerPreCheckoutQueryMethodObject()
 		closure.delegate = builder
 		closure.call()
 		answerPreCheckoutQuery(builder)

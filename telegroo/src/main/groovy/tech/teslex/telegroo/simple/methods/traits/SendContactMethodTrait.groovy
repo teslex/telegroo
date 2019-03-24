@@ -3,14 +3,16 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.SendContactMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.SendContactMethod
 import tech.teslex.telegroo.telegram.methods.objects.SendContactMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-trait SendContactMethodTrait implements SendContactMethod<TelegramResult<Message>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait SendContactMethodTrait implements SendContactMethod<TelegramResult<Message>> {
 
 	@Override
 	@NamedVariant
@@ -29,7 +31,7 @@ trait SendContactMethodTrait implements SendContactMethod<TelegramResult<Message
 
 	@Override
 	TelegramResult<Message> sendContact(@DelegatesTo(SendContactMethodObject) Closure closure) {
-		def builder = SendContactMethodObject.newInstance()
+		SendContactMethodObject builder = new SendContactMethodObject()
 		closure.delegate = builder
 		closure.call()
 		sendContact(builder)

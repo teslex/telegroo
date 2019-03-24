@@ -3,13 +3,15 @@ package tech.teslex.telegroo.simple.methods.traits
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.methods.interfaces.CreateNewStickerSetMethod
+import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.methods.interfaces.CreateNewStickerSetMethod
 import tech.teslex.telegroo.telegram.methods.objects.CreateNewStickerSetMethodObject
 
 @CompileStatic
-trait CreateNewStickerSetMethodTrait implements CreateNewStickerSetMethod<TelegramResult<Object>>, ContextWithObjectMapper {
+@SelfType(ContextWithObjectMapper)
+trait CreateNewStickerSetMethodTrait implements CreateNewStickerSetMethod<TelegramResult<Object>> {
 
 	@Override
 	@NamedVariant
@@ -26,7 +28,7 @@ trait CreateNewStickerSetMethodTrait implements CreateNewStickerSetMethod<Telegr
 
 	@Override
 	TelegramResult<Object> createNewStickerSet(@DelegatesTo(CreateNewStickerSetMethodObject) Closure closure) {
-		def builder = CreateNewStickerSetMethodObject.newInstance()
+		CreateNewStickerSetMethodObject builder = new CreateNewStickerSetMethodObject()
 		closure.delegate = builder
 		closure.call()
 		createNewStickerSet(builder)
