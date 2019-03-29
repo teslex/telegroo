@@ -32,9 +32,7 @@ class SimpleTelegroo implements Telegroo {
 
 	Boolean active = false
 
-	String defaultCommandSymbol = '/'
-
-	SimpleContext defaultContext
+	SimpleContext context
 
 	SimpleTelegroo(String token) {
 		ObjectMapper mapper = new ObjectMapper().tap {
@@ -43,7 +41,7 @@ class SimpleTelegroo implements Telegroo {
 		}
 
 		this.token = token
-		this.defaultContext = new SimpleContext(new SimpleApi(token, mapper), new Update(updateId: 0))
+		this.context = new SimpleContext(new SimpleApi(token, mapper), new Update(updateId: 0))
 		this.updateHandlersSolver = new SimpleUpdateHandlersSolver(this)
 	}
 
@@ -55,7 +53,7 @@ class SimpleTelegroo implements Telegroo {
 		active = true
 
 		while (active) {
-			TelegramResult<List<Update>> response = defaultContext.getUpdates(offset: defaultContext.lastUpdate.updateId + 1)
+			TelegramResult<List<Update>> response = context.getUpdates(offset: context.lastUpdate.updateId + 1)
 
 			if (response && response.ok && response.result)
 				for (update in response.result)
@@ -70,9 +68,9 @@ class SimpleTelegroo implements Telegroo {
 
 	@Override
 	void solveUpdate(Update update) {
-		this.defaultContext.lastUpdate = update
-		if (checkMid(this.defaultContext.lastUpdate))
-			updateHandlersSolver.solve(this.defaultContext.lastUpdate, handlers)
+		this.context.lastUpdate = update
+		if (checkMid(this.context.lastUpdate))
+			updateHandlersSolver.solve(this.context.lastUpdate, handlers)
 	}
 
 	@Override

@@ -17,7 +17,8 @@ public interface Telegroo {
 
 	void solveUpdate(Update update);
 
-	String getDefaultCommandSymbol();
+
+	MethodsContext getContext();
 
 
 	void on(UpdateType type, @DelegatesTo(MethodsContext.class) Closure handler);

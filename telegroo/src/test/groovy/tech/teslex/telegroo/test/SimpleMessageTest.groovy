@@ -26,7 +26,7 @@ class SimpleMessageTest extends Specification {
 		def testText = 'Hello, Groovy!'
 
 		when:
-		def response = telegroo.sendMessage {
+		def response = telegroo.context.sendMessage {
 			text = testText
 			chatId = testChatId
 		}
@@ -51,7 +51,7 @@ class SimpleMessageTest extends Specification {
 				]).build()
 
 		when:
-		def response = telegroo.sendMessage {
+		def response = telegroo.context.sendMessage {
 			text = testText
 			chatId = testChatId
 			replyMarkup = testMarkup
@@ -68,7 +68,7 @@ class SimpleMessageTest extends Specification {
 		def testPhoto = InputFile.ofUrl('https://assets.gitlab-static.net/uploads/-/system/group/avatar/1593121/CAGK4xZfg_M.jpg?width=64')
 
 		when:
-		def response = telegroo.sendPhoto {
+		def response = telegroo.context.sendPhoto {
 			chatId = testChatId
 			caption = testCaption
 			photo = testPhoto
