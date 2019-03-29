@@ -16,7 +16,7 @@ trait UnbanChatMemberMethodTrait implements UnbanChatMemberMethod<TelegramResult
 	@Override
 	@NamedVariant
 	TelegramResult<Object> unbanChatMember(@NamedDelegate UnbanChatMemberMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
+		data.chatId = data.chatId ?: update[update.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 

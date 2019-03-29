@@ -17,7 +17,7 @@ trait SendAudioMethodTrait implements SendAudioMethod<TelegramResult<Message>> {
 	@Override
 	@NamedVariant
 	TelegramResult<Message> sendAudio(@NamedDelegate SendAudioMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
+		data.chatId = data.chatId ?: update[update.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 

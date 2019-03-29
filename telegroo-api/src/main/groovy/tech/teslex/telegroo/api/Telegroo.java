@@ -3,6 +3,7 @@ package tech.teslex.telegroo.api;
 import groovy.lang.Closure;
 import groovy.lang.DelegatesTo;
 import tech.teslex.telegroo.api.context.MethodsContext;
+import tech.teslex.telegroo.api.dsl.TelegrooDSL;
 import tech.teslex.telegroo.api.update.CommandUpdateHandler;
 import tech.teslex.telegroo.api.update.MessageUpdateHandler;
 import tech.teslex.telegroo.api.update.UpdateHandler;
@@ -20,8 +21,10 @@ public interface Telegroo {
 
 	MethodsContext getContext();
 
+	void dsl(@DelegatesTo(TelegrooDSL.class) Closure closure);
 
-	void on(UpdateType type, @DelegatesTo(MethodsContext.class) Closure handler);
+
+	void update(UpdateType type, @DelegatesTo(MethodsContext.class) Closure handler);
 
 	void update(@DelegatesTo(MethodsContext.class) Closure handler);
 

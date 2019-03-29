@@ -16,7 +16,7 @@ trait GetUserProfilePhotosMethodTrait implements GetUserProfilePhotosMethod<Tele
 
 	@NamedVariant
 	TelegramResult<UserProfilePhotos> getUserProfilePhotos(@NamedDelegate GetUserProfilePhotosMethodObject data) {
-		data.userId = data.userId ?: lastUpdate[lastUpdate.updateType.value]['from']['id'] as Integer
+		data.userId = data.userId ?: update[update.updateType.value]['from']['id'] as Integer
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, UserProfilePhotos)
 

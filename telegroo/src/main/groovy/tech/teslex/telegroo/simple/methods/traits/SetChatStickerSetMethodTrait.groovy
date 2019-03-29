@@ -16,7 +16,7 @@ trait SetChatStickerSetMethodTrait implements SetChatStickerSetMethod<TelegramRe
 	@Override
 	@NamedVariant
 	TelegramResult<Object> setChatStickerSet(@NamedDelegate SetChatStickerSetMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
+		data.chatId = data.chatId ?: update[update.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 

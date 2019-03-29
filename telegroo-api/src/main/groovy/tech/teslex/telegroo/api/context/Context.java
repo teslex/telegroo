@@ -11,7 +11,7 @@ public interface Context<T> {
 
 	void setApi(Api api);
 
-	Update getLastUpdate();
+	Update getUpdate();
 
 	Matcher getMatcher();
 

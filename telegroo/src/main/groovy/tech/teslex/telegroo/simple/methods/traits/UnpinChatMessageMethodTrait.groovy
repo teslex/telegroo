@@ -16,7 +16,7 @@ trait UnpinChatMessageMethodTrait implements UnpinChatMessageMethod<TelegramResu
 	@Override
 	@NamedVariant
 	TelegramResult<Object> unpinChatMessage(@NamedDelegate UnpinChatMessageMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
+		data.chatId = data.chatId ?: update[update.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 

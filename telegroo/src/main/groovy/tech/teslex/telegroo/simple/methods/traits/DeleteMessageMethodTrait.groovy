@@ -16,8 +16,8 @@ trait DeleteMessageMethodTrait implements DeleteMessageMethod<TelegramResult<Obj
 	@Override
 	@NamedVariant
 	TelegramResult<Object> deleteMessage(@NamedDelegate DeleteMessageMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
-		data.messageId = data.messageId ?: lastUpdate[lastUpdate.updateType.value]['messageId'] as Integer
+		data.chatId = data.chatId ?: update[update.updateType.value]['chat']['id']
+		data.messageId = data.messageId ?: update[update.updateType.value]['messageId'] as Integer
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 

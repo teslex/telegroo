@@ -20,7 +20,7 @@ trait ReplyTrait implements ReplyMethod {
 	void reply(replyTo, @DelegatesTo(SimpleMethodsContext) Closure closure) {
 		Api nextApi = new SimpleApi((api as SimpleApi).token, objectMapper)
 		nextApi.defaultParams.put('reply_to_message_id', replyTo)
-		Context nextContext = createNewContext(nextApi, lastUpdate, null)
+		Context nextContext = createNewContext(nextApi, update, null)
 
 		closure.delegate = nextContext
 		closure()
@@ -30,7 +30,7 @@ trait ReplyTrait implements ReplyMethod {
 	 * example: reply { sendMessage(text: 'Nice') }*/
 	@Override
 	void reply(@DelegatesTo(SimpleMethodsContext) Closure closure) {
-		reply(lastUpdate[lastUpdate.updateType.value]['messageId'], closure)
+		reply(update[update.updateType.value]['messageId'], closure)
 	}
 
 	/**
@@ -38,11 +38,11 @@ trait ReplyTrait implements ReplyMethod {
 	 * example: reply(34225).sendMessage(text: 'Nice')
 	 */
 	@Override
-	SimpleMethodsContext reply(replyTo = lastUpdate[lastUpdate.updateType.value]['messageId']) {
+	SimpleMethodsContext reply(replyTo = update[update.updateType.value]['messageId']) {
 		Api nextApi = new SimpleApi((api as SimpleApi).token, objectMapper)
 
 		nextApi.defaultParams.put('reply_to_message_id', replyTo)
 
-		new SimpleContext(nextApi, lastUpdate, objectMapper)
+		new SimpleContext(nextApi, update, objectMapper)
 	}
 }

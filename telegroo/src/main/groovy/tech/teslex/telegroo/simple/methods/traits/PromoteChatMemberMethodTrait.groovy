@@ -16,7 +16,7 @@ trait PromoteChatMemberMethodTrait implements PromoteChatMemberMethod<TelegramRe
 	@Override
 	@NamedVariant
 	TelegramResult<Object> promoteChatMember(@NamedDelegate PromoteChatMemberMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
+		data.chatId = data.chatId ?: update[update.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 

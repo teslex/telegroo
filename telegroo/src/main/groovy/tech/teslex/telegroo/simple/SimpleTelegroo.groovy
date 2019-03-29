@@ -6,11 +6,13 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.api.context.MethodsContext
+import tech.teslex.telegroo.api.dsl.TelegrooDSL
 import tech.teslex.telegroo.api.update.CommandUpdateHandler
 import tech.teslex.telegroo.api.update.MessageUpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandlersSolver
 import tech.teslex.telegroo.simple.context.SimpleContext
+import tech.teslex.telegroo.simple.dsl.SimpleTelegrooDSL
 import tech.teslex.telegroo.simple.update.SimpleUpdateHandlersSolver
 import tech.teslex.telegroo.simple.update.closure.SimpleClosureCommandUpdateHandler
 import tech.teslex.telegroo.simple.update.closure.SimpleClosureMessageUpdateHandler
@@ -53,7 +55,7 @@ class SimpleTelegroo implements Telegroo {
 		active = true
 
 		while (active) {
-			TelegramResult<List<Update>> response = context.getUpdates(offset: context.lastUpdate.updateId + 1)
+			TelegramResult<List<Update>> response = context.getUpdates(offset: context.update.updateId + 1)
 
 			if (response && response.ok && response.result)
 				for (update in response.result)
@@ -68,18 +70,25 @@ class SimpleTelegroo implements Telegroo {
 
 	@Override
 	void solveUpdate(Update update) {
-		this.context.lastUpdate = update
-		if (checkMid(this.context.lastUpdate))
-			updateHandlersSolver.solve(this.context.lastUpdate, handlers)
+		this.context.update = update
+		if (checkMid(this.context.update))
+			updateHandlersSolver.solve(this.context.update, handlers)
 	}
 
 	@Override
-	void on(UpdateType updateType, @DelegatesTo(MethodsContext) Closure handler) {
+	void dsl(@DelegatesTo(TelegrooDSL) Closure closure) {
+		SimpleTelegrooDSL dsl = new SimpleTelegrooDSL(this)
+		closure.delegate = dsl
+		closure()
+	}
+
+	@Override
+	void update(UpdateType updateType, @DelegatesTo(MethodsContext) Closure handler) {
 		if (!handlers.containsKey(updateType)) handlers.put(updateType, [])
 		handlers[updateType] << new SimpleClosureUpdateHandler(updateType, handler)
 	}
 
-	void on(String updateType, @DelegatesTo(MethodsContext) Closure handler) {
+	void update(String updateType, @DelegatesTo(MethodsContext) Closure handler) {
 		if (!handlers.containsKey(UpdateType.fromString(updateType))) handlers.put(UpdateType.fromString(updateType), [])
 		handlers[UpdateType.fromString(updateType)] << new SimpleClosureUpdateHandler(UpdateType.fromString(updateType), handler)
 	}

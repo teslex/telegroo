@@ -66,7 +66,7 @@ class SimpleContext implements SimpleMethodsContext {
 	}
 
 	@Override
-	Update getLastUpdate() {
+	Update getUpdate() {
 		this.lastUpdate
 	}
 
@@ -88,7 +88,7 @@ class SimpleContext implements SimpleMethodsContext {
 		this.objectMapper = objectMapper
 	}
 
-	void setLastUpdate(Update update) {
+	void setUpdate(Update update) {
 		this.lastUpdate = update
 	}
 }

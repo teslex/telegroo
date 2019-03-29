@@ -16,7 +16,7 @@ trait RestrictChatMemberMethodTrait implements RestrictChatMemberMethod<Telegram
 	@Override
 	@NamedVariant
 	TelegramResult<Object> restrictChatMember(@NamedDelegate RestrictChatMemberMethodObject data) {
-		data.chatId = data.chatId ?: lastUpdate[lastUpdate.updateType.value]['chat']['id']
+		data.chatId = data.chatId ?: update[update.updateType.value]['chat']['id']
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 
