@@ -2,22 +2,18 @@ package tech.teslex.telegroo.api;
 
 import groovy.lang.Closure;
 import groovy.lang.DelegatesTo;
-import groovy.lang.Newify;
 import tech.teslex.telegroo.api.context.MethodsContext;
 import tech.teslex.telegroo.api.update.CommandUpdateHandler;
 import tech.teslex.telegroo.api.update.MessageUpdateHandler;
 import tech.teslex.telegroo.api.update.UpdateHandler;
 import tech.teslex.telegroo.telegram.enums.UpdateType;
-import tech.teslex.telegroo.telegram.methods.objects.SendMessageMethodObject;
 import tech.teslex.telegroo.telegram.types.update.Update;
 
-public interface Telegroo<T> extends MethodsContext<T> {
+public interface Telegroo {
 
 	void start();
 
 	void stop();
-
-	void setLastUpdate(Update update);
 
 	void solveUpdate(Update update);
 
@@ -26,20 +22,20 @@ public interface Telegroo<T> extends MethodsContext<T> {
 
 	void on(UpdateType type, @DelegatesTo(MethodsContext.class) Closure handler);
 
-	void onUpdate(@DelegatesTo(MethodsContext.class) Closure handler);
+	void update(@DelegatesTo(MethodsContext.class) Closure handler);
 
-	void onCommand(String command, @DelegatesTo(MethodsContext.class) Closure handler);
+	void command(String command, @DelegatesTo(MethodsContext.class) Closure handler);
 
-	void onMessage(String message, @DelegatesTo(MethodsContext.class) Closure handler);
+	void message(String message, @DelegatesTo(MethodsContext.class) Closure handler);
 
-	void onMessage(@DelegatesTo(MethodsContext.class) Closure handler);
+	void message(@DelegatesTo(MethodsContext.class) Closure handler);
 
 
-	void onUpdateHandler(UpdateHandler handler);
+	void updateHandler(UpdateHandler handler);
 
-	void onCommandUpdateHandler(CommandUpdateHandler handler);
+	void commandUpdateHandler(CommandUpdateHandler handler);
 
-	void onMessageUpdateHandler(MessageUpdateHandler handler);
+	void messageUpdateHandler(MessageUpdateHandler handler);
 
 	void middleware(Closure<Boolean> closure);
 }

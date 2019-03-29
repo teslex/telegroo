@@ -10,8 +10,6 @@ import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.enums.UpdateType
 import tech.teslex.telegroo.telegram.types.update.Update
 
-import java.util.regex.Pattern
-
 @CompileStatic
 class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 
@@ -22,44 +20,35 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 	}
 
 	@Override
-	void solve(Update update, List<UpdateHandler> handlers) {
+	void solve(Update update, Map<UpdateType, List<UpdateHandler>> handlers) {
 
-		handlers.findAll { it.type == UpdateType.UPDATE }.each {
-			it.handle(new SimpleContext(telegroo.api, update, telegroo.objectMapper))
+		handlers[UpdateType.UPDATE].each {
+			it.handle(new SimpleContext(telegroo.defaultContext.api, update, telegroo.defaultContext.objectMapper))
 		}
 
-		if (update.updateType == UpdateType.MESSAGE) {
+		solveMessagesAndCommands(update, handlers[UpdateType.MESSAGE])
 
-			// handle all message handlers
-			handlers.findAll {
-				(!(it instanceof CommandUpdateHandler) && !(it instanceof MessageUpdateHandler) && it.type == UpdateType.MESSAGE)
-			}.each {
-				it.handle(new SimpleContext(telegroo.api, update, telegroo.objectMapper))
+		handlers.findAll { it.key != UpdateType.MESSAGE && it.key != UpdateType.UPDATE }.each {
+			it.value.each {
+				it.handle(new SimpleContext(telegroo.defaultContext.api, update, telegroo.defaultContext.objectMapper))
 			}
+		}
+	}
 
-			// find with patterns
-			def handler = handlers.find {
-				if (it instanceof CommandUpdateHandler) {
-					((it as CommandUpdateHandler).useCommandSymbol() ? Pattern.compile("${(it as CommandUpdateHandler).commandSymbol}${it.pattern}") : it.pattern).matcher(update.message.text)
-				} else if (it instanceof MessageUpdateHandler) {
-					(it as MessageUpdateHandler).pattern.matcher(update.message.text)
-				} else {
-					false
+	private void solveMessagesAndCommands(Update update, List<UpdateHandler> handlers) {
+		handlers.each { handler ->
+			if (handler instanceof CommandUpdateHandler) {
+				def pattern = handler.useCommandSymbol() ? handler.patternWithCommandSymbol : handler.pattern
+				if (pattern.matcher(update.message.text)) {
+					handler.handle(new SimpleContext(telegroo.defaultContext.api, update, telegroo.defaultContext.objectMapper, update.message.text =~ pattern))
 				}
-			}
-
-			if (handler) {
-				if (handler instanceof CommandUpdateHandler) {
-					def pattern = (handler as CommandUpdateHandler).useCommandSymbol() ? "${(handler as CommandUpdateHandler).commandSymbol}${(handler as CommandUpdateHandler).pattern}" : (handler as CommandUpdateHandler).pattern
-					handler.handle(new SimpleContext(telegroo.api, update, telegroo.objectMapper, update.message.text =~ pattern))
-				} else {
-					handler.handle(new SimpleContext(telegroo.api, update, telegroo.objectMapper, update.message.text =~ (handler as MessageUpdateHandler).pattern))
+			} else if (handler instanceof MessageUpdateHandler) {
+				def pattern = handler.pattern
+				if (pattern.matcher(update.message.text)) {
+					handler.handle(new SimpleContext(telegroo.defaultContext.api, update, telegroo.defaultContext.objectMapper, update.message.text =~ pattern))
 				}
-			}
-		} else {
-
-			handlers.findAll { it.type == update.updateType }.each {
-				it.handle(new SimpleContext(telegroo.api, update, telegroo.objectMapper))
+			} else {
+				handler.handle(new SimpleContext(telegroo.defaultContext.api, update, telegroo.defaultContext.objectMapper))
 			}
 		}
 	}

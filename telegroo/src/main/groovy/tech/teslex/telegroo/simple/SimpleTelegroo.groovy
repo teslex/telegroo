@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
-import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.api.context.MethodsContext
 import tech.teslex.telegroo.api.update.CommandUpdateHandler
@@ -16,32 +15,36 @@ import tech.teslex.telegroo.simple.update.SimpleUpdateHandlersSolver
 import tech.teslex.telegroo.simple.update.closure.SimpleClosureCommandUpdateHandler
 import tech.teslex.telegroo.simple.update.closure.SimpleClosureMessageUpdateHandler
 import tech.teslex.telegroo.simple.update.closure.SimpleClosureUpdateHandler
+import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.enums.UpdateType
 import tech.teslex.telegroo.telegram.types.update.Update
 
 @CompileStatic
-class SimpleTelegroo extends SimpleContext implements Telegroo<Response> {
+class SimpleTelegroo implements Telegroo {
 
 	String token
 
-	List<UpdateHandler> handlers = []
+	Map<UpdateType, List<UpdateHandler>> handlers = [:]
 
 	List<Closure<Boolean>> middlewareList = []
 
-	UpdateHandlersSolver updateHandlersSolver = new SimpleUpdateHandlersSolver(this)
+	UpdateHandlersSolver updateHandlersSolver
 
 	Boolean active = false
 
 	String defaultCommandSymbol = '/'
 
+	SimpleContext defaultContext
+
 	SimpleTelegroo(String token) {
-		this.objectMapper = new ObjectMapper()
-		this.objectMapper.registerModule(new Jdk8Module())
-		this.objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+		ObjectMapper mapper = new ObjectMapper().tap {
+			registerModule(new Jdk8Module())
+			configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+		}
 
 		this.token = token
-		this.lastUpdate = new Update(updateId: 0)
-		this.api = new SimpleApi(token, objectMapper)
+		this.defaultContext = new SimpleContext(new SimpleApi(token, mapper), new Update(updateId: 0))
+		this.updateHandlersSolver = new SimpleUpdateHandlersSolver(this)
 	}
 
 	@Override
@@ -52,7 +55,7 @@ class SimpleTelegroo extends SimpleContext implements Telegroo<Response> {
 		active = true
 
 		while (active) {
-			def response = getUpdates(offset: lastUpdate.updateId + 1)
+			TelegramResult<List<Update>> response = defaultContext.getUpdates(offset: defaultContext.lastUpdate.updateId + 1)
 
 			if (response && response.ok && response.result)
 				for (update in response.result)
@@ -67,53 +70,62 @@ class SimpleTelegroo extends SimpleContext implements Telegroo<Response> {
 
 	@Override
 	void solveUpdate(Update update) {
-		lastUpdate = update
-		if (checkMid(lastUpdate))
-			updateHandlersSolver.solve(lastUpdate, handlers)
+		this.defaultContext.lastUpdate = update
+		if (checkMid(this.defaultContext.lastUpdate))
+			updateHandlersSolver.solve(this.defaultContext.lastUpdate, handlers)
 	}
 
 	@Override
 	void on(UpdateType updateType, @DelegatesTo(MethodsContext) Closure handler) {
-		handlers << new SimpleClosureUpdateHandler(updateType, handler)
+		if (!handlers.containsKey(updateType)) handlers.put(updateType, [])
+		handlers[updateType] << new SimpleClosureUpdateHandler(updateType, handler)
 	}
 
 	void on(String updateType, @DelegatesTo(MethodsContext) Closure handler) {
-		handlers << new SimpleClosureUpdateHandler(UpdateType.fromString(updateType), handler)
+		if (!handlers.containsKey(UpdateType.fromString(updateType))) handlers.put(UpdateType.fromString(updateType), [])
+		handlers[UpdateType.fromString(updateType)] << new SimpleClosureUpdateHandler(UpdateType.fromString(updateType), handler)
 	}
 
 	@Override
-	void onUpdate(@DelegatesTo(MethodsContext) Closure handler) {
-		handlers << new SimpleClosureUpdateHandler(handler)
+	void update(@DelegatesTo(MethodsContext) Closure handler) {
+		if (!handlers.containsKey(UpdateType.UPDATE)) handlers.put(UpdateType.UPDATE, [])
+		handlers[UpdateType.UPDATE] << new SimpleClosureUpdateHandler(handler)
 	}
 
 	@Override
-	void onCommand(String command, @DelegatesTo(MethodsContext) Closure handler) {
-		handlers << new SimpleClosureCommandUpdateHandler(command, handler)
+	void command(String command, @DelegatesTo(MethodsContext) Closure handler) {
+		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, [])
+		handlers[UpdateType.MESSAGE] << new SimpleClosureCommandUpdateHandler(command, handler)
 	}
 
 	@Override
-	void onMessage(String message, @DelegatesTo(MethodsContext) Closure handler) {
-		handlers << new SimpleClosureMessageUpdateHandler(message, handler)
+	void message(String message, @DelegatesTo(MethodsContext) Closure handler) {
+		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, [])
+		handlers[UpdateType.MESSAGE] << new SimpleClosureMessageUpdateHandler(message, handler)
 	}
 
 	@Override
-	void onMessage(@DelegatesTo(MethodsContext) Closure handler) {
-		handlers << new SimpleClosureUpdateHandler(UpdateType.MESSAGE, handler)
+	void message(@DelegatesTo(MethodsContext) Closure handler) {
+		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, [])
+		handlers[UpdateType.MESSAGE] << new SimpleClosureUpdateHandler(UpdateType.MESSAGE, handler)
 	}
 
 	@Override
-	void onUpdateHandler(UpdateHandler handler) {
-		handlers << handler
+	void updateHandler(UpdateHandler handler) {
+		if (!handlers.containsKey(UpdateType.UPDATE)) handlers.put(UpdateType.UPDATE, [])
+		handlers[UpdateType.UPDATE] << handler
 	}
 
 	@Override
-	void onCommandUpdateHandler(CommandUpdateHandler handler) {
-		handlers << handler
+	void commandUpdateHandler(CommandUpdateHandler handler) {
+		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, [])
+		handlers[UpdateType.MESSAGE] << handler
 	}
 
 	@Override
-	void onMessageUpdateHandler(MessageUpdateHandler handler) {
-		handlers << handler
+	void messageUpdateHandler(MessageUpdateHandler handler) {
+		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, [])
+		handlers[UpdateType.MESSAGE] << handler
 	}
 
 	@Override
