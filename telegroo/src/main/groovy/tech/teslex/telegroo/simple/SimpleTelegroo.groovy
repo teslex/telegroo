@@ -36,6 +36,8 @@ class SimpleTelegroo implements Telegroo {
 
 	SimpleContext context
 
+	protected SimpleTelegroo() {}
+
 	SimpleTelegroo(String token) {
 		ObjectMapper mapper = new ObjectMapper().tap {
 			registerModule(new Jdk8Module())
