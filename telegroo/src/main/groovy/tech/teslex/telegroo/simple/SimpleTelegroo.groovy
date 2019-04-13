@@ -34,7 +34,7 @@ class SimpleTelegroo implements Telegroo {
 
 	Boolean active = false
 
-	SimpleContext context
+	SimpleContext mainContext
 
 	protected SimpleTelegroo() {}
 
@@ -45,7 +45,7 @@ class SimpleTelegroo implements Telegroo {
 		}
 
 		this.token = token
-		this.context = new SimpleContext(new SimpleApi(token, mapper), new Update(updateId: 0))
+		this.mainContext = new SimpleContext(new SimpleApi(token, mapper), new Update(updateId: 0))
 		this.updateHandlersSolver = new SimpleUpdateHandlersSolver(this)
 	}
 
@@ -57,7 +57,7 @@ class SimpleTelegroo implements Telegroo {
 		active = true
 
 		while (active) {
-			TelegramResult<List<Update>> response = context.getUpdates(offset: context.update.updateId + 1)
+			TelegramResult<List<Update>> response = mainContext.getUpdates(offset: mainContext.update.updateId + 1)
 
 			if (response && response.ok && response.result)
 				for (update in response.result)
@@ -72,9 +72,9 @@ class SimpleTelegroo implements Telegroo {
 
 	@Override
 	void solveUpdate(Update update) {
-		this.context.update = update
-		if (checkMid(this.context.update))
-			updateHandlersSolver.solve(this.context.update, handlers)
+		this.mainContext.update = update
+		if (checkMid(this.mainContext.update))
+			updateHandlersSolver.solve(this.mainContext.update, handlers)
 	}
 
 	@Override

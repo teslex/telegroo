@@ -19,7 +19,7 @@ public interface Telegroo {
 	void solveUpdate(Update update);
 
 
-	MethodsContext getContext();
+	MethodsContext getMainContext();
 
 	void dsl(@DelegatesTo(TelegrooDSL.class) Closure closure);
 
