@@ -16,6 +16,6 @@ trait GetWebhookInfoMethodTrait implements GetWebhookInfoMethod<TelegramResult<W
 	TelegramResult<WebhookInfo> getWebhookInfo() {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, WebhookInfo)
 
-		objectMapper.readValue(api.go(new GetWebhookInfoMethodObject()).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(new GetWebhookInfoMethodObject()).returnContent().asStream(), type)
 	}
 }

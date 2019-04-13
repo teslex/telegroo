@@ -21,7 +21,7 @@ trait SendDocumentMethodTrait implements SendDocumentMethod<TelegramResult<Messa
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 
-		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
 	}
 
 	@Override

@@ -19,7 +19,7 @@ trait GetFileMethodTrait implements GetFileMethod<TelegramResult<FileObject>> {
 	TelegramResult<FileObject> getFile(@NamedDelegate GetFileMethodObject data) {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, FileObject)
 
-		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
 	}
 
 	@Override

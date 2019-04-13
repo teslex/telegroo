@@ -24,7 +24,7 @@ trait GetGameHighScoresMethodTrait implements GetGameHighScoresMethod<TelegramRe
 	TelegramResult<List<GameHighScore>> getGameHighScores(@NamedDelegate GetGameHighScoresMethodObject data) {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, objectMapper.typeFactory.constructCollectionLikeType(ArrayList, GameHighScore))
 
-		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
 	}
 
 	@Override

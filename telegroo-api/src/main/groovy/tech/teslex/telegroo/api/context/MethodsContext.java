@@ -1,5 +1,6 @@
 package tech.teslex.telegroo.api.context;
 
+import tech.teslex.telegroo.api.TelegramClient;
 import tech.teslex.telegroo.api.methods.reply.ReplyMethod;
 import tech.teslex.telegroo.telegram.TelegramResult;
 import tech.teslex.telegroo.telegram.methods.interfaces.*;
@@ -19,7 +20,7 @@ import tech.teslex.telegroo.telegram.types.update.Update;
 
 import java.util.List;
 
-public interface MethodsContext<T> extends Context<T>,
+public interface MethodsContext<TC extends TelegramClient> extends Context<TC>,
 
 		GetUpdatesMethod<TelegramResult<List<Update>>>,
 

@@ -1,3 +1,3 @@
-# telegram-api
+# telegram-telegramClient
 
-telegram bot api types & methods for **telegroo**
+telegram bot telegramClient types & methods for **telegroo**

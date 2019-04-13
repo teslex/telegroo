@@ -19,7 +19,7 @@ trait UploadStickerFileMethodTrait implements UploadStickerFileMethod<TelegramRe
 	TelegramResult<FileObject> uploadStickerFile(@NamedDelegate UploadStickerFileMethodObject data) {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, FileObject)
 
-		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
 	}
 
 	@Override

@@ -1,3 +1,3 @@
-# telegroo-api
+# telegroo-telegramClient
 
-telegroo api for bots
+telegroo telegramClient for bots

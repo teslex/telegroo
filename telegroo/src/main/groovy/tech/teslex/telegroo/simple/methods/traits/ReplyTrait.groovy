@@ -2,10 +2,10 @@ package tech.teslex.telegroo.simple.methods.traits
 
 import groovy.transform.CompileStatic
 import groovy.transform.SelfType
-import tech.teslex.telegroo.api.Api
+import tech.teslex.telegroo.api.TelegramClient
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.api.methods.reply.ReplyMethod
-import tech.teslex.telegroo.simple.SimpleApi
+import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
 import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.simple.context.SimpleMethodsContext
@@ -18,7 +18,7 @@ trait ReplyTrait implements ReplyMethod {
 	 * example: reply(12343) { sendMessage(text: 'Nice') }*/
 	@Override
 	void reply(replyTo, @DelegatesTo(SimpleMethodsContext) Closure closure) {
-		Api nextApi = new SimpleApi((api as SimpleApi).token, objectMapper)
+		TelegramClient nextApi = new SimpleTelegramClient((telegramClient as SimpleTelegramClient).token, objectMapper)
 		nextApi.defaultParams.put('reply_to_message_id', replyTo)
 		Context nextContext = createNewContext(nextApi, update, null)
 
@@ -39,7 +39,7 @@ trait ReplyTrait implements ReplyMethod {
 	 */
 	@Override
 	SimpleMethodsContext reply(replyTo = update[update.updateType.value]['messageId']) {
-		Api nextApi = new SimpleApi((api as SimpleApi).token, objectMapper)
+		TelegramClient nextApi = new SimpleTelegramClient((telegramClient as SimpleTelegramClient).token, objectMapper)
 
 		nextApi.defaultParams.put('reply_to_message_id', replyTo)
 

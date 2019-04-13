@@ -1,19 +1,19 @@
 package tech.teslex.telegroo.api.context;
 
-import tech.teslex.telegroo.api.Api;
+import tech.teslex.telegroo.api.TelegramClient;
 import tech.teslex.telegroo.telegram.types.update.Update;
 
 import java.util.regex.Matcher;
 
-public interface Context</*fixme*/T> {
+public interface Context<TC extends TelegramClient> {
 
-	Api<T> getApi();
+	TC getTelegramClient();
 
-	void setApi(Api api);
+	void setTelegramClient(TC telegramClient);
 
 	Update getUpdate();
 
 	Matcher getMatcher();
 
-	Context createNewContext(Api api, Update update, Matcher matcher);
+	Context createNewContext(TC telegramClient, Update update, Matcher matcher);
 }

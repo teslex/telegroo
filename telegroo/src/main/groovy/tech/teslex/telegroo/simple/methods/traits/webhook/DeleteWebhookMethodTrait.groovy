@@ -15,6 +15,6 @@ trait DeleteWebhookMethodTrait implements DeleteWebhookMethod<TelegramResult<Obj
 	TelegramResult<Object> deleteWebhook() {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 
-		objectMapper.readValue(api.go(new DeleteWebhookMethodObject()).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(new DeleteWebhookMethodObject()).returnContent().asStream(), type)
 	}
 }

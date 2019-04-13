@@ -20,7 +20,7 @@ trait DeleteChatPhotoMethodTrait implements DeleteChatPhotoMethod<TelegramResult
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 
-		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
 	}
 
 	@Override

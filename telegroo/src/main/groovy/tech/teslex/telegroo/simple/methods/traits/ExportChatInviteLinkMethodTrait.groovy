@@ -20,7 +20,7 @@ trait ExportChatInviteLinkMethodTrait implements ExportChatInviteLinkMethod<Tele
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, String)
 
-		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
 	}
 
 	@Override

@@ -20,7 +20,7 @@ trait GetChatMembersCountMethodTrait implements GetChatMembersCountMethod<Telegr
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Integer)
 
-		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
 	}
 
 	@Override

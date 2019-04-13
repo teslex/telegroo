@@ -21,7 +21,7 @@ trait GetChatAdministratorsMethodTrait implements GetChatAdministratorsMethod<Te
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, objectMapper.typeFactory.constructCollectionLikeType(ArrayList, ChatMember))
 
-		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
 	}
 
 	@Override

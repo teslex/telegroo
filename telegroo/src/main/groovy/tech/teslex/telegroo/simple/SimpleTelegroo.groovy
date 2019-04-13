@@ -43,7 +43,7 @@ class SimpleTelegroo implements Telegroo {
 		}
 
 		this.token = token
-		this.mainContext = new SimpleContext(new SimpleApi(token, mapper), new Update(updateId: 0))
+		this.mainContext = new SimpleContext(new SimpleTelegramClient(token, mapper), new Update(updateId: 0), mapper)
 		this.updateHandlersSolver = new SimpleUpdateHandlersSolver(this)
 	}
 

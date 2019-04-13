@@ -1,7 +1,9 @@
 package tech.teslex.telegroo.test
 
+import groovy.transform.CompileStatic
 import spock.lang.Shared
 import spock.lang.Specification
+import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.simple.SimpleTelegroo
 import tech.teslex.telegroo.telegram.types.InlineKeyboardButton
 import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
@@ -16,7 +18,7 @@ class SimpleMessageTest extends Specification {
 	String token = props.token
 
 	@Shared
-	def telegroo = new SimpleTelegroo(token)
+	Telegroo telegroo = new SimpleTelegroo(token)
 
 	@Shared
 	def testChatId = -347437795
@@ -26,7 +28,7 @@ class SimpleMessageTest extends Specification {
 		def testText = 'Hello, Groovy!'
 
 		when:
-		def response = telegroo.context.sendMessage {
+		def response = telegroo.mainContext.sendMessage {
 			text = testText
 			chatId = testChatId
 		}
@@ -51,7 +53,7 @@ class SimpleMessageTest extends Specification {
 				]).build()
 
 		when:
-		def response = telegroo.context.sendMessage {
+		def response = telegroo.mainContext.sendMessage {
 			text = testText
 			chatId = testChatId
 			replyMarkup = testMarkup
@@ -68,7 +70,7 @@ class SimpleMessageTest extends Specification {
 		def testPhoto = InputFile.ofUrl('https://assets.gitlab-static.net/uploads/-/system/group/avatar/1593121/CAGK4xZfg_M.jpg?width=64')
 
 		when:
-		def response = telegroo.context.sendPhoto {
+		def response = telegroo.mainContext.sendPhoto {
 			chatId = testChatId
 			caption = testCaption
 			photo = testPhoto

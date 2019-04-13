@@ -23,14 +23,14 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 	void solve(Update update, Map<UpdateType, List<UpdateHandler>> handlers) {
 
 		handlers[UpdateType.UPDATE].each {
-			it.handle(new SimpleContext(telegroo.mainContext.api, update, telegroo.mainContext.objectMapper))
+			it.handle(new SimpleContext(telegroo.mainContext.telegramClient, update, telegroo.mainContext.objectMapper))
 		}
 
 		solveMessagesAndCommands(update, handlers[UpdateType.MESSAGE])
 
 		handlers.findAll { it.key != UpdateType.MESSAGE && it.key != UpdateType.UPDATE }.each {
 			it.value.each {
-				it.handle(new SimpleContext(telegroo.mainContext.api, update, telegroo.mainContext.objectMapper))
+				it.handle(new SimpleContext(telegroo.mainContext.telegramClient, update, telegroo.mainContext.objectMapper))
 			}
 		}
 	}
@@ -40,15 +40,15 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 			if (handler instanceof CommandUpdateHandler) {
 				def pattern = handler.useCommandSymbol() ? handler.patternWithCommandSymbol : handler.pattern
 				if (pattern.matcher(update.message.text)) {
-					handler.handle(new SimpleContext(telegroo.mainContext.api, update, telegroo.mainContext.objectMapper, update.message.text =~ pattern))
+					handler.handle(new SimpleContext(telegroo.mainContext.telegramClient, update, telegroo.mainContext.objectMapper, update.message.text =~ pattern))
 				}
 			} else if (handler instanceof MessageUpdateHandler) {
 				def pattern = handler.pattern
 				if (pattern.matcher(update.message.text)) {
-					handler.handle(new SimpleContext(telegroo.mainContext.api, update, telegroo.mainContext.objectMapper, update.message.text =~ pattern))
+					handler.handle(new SimpleContext(telegroo.mainContext.telegramClient, update, telegroo.mainContext.objectMapper, update.message.text =~ pattern))
 				}
 			} else {
-				handler.handle(new SimpleContext(telegroo.mainContext.api, update, telegroo.mainContext.objectMapper))
+				handler.handle(new SimpleContext(telegroo.mainContext.telegramClient, update, telegroo.mainContext.objectMapper))
 			}
 		}
 	}

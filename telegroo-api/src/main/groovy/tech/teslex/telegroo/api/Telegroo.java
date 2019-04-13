@@ -18,7 +18,7 @@ public interface Telegroo {
 	void solveUpdate(Update update);
 
 
-	MethodsContext getMainContext();
+	MethodsContext<TelegramClient> getMainContext();
 
 
 	void update(UpdateType type, @DelegatesTo(MethodsContext.class) Closure handler);

@@ -20,7 +20,7 @@ trait GetUserProfilePhotosMethodTrait implements GetUserProfilePhotosMethod<Tele
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, UserProfilePhotos)
 
-		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
 	}
 
 	TelegramResult<UserProfilePhotos> getUserProfilePhotos(Map data) {

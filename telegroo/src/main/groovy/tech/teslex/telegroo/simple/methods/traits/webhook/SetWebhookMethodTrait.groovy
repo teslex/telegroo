@@ -18,7 +18,7 @@ trait SetWebhookMethodTrait implements SetWebhookMethod<TelegramResult<Object>> 
 	TelegramResult<Object> setWebhook(@NamedDelegate SetWebhookMethodObject data) {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 
-		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
 	}
 
 	@Override

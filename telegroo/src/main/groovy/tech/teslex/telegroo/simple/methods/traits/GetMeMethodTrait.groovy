@@ -15,6 +15,6 @@ trait GetMeMethodTrait implements GetMeMethod<TelegramResult<User>> {
 	TelegramResult<User> getMe() {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, User)
 
-		objectMapper.readValue(api.go('getMe', [:]).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go('getMe', [:]).returnContent().asStream(), type)
 	}
 }

@@ -21,7 +21,7 @@ trait GetChatMemberMethodTrait implements GetChatMemberMethod<TelegramResult<Cha
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, ChatMember)
 
-		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
 	}
 
 	@Override

@@ -9,13 +9,13 @@ import org.apache.http.client.fluent.Request
 import org.apache.http.client.fluent.Response
 import org.apache.http.entity.ContentType
 import org.apache.http.entity.mime.MultipartEntityBuilder
-import tech.teslex.telegroo.api.Api
+import tech.teslex.telegroo.api.TelegramClient
 import tech.teslex.telegroo.telegram.methods.MethodObject
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
 
 @CompileStatic
-class SimpleApi implements Api<Response> {
+class SimpleTelegramClient implements TelegramClient<Response> {
 
 	String token
 
@@ -26,7 +26,7 @@ class SimpleApi implements Api<Response> {
 
 	ObjectMapper objectMapper
 
-	SimpleApi(String token) {
+	SimpleTelegramClient(String token) {
 		this.token = token
 
 		this.objectMapper = new ObjectMapper()
@@ -34,7 +34,7 @@ class SimpleApi implements Api<Response> {
 		this.objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
 	}
 
-	SimpleApi(String token, ObjectMapper objectMapper) {
+	SimpleTelegramClient(String token, ObjectMapper objectMapper) {
 		this.token = token
 		this.objectMapper = objectMapper
 	}

@@ -19,7 +19,7 @@ trait GetStickerSetMethodTrait implements GetStickerSetMethod<TelegramResult<Sti
 	TelegramResult<StickerSet> getStickerSet(@NamedDelegate GetStickerSetMethodObject data) {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, StickerSet)
 
-		objectMapper.readValue(api.go(data).returnContent().asStream(), type)
+		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
 	}
 
 	@Override
