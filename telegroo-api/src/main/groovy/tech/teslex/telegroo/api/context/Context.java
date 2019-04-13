@@ -5,7 +5,7 @@ import tech.teslex.telegroo.telegram.types.update.Update;
 
 import java.util.regex.Matcher;
 
-public interface Context<T> {
+public interface Context</*fixme*/T> {
 
 	Api<T> getApi();
 

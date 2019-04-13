@@ -2,4 +2,5 @@ rootProject.name = 'telegroo'
 
 include 'telegram-api'
 include 'telegroo-api'
+include 'telegroo-dsl'
 include 'telegroo'

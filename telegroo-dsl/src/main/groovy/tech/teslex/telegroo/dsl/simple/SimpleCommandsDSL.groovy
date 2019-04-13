@@ -1,17 +1,16 @@
-package tech.teslex.telegroo.simple.dsl
-
+package tech.teslex.telegroo.dsl.simple
 
 import groovy.transform.CompileStatic
+import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.api.context.MethodsContext
-import tech.teslex.telegroo.api.dsl.CommandsDSL
-import tech.teslex.telegroo.simple.SimpleTelegroo
+import tech.teslex.telegroo.dsl.api.CommandsDSL
 
 @CompileStatic
 class SimpleCommandsDSL implements CommandsDSL {
 
-	private SimpleTelegroo telegroo
+	private Telegroo telegroo
 
-	SimpleCommandsDSL(SimpleTelegroo telegroo) {
+	SimpleCommandsDSL(Telegroo telegroo) {
 		this.telegroo = telegroo
 	}
 

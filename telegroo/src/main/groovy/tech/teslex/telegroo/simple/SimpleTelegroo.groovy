@@ -6,13 +6,11 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.api.context.MethodsContext
-import tech.teslex.telegroo.api.dsl.TelegrooDSL
 import tech.teslex.telegroo.api.update.CommandUpdateHandler
 import tech.teslex.telegroo.api.update.MessageUpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandlersSolver
 import tech.teslex.telegroo.simple.context.SimpleContext
-import tech.teslex.telegroo.simple.dsl.SimpleTelegrooDSL
 import tech.teslex.telegroo.simple.update.SimpleUpdateHandlersSolver
 import tech.teslex.telegroo.simple.update.closure.SimpleClosureCommandUpdateHandler
 import tech.teslex.telegroo.simple.update.closure.SimpleClosureMessageUpdateHandler
@@ -75,13 +73,6 @@ class SimpleTelegroo implements Telegroo {
 		this.mainContext.update = update
 		if (checkMid(this.mainContext.update))
 			updateHandlersSolver.solve(this.mainContext.update, handlers)
-	}
-
-	@Override
-	void dsl(@DelegatesTo(TelegrooDSL) Closure closure) {
-		SimpleTelegrooDSL dsl = new SimpleTelegrooDSL(this)
-		closure.delegate = dsl
-		closure()
 	}
 
 	@Override

@@ -1,8 +1,9 @@
-package tech.teslex.telegroo.api.dsl;
+package tech.teslex.telegroo.dsl.api;
 
 import groovy.lang.Closure;
 import groovy.lang.DelegatesTo;
 import tech.teslex.telegroo.api.context.MethodsContext;
+import tech.teslex.telegroo.dsl.api.CommandsDSL;
 import tech.teslex.telegroo.telegram.enums.UpdateType;
 
 public interface TelegrooDSL {

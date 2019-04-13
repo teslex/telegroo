@@ -1,4 +1,5 @@
 plugins {
+	id 'java'
 	id 'groovy'
 
 	id 'maven-publish'
@@ -9,16 +10,6 @@ dependencies {
 	compile project(':telegroo-api')
 
 	compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
-
-	compile group: 'org.apache.httpcomponents', name: 'httpcore', version: apacheHttpCoreVersion
-	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: apacheHttpClientVersion
-	compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: apacheHttpFluentHcVersion
-	compile group: 'org.apache.httpcomponents', name: 'httpmime', version: apacheHttpHttpMimeVersion
-
-	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion
-	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jacksonVersion
-
-	testCompile 'org.spockframework.spock:spock-core:spock-1.2'
 }
 
 task sourcesJar(type: Jar) {
@@ -30,14 +21,14 @@ publishing {
 	publications {
 		maven(MavenPublication) {
 			groupId 'tech.teslex.telegroo'
-			artifactId 'telegroo'
+			artifactId 'telegroo-dsl'
 			version version
 
 			from components.java
 			artifact sourcesJar
 
 			pom {
-				name = 'telegroo'
+				name = 'telegroo-api'
 				url = 'https://gitlab.com/teslex/telegroo/telegroo'
 				licenses {
 					license {
@@ -75,12 +66,12 @@ publishing {
 bintray {
 	user = System.getenv('BINTRAY_USER')
 	key = System.getenv('BINTRAY_KEY')
-
+	
 	publications = ['maven']
 
 	pkg {
 		repo = 'telegroo'
-		name = 'telegroo'
+		name = 'telegroo-dsl'
 		userOrg = 'expexes'
 		licenses = ['Apache-2.0']
 		vcsUrl = 'https://gitlab.com/teslex/telegroo/telegroo.git'

@@ -1,4 +1,4 @@
-package tech.teslex.telegroo.api.dsl;
+package tech.teslex.telegroo.dsl.api;
 
 import groovy.lang.Closure;
 import groovy.lang.DelegatesTo;

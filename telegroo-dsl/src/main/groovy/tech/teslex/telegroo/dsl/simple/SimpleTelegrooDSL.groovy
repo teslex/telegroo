@@ -1,18 +1,18 @@
-package tech.teslex.telegroo.simple.dsl
+package tech.teslex.telegroo.dsl.simple
 
 import groovy.transform.CompileStatic
+import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.api.context.MethodsContext
-import tech.teslex.telegroo.api.dsl.CommandsDSL
-import tech.teslex.telegroo.api.dsl.TelegrooDSL
-import tech.teslex.telegroo.simple.SimpleTelegroo
+import tech.teslex.telegroo.dsl.api.CommandsDSL
+import tech.teslex.telegroo.dsl.api.TelegrooDSL
 import tech.teslex.telegroo.telegram.enums.UpdateType
 
 @CompileStatic
 class SimpleTelegrooDSL implements TelegrooDSL {
 
-	private SimpleTelegroo telegroo
+	private Telegroo telegroo
 
-	SimpleTelegrooDSL(SimpleTelegroo telegroo) {
+	SimpleTelegrooDSL(Telegroo telegroo) {
 		this.telegroo = telegroo
 	}
 
