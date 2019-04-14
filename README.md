@@ -35,11 +35,11 @@ import tech.teslex.telegroo.simple.SimpleTelegroo
 
 def bot = new SimpleTelegroo('TOKEN')
 
-bot.onCommand(/start/) {
+bot.command(/start/) {
 	sendMessage(text: 'Welcome!')
 }
 	
-bot.onCommand(/echo (.+)/) {
+bot.message(/echo (.+)/) {
 	sendMessage(text: matcher[0][1])
 }
 

@@ -45,10 +45,10 @@ publish-teslex-snapshot:
     - cd $HERE/repo/snapshots/tech/teslex/telegroo/telegroo-api && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
     - cd $HERE/repo/snapshots/tech/teslex/telegroo/telegram-api && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
     - cd $HERE/repo/snapshots/tech/teslex/telegroo/telegroo-dsl && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
-    - cp -r $HERE/telegram-api/build/repo/* repo
-    - cp -r $HERE/telegroo-api/build/repo/* repo
-    - cp -r $HERE/telegroo-dsl/build/repo/* repo
-    - cp -r $HERE/telegroo/build/repo/* repo
+    - cp -r $HERE/telegram-api/build/repo/* $HERE/repo
+    - cp -r $HERE/telegroo-api/build/repo/* $HERE/repo
+    - cp -r $HERE/telegroo-dsl/build/repo/* $HERE/repo
+    - cp -r $HERE/telegroo/build/repo/* $HERE/repo
     - cd $HERE/repo
     - git config --global user.name 'TesLex Bot'
     - git config --global user.email 'teslex.bot@gmail.com'
