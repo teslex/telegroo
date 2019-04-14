@@ -65,6 +65,7 @@ bintray-upload:
   stage: publish
   script:
     - "[ $(gradle properties -q | grep 'isSnapshot:' | awk '{print $2}') == 'true' ] && exit 1"
+    - echo "token=$TEST_BOT_TOKEN" > telegroo/src/test/resources/test.properties
     - gradle test
     - gradle bintrayUpload
   only:
