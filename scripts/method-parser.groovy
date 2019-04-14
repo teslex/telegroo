@@ -1,8 +1,7 @@
-String defaultText = """user_id\tInteger\tYes\tTarget user id
-chat_id\tInteger\tOptional\tRequired if inline_message_id is not specified. Unique identifier for the target chat
-message_id\tInteger\tOptional\tRequired if inline_message_id is not specified. Identifier of the sent message
-inline_message_id\tString\tOptional\tRequired if chat_id and message_id are not specified. Identifier of the inline message
-"""
+String defaultText = """question\tString\tYes\tPoll question, 1-255 characters
+options\tArray of String\tYes\tList of answer options, 2-10 strings 1-100 characters each
+disable_notification\tBoolean\tOptional\tSends the message silently. Users will receive a notification with no sound.
+reply_to_message_id\tInteger\tOptional\tIf the message is a reply, ID of the original message"""
 
 String text = args ? args[0] : defaultText
 

@@ -26,6 +26,8 @@ import tech.teslex.telegroo.telegram.methods.interfaces.games.SetGameScoreMethod
 import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerPreCheckoutQueryMethod;
 import tech.teslex.telegroo.telegram.methods.interfaces.payments.AnswerShippingQueryMethod;
 import tech.teslex.telegroo.telegram.methods.interfaces.payments.SendInvoiceMethod;
+import tech.teslex.telegroo.telegram.methods.interfaces.polls.SendPollMethod;
+import tech.teslex.telegroo.telegram.methods.interfaces.polls.StopPollMethod;
 import tech.teslex.telegroo.telegram.methods.interfaces.webhook.DeleteWebhookMethod;
 import tech.teslex.telegroo.telegram.methods.interfaces.webhook.GetWebhookInfoMethod;
 import tech.teslex.telegroo.telegram.methods.interfaces.webhook.SetWebhookMethod;
@@ -38,6 +40,7 @@ import java.util.List;
 
 /**
  * MethodsContext
+ *
  * @param <TC>
  */
 public interface MethodsContext<TC extends TelegramClient> extends Context<TC>,
@@ -116,5 +119,8 @@ public interface MethodsContext<TC extends TelegramClient> extends Context<TC>,
 
 		SendGameMethod<TelegramResult<Object>>, // True or Message
 		SetGameScoreMethod<TelegramResult<Object>>, // True or Message
-		GetGameHighScoresMethod<TelegramResult<List<GameHighScore>>> {
+		GetGameHighScoresMethod<TelegramResult<List<GameHighScore>>>,
+
+		SendPollMethod<TelegramResult<Message>>,
+		StopPollMethod<TelegramResult<Poll>> {
 }

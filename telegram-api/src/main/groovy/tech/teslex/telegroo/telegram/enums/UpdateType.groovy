@@ -15,7 +15,8 @@ enum UpdateType {
 	CHOSEN_INLINE_QUERY('chosenInlineResult'),
 	CALLBACK_QUERY('callbackQuery'),
 	SHIPPING_QUERY('shippingQuery'),
-	PRE_CHECKOUT_QUERY('preCheckoutQuery')
+	PRE_CHECKOUT_QUERY('preCheckoutQuery'),
+	POLL('poll')
 
 	private String value
 

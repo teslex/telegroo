@@ -6,6 +6,7 @@ import tech.teslex.telegroo.telegram.TypeAnnotations
 import tech.teslex.telegroo.telegram.enums.UpdateType
 import tech.teslex.telegroo.telegram.types.CallbackQuery
 import tech.teslex.telegroo.telegram.types.Message
+import tech.teslex.telegroo.telegram.types.Poll
 import tech.teslex.telegroo.telegram.types.inline.ChosenInlineResult
 import tech.teslex.telegroo.telegram.types.inline.InlineQuery
 import tech.teslex.telegroo.telegram.types.payments.PreCheckoutQuery
@@ -74,6 +75,12 @@ class Update {
 	@JsonProperty(value = 'chosen_inline_result', required = false)
 	ChosenInlineResult chosenInlineResult
 
+	/**
+	 * Optional. New poll state. Bots receive only updates about polls, which are sent or stopped by the bot
+	 */
+	@JsonProperty(required = false)
+	Poll poll
+
 
 	@JsonIgnore
 	UpdateType getUpdateType() {
@@ -95,6 +102,8 @@ class Update {
 			UpdateType.INLINE_QUERY
 		else if (chosenInlineResult != null)
 			UpdateType.CHOSEN_INLINE_QUERY
+		else if (poll != null)
+			UpdateType.POLL
 		else
 			UpdateType.UPDATE
 	}

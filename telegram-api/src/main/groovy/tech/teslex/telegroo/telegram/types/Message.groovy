@@ -185,6 +185,12 @@ class Message {
 	Venue venue
 
 	/**
+	 * Optional. Message is a native poll, information about the poll
+	 */
+	@JsonProperty(required = false)
+	Poll poll
+
+	/**
 	 * Optional. New members that were added to the group or supergroup and information about them (the bot itself may be one of these members)
 	 */
 	@JsonProperty(value = 'new_chat_members', required = false)

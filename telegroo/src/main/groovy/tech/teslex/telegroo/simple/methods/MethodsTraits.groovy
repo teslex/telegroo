@@ -1,5 +1,3 @@
-package tech.teslex.telegroo.simple.methods
-
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +14,8 @@ package tech.teslex.telegroo.simple.methods
  * © 2019 TesLex
  */
 
+package tech.teslex.telegroo.simple.methods
+
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.simple.methods.traits.*
 import tech.teslex.telegroo.simple.methods.traits.games.GetGameHighScoresMethodTrait
@@ -24,6 +24,8 @@ import tech.teslex.telegroo.simple.methods.traits.games.SetGameScoreMethodTrait
 import tech.teslex.telegroo.simple.methods.traits.payments.AnswerPreCheckoutQueryMethodTrait
 import tech.teslex.telegroo.simple.methods.traits.payments.AnswerShippingQueryMethodTrait
 import tech.teslex.telegroo.simple.methods.traits.payments.SendInvoiceMethodTrait
+import tech.teslex.telegroo.simple.methods.traits.polls.SendPollMethodTrait
+import tech.teslex.telegroo.simple.methods.traits.polls.StopPollMethodTrait
 import tech.teslex.telegroo.simple.methods.traits.webhook.DeleteWebhookMethodTrait
 import tech.teslex.telegroo.simple.methods.traits.webhook.GetWebhookInfoMethodTrait
 import tech.teslex.telegroo.simple.methods.traits.webhook.SetWebhookMethodTrait
@@ -102,4 +104,7 @@ trait MethodsTraits implements
 
 		SendGameMethodTrait,
 		SetGameScoreMethodTrait,
-		GetGameHighScoresMethodTrait {}
+		GetGameHighScoresMethodTrait,
+
+		SendPollMethodTrait,
+		StopPollMethodTrait {}
