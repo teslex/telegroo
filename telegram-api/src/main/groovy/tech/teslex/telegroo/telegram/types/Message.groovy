@@ -59,6 +59,12 @@ class Message {
 	String forwardSignature
 
 	/**
+	 * Optional. Sender's name for messages forwarded from users who disallow adding a link to their account in forwarded messages
+	 */
+	@JsonProperty(value = 'forward_sender_name', required = false)
+	String forwardSenderName
+
+	/**
 	 * Optional. For forwarded messages, date the original message was sent in Unix time
 	 */
 	@JsonProperty(value = 'forward_date', required = false)

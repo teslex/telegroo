@@ -78,6 +78,12 @@ class ChatMember {
 	Boolean canPromoteMembers
 
 	/**
+	 * Optional. Restricted only. True, if the user is a member of the chat at the moment of the request
+	 */
+	@JsonProperty(value = 'is_member', required = false)
+	Boolean isMember
+
+	/**
 	 * Optional. Restricted only. True, if the user can send text messages, contacts, locations and venues
 	 */
 	@JsonProperty(value = 'can_send_messages', required = false)
