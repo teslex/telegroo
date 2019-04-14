@@ -1,5 +1,3 @@
-package tech.teslex.telegroo.api.methods.reply;
-
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +13,8 @@ package tech.teslex.telegroo.api.methods.reply;
  *
  * © 2019 TesLex
  */
+
+package tech.teslex.telegroo.api.methods.reply;
 
 import groovy.lang.Closure;
 import groovy.lang.DelegatesTo;

@@ -1,5 +1,3 @@
-package tech.teslex.telegroo.simple.methods.traits.webhook
-
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +13,8 @@ package tech.teslex.telegroo.simple.methods.traits.webhook
  *
  * © 2019 TesLex
  */
+
+package tech.teslex.telegroo.simple.methods.traits.webhook
 
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate

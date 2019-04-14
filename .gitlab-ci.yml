@@ -18,6 +18,7 @@ publish-teslex:
   stage: publish
   script:
     - "[ $(gradle properties -q | grep 'isSnapshot:' | awk '{print $2}') == 'true' ] && exit 1"
+    - gradle test
     - gradle clean publish
     - git clone https://gitlab.com/teslex/repo
     - cp -r telegram-api/build/repo/* repo

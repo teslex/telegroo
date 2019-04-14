@@ -1,5 +1,3 @@
-package tech.teslex.telegroo.api.update;
-
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +13,8 @@ package tech.teslex.telegroo.api.update;
  *
  * © 2019 TesLex
  */
+
+package tech.teslex.telegroo.api.update;
 
 import tech.teslex.telegroo.telegram.enums.UpdateType;
 import tech.teslex.telegroo.telegram.types.update.Update;
