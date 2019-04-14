@@ -5,7 +5,7 @@
 
 **Telegram Bot framework for [Groovy](http://groovy-lang.org)**
 
-> Version: **[1.0-{timestamp}-SNAPSHOT](https://gitlab.com/teslex/repo/tree/master/snapshots/tech/teslex/telegroo/telegroo)**
+> Version: **[1.0](https://gitlab.com/teslex/telegroo/telegroo)**
 
 - [Telegroo Docs](https://teslex.gitlab.io/telegroo)
 - [Telegram Bot API](https://core.telegram.org/bots/api)
@@ -21,15 +21,14 @@ repositories {
 }
 
 dependencies {
-	compile 'tech.teslex.telegroo:telegroo:1.0-{timestamp}-SNAPSHOT'
+	compile 'tech.teslex.telegroo:telegroo:1.0'
 }
 ```
 
 Sample bot:
 
 ```groovy
-@GrabResolver(name = 'teslex-repo', root = 'https://teslex.gitlab.io/repo/snapshots')
-@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '1.0-{timestamp}-SNAPSHOT')
+@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '1.0')
 
 import tech.teslex.telegroo.simple.SimpleTelegroo
 
