@@ -6,5 +6,4 @@ import tech.teslex.telegroo.api.update.UpdateHandler
 import tech.teslex.telegroo.simple.context.SimpleMethodsContext
 
 @CompileStatic
-interface SimpleUpdateHandler extends UpdateHandler<SimpleMethodsContext> {
-}
+interface SimpleUpdateHandler extends UpdateHandler<SimpleMethodsContext> {}

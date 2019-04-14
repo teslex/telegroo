@@ -9,8 +9,8 @@ import tech.teslex.telegroo.dsl.simple.SimpleTelegrooDSL
 class TDSL {
 
 	static forBot(Telegroo telegroo, @DelegatesTo(TelegrooDSL) Closure closure) {
-		SimpleTelegrooDSL tdsl = new SimpleTelegrooDSL(telegroo)
-		closure.delegate = tdsl
+		SimpleTelegrooDSL telegrooDSL = new SimpleTelegrooDSL(telegroo)
+		closure.delegate = telegrooDSL
 		closure()
 	}
 

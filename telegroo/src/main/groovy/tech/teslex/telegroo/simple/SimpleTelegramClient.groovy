@@ -26,14 +26,6 @@ class SimpleTelegramClient implements TelegramClient<Response> {
 
 	ObjectMapper objectMapper
 
-	SimpleTelegramClient(String token) {
-		this.token = token
-
-		this.objectMapper = new ObjectMapper()
-		this.objectMapper.registerModule(new Jdk8Module())
-		this.objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-	}
-
 	SimpleTelegramClient(String token, ObjectMapper objectMapper) {
 		this.token = token
 		this.objectMapper = objectMapper
