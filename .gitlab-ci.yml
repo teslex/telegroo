@@ -38,21 +38,18 @@ publish-teslex-snapshot:
   stage: publish
   script:
     - "[ $(gradle properties -q | grep 'isSnapshot:' | awk '{print $2}') != 'true' ] && exit 1"
+    - HERE=$(pwd)
     - gradle clean publish
     - git clone https://gitlab.com/teslex/repo
-    - cd repo/snapshots/tech/teslex/telegroo/telegroo && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
-    - cd -
-    - cd repo/snapshots/tech/teslex/telegroo/telegroo-api && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
-    - cd -
-    - cd repo/snapshots/tech/teslex/telegroo/telegram-api && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
-    - cd -
-    - cd repo/snapshots/tech/teslex/telegroo/telegram-dsl && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
-    - cd -
-    - cp -r telegram-api/build/repo/* repo
-    - cp -r telegroo-api/build/repo/* repo
-    - cp -r telegroo-dsl/build/repo/* repo
-    - cp -r telegroo/build/repo/* repo
-    - cd repo
+    - cd $HERE/repo/snapshots/tech/teslex/telegroo/telegroo && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
+    - cd $HERE/repo/snapshots/tech/teslex/telegroo/telegroo-api && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
+    - cd $HERE/repo/snapshots/tech/teslex/telegroo/telegram-api && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
+    - cd $HERE/repo/snapshots/tech/teslex/telegroo/telegram-dsl && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
+    - cp -r $HERE/telegram-api/build/repo/* repo
+    - cp -r $HERE/telegroo-api/build/repo/* repo
+    - cp -r $HERE/telegroo-dsl/build/repo/* repo
+    - cp -r $HERE/telegroo/build/repo/* repo
+    - cd $HERE/repo
     - git config --global user.name 'TesLex Bot'
     - git config --global user.email 'teslex.bot@gmail.com'
     - git add .
