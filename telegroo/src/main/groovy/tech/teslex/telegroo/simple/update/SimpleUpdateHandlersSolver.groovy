@@ -38,7 +38,7 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 	@Override
 	void solve(Update update, Map<UpdateType, List<UpdateHandler>> handlers) {
 
-		handlers[UpdateType.UPDATE].each {
+		if (handlers.containsKey(UpdateType.UPDATE)) handlers[UpdateType.UPDATE].each {
 			it.handle(new SimpleContext(telegroo.mainContext.telegramClient, update, telegroo.mainContext.objectMapper))
 		}
 
