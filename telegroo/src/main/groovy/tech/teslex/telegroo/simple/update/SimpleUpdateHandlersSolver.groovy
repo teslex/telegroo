@@ -44,23 +44,25 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 
 		solveMessagesAndCommands(update, handlers[UpdateType.MESSAGE])
 
-		handlers.findAll { it.key != UpdateType.MESSAGE && it.key != UpdateType.UPDATE }.each {
-			it.value.each {
-				it.handle(new SimpleContext(telegroo.mainContext.telegramClient, update, telegroo.mainContext.objectMapper))
-			}
-		}
+		handlers
+				.findAll { it.key != UpdateType.MESSAGE && it.key != UpdateType.UPDATE }
+				.each {
+					it.value.each {
+						it.handle(new SimpleContext(telegroo.mainContext.telegramClient, update, telegroo.mainContext.objectMapper))
+					}
+				}
 	}
 
 	private void solveMessagesAndCommands(Update update, List<UpdateHandler> handlers) {
 		handlers.each { handler ->
 			if (handler instanceof CommandUpdateHandler) {
 				def pattern = handler.useCommandSymbol() ? handler.patternWithCommandSymbol : handler.pattern
-				if (pattern.matcher(update.message.text)) {
+				if (pattern?.matcher(update.message.text)) {
 					handler.handle(new SimpleContext(telegroo.mainContext.telegramClient, update, telegroo.mainContext.objectMapper, update.message.text =~ pattern))
 				}
 			} else if (handler instanceof MessageUpdateHandler) {
 				def pattern = handler.pattern
-				if (pattern.matcher(update.message.text)) {
+				if (pattern?.matcher(update.message.text)) {
 					handler.handle(new SimpleContext(telegroo.mainContext.telegramClient, update, telegroo.mainContext.objectMapper, update.message.text =~ pattern))
 				}
 			} else {

@@ -78,5 +78,7 @@ bintray {
 
 	version {
 		name = telegrooVersion
+		released = new Date()
+		vcsTag = telegrooVersion
 	}
 }
