@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import tech.teslex.telegroo.telegram.methods.MethodObjectAnnotations
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
-import tech.teslex.telegroo.telegram.types.InputFile
+import tech.teslex.telegroo.telegram.types.input.InputFile
 
 /**
  * sendVoice
@@ -73,7 +73,7 @@ class SendVoiceMethodObject implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	<T> InputFile<T> getFile() {
+	InputFile getFile() {
 		this.voice
 	}
 }

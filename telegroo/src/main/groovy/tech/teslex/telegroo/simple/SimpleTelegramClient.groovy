@@ -17,8 +17,6 @@
 package tech.teslex.telegroo.simple
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import groovy.transform.CompileStatic
 import org.apache.http.HttpEntity
 import org.apache.http.client.fluent.Request
@@ -29,6 +27,8 @@ import tech.teslex.telegroo.api.TelegramClient
 import tech.teslex.telegroo.telegram.methods.MethodObject
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
+import tech.teslex.telegroo.telegram.types.input.FileInputFile
+import tech.teslex.telegroo.telegram.types.input.IdInputFile
 
 /**
  * Simple TelegramClient implementation
@@ -88,7 +88,7 @@ class SimpleTelegramClient implements TelegramClient<Response> {
 		Map params = objectMapper.convertValue(methodObjectWithFile, Map)
 		params += defaultParams
 
-		if (methodObjectWithFile.file.file instanceof File) {
+		if (methodObjectWithFile.file instanceof FileInputFile) {
 			HttpEntity entity = MultipartEntityBuilder.create().tap {
 
 				// adding params to body
@@ -101,13 +101,13 @@ class SimpleTelegramClient implements TelegramClient<Response> {
 				}
 
 				// adding file to body
-				addBinaryBody(methodObjectWithFile.file.mediaType, methodObjectWithFile.file.file as File, ContentType.MULTIPART_FORM_DATA, methodObjectWithFile.file.mediaType)
+				addBinaryBody(methodObjectWithFile.file.mediaType.value, methodObjectWithFile.file.file as File, ContentType.MULTIPART_FORM_DATA, methodObjectWithFile.file.mediaType.value)
 			}.build()
 
 			Request.Post(buildUrl(methodObjectWithFile.pathMethod))
 					.body(entity)
 		} else {
-			if (methodObjectWithFile.file.isId)
+			if (methodObjectWithFile.file instanceof IdInputFile)
 				params += [photo: [file_id: methodObjectWithFile.file.file]]
 			else
 				params += [photo: methodObjectWithFile.file.file]
@@ -123,8 +123,8 @@ class SimpleTelegramClient implements TelegramClient<Response> {
 		// collecting media to normal map
 		params['media'] = methodObjectWithMedia.media.collect { inputMedia ->
 			objectMapper.convertValue(inputMedia, Map).tap {
-				media = (inputMedia.media.isFile ? "attach://${(inputMedia.media.file as File).name}" :
-						inputMedia.media.isId ? [file_id: inputMedia.media.file] : inputMedia.media.file)
+				media = (inputMedia.media instanceof FileInputFile ? "attach://${(inputMedia.media.file as File).name}" :
+						inputMedia.media instanceof IdInputFile ? [file_id: inputMedia.media.file] : inputMedia.media.file)
 			}
 		}
 
@@ -141,7 +141,7 @@ class SimpleTelegramClient implements TelegramClient<Response> {
 
 			// adding media files to body
 			methodObjectWithMedia.media.each { entry ->
-				if (entry.media.isFile)
+				if (entry.media instanceof FileInputFile)
 					addBinaryBody((entry.media.file as File).name, entry.media.file as File, ContentType.MULTIPART_FORM_DATA, (entry.media.file as File).name)
 			}
 		}.build()

@@ -1,5 +1,5 @@
 ext {
-	telegrooVersion = '1.0'
+	telegrooVersion = '1.0.1'
 	isSnapshot = false
 	snapshotId = date
 

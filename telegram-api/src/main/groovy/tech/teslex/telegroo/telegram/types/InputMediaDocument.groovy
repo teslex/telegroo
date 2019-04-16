@@ -3,6 +3,7 @@ package tech.teslex.telegroo.telegram.types
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import tech.teslex.telegroo.telegram.TypeAnnotations
+import tech.teslex.telegroo.telegram.types.input.InputFile
 
 @TypeAnnotations
 class InputMediaDocument extends InputMedia {

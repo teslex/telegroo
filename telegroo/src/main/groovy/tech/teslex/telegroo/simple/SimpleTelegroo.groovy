@@ -49,7 +49,7 @@ import tech.teslex.telegroo.telegram.types.update.Update
 @CompileStatic
 class SimpleTelegroo implements Telegroo {
 
-	private String token
+	String token
 
 	Map<UpdateType, List<UpdateHandler>> handlers = [:]
 

@@ -1,13 +1,13 @@
 package tech.teslex.telegroo.test
 
-import groovy.transform.CompileStatic
 import spock.lang.Shared
 import spock.lang.Specification
 import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.simple.SimpleTelegroo
 import tech.teslex.telegroo.telegram.types.InlineKeyboardButton
 import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
-import tech.teslex.telegroo.telegram.types.InputFile
+import tech.teslex.telegroo.telegram.types.input.Attach
+import tech.teslex.telegroo.telegram.types.input.InputFile
 
 class SimpleMessageTest extends Specification {
 
@@ -67,7 +67,7 @@ class SimpleMessageTest extends Specification {
 	def 'send photo by url'() {
 		given:
 		def testCaption = 'TesLex'
-		def testPhoto = InputFile.ofUrl('https://assets.gitlab-static.net/uploads/-/system/group/avatar/1593121/CAGK4xZfg_M.jpg?width=64')
+		def testPhoto = Attach.byUrl('https://assets.gitlab-static.net/uploads/-/system/group/avatar/1593121/CAGK4xZfg_M.jpg?width=64')
 
 		when:
 		def response = telegroo.mainContext.sendPhoto {

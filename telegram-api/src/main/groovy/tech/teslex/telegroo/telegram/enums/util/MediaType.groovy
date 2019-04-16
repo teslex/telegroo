@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.enums.util
 import groovy.transform.CompileStatic
 
 @CompileStatic
-enum FileTypeMethodWithFile {
+enum MediaType {
 
 	PHOTO('photo'),
 	AUDIO('audio'),
@@ -11,7 +11,8 @@ enum FileTypeMethodWithFile {
 	VIDEO('video'),
 	ANIMATION('animation'),
 	VOICE('voice'),
-	VIDEO_NOTE('video_note')
+	VIDEO_NOTE('video_note'),
+	STICKER('sticker')
 
 	private String value
 
@@ -19,7 +20,7 @@ enum FileTypeMethodWithFile {
 		return this.value
 	}
 
-	private FileTypeMethodWithFile(String value) {
+	private MediaType(String value) {
 		this.value = value
 	}
 }
