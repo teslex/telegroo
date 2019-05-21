@@ -6,8 +6,7 @@ import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.simple.SimpleTelegroo
 import tech.teslex.telegroo.telegram.types.InlineKeyboardButton
 import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
-import tech.teslex.telegroo.telegram.types.input.Attach
-import tech.teslex.telegroo.telegram.types.input.InputFile
+import tech.teslex.telegroo.telegram.attach.Attach
 
 class SimpleMessageTest extends Specification {
 

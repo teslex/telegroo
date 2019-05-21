@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import tech.teslex.telegroo.telegram.methods.MethodObject
 import tech.teslex.telegroo.telegram.methods.MethodObjectAnnotations
-import tech.teslex.telegroo.telegram.types.input.InputFile
+import tech.teslex.telegroo.telegram.attach.InputFile
 
 /**
  * sendSticker

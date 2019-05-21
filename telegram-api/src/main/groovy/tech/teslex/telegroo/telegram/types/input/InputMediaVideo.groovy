@@ -1,20 +1,20 @@
-package tech.teslex.telegroo.telegram.types
+package tech.teslex.telegroo.telegram.types.input
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.builder.Builder
 import groovy.transform.builder.SimpleStrategy
 import tech.teslex.telegroo.telegram.TypeAnnotations
-import tech.teslex.telegroo.telegram.types.input.InputFile
+import tech.teslex.telegroo.telegram.attach.InputFile
 
 @TypeAnnotations
 @Builder(builderStrategy = SimpleStrategy, prefix = "")
-class InputMediaAudio extends InputMedia {
+class InputMediaVideo extends InputMedia {
 
 	/**
-	 * Type of the result, must be audio
+	 * Type of the result, must be video
 	 */
-	String type = 'audio'
+	String type = 'video'
 
 	/**
 	 * File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More info on Sending Files »
@@ -29,7 +29,7 @@ class InputMediaAudio extends InputMedia {
 	InputFile thumb
 
 	/**
-	 * Optional. Caption of the audio to be sent, 0-1024 characters
+	 * Optional. Caption of the video to be sent, 0-1024 characters
 	 */
 	@JsonProperty(required = false)
 	String caption
@@ -41,20 +41,26 @@ class InputMediaAudio extends InputMedia {
 	String parseMode
 
 	/**
-	 * Optional. Duration of the audio in seconds
+	 * Optional. Video width
+	 */
+	@JsonProperty(required = false)
+	Integer width
+
+	/**
+	 * Optional. Video height
+	 */
+	@JsonProperty(required = false)
+	Integer height
+
+	/**
+	 * Optional. Video duration
 	 */
 	@JsonProperty(required = false)
 	Integer duration
 
 	/**
-	 * Optional. Performer of the audio
+	 * Optional. Pass True, if the uploaded video is suitable for streaming
 	 */
-	@JsonProperty(required = false)
-	String performer
-
-	/**
-	 * Optional. Title of the audio
-	 */
-	@JsonProperty(required = false)
-	String title
+	@JsonProperty(value = 'supports_streaming', required = false)
+	Boolean supportsStreaming
 }

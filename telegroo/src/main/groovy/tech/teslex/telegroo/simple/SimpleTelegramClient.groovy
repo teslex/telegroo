@@ -32,9 +32,9 @@ import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.MethodObject
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
-import tech.teslex.telegroo.telegram.types.InputMedia
-import tech.teslex.telegroo.telegram.types.input.FileInputFile
-import tech.teslex.telegroo.telegram.types.input.IdInputFile
+import tech.teslex.telegroo.telegram.types.input.InputMedia
+import tech.teslex.telegroo.telegram.attach.FileInputFile
+import tech.teslex.telegroo.telegram.attach.IdInputFile
 
 /**
  * Simple TelegramClient implementation

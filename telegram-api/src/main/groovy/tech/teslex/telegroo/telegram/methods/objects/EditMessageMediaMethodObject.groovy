@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import tech.teslex.telegroo.telegram.methods.MethodObject
 import tech.teslex.telegroo.telegram.methods.MethodObjectAnnotations
 import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
-import tech.teslex.telegroo.telegram.types.InputMedia
+import tech.teslex.telegroo.telegram.types.input.InputMedia
 
 /**
  * editMessageMedia

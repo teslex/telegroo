@@ -1,20 +1,20 @@
-package tech.teslex.telegroo.telegram.types
+package tech.teslex.telegroo.telegram.types.input
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.builder.Builder
 import groovy.transform.builder.SimpleStrategy
 import tech.teslex.telegroo.telegram.TypeAnnotations
-import tech.teslex.telegroo.telegram.types.input.InputFile
+import tech.teslex.telegroo.telegram.attach.InputFile
 
 @TypeAnnotations
 @Builder(builderStrategy = SimpleStrategy, prefix = "")
-class InputMediaVideo extends InputMedia {
+class InputMediaAnimation extends InputMedia {
 
 	/**
-	 * Type of the result, must be video
+	 * Type of the result, must be animation
 	 */
-	String type = 'video'
+	String type = 'animation'
 
 	/**
 	 * File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More info on Sending Files »
@@ -29,7 +29,7 @@ class InputMediaVideo extends InputMedia {
 	InputFile thumb
 
 	/**
-	 * Optional. Caption of the video to be sent, 0-1024 characters
+	 * Optional. Caption of the animation to be sent, 0-1024 characters
 	 */
 	@JsonProperty(required = false)
 	String caption
@@ -41,26 +41,20 @@ class InputMediaVideo extends InputMedia {
 	String parseMode
 
 	/**
-	 * Optional. Video width
+	 * Optional. Animation width
 	 */
 	@JsonProperty(required = false)
 	Integer width
 
 	/**
-	 * Optional. Video height
+	 * Optional. Animation height
 	 */
 	@JsonProperty(required = false)
 	Integer height
 
 	/**
-	 * Optional. Video duration
+	 * Optional. Animation duration
 	 */
 	@JsonProperty(required = false)
 	Integer duration
-
-	/**
-	 * Optional. Pass True, if the uploaded video is suitable for streaming
-	 */
-	@JsonProperty(value = 'supports_streaming', required = false)
-	Boolean supportsStreaming
 }

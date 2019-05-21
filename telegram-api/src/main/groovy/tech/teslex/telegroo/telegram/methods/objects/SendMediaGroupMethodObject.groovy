@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import tech.teslex.telegroo.telegram.methods.MethodObjectAnnotations
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
-import tech.teslex.telegroo.telegram.types.InputMedia
+import tech.teslex.telegroo.telegram.types.input.InputMedia
 
 /**
  * sendMediaGroup
