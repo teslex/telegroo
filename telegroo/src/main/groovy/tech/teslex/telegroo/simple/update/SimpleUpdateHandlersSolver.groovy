@@ -90,8 +90,14 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 		}
 
 		if (entity) {
-			String command = update.message.text[entity.offset + 1..entity.offset + entity.length - 1]
-			String argsText = update.message.text.length() > entity.offset + entity.length ? update.message.text[entity.offset + entity.length + 1..update.message.text.length() - 1] : ""
+			String command = update.message.text.substring(entity.offset + 1, entity.offset + entity.length)
+
+			String argsText = ""
+			if (update.message.text.length() > entity.length + entity.offset)
+				if (update.message.text[entity.length + entity.offset] == ' ')
+					argsText = update.message.text.substring(entity.length + entity.offset + 1, update.message.text.length())
+				else
+					argsText = update.message.text.substring(entity.length + entity.offset, update.message.text.length())
 
 			Matcher commandMatcher = command =~ handler.pattern
 
