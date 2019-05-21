@@ -16,21 +16,17 @@
 
 package tech.teslex.telegroo.api.update;
 
-import tech.teslex.telegroo.api.context.Context;
+import tech.teslex.telegroo.api.context.MessageContext;
+import tech.teslex.telegroo.telegram.enums.UpdateType;
 
 import java.util.regex.Pattern;
 
-public interface CommandUpdateHandler<C extends Context> extends MessageUpdateHandler<C> {
+public interface MessagePatternUpdateHandler<C extends MessageContext> extends UpdateHandler<C> {
 
-	default Boolean useCommandSymbol() {
-		return true;
-	}
+	Pattern getPattern();
 
-	default String getCommandSymbol() {
-		return "/";
-	}
-
-	default Pattern getPatternWithCommandSymbol() {
-		return Pattern.compile(getCommandSymbol() + getPattern().pattern());
+	@Override
+	default UpdateType getType() {
+		return UpdateType.MESSAGE;
 	}
 }

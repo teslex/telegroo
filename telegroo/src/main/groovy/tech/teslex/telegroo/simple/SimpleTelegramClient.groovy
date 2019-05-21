@@ -24,6 +24,7 @@ import org.apache.http.client.fluent.Response
 import org.apache.http.entity.ContentType
 import org.apache.http.entity.mime.MultipartEntityBuilder
 import tech.teslex.telegroo.api.TelegramClient
+import tech.teslex.telegroo.simple.jackson.JacksonObjectMapper
 import tech.teslex.telegroo.telegram.methods.MethodObject
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
@@ -43,11 +44,11 @@ class SimpleTelegramClient implements TelegramClient<Response> {
 
 	Map defaultParams = [:]
 
-	ObjectMapper objectMapper
+	ObjectMapper objectMapper = JacksonObjectMapper.objectMapper
 
-	SimpleTelegramClient(String token, ObjectMapper objectMapper) {
+	SimpleTelegramClient(String token, Map defaultParams = [:]) {
 		this.token = token
-		this.objectMapper = objectMapper
+		this.defaultParams = defaultParams
 	}
 
 	String buildUrl(method) {

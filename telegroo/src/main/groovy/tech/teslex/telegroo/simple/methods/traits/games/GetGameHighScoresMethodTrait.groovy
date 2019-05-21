@@ -16,18 +16,19 @@
 
 package tech.teslex.telegroo.simple.methods.traits.games
 
+
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import groovy.transform.SelfType
-import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
+import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.games.GetGameHighScoresMethod
 import tech.teslex.telegroo.telegram.methods.objects.games.GetGameHighScoresMethodObject
 import tech.teslex.telegroo.telegram.types.games.GameHighScore
 
 @CompileStatic
-@SelfType(ContextWithObjectMapper)
+@SelfType(SimpleContext)
 trait GetGameHighScoresMethodTrait implements GetGameHighScoresMethod<TelegramResult<List<GameHighScore>>> {
 
 	@Override

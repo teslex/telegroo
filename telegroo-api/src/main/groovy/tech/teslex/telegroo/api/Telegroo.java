@@ -18,17 +18,20 @@ package tech.teslex.telegroo.api;
 
 import groovy.lang.Closure;
 import groovy.lang.DelegatesTo;
+import tech.teslex.telegroo.api.context.CommandContext;
+import tech.teslex.telegroo.api.context.MessageContext;
 import tech.teslex.telegroo.api.context.MethodsContext;
-import tech.teslex.telegroo.api.update.CommandUpdateHandler;
-import tech.teslex.telegroo.api.update.MessageUpdateHandler;
+import tech.teslex.telegroo.api.update.CommandPatternUpdateHandler;
+import tech.teslex.telegroo.api.update.MessagePatternUpdateHandler;
 import tech.teslex.telegroo.api.update.UpdateHandler;
 import tech.teslex.telegroo.telegram.enums.UpdateType;
 import tech.teslex.telegroo.telegram.types.update.Update;
 
+import java.util.List;
+import java.util.regex.Pattern;
+
 /**
  * Telegroo!!!
- * <p>
- * docs here: https://teslex.gitlab.io/telegroo
  */
 public interface Telegroo {
 
@@ -36,7 +39,7 @@ public interface Telegroo {
 
 	void stop();
 
-	void solveUpdate(Update update);
+	void solveUpdates(List<Update> update);
 
 
 	MethodsContext<TelegramClient> getMainContext();
@@ -46,18 +49,30 @@ public interface Telegroo {
 
 	void update(@DelegatesTo(MethodsContext.class) Closure handler);
 
-	void command(String command, @DelegatesTo(MethodsContext.class) Closure handler);
+	void command(Pattern command, @DelegatesTo(CommandContext.class) Closure handler);
 
-	void message(String message, @DelegatesTo(MethodsContext.class) Closure handler);
+	void command(Pattern command, Pattern argsPattern, @DelegatesTo(CommandContext.class) Closure handler);
 
-	void message(@DelegatesTo(MethodsContext.class) Closure handler);
+	void command(String command, @DelegatesTo(CommandContext.class) Closure handler);
+
+	void command(String command, Pattern argsPattern, @DelegatesTo(CommandContext.class) Closure handler);
+
+	void message(Pattern message, @DelegatesTo(MessageContext.class) Closure handler);
+
+	void message(String message, @DelegatesTo(MessageContext.class) Closure handler);
+
+	void message(@DelegatesTo(MessageContext.class) Closure handler);
+
+	void entity(String entity, @DelegatesTo(MethodsContext.class) Closure handler);
+
+	void entities(List<String> entities, @DelegatesTo(MethodsContext.class) Closure handler);
 
 
 	void updateHandler(UpdateHandler handler);
 
-	void commandUpdateHandler(CommandUpdateHandler handler);
+	void commandUpdateHandler(CommandPatternUpdateHandler handler);
 
-	void messageUpdateHandler(MessageUpdateHandler handler);
+	void messageUpdateHandler(MessagePatternUpdateHandler handler);
 
 	void middleware(Closure<Boolean> closure);
 }

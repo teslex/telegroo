@@ -19,10 +19,9 @@ package tech.teslex.telegroo.api.context;
 import tech.teslex.telegroo.api.TelegramClient;
 import tech.teslex.telegroo.telegram.types.update.Update;
 
-import java.util.regex.Matcher;
-
 /**
  * Context
+ *
  * @param <TC>
  */
 public interface Context<TC extends TelegramClient> {
@@ -33,7 +32,7 @@ public interface Context<TC extends TelegramClient> {
 
 	Update getUpdate();
 
-	Matcher getMatcher();
+	void setUpdate(Update update);
 
-	Context createNewContext(TC telegramClient, Update update, Matcher matcher);
+	Context createNewContext(TC telegramClient, Update update);
 }

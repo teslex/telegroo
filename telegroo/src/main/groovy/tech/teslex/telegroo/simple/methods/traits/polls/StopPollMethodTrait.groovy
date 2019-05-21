@@ -19,7 +19,7 @@ package tech.teslex.telegroo.simple.methods.traits.polls
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.SelfType
-import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
+import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.polls.StopPollMethod
 import tech.teslex.telegroo.telegram.methods.objects.polls.StopPollMethodObject
@@ -27,7 +27,7 @@ import tech.teslex.telegroo.telegram.types.Message
 import tech.teslex.telegroo.telegram.types.Poll
 
 @CompileStatic
-@SelfType(ContextWithObjectMapper)
+@SelfType(SimpleContext)
 trait StopPollMethodTrait implements StopPollMethod<TelegramResult<Poll>> {
 
 	@Override

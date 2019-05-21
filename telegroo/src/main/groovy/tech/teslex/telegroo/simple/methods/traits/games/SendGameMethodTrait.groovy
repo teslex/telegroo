@@ -20,14 +20,14 @@ import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import groovy.transform.SelfType
-import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
+import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.games.SendGameMethod
 import tech.teslex.telegroo.telegram.methods.objects.games.SendGameMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-@SelfType(ContextWithObjectMapper)
+@SelfType(SimpleContext)
 trait SendGameMethodTrait implements SendGameMethod<TelegramResult<Object>> {
 
 	@Override

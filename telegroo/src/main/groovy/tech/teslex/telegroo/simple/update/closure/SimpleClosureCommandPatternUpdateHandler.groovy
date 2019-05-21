@@ -17,36 +17,28 @@
 package tech.teslex.telegroo.simple.update.closure
 
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.api.context.MethodsContext
-import tech.teslex.telegroo.simple.context.SimpleMethodsContext
-import tech.teslex.telegroo.simple.update.SimpleCommandUpdateHandler
-import tech.teslex.telegroo.telegram.enums.UpdateType
+import tech.teslex.telegroo.simple.context.SimpleCommandContext
+import tech.teslex.telegroo.simple.update.SimpleCommandPatternUpdateHandler
 
 import java.util.regex.Pattern
 
 @CompileStatic
-class SimpleClosureCommandUpdateHandler implements SimpleCommandUpdateHandler {
+class SimpleClosureCommandPatternUpdateHandler implements SimpleCommandPatternUpdateHandler {
 
-	UpdateType updateType
+	final Pattern pattern
 
-	Pattern pattern
+	final Pattern argsPattern
 
-	Closure closure
+	final Closure closure
 
-	SimpleClosureCommandUpdateHandler(Pattern pattern, Closure closure) {
-		this.updateType = UpdateType.MESSAGE
+	SimpleClosureCommandPatternUpdateHandler(Pattern pattern, Pattern argsPattern = null, Closure closure) {
 		this.pattern = pattern
-		this.closure = closure
-	}
-
-	SimpleClosureCommandUpdateHandler(String pattern, Closure closure) {
-		this.updateType = UpdateType.MESSAGE
-		this.pattern = Pattern.compile(pattern)
+		this.argsPattern = argsPattern
 		this.closure = closure
 	}
 
 	@Override
-	void handle(SimpleMethodsContext context) {
+	void handle(SimpleCommandContext context) {
 		closure.delegate = context
 		closure()
 	}

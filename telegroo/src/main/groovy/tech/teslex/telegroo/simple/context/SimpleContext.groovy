@@ -21,37 +21,22 @@ import groovy.transform.CompileStatic
 import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.TelegramClient
 import tech.teslex.telegroo.api.context.Context
+import tech.teslex.telegroo.simple.jackson.JacksonObjectMapper
 import tech.teslex.telegroo.telegram.types.update.Update
-
-import java.util.regex.Matcher
 
 /**
  * Simple Context implementation
  */
 @CompileStatic
-class SimpleContext implements SimpleMethodsContext {
+abstract class SimpleContext implements Context<TelegramClient<Response>> {
 
 	private TelegramClient<Response> telegramClient
 
 	private Update lastUpdate
 
-	private ObjectMapper objectMapper
-
-	private Matcher matcher
-
-	protected SimpleContext() {}
-
-	SimpleContext(TelegramClient<Response> telegramClient, Update lastUpdate, ObjectMapper jacksonObjectMapper) {
+	SimpleContext(TelegramClient<Response> telegramClient, Update lastUpdate) {
 		this.telegramClient = telegramClient
 		this.lastUpdate = lastUpdate
-		this.objectMapper = jacksonObjectMapper
-	}
-
-	SimpleContext(TelegramClient<Response> telegramClient, Update lastUpdate, ObjectMapper jacksonObjectMapper, Matcher matcher) {
-		this.telegramClient = telegramClient
-		this.lastUpdate = lastUpdate
-		this.objectMapper = jacksonObjectMapper
-		this.matcher = matcher
 	}
 
 	@Override
@@ -69,25 +54,17 @@ class SimpleContext implements SimpleMethodsContext {
 		this.lastUpdate
 	}
 
-	ObjectMapper getObjectMapper() {
-		this.objectMapper
-	}
-
 	@Override
-	Matcher getMatcher() {
-		this.matcher
-	}
-
-	@Override
-	Context createNewContext(TelegramClient<Response> telegramClient, Update update, Matcher matcher) {
-		new SimpleContext(telegramClient, update, objectMapper, matcher)
-	}
-
-	void setObjectMapper(ObjectMapper objectMapper) {
-		this.objectMapper = objectMapper
-	}
-
 	void setUpdate(Update update) {
 		this.lastUpdate = update
+	}
+
+	static ObjectMapper getObjectMapper() {
+		JacksonObjectMapper.objectMapper
+	}
+
+	@Override
+	Context createNewContext(TelegramClient<Response> telegramClient, Update update) {
+		new SimpleMethodsContext(telegramClient, update)
 	}
 }

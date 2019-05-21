@@ -24,5 +24,9 @@ import java.util.Map;
 
 public interface UpdateHandlersSolver {
 
-	void solve(Update update, Map<UpdateType, List<UpdateHandler>> handlers);
+	void solveOne(Update update, Map<UpdateType, List<UpdateHandler>> handlers);
+
+	default void solve(List<Update> updates, Map<UpdateType, List<UpdateHandler>> handlers) {
+		updates.forEach(update -> solveOne(update, handlers));
+	}
 }

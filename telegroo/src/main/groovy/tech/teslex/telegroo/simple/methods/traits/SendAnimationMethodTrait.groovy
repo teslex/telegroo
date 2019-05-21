@@ -20,14 +20,14 @@ import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import groovy.transform.SelfType
-import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
+import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.SendAnimationMethod
 import tech.teslex.telegroo.telegram.methods.objects.SendAnimationMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-@SelfType(ContextWithObjectMapper)
+@SelfType(SimpleContext)
 trait SendAnimationMethodTrait implements SendAnimationMethod<TelegramResult<Message>> {
 
 	@Override

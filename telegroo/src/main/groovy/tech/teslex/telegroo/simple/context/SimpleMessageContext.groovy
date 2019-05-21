@@ -16,17 +16,26 @@
 
 package tech.teslex.telegroo.simple.context
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.transform.CompileStatic
 import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.TelegramClient
-import tech.teslex.telegroo.api.context.Context
+import tech.teslex.telegroo.api.context.MessageContext
+import tech.teslex.telegroo.telegram.types.update.Update
 
-/**
- * todo: doc it!
- */
+import java.util.regex.Matcher
+
 @CompileStatic
-interface ContextWithObjectMapper extends Context<TelegramClient<Response>> {
+class SimpleMessageContext extends SimpleMethodsContext implements MessageContext<TelegramClient<Response>> {
 
-	ObjectMapper getObjectMapper()
+	private final Matcher matcher
+
+	SimpleMessageContext(TelegramClient<Response> telegramClient, Update lastUpdate, Matcher matcher) {
+		super(telegramClient, lastUpdate)
+		this.matcher = matcher
+	}
+
+	@Override
+	Matcher getMatcher() {
+		this.matcher
+	}
 }

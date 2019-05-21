@@ -24,9 +24,9 @@ import tech.teslex.telegroo.telegram.enums.UpdateType
 @CompileStatic
 class SimpleClosureUpdateHandler implements SimpleUpdateHandler {
 
-	UpdateType updateType
+	final UpdateType updateType
 
-	Closure closure
+	final Closure closure
 
 	SimpleClosureUpdateHandler(Closure closure) {
 		this.updateType = UpdateType.UPDATE

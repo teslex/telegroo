@@ -23,6 +23,8 @@ import tech.teslex.telegroo.dsl.api.CommandsDSL
 import tech.teslex.telegroo.dsl.api.TelegrooDSL
 import tech.teslex.telegroo.telegram.enums.UpdateType
 
+import java.util.regex.Pattern
+
 @CompileStatic
 class SimpleTelegrooDSL implements TelegrooDSL {
 
@@ -39,7 +41,7 @@ class SimpleTelegrooDSL implements TelegrooDSL {
 
 	@Override
 	void command(String command, @DelegatesTo(MethodsContext.class) Closure handler) {
-		telegroo.command(command, handler)
+		telegroo.command(Pattern.compile(command), handler)
 	}
 
 	@Override
@@ -51,7 +53,7 @@ class SimpleTelegrooDSL implements TelegrooDSL {
 
 	@Override
 	void message(String message, @DelegatesTo(MethodsContext.class) Closure handler) {
-		telegroo.message(message, handler)
+		telegroo.message(Pattern.compile(message), handler)
 	}
 
 	@Override

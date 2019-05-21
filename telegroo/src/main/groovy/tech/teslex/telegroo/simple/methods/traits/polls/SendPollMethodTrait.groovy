@@ -19,14 +19,14 @@ package tech.teslex.telegroo.simple.methods.traits.polls
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.SelfType
-import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
+import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.polls.SendPollMethod
 import tech.teslex.telegroo.telegram.methods.objects.polls.SendPollMethodObject
 import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
-@SelfType(ContextWithObjectMapper)
+@SelfType(SimpleContext)
 trait SendPollMethodTrait implements SendPollMethod<TelegramResult<Message>> {
 
 	@Override

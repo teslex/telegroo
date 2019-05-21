@@ -1,9 +1,10 @@
 ext {
-	telegrooVersion = '1.0.3'
-	isSnapshot = false
-	snapshotId = date
+	telegrooVersion = '1.1'
+	isSnapshot = true
+	snapshotId = snapshotId
 
-	groovyVersion = '2.5.6'
+	groovyVersion = '2.5.7'
+//	groovyVersion = '3.0.0-beta-1'
 	jacksonVersion = '2.9.6'
 
 	apacheHttpCoreVersion = '4.4.10'
@@ -28,6 +29,6 @@ subprojects {
 	}
 }
 
-static getDate() {
+static getSnapshotId() {
 	return new Date().format('yyyyMMddHHmmss')
 }

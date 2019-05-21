@@ -18,13 +18,13 @@ package tech.teslex.telegroo.simple.methods.traits.webhook
 
 import groovy.transform.CompileStatic
 import groovy.transform.SelfType
-import tech.teslex.telegroo.simple.context.ContextWithObjectMapper
+import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.webhook.DeleteWebhookMethod
 import tech.teslex.telegroo.telegram.methods.objects.webhook.DeleteWebhookMethodObject
 
 @CompileStatic
-@SelfType(ContextWithObjectMapper)
+@SelfType(SimpleContext)
 trait DeleteWebhookMethodTrait implements DeleteWebhookMethod<TelegramResult<Object>> {
 
 	@Override

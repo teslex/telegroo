@@ -5,7 +5,7 @@ import groovy.transform.CompileStatic
 @CompileStatic
 enum UpdateType {
 
-	UPDATE('update'),
+	UPDATE('update'), // custom
 
 	MESSAGE('message'),
 	EDITED_MESSAGE('editedMessage'),

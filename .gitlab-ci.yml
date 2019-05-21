@@ -59,7 +59,7 @@ publish-teslex-snapshot:
     - git commit -m 'Update telegroo'
     - git push https://teslex.bot:${GITLAB_PRIVATE_KEY}@gitlab.com/teslex/repo
   only:
-    - '1.0'
+    - '1.1'
 
 
 bintray-upload:
