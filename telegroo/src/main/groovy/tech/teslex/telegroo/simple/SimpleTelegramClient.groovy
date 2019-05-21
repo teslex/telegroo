@@ -16,18 +16,23 @@
 
 package tech.teslex.telegroo.simple
 
+import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.transform.CompileStatic
 import org.apache.http.HttpEntity
+import org.apache.http.HttpResponse
 import org.apache.http.client.fluent.Request
 import org.apache.http.client.fluent.Response
 import org.apache.http.entity.ContentType
 import org.apache.http.entity.mime.MultipartEntityBuilder
 import tech.teslex.telegroo.api.TelegramClient
 import tech.teslex.telegroo.simple.jackson.JacksonObjectMapper
+import tech.teslex.telegroo.telegram.TelegramErrorException
+import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.MethodObject
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
 import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
+import tech.teslex.telegroo.telegram.types.InputMedia
 import tech.teslex.telegroo.telegram.types.input.FileInputFile
 import tech.teslex.telegroo.telegram.types.input.IdInputFile
 
@@ -94,11 +99,7 @@ class SimpleTelegramClient implements TelegramClient<Response> {
 
 				// adding params to body
 				params.each { Map.Entry param ->
-					def value = param.value instanceof Number ||
-							param.value instanceof String ||
-							param.value.class.isPrimitive() ? param.value : objectMapper.writeValueAsString(param.value)
-
-					addTextBody(param.key as String, value as String)
+					addTextBody(param.key as String, objectMapper.writeValueAsString(param.value))
 				}
 
 				// adding file to body
@@ -124,8 +125,12 @@ class SimpleTelegramClient implements TelegramClient<Response> {
 		// collecting media to normal map
 		params['media'] = methodObjectWithMedia.media.collect { inputMedia ->
 			objectMapper.convertValue(inputMedia, Map).tap {
-				media = (inputMedia.media instanceof FileInputFile ? "attach://${(inputMedia.media.file as File).name}" :
-						inputMedia.media instanceof IdInputFile ? [file_id: inputMedia.media.file] : inputMedia.media.file)
+				if (inputMedia.media instanceof FileInputFile)
+					media = "attach://${(inputMedia.media.file as File).name}" as String
+				else if (inputMedia.media instanceof IdInputFile)
+					media = [file_id: inputMedia.media.file]
+				else
+					media = inputMedia.media.file
 			}
 		}
 
@@ -133,17 +138,12 @@ class SimpleTelegramClient implements TelegramClient<Response> {
 
 			// adding params to body
 			params.each { Map.Entry param ->
-				def value = param.value instanceof Number ||
-						param.value instanceof String ||
-						param.value.class.isPrimitive() ? param.value : objectMapper.writeValueAsString(param.value)
-
-				addTextBody(param.key as String, value as String)
+				addTextBody(param.key as String, objectMapper.writeValueAsString(param.value))
 			}
 
 			// adding media files to body
-			methodObjectWithMedia.media.each { entry ->
-				if (entry.media instanceof FileInputFile)
-					addBinaryBody((entry.media.file as File).name, entry.media.file as File, ContentType.MULTIPART_FORM_DATA, (entry.media.file as File).name)
+			methodObjectWithMedia.media.findAll { it.media instanceof FileInputFile }.each { InputMedia inputMedia ->
+				addBinaryBody((inputMedia.media.file as File).name, inputMedia.media.file as File, ContentType.MULTIPART_FORM_DATA, (inputMedia.media.file as File).name)
 			}
 		}.build()
 
@@ -155,5 +155,14 @@ class SimpleTelegramClient implements TelegramClient<Response> {
 		Request.Post(buildUrl(method))
 				.addHeader('Content-Type', 'application/json')
 				.bodyString(objectMapper.writeValueAsString(parameters), ContentType.APPLICATION_JSON)
+	}
+
+	static <T> TelegramResult<T> handleResponse(HttpResponse response, JavaType type) {
+		TelegramResult result = JacksonObjectMapper.objectMapper.readValue(response.entity.content.text, type)
+
+		if (result.ok)
+			return result
+		else
+			throw new TelegramErrorException(result)
 	}
 }

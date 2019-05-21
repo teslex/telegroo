@@ -2,10 +2,13 @@ package tech.teslex.telegroo.telegram.types
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
+import groovy.transform.builder.Builder
+import groovy.transform.builder.SimpleStrategy
 import tech.teslex.telegroo.telegram.TypeAnnotations
 import tech.teslex.telegroo.telegram.types.input.InputFile
 
 @TypeAnnotations
+@Builder(builderStrategy = SimpleStrategy, prefix = "")
 class InputMediaAudio extends InputMedia {
 
 	/**

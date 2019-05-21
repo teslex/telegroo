@@ -20,6 +20,7 @@ import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import groovy.transform.SelfType
+import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.GetUpdatesMethod
@@ -40,7 +41,7 @@ trait GetUpdatesMethodTrait implements GetUpdatesMethod<TelegramResult<List<Upda
 	TelegramResult<List<Update>> getUpdates(@NamedDelegate GetUpdatesMethodObject data) {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, objectMapper.typeFactory.constructCollectionLikeType(ArrayList, Update))
 
-		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
+		telegramClient.go(data).handleResponse { SimpleTelegramClient.handleResponse(it, type) }
 	}
 
 	@Override

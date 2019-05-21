@@ -18,6 +18,7 @@ package tech.teslex.telegroo.simple.methods.traits.webhook
 
 import groovy.transform.CompileStatic
 import groovy.transform.SelfType
+import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.webhook.DeleteWebhookMethod
@@ -31,6 +32,6 @@ trait DeleteWebhookMethodTrait implements DeleteWebhookMethod<TelegramResult<Obj
 	TelegramResult<Object> deleteWebhook() {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 
-		objectMapper.readValue(telegramClient.go(new DeleteWebhookMethodObject()).returnContent().asStream(), type)
+		telegramClient.go(new DeleteWebhookMethodObject()).handleResponse { SimpleTelegramClient.handleResponse(it, type) }
 	}
 }

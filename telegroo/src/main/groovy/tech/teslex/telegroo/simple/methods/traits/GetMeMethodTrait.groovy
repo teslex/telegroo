@@ -18,6 +18,7 @@ package tech.teslex.telegroo.simple.methods.traits
 
 import groovy.transform.CompileStatic
 import groovy.transform.SelfType
+import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.GetMeMethod
@@ -31,6 +32,6 @@ trait GetMeMethodTrait implements GetMeMethod<TelegramResult<User>> {
 	TelegramResult<User> getMe() {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, User)
 
-		objectMapper.readValue(telegramClient.go('getMe', [:]).returnContent().asStream(), type)
+		telegramClient.go('getMe', [:]).handleResponse { SimpleTelegramClient.handleResponse(it, type) }
 	}
 }

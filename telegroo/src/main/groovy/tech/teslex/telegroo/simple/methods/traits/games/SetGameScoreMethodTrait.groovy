@@ -20,6 +20,7 @@ import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import groovy.transform.SelfType
+import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.games.SetGameScoreMethod
@@ -40,7 +41,7 @@ trait SetGameScoreMethodTrait implements SetGameScoreMethod<TelegramResult<Objec
 	TelegramResult<Object> setGameScore(@NamedDelegate SetGameScoreMethodObject data) {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 
-		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
+		telegramClient.go(data).handleResponse { SimpleTelegramClient.handleResponse(it, type) }
 	}
 
 	@Override

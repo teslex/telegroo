@@ -21,6 +21,7 @@ import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import groovy.transform.SelfType
+import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.games.GetGameHighScoresMethod
@@ -41,7 +42,7 @@ trait GetGameHighScoresMethodTrait implements GetGameHighScoresMethod<TelegramRe
 	TelegramResult<List<GameHighScore>> getGameHighScores(@NamedDelegate GetGameHighScoresMethodObject data) {
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, objectMapper.typeFactory.constructCollectionLikeType(ArrayList, GameHighScore))
 
-		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
+		telegramClient.go(data).handleResponse { SimpleTelegramClient.handleResponse(it, type) }
 	}
 
 	@Override

@@ -20,6 +20,7 @@ import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import groovy.transform.SelfType
+import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.games.SendGameMethod
@@ -42,7 +43,7 @@ trait SendGameMethodTrait implements SendGameMethod<TelegramResult<Object>> {
 
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
 
-		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
+		telegramClient.go(data).handleResponse { SimpleTelegramClient.handleResponse(it, type) }
 	}
 
 	@Override

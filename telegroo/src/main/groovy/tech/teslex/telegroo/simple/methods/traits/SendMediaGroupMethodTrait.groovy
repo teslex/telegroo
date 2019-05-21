@@ -20,6 +20,7 @@ import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import groovy.transform.SelfType
+import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.telegram.TelegramResult
 import tech.teslex.telegroo.telegram.methods.interfaces.SendMediaGroupMethod
@@ -28,25 +29,25 @@ import tech.teslex.telegroo.telegram.types.Message
 
 @CompileStatic
 @SelfType(SimpleContext)
-trait SendMediaGroupMethodTrait implements SendMediaGroupMethod<TelegramResult<Message>> {
+trait SendMediaGroupMethodTrait implements SendMediaGroupMethod<TelegramResult<List<Message>>> {
 
 	@Override
 	@NamedVariant
-	TelegramResult<Message> sendMediaGroup(@NamedDelegate SendMediaGroupMethodObject data) {
+	TelegramResult<List<Message>> sendMediaGroup(@NamedDelegate SendMediaGroupMethodObject data) {
 		data.chatId = data.chatId ?: update[update.updateType.value]['chat']['id']
 
-		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Message)
+		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, objectMapper.typeFactory.constructParametricType(List, Message))
 
-		objectMapper.readValue(telegramClient.go(data).returnContent().asStream(), type)
+		telegramClient.go(data).handleResponse { SimpleTelegramClient.handleResponse(it, type) }
 	}
 
 	@Override
-	TelegramResult<Message> sendMediaGroup(Map data) {
+	TelegramResult<List<Message>> sendMediaGroup(Map data) {
 		sendMediaGroup(data as SendMediaGroupMethodObject)
 	}
 
 	@Override
-	TelegramResult<Message> sendMediaGroup(@DelegatesTo(SendMediaGroupMethodObject) Closure closure) {
+	TelegramResult<List<Message>> sendMediaGroup(@DelegatesTo(SendMediaGroupMethodObject) Closure closure) {
 		SendMediaGroupMethodObject builder = new SendMediaGroupMethodObject()
 		closure.delegate = builder
 		closure.call()
