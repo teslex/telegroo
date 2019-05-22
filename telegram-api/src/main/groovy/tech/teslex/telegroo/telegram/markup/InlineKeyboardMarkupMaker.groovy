@@ -5,6 +5,7 @@ import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
 import tech.teslex.telegroo.telegram.types.InlineKeyboardButton
 import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
+import tech.teslex.telegroo.telegram.types.games.CallbackGame
 
 @CompileStatic
 class InlineKeyboardMarkupMaker {
@@ -40,6 +41,30 @@ class InlineKeyboardRow {
 	@NamedVariant
 	void button(@NamedDelegate InlineKeyboardButton button) {
 		buttons << button
+	}
+
+	void callbackButton(String text, String callbackData) {
+		buttons << new InlineKeyboardButton(text: text, callbackData: callbackData)
+	}
+
+	void urlButton(String text, String url) {
+		buttons << new InlineKeyboardButton(text: text, url: url)
+	}
+
+	void switchInlineQueryButton(String text, String switchInlineQuery) {
+		buttons << new InlineKeyboardButton(text: text, switchInlineQuery: switchInlineQuery)
+	}
+
+	void switchInlineQueryCurrentChatButton(String text, String switchInlineQueryCurrentChat) {
+		buttons << new InlineKeyboardButton(text: text, switchInlineQueryCurrentChat: switchInlineQueryCurrentChat)
+	}
+
+	void callbackGameButton(String text, CallbackGame callbackGame = new CallbackGame()) {
+		buttons << new InlineKeyboardButton(text: text, callbackGame: callbackGame)
+	}
+
+	void payButton(String text) {
+		buttons << new InlineKeyboardButton(text: text, pay: true)
 	}
 
 	List<InlineKeyboardButton> getButtons() {
