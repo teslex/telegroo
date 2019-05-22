@@ -46,6 +46,8 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 	void solveOne(Update update, Map<UpdateType, List<UpdateHandler>> handlers) {
 		telegroo.mainContext.update = update
 
+		if (!checkMiddleware(update)) return
+
 		handlers.getOrDefault(UpdateType.UPDATE, []).each { handler ->
 			handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 		}
@@ -118,5 +120,13 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 		}
 
 		return false
+	}
+
+	private boolean checkMiddleware(Update update) {
+		for (middleware in telegroo.middlewareList)
+			if (!middleware(update))
+				return false
+
+		return true
 	}
 }

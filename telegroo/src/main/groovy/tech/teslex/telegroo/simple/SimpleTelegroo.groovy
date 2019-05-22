@@ -16,9 +16,7 @@
 
 package tech.teslex.telegroo.simple
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
+
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.update.UpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandlersSolver
@@ -48,20 +46,18 @@ class SimpleTelegroo implements SimpleTelegrooTrait {
 
 	UpdateHandlersSolver updateHandlersSolver
 
-	Boolean active = false
+	boolean active = false
 
 	SimpleMethodsContext mainContext
+
+	SimpleTelegramClient telegramClient
 
 	protected SimpleTelegroo() {}
 
 	SimpleTelegroo(String token) {
-		ObjectMapper mapper = new ObjectMapper().tap {
-			registerModule(new Jdk8Module())
-			configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-		}
-
 		this.token = token
-		this.mainContext = new SimpleMethodsContext(new SimpleTelegramClient(token), new Update(updateId: 0))
+		this.telegramClient = new SimpleTelegramClient(token)
+		this.mainContext = new SimpleMethodsContext(telegramClient, new Update(updateId: 0))
 		this.updateHandlersSolver = new SimpleUpdateHandlersSolver(this)
 	}
 
@@ -87,15 +83,6 @@ class SimpleTelegroo implements SimpleTelegrooTrait {
 
 	@Override
 	void solveUpdates(List<Update> updates) {
-//		if (checkMid(mainContext.update))
 		updateHandlersSolver.solve(updates, handlers)
-	}
-
-	Boolean checkMid(Update update) {
-		for (middleware in middlewareList)
-			if (!middleware(update))
-				return false
-
-		return true
 	}
 }

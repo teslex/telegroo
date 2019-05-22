@@ -2,11 +2,10 @@ package tech.teslex.telegroo.test
 
 import spock.lang.Shared
 import spock.lang.Specification
-import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.simple.SimpleTelegroo
+import tech.teslex.telegroo.telegram.attach.Attach
 import tech.teslex.telegroo.telegram.types.InlineKeyboardButton
 import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
-import tech.teslex.telegroo.telegram.attach.Attach
 
 class SimpleMessageTest extends Specification {
 
@@ -17,7 +16,7 @@ class SimpleMessageTest extends Specification {
 	String token = props.token
 
 	@Shared
-	Telegroo telegroo = new SimpleTelegroo(token)
+	SimpleTelegroo telegroo = new SimpleTelegroo(token)
 
 	@Shared
 	def testChatId = -347437795
@@ -80,4 +79,23 @@ class SimpleMessageTest extends Specification {
 		response.result.photo
 		response.result.caption == testCaption
 	}
+
+	/*
+	def 'send media photos'() {
+		given:
+		def mediaList = [
+				AttachMedia.photo(Attach.byUrl('https://assets.gitlab-static.net/uploads/-/system/project/avatar/7278100/telegroo.png')),
+				AttachMedia.photo(Attach.byUrl('https://assets.gitlab-static.net/uploads/-/system/group/avatar/1593121/CAGK4xZfg_M.jpg'))
+		]
+
+		when:
+		def response = telegroo.mainContext.sendMediaGroup {
+			media = mediaList
+		}
+
+		then:
+		response.ok
+		response.result
+	}
+	*/
 }

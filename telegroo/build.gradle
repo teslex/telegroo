@@ -18,7 +18,9 @@ dependencies {
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion
 	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jacksonVersion
 
-	testCompile 'org.spockframework.spock:spock-core:spock-1.2'
+	testCompile 'org.spockframework.spock:spock-core:spock-1.2', {
+		exclude group: 'org.codehaus.groovy', module: 'groovy-all'
+	}
 }
 
 task sourcesJar(type: Jar) {
@@ -85,7 +87,7 @@ bintray {
 		licenses = ['Apache-2.0']
 		vcsUrl = 'https://gitlab.com/teslex/telegroo/telegroo.git'
 	}
-	
+
 	version {
 		name = telegrooVersion
 		released = new Date()

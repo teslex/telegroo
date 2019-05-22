@@ -15,9 +15,9 @@ ext {
 
 subprojects {
 	if (isSnapshot)
-		version "$telegrooVersion-${snapshotId}-SNAPSHOT"
+		version = "$telegrooVersion-${snapshotId}-SNAPSHOT"
 	else
-		version telegrooVersion
+		version = telegrooVersion
 
 
 	repositories {
