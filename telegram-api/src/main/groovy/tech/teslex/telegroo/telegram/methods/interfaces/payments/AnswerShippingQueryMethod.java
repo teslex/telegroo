@@ -15,5 +15,5 @@ public interface AnswerShippingQueryMethod<R> {
 	@NamedVariant
 	R answerShippingQuery(@NamedDelegate AnswerShippingQueryMethodObject data);
 
-	R answerShippingQuery(@DelegatesTo(AnswerShippingQueryMethodObject.class) Closure closure);
+	R answerShippingQuery(@DelegatesTo(value = AnswerShippingQueryMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

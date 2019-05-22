@@ -47,9 +47,10 @@ trait SendAudioMethodTrait implements SendAudioMethod<TelegramResult<Message>> {
 	}
 
 	@Override
-	TelegramResult<Message> sendAudio(@DelegatesTo(SendAudioMethodObject) Closure closure) {
+	TelegramResult<Message> sendAudio(@DelegatesTo(value = SendAudioMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendAudioMethodObject builder = new SendAudioMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendAudio(builder)
 	}

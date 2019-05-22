@@ -15,5 +15,5 @@ public interface SetChatStickerSetMethod<R> {
 	@NamedVariant
 	R setChatStickerSet(@NamedDelegate SetChatStickerSetMethodObject data);
 
-	R setChatStickerSet(@DelegatesTo(SetChatStickerSetMethodObject.class) Closure closure);
+	R setChatStickerSet(@DelegatesTo(value = SetChatStickerSetMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

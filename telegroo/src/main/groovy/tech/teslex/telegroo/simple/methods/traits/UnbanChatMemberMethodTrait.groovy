@@ -46,9 +46,10 @@ trait UnbanChatMemberMethodTrait implements UnbanChatMemberMethod<TelegramResult
 	}
 
 	@Override
-	TelegramResult<Object> unbanChatMember(@DelegatesTo(UnbanChatMemberMethodObject) Closure closure) {
+	TelegramResult<Object> unbanChatMember(@DelegatesTo(value = UnbanChatMemberMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		UnbanChatMemberMethodObject builder = new UnbanChatMemberMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		unbanChatMember(builder)
 	}

@@ -15,5 +15,5 @@ public interface EditMessageCaptionMethod<R> {
 	@NamedVariant
 	R editMessageCaption(@NamedDelegate EditMessageCaptionMethodObject data);
 
-	R editMessageCaption(@DelegatesTo(EditMessageCaptionMethodObject.class) Closure closure);
+	R editMessageCaption(@DelegatesTo(value = EditMessageCaptionMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

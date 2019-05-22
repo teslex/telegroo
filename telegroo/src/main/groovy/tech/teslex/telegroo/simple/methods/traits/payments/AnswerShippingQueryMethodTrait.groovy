@@ -44,9 +44,10 @@ trait AnswerShippingQueryMethodTrait implements AnswerShippingQueryMethod<Telegr
 	}
 
 	@Override
-	TelegramResult<Object> answerShippingQuery(@DelegatesTo(AnswerShippingQueryMethodObject) Closure closure) {
+	TelegramResult<Object> answerShippingQuery(@DelegatesTo(value = AnswerShippingQueryMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		AnswerShippingQueryMethodObject builder = new AnswerShippingQueryMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		answerShippingQuery(builder)
 	}

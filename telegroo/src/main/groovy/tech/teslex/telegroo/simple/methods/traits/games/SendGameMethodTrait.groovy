@@ -47,9 +47,10 @@ trait SendGameMethodTrait implements SendGameMethod<TelegramResult<Object>> {
 	}
 
 	@Override
-	TelegramResult<Object> sendGame(@DelegatesTo(SendGameMethodObject) Closure closure) {
+	TelegramResult<Object> sendGame(@DelegatesTo(value = SendGameMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendGameMethodObject builder = new SendGameMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendGame(builder)
 	}

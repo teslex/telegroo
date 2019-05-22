@@ -15,5 +15,5 @@ public interface DeleteChatPhotoMethod<R> {
 	@NamedVariant
 	R deleteChatPhoto(@NamedDelegate DeleteChatPhotoMethodObject data);
 
-	R deleteChatPhoto(@DelegatesTo(DeleteChatPhotoMethodObject.class) Closure closure);
+	R deleteChatPhoto(@DelegatesTo(value = DeleteChatPhotoMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

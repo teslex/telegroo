@@ -15,5 +15,5 @@ public interface SetWebhookMethod<R> {
 	@NamedVariant
 	R setWebhook(@NamedDelegate SetWebhookMethodObject data);
 
-	R setWebhook(@DelegatesTo(SetWebhookMethodObject.class) Closure closure);
+	R setWebhook(@DelegatesTo(value = SetWebhookMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

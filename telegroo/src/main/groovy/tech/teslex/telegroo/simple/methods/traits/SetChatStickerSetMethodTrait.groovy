@@ -46,9 +46,10 @@ trait SetChatStickerSetMethodTrait implements SetChatStickerSetMethod<TelegramRe
 	}
 
 	@Override
-	TelegramResult<Object> setChatStickerSet(@DelegatesTo(SetChatStickerSetMethodObject) Closure closure) {
+	TelegramResult<Object> setChatStickerSet(@DelegatesTo(value = SetChatStickerSetMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SetChatStickerSetMethodObject builder = new SetChatStickerSetMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		setChatStickerSet(builder)
 	}

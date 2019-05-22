@@ -15,5 +15,5 @@ public interface SetChatDescriptionMethod<R> {
 	@NamedVariant
 	R setChatDescription(@NamedDelegate SetChatDescriptionMethodObject data);
 
-	R setChatDescription(@DelegatesTo(SetChatDescriptionMethodObject.class) Closure closure);
+	R setChatDescription(@DelegatesTo(value = SetChatDescriptionMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

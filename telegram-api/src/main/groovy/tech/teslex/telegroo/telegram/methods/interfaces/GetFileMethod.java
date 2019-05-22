@@ -15,5 +15,5 @@ public interface GetFileMethod<R> {
 	@NamedVariant
 	R getFile(@NamedDelegate GetFileMethodObject data);
 
-	R getFile(@DelegatesTo(GetFileMethodObject.class) Closure closure);
+	R getFile(@DelegatesTo(value = GetFileMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

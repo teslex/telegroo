@@ -45,9 +45,10 @@ trait SendPollMethodTrait implements SendPollMethod<TelegramResult<Message>> {
 	}
 
 	@Override
-	TelegramResult<Message> sendPoll(@DelegatesTo(SendPollMethodObject.class) Closure closure) {
+	TelegramResult<Message> sendPoll(@DelegatesTo(value = SendPollMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendPollMethodObject builder = new SendPollMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendPoll(builder)
 	}

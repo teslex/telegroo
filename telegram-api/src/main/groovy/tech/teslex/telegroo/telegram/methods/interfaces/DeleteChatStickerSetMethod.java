@@ -15,5 +15,5 @@ public interface DeleteChatStickerSetMethod<R> {
 	@NamedVariant
 	R deleteChatStickerSet(@NamedDelegate DeleteChatStickerSetMethodObject data);
 
-	R deleteChatStickerSet(@DelegatesTo(DeleteChatStickerSetMethodObject.class) Closure closure);
+	R deleteChatStickerSet(@DelegatesTo(value = DeleteChatStickerSetMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

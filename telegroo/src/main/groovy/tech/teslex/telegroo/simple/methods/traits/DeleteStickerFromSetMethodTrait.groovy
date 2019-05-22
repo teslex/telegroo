@@ -44,9 +44,10 @@ trait DeleteStickerFromSetMethodTrait implements DeleteStickerFromSetMethod<Tele
 	}
 
 	@Override
-	TelegramResult<Object> deleteStickerFromSet(@DelegatesTo(DeleteStickerFromSetMethodObject) Closure closure) {
+	TelegramResult<Object> deleteStickerFromSet(@DelegatesTo(value = DeleteStickerFromSetMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		DeleteStickerFromSetMethodObject builder = new DeleteStickerFromSetMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		deleteStickerFromSet(builder)
 	}

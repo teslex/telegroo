@@ -15,5 +15,5 @@ public interface SendVoiceMethod<R> {
 	@NamedVariant
 	R sendVoice(@NamedDelegate SendVoiceMethodObject data);
 
-	R sendVoice(@DelegatesTo(SendVoiceMethodObject.class) Closure closure);
+	R sendVoice(@DelegatesTo(value = SendVoiceMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

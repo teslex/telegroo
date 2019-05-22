@@ -15,5 +15,5 @@ public interface GetChatAdministratorsMethod<R> {
 	@NamedVariant
 	R getChatAdministrators(@NamedDelegate GetChatAdministratorsMethodObject data);
 
-	R getChatAdministrators(@DelegatesTo(GetChatAdministratorsMethodObject.class) Closure closure);
+	R getChatAdministrators(@DelegatesTo(value = GetChatAdministratorsMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

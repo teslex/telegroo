@@ -15,5 +15,5 @@ public interface GetGameHighScoresMethod<R> {
 	@NamedVariant
 	R getGameHighScores(@NamedDelegate GetGameHighScoresMethodObject data);
 
-	R getGameHighScores(@DelegatesTo(GetGameHighScoresMethodObject.class) Closure closure);
+	R getGameHighScores(@DelegatesTo(value = GetGameHighScoresMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

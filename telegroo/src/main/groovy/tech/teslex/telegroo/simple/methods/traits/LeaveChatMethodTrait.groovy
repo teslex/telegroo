@@ -46,9 +46,10 @@ trait LeaveChatMethodTrait implements LeaveChatMethod<TelegramResult<Object>> {
 	}
 
 	@Override
-	TelegramResult<Object> leaveChat(@DelegatesTo(LeaveChatMethodObject) Closure closure) {
+	TelegramResult<Object> leaveChat(@DelegatesTo(value = LeaveChatMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		LeaveChatMethodObject builder = new LeaveChatMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		leaveChat(builder)
 	}

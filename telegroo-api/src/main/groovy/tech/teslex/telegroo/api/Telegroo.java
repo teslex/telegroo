@@ -56,6 +56,8 @@ public interface Telegroo {
 
 	void command(String command, Pattern argsPattern, @DelegatesTo(CommandContext.class) Closure handler);
 
+	void command(String command, String argsPattern, @DelegatesTo(CommandContext.class) Closure handler);
+
 	void message(Pattern message, @DelegatesTo(MessageContext.class) Closure handler);
 
 	void message(String message, @DelegatesTo(MessageContext.class) Closure handler);

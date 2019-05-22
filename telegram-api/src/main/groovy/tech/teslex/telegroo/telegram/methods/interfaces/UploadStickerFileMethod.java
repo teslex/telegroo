@@ -15,5 +15,5 @@ public interface UploadStickerFileMethod<R> {
 	@NamedVariant
 	R uploadStickerFile(@NamedDelegate UploadStickerFileMethodObject data);
 
-	R uploadStickerFile(@DelegatesTo(UploadStickerFileMethodObject.class) Closure closure);
+	R uploadStickerFile(@DelegatesTo(value = UploadStickerFileMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

@@ -15,5 +15,5 @@ public interface SendAudioMethod<R> {
 	@NamedVariant
 	R sendAudio(@NamedDelegate SendAudioMethodObject data);
 
-	R sendAudio(@DelegatesTo(SendAudioMethodObject.class) Closure closure);
+	R sendAudio(@DelegatesTo(value = SendAudioMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

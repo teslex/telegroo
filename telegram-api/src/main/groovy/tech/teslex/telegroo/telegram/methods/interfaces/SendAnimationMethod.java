@@ -15,5 +15,5 @@ public interface SendAnimationMethod<R> {
 	@NamedVariant
 	R sendAnimation(@NamedDelegate SendAnimationMethodObject data);
 
-	R sendAnimation(@DelegatesTo(SendAnimationMethodObject.class) Closure closure);
+	R sendAnimation(@DelegatesTo(value = SendAnimationMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

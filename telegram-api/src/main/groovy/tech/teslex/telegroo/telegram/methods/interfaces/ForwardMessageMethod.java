@@ -15,5 +15,5 @@ public interface ForwardMessageMethod<R> {
 	@NamedVariant
 	R forwardMessage(@NamedDelegate ForwardMessageMethodObject data);
 
-	R forwardMessage(@DelegatesTo(ForwardMessageMethodObject.class) Closure closure);
+	R forwardMessage(@DelegatesTo(value = ForwardMessageMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

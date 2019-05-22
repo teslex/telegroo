@@ -15,5 +15,5 @@ public interface SetGameScoreMethod<R> {
 	@NamedVariant
 	R setGameScore(@NamedDelegate SetGameScoreMethodObject data);
 
-	R setGameScore(@DelegatesTo(SetGameScoreMethodObject.class) Closure closure);
+	R setGameScore(@DelegatesTo(value = SetGameScoreMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

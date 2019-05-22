@@ -46,9 +46,10 @@ trait GetChatMembersCountMethodTrait implements GetChatMembersCountMethod<Telegr
 	}
 
 	@Override
-	TelegramResult<Integer> getChatMembersCount(@DelegatesTo(GetChatMembersCountMethodObject) Closure closure) {
+	TelegramResult<Integer> getChatMembersCount(@DelegatesTo(value = GetChatMembersCountMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		GetChatMembersCountMethodObject builder = new GetChatMembersCountMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		getChatMembersCount(builder)
 	}

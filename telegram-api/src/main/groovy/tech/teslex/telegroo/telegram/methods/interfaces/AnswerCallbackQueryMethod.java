@@ -15,5 +15,5 @@ public interface AnswerCallbackQueryMethod<R> {
 	@NamedVariant
 	R answerCallbackQuery(@NamedDelegate AnswerCallbackQueryMethodObject data);
 
-	R answerCallbackQuery(@DelegatesTo(AnswerCallbackQueryMethodObject.class) Closure closure);
+	R answerCallbackQuery(@DelegatesTo(value = AnswerCallbackQueryMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

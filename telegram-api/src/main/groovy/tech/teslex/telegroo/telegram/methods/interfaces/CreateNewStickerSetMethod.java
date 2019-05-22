@@ -15,5 +15,5 @@ public interface CreateNewStickerSetMethod<R> {
 	@NamedVariant
 	R createNewStickerSet(@NamedDelegate CreateNewStickerSetMethodObject data);
 
-	R createNewStickerSet(@DelegatesTo(CreateNewStickerSetMethodObject.class) Closure closure);
+	R createNewStickerSet(@DelegatesTo(value = CreateNewStickerSetMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

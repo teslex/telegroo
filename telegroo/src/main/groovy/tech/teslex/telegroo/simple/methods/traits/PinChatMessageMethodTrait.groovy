@@ -46,9 +46,10 @@ trait PinChatMessageMethodTrait implements PinChatMessageMethod<TelegramResult<O
 	}
 
 	@Override
-	TelegramResult<Object> pinChatMessage(@DelegatesTo(PinChatMessageMethodObject) Closure closure) {
+	TelegramResult<Object> pinChatMessage(@DelegatesTo(value = PinChatMessageMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		PinChatMessageMethodObject builder = new PinChatMessageMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		pinChatMessage(builder)
 	}

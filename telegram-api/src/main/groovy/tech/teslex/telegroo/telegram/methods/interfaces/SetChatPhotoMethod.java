@@ -15,5 +15,5 @@ public interface SetChatPhotoMethod<R> {
 	@NamedVariant
 	R setChatPhoto(@NamedDelegate SetChatPhotoMethodObject data);
 
-	R setChatPhoto(@DelegatesTo(SetChatPhotoMethodObject.class) Closure closure);
+	R setChatPhoto(@DelegatesTo(value = SetChatPhotoMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

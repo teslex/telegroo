@@ -46,9 +46,10 @@ trait SetChatTitleMethodTrait implements SetChatTitleMethod<TelegramResult<Objec
 	}
 
 	@Override
-	TelegramResult<Object> setChatTitle(@DelegatesTo(SetChatTitleMethodObject) Closure closure) {
+	TelegramResult<Object> setChatTitle(@DelegatesTo(value = SetChatTitleMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SetChatTitleMethodObject builder = new SetChatTitleMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		setChatTitle(builder)
 	}

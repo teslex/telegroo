@@ -47,9 +47,10 @@ trait SendLocationMethodTrait implements SendLocationMethod<TelegramResult<Messa
 	}
 
 	@Override
-	TelegramResult<Message> sendLocation(@DelegatesTo(SendLocationMethodObject) Closure closure) {
+	TelegramResult<Message> sendLocation(@DelegatesTo(value = SendLocationMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendLocationMethodObject builder = new SendLocationMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendLocation(builder)
 	}

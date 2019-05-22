@@ -15,5 +15,5 @@ public interface EditMessageReplyMarkupMethod<R> {
 	@NamedVariant
 	R editMessageReplyMarkup(@NamedDelegate EditMessageReplyMarkupMethodObject data);
 
-	R editMessageReplyMarkup(@DelegatesTo(EditMessageReplyMarkupMethodObject.class) Closure closure);
+	R editMessageReplyMarkup(@DelegatesTo(value = EditMessageReplyMarkupMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

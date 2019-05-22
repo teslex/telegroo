@@ -15,5 +15,5 @@ public interface SetStickerPositionInSetMethod<R> {
 	@NamedVariant
 	R setStickerPositionInSet(@NamedDelegate SetStickerPositionInSetMethodObject data);
 
-	R setStickerPositionInSet(@DelegatesTo(SetStickerPositionInSetMethodObject.class) Closure closure);
+	R setStickerPositionInSet(@DelegatesTo(value = SetStickerPositionInSetMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

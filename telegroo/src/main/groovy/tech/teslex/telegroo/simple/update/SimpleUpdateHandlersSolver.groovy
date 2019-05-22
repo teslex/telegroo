@@ -38,23 +38,23 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 	}
 
 	@Override
-	void solve(List<Update> updates, Map<UpdateType, List<UpdateHandler>> handlers) {
+	void solve(List<Update> updates, Map<UpdateType, Queue<UpdateHandler>> handlers) {
 		updates.each { update -> solveOne(update, handlers) }
 	}
 
 	@Override
-	void solveOne(Update update, Map<UpdateType, List<UpdateHandler>> handlers) {
+	void solveOne(Update update, Map<UpdateType, Queue<UpdateHandler>> handlers) {
 		telegroo.mainContext.update = update
 
 		if (!checkMiddleware(update)) return
 
-		handlers.getOrDefault(UpdateType.UPDATE, []).each { handler ->
+		handlers.getOrDefault(UpdateType.UPDATE, new LinkedList<UpdateHandler>()).each { handler ->
 			handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 		}
 
 		if (update.updateType == UpdateType.MESSAGE) {
 
-			handlers.getOrDefault(UpdateType.MESSAGE, []).each { handler ->
+			handlers.getOrDefault(UpdateType.MESSAGE, new LinkedList<UpdateHandler>()).each { handler ->
 				if (handler instanceof SimpleUpdateHandler)
 					handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 
@@ -80,14 +80,14 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 				}
 			}
 		} else if (update.updateType == UpdateType.CALLBACK_QUERY) {
-			handlers.getOrDefault(UpdateType.CALLBACK_QUERY, []).each { handler ->
+			handlers.getOrDefault(UpdateType.CALLBACK_QUERY, new LinkedList<UpdateHandler>()).each { handler ->
 				if (handler instanceof CallbackQueryUpdateHandler)
 					handleCallbackQuery(update, handler)
 				else
 					handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 			}
 		} else {
-			handlers.getOrDefault(update.updateType, []).each { handler ->
+			handlers.getOrDefault(update.updateType, new LinkedList<UpdateHandler>()).each { handler ->
 				handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 			}
 		}
@@ -111,9 +111,16 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 			Matcher commandMatcher = command =~ handler.pattern
 
 			if (commandMatcher.matches()) {
-				Matcher argsMatcher = argsText =~ handler.argsPattern
-				handler.handle(new SimpleCommandContext(telegroo.mainContext.telegramClient, update, commandMatcher, argsMatcher, argsText))
-				return true
+				if (handler.argsPattern == null) {
+					handler.handle(new SimpleCommandContext(telegroo.mainContext.telegramClient, update, commandMatcher, null, argsText))
+					return true
+				} else {
+					Matcher argsMatcher = argsText =~ handler.argsPattern
+
+					if (argsMatcher.matches())
+						handler.handle(new SimpleCommandContext(telegroo.mainContext.telegramClient, update, commandMatcher, argsMatcher, argsText))
+					return true
+				}
 			}
 		}
 

@@ -15,5 +15,5 @@ public interface LeaveChatMethod<R> {
 	@NamedVariant
 	R leaveChat(@NamedDelegate LeaveChatMethodObject data);
 
-	R leaveChat(@DelegatesTo(LeaveChatMethodObject.class) Closure closure);
+	R leaveChat(@DelegatesTo(value = LeaveChatMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

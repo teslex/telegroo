@@ -15,5 +15,5 @@ public interface DeleteMessageMethod<R> {
 	@NamedVariant
 	R deleteMessage(@NamedDelegate DeleteMessageMethodObject data);
 
-	R deleteMessage(@DelegatesTo(DeleteMessageMethodObject.class) Closure closure);
+	R deleteMessage(@DelegatesTo(value = DeleteMessageMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

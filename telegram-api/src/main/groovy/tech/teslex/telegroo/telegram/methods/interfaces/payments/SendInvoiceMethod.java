@@ -15,5 +15,5 @@ public interface SendInvoiceMethod<R> {
 	@NamedVariant
 	R sendInvoice(@NamedDelegate SendInvoiceMethodObject data);
 
-	R sendInvoice(@DelegatesTo(SendInvoiceMethodObject.class) Closure closure);
+	R sendInvoice(@DelegatesTo(value = SendInvoiceMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

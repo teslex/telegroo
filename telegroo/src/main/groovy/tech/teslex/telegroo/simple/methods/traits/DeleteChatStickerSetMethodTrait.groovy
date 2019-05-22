@@ -46,9 +46,10 @@ trait DeleteChatStickerSetMethodTrait implements DeleteChatStickerSetMethod<Tele
 	}
 
 	@Override
-	TelegramResult<Object> deleteChatStickerSet(@DelegatesTo(DeleteChatStickerSetMethodObject) Closure closure) {
+	TelegramResult<Object> deleteChatStickerSet(@DelegatesTo(value = DeleteChatStickerSetMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		DeleteChatStickerSetMethodObject builder = new DeleteChatStickerSetMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		deleteChatStickerSet(builder)
 	}

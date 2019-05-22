@@ -45,9 +45,10 @@ trait UploadStickerFileMethodTrait implements UploadStickerFileMethod<TelegramRe
 	}
 
 	@Override
-	TelegramResult<FileObject> uploadStickerFile(@DelegatesTo(UploadStickerFileMethodObject) Closure closure) {
+	TelegramResult<FileObject> uploadStickerFile(@DelegatesTo(value = UploadStickerFileMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		UploadStickerFileMethodObject builder = new UploadStickerFileMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		uploadStickerFile(builder)
 	}

@@ -15,5 +15,5 @@ public interface SendGameMethod<R> {
 	@NamedVariant
 	R sendGame(@NamedDelegate SendGameMethodObject data);
 
-	R sendGame(@DelegatesTo(SendGameMethodObject.class) Closure closure);
+	R sendGame(@DelegatesTo(value = SendGameMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

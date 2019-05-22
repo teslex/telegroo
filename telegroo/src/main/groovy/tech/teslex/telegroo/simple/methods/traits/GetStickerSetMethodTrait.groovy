@@ -45,9 +45,10 @@ trait GetStickerSetMethodTrait implements GetStickerSetMethod<TelegramResult<Sti
 	}
 
 	@Override
-	TelegramResult<StickerSet> getStickerSet(@DelegatesTo(GetStickerSetMethodObject) Closure closure) {
+	TelegramResult<StickerSet> getStickerSet(@DelegatesTo(value = GetStickerSetMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		GetStickerSetMethodObject builder = new GetStickerSetMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		getStickerSet(builder)
 	}

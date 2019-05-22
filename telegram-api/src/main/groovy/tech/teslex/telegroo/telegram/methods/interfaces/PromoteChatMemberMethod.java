@@ -15,5 +15,5 @@ public interface PromoteChatMemberMethod<R> {
 	@NamedVariant
 	R promoteChatMember(@NamedDelegate PromoteChatMemberMethodObject data);
 
-	R promoteChatMember(@DelegatesTo(PromoteChatMemberMethodObject.class) Closure closure);
+	R promoteChatMember(@DelegatesTo(value = PromoteChatMemberMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

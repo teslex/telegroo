@@ -45,9 +45,10 @@ trait SetGameScoreMethodTrait implements SetGameScoreMethod<TelegramResult<Objec
 	}
 
 	@Override
-	TelegramResult<Object> setGameScore(@DelegatesTo(SetGameScoreMethodObject) Closure closure) {
+	TelegramResult<Object> setGameScore(@DelegatesTo(value = SetGameScoreMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SetGameScoreMethodObject builder = new SetGameScoreMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		setGameScore(builder)
 	}

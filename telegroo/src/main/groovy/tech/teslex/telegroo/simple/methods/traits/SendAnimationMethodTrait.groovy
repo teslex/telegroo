@@ -47,9 +47,10 @@ trait SendAnimationMethodTrait implements SendAnimationMethod<TelegramResult<Mes
 	}
 
 	@Override
-	TelegramResult<Message> sendAnimation(@DelegatesTo(SendAnimationMethodObject) Closure closure) {
+	TelegramResult<Message> sendAnimation(@DelegatesTo(value = SendAnimationMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendAnimationMethodObject builder = new SendAnimationMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendAnimation(builder)
 	}

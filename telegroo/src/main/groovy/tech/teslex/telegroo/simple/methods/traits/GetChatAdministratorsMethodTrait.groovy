@@ -47,9 +47,10 @@ trait GetChatAdministratorsMethodTrait implements GetChatAdministratorsMethod<Te
 	}
 
 	@Override
-	TelegramResult<List<ChatMember>> getChatAdministrators(@DelegatesTo(GetChatAdministratorsMethodObject) Closure closure) {
+	TelegramResult<List<ChatMember>> getChatAdministrators(@DelegatesTo(value = GetChatAdministratorsMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		GetChatAdministratorsMethodObject builder = new GetChatAdministratorsMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		getChatAdministrators(builder)
 	}

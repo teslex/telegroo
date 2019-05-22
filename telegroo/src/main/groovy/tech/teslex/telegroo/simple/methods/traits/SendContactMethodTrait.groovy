@@ -47,9 +47,10 @@ trait SendContactMethodTrait implements SendContactMethod<TelegramResult<Message
 	}
 
 	@Override
-	TelegramResult<Message> sendContact(@DelegatesTo(SendContactMethodObject) Closure closure) {
+	TelegramResult<Message> sendContact(@DelegatesTo(value = SendContactMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendContactMethodObject builder = new SendContactMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendContact(builder)
 	}

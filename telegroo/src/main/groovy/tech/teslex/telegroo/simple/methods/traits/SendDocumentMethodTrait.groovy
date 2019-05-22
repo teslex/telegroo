@@ -47,9 +47,10 @@ trait SendDocumentMethodTrait implements SendDocumentMethod<TelegramResult<Messa
 	}
 
 	@Override
-	TelegramResult<Message> sendDocument(@DelegatesTo(SendDocumentMethodObject) Closure closure) {
+	TelegramResult<Message> sendDocument(@DelegatesTo(value = SendDocumentMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendDocumentMethodObject builder = new SendDocumentMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendDocument(builder)
 	}

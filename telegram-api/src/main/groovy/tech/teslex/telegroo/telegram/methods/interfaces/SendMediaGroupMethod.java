@@ -15,5 +15,5 @@ public interface SendMediaGroupMethod<R> {
 	@NamedVariant
 	R sendMediaGroup(@NamedDelegate SendMediaGroupMethodObject data);
 
-	R sendMediaGroup(@DelegatesTo(SendMediaGroupMethodObject.class) Closure closure);
+	R sendMediaGroup(@DelegatesTo(value = SendMediaGroupMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

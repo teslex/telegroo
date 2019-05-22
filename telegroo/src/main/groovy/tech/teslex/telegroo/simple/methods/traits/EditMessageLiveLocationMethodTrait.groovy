@@ -48,9 +48,10 @@ trait EditMessageLiveLocationMethodTrait implements EditMessageLiveLocationMetho
 	}
 
 	@Override
-	TelegramResult<Object> editMessageLiveLocation(@DelegatesTo(EditMessageLiveLocationMethodObject) Closure closure) {
+	TelegramResult<Object> editMessageLiveLocation(@DelegatesTo(value = EditMessageLiveLocationMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		EditMessageLiveLocationMethodObject builder = new EditMessageLiveLocationMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		editMessageLiveLocation(builder)
 	}

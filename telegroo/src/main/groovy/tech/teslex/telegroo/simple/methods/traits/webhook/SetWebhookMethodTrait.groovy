@@ -44,9 +44,10 @@ trait SetWebhookMethodTrait implements SetWebhookMethod<TelegramResult<Object>> 
 	}
 
 	@Override
-	TelegramResult<Object> setWebhook(@DelegatesTo(SetWebhookMethodObject) Closure closure) {
+	TelegramResult<Object> setWebhook(@DelegatesTo(value = SetWebhookMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SetWebhookMethodObject builder = new SetWebhookMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		setWebhook(builder)
 	}

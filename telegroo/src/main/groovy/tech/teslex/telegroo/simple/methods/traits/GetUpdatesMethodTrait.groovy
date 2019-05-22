@@ -50,9 +50,10 @@ trait GetUpdatesMethodTrait implements GetUpdatesMethod<TelegramResult<List<Upda
 	}
 
 	@Override
-	TelegramResult<List<Update>> getUpdates(@DelegatesTo(GetUpdatesMethodObject) Closure closure) {
+	TelegramResult<List<Update>> getUpdates(@DelegatesTo(value = GetUpdatesMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		GetUpdatesMethodObject builder = new GetUpdatesMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		getUpdates(builder)
 	}

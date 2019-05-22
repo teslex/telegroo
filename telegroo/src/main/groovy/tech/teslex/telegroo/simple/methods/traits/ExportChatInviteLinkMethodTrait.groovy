@@ -46,9 +46,10 @@ trait ExportChatInviteLinkMethodTrait implements ExportChatInviteLinkMethod<Tele
 	}
 
 	@Override
-	TelegramResult<String> exportChatInviteLink(@DelegatesTo(ExportChatInviteLinkMethodObject) Closure closure) {
+	TelegramResult<String> exportChatInviteLink(@DelegatesTo(value = ExportChatInviteLinkMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		ExportChatInviteLinkMethodObject builder = new ExportChatInviteLinkMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		exportChatInviteLink(builder)
 	}

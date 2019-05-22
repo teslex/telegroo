@@ -44,9 +44,10 @@ trait SetStickerPositionInSetMethodTrait implements SetStickerPositionInSetMetho
 	}
 
 	@Override
-	TelegramResult<Object> setStickerPositionInSet(@DelegatesTo(SetStickerPositionInSetMethodObject) Closure closure) {
+	TelegramResult<Object> setStickerPositionInSet(@DelegatesTo(value = SetStickerPositionInSetMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SetStickerPositionInSetMethodObject builder = new SetStickerPositionInSetMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		setStickerPositionInSet(builder)
 	}

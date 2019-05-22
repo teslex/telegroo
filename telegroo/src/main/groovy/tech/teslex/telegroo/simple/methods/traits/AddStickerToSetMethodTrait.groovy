@@ -44,9 +44,10 @@ trait AddStickerToSetMethodTrait implements AddStickerToSetMethod<TelegramResult
 	}
 
 	@Override
-	TelegramResult<Object> addStickerToSet(@DelegatesTo(AddStickerToSetMethodObject) Closure closure) {
+	TelegramResult<Object> addStickerToSet(@DelegatesTo(value = AddStickerToSetMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		AddStickerToSetMethodObject builder = new AddStickerToSetMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		addStickerToSet(builder)
 	}

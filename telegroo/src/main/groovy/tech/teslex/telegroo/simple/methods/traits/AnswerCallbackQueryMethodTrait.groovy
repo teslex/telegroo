@@ -44,9 +44,10 @@ trait AnswerCallbackQueryMethodTrait implements AnswerCallbackQueryMethod<Telegr
 	}
 
 	@Override
-	TelegramResult<Object> answerCallbackQuery(@DelegatesTo(AnswerCallbackQueryMethodObject) Closure closure) {
+	TelegramResult<Object> answerCallbackQuery(@DelegatesTo(value = AnswerCallbackQueryMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		AnswerCallbackQueryMethodObject builder = new AnswerCallbackQueryMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		answerCallbackQuery(builder)
 	}

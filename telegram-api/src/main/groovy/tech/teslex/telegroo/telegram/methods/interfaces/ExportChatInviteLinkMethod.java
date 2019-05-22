@@ -15,5 +15,5 @@ public interface ExportChatInviteLinkMethod<R> {
 	@NamedVariant
 	R exportChatInviteLink(@NamedDelegate ExportChatInviteLinkMethodObject data);
 
-	R exportChatInviteLink(@DelegatesTo(ExportChatInviteLinkMethodObject.class) Closure closure);
+	R exportChatInviteLink(@DelegatesTo(value = ExportChatInviteLinkMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

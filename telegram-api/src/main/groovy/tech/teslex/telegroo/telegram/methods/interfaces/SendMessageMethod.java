@@ -15,5 +15,5 @@ public interface SendMessageMethod<R> {
 	@NamedVariant
 	R sendMessage(@NamedDelegate SendMessageMethodObject data);
 
-	R sendMessage(@DelegatesTo(SendMessageMethodObject.class) Closure closure);
+	R sendMessage(@DelegatesTo(value = SendMessageMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

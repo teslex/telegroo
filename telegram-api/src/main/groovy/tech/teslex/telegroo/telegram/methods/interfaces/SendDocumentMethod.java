@@ -15,5 +15,5 @@ public interface SendDocumentMethod<R> {
 	@NamedVariant
 	R sendDocument(@NamedDelegate SendDocumentMethodObject data);
 
-	R sendDocument(@DelegatesTo(SendDocumentMethodObject.class) Closure closure);
+	R sendDocument(@DelegatesTo(value = SendDocumentMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

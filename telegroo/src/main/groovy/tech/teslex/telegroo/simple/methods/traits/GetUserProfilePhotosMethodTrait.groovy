@@ -44,9 +44,10 @@ trait GetUserProfilePhotosMethodTrait implements GetUserProfilePhotosMethod<Tele
 		getUserProfilePhotos(data as GetUserProfilePhotosMethodObject)
 	}
 
-	TelegramResult<UserProfilePhotos> getUserProfilePhotos(@DelegatesTo(GetUserProfilePhotosMethodObject) Closure closure) {
+	TelegramResult<UserProfilePhotos> getUserProfilePhotos(@DelegatesTo(value = GetUserProfilePhotosMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		GetUserProfilePhotosMethodObject builder = new GetUserProfilePhotosMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		getUserProfilePhotos(builder)
 	}

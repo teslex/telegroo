@@ -41,7 +41,7 @@ trait ReplyTrait implements ReplyMethod {
 	/**
 	 * example: reply { sendMessage(text: 'Nice') }*/
 	@Override
-	void reply(@DelegatesTo(SimpleMethodsContext) Closure closure) {
+	void reply(@DelegatesTo(value = SimpleMethodsContext, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		reply(update[update.updateType.value]['messageId'], closure)
 	}
 

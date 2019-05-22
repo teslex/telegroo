@@ -45,9 +45,10 @@ trait GetFileMethodTrait implements GetFileMethod<TelegramResult<FileObject>> {
 	}
 
 	@Override
-	TelegramResult<FileObject> getFile(@DelegatesTo(GetFileMethodObject) Closure closure) {
+	TelegramResult<FileObject> getFile(@DelegatesTo(value = GetFileMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		GetFileMethodObject builder = new GetFileMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		getFile(builder)
 	}

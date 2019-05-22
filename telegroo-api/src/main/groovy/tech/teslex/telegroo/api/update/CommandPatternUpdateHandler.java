@@ -20,14 +20,15 @@ import tech.teslex.telegroo.api.context.CommandContext;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 public interface CommandPatternUpdateHandler<C extends CommandContext> extends EntitiesUpdateHandler<C> {
 
 	Pattern getPattern();
 
-	Pattern getArgsPattern();
+	default Pattern getArgsPattern() {
+		return Pattern.compile("");
+	}
 
 	@Override
 	default List<String> getEntities() {

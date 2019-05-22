@@ -15,5 +15,5 @@ public interface GetUserProfilePhotosMethod<R> {
 	@NamedVariant
 	R getUserProfilePhotos(@NamedDelegate GetUserProfilePhotosMethodObject data);
 
-	R getUserProfilePhotos(@DelegatesTo(GetUserProfilePhotosMethodObject.class) Closure closure);
+	R getUserProfilePhotos(@DelegatesTo(value = GetUserProfilePhotosMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

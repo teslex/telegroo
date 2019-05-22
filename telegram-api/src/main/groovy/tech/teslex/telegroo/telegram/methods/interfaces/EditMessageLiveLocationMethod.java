@@ -15,5 +15,5 @@ public interface EditMessageLiveLocationMethod<R> {
 	@NamedVariant
 	R editMessageLiveLocation(@NamedDelegate EditMessageLiveLocationMethodObject data);
 
-	R editMessageLiveLocation(@DelegatesTo(EditMessageLiveLocationMethodObject.class) Closure closure);
+	R editMessageLiveLocation(@DelegatesTo(value = EditMessageLiveLocationMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

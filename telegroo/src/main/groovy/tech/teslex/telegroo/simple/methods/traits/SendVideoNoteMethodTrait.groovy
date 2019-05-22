@@ -47,9 +47,10 @@ trait SendVideoNoteMethodTrait implements SendVideoNoteMethod<TelegramResult<Mes
 	}
 
 	@Override
-	TelegramResult<Message> sendVideoNote(@DelegatesTo(SendVideoNoteMethodObject) Closure closure) {
+	TelegramResult<Message> sendVideoNote(@DelegatesTo(value = SendVideoNoteMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendVideoNoteMethodObject builder = new SendVideoNoteMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendVideoNote(builder)
 	}

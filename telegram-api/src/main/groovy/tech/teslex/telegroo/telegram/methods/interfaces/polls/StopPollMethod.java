@@ -15,5 +15,5 @@ public interface StopPollMethod<R> {
 	@NamedVariant
 	R stopPoll(@NamedDelegate StopPollMethodObject data);
 
-	R stopPoll(@DelegatesTo(StopPollMethodObject.class) Closure closure);
+	R stopPoll(@DelegatesTo(value = StopPollMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

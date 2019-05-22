@@ -15,5 +15,5 @@ public interface SendVideoMethod<R> {
 	@NamedVariant
 	R sendVideo(@NamedDelegate SendVideoMethodObject data);
 
-	R sendVideo(@DelegatesTo(SendVideoMethodObject.class) Closure closure);
+	R sendVideo(@DelegatesTo(value = SendVideoMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

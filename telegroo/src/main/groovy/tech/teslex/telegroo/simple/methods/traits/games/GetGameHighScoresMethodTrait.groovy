@@ -46,9 +46,10 @@ trait GetGameHighScoresMethodTrait implements GetGameHighScoresMethod<TelegramRe
 	}
 
 	@Override
-	TelegramResult<List<GameHighScore>> getGameHighScores(@DelegatesTo(GetGameHighScoresMethodObject) Closure closure) {
+	TelegramResult<List<GameHighScore>> getGameHighScores(@DelegatesTo(value = GetGameHighScoresMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		GetGameHighScoresMethodObject builder = new GetGameHighScoresMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		getGameHighScores(builder)
 	}

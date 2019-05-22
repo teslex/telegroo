@@ -46,9 +46,10 @@ trait SetChatPhotoMethodTrait implements SetChatPhotoMethod<TelegramResult<Objec
 	}
 
 	@Override
-	TelegramResult<Object> setChatPhoto(@DelegatesTo(SetChatPhotoMethodObject) Closure closure) {
+	TelegramResult<Object> setChatPhoto(@DelegatesTo(value = SetChatPhotoMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SetChatPhotoMethodObject builder = new SetChatPhotoMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		setChatPhoto(builder)
 	}

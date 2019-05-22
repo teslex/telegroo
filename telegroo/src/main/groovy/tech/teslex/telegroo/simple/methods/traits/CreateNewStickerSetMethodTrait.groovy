@@ -44,9 +44,10 @@ trait CreateNewStickerSetMethodTrait implements CreateNewStickerSetMethod<Telegr
 	}
 
 	@Override
-	TelegramResult<Object> createNewStickerSet(@DelegatesTo(CreateNewStickerSetMethodObject) Closure closure) {
+	TelegramResult<Object> createNewStickerSet(@DelegatesTo(value = CreateNewStickerSetMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		CreateNewStickerSetMethodObject builder = new CreateNewStickerSetMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		createNewStickerSet(builder)
 	}

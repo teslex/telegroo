@@ -47,9 +47,10 @@ trait SendVoiceMethodTrait implements SendVoiceMethod<TelegramResult<Message>> {
 	}
 
 	@Override
-	TelegramResult<Message> sendVoice(@DelegatesTo(SendVoiceMethodObject) Closure closure) {
+	TelegramResult<Message> sendVoice(@DelegatesTo(value = SendVoiceMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendVoiceMethodObject builder = new SendVoiceMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendVoice(builder)
 	}

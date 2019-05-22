@@ -15,5 +15,5 @@ public interface SetChatTitleMethod<R> {
 	@NamedVariant
 	R setChatTitle(@NamedDelegate SetChatTitleMethodObject data);
 
-	R setChatTitle(@DelegatesTo(SetChatTitleMethodObject.class) Closure closure);
+	R setChatTitle(@DelegatesTo(value = SetChatTitleMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

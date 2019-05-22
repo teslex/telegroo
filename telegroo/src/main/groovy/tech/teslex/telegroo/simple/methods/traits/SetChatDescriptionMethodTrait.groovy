@@ -46,9 +46,10 @@ trait SetChatDescriptionMethodTrait implements SetChatDescriptionMethod<Telegram
 	}
 
 	@Override
-	TelegramResult<Object> setChatDescription(@DelegatesTo(SetChatDescriptionMethodObject) Closure closure) {
+	TelegramResult<Object> setChatDescription(@DelegatesTo(value = SetChatDescriptionMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SetChatDescriptionMethodObject builder = new SetChatDescriptionMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		setChatDescription(builder)
 	}

@@ -15,5 +15,5 @@ public interface DeleteStickerFromSetMethod<R> {
 	@NamedVariant
 	R deleteStickerFromSet(@NamedDelegate DeleteStickerFromSetMethodObject data);
 
-	R deleteStickerFromSet(@DelegatesTo(DeleteStickerFromSetMethodObject.class) Closure closure);
+	R deleteStickerFromSet(@DelegatesTo(value = DeleteStickerFromSetMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

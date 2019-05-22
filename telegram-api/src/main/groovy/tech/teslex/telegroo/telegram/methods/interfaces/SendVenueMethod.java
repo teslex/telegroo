@@ -15,5 +15,5 @@ public interface SendVenueMethod<R> {
 	@NamedVariant
 	R sendVenue(@NamedDelegate SendVenueMethodObject data);
 
-	R sendVenue(@DelegatesTo(SendVenueMethodObject.class) Closure closure);
+	R sendVenue(@DelegatesTo(value = SendVenueMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

@@ -48,9 +48,10 @@ trait EditMessageTextMethodTrait implements EditMessageTextMethod<TelegramResult
 	}
 
 	@Override
-	TelegramResult<Object> editMessageText(@DelegatesTo(EditMessageTextMethodObject) Closure closure) {
+	TelegramResult<Object> editMessageText(@DelegatesTo(value = EditMessageTextMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		EditMessageTextMethodObject builder = new EditMessageTextMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		editMessageText(builder)
 	}

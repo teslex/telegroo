@@ -15,5 +15,5 @@ public interface SendLocationMethod<R> {
 	@NamedVariant
 	R sendLocation(@NamedDelegate SendLocationMethodObject data);
 
-	R sendLocation(@DelegatesTo(SendLocationMethodObject.class) Closure closure);
+	R sendLocation(@DelegatesTo(value = SendLocationMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

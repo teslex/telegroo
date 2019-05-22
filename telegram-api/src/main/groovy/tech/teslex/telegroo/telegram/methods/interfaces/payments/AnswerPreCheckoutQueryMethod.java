@@ -15,5 +15,5 @@ public interface AnswerPreCheckoutQueryMethod<R> {
 	@NamedVariant
 	R answerPreCheckoutQuery(@NamedDelegate AnswerPreCheckoutQueryMethodObject data);
 
-	R answerPreCheckoutQuery(@DelegatesTo(AnswerPreCheckoutQueryMethodObject.class) Closure closure);
+	R answerPreCheckoutQuery(@DelegatesTo(value = AnswerPreCheckoutQueryMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

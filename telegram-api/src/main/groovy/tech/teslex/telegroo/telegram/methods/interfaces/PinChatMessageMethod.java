@@ -15,5 +15,5 @@ public interface PinChatMessageMethod<R> {
 	@NamedVariant
 	R pinChatMessage(@NamedDelegate PinChatMessageMethodObject data);
 
-	R pinChatMessage(@DelegatesTo(PinChatMessageMethodObject.class) Closure closure);
+	R pinChatMessage(@DelegatesTo(value = PinChatMessageMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

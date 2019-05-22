@@ -44,9 +44,10 @@ trait AnswerInlineQueryMethodTrait implements AnswerInlineQueryMethod<TelegramRe
 	}
 
 	@Override
-	TelegramResult<Object> answerInlineQuery(@DelegatesTo(AnswerInlineQueryMethodObject) Closure closure) {
+	TelegramResult<Object> answerInlineQuery(@DelegatesTo(value = AnswerInlineQueryMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		AnswerInlineQueryMethodObject builder = new AnswerInlineQueryMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		answerInlineQuery(builder)
 	}

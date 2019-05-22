@@ -44,9 +44,10 @@ trait AnswerPreCheckoutQueryMethodTrait implements AnswerPreCheckoutQueryMethod<
 	}
 
 	@Override
-	TelegramResult<Object> answerPreCheckoutQuery(@DelegatesTo(AnswerPreCheckoutQueryMethodObject) Closure closure) {
+	TelegramResult<Object> answerPreCheckoutQuery(@DelegatesTo(value = AnswerPreCheckoutQueryMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		AnswerPreCheckoutQueryMethodObject builder = new AnswerPreCheckoutQueryMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		answerPreCheckoutQuery(builder)
 	}

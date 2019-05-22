@@ -15,5 +15,5 @@ public interface UnbanChatMemberMethod<R> {
 	@NamedVariant
 	R unbanChatMember(@NamedDelegate UnbanChatMemberMethodObject data);
 
-	R unbanChatMember(@DelegatesTo(UnbanChatMemberMethodObject.class) Closure closure);
+	R unbanChatMember(@DelegatesTo(value = UnbanChatMemberMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

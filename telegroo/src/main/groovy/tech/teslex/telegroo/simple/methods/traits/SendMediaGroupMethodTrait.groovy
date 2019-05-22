@@ -47,9 +47,10 @@ trait SendMediaGroupMethodTrait implements SendMediaGroupMethod<TelegramResult<L
 	}
 
 	@Override
-	TelegramResult<List<Message>> sendMediaGroup(@DelegatesTo(SendMediaGroupMethodObject) Closure closure) {
+	TelegramResult<List<Message>> sendMediaGroup(@DelegatesTo(value = SendMediaGroupMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendMediaGroupMethodObject builder = new SendMediaGroupMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendMediaGroup(builder)
 	}

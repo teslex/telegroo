@@ -46,9 +46,10 @@ trait StopPollMethodTrait implements StopPollMethod<TelegramResult<Poll>> {
 	}
 
 	@Override
-	TelegramResult<Message> stopPoll(@DelegatesTo(StopPollMethodObject.class) Closure closure) {
+	TelegramResult<Message> stopPoll(@DelegatesTo(value = StopPollMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		StopPollMethodObject builder = new StopPollMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		stopPoll(builder)
 	}

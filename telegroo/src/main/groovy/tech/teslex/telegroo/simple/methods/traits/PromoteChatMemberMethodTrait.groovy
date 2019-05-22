@@ -46,9 +46,10 @@ trait PromoteChatMemberMethodTrait implements PromoteChatMemberMethod<TelegramRe
 	}
 
 	@Override
-	TelegramResult<Object> promoteChatMember(@DelegatesTo(PromoteChatMemberMethodObject) Closure closure) {
+	TelegramResult<Object> promoteChatMember(@DelegatesTo(value = PromoteChatMemberMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		PromoteChatMemberMethodObject builder = new PromoteChatMemberMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		promoteChatMember(builder)
 	}

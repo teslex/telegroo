@@ -15,5 +15,5 @@ public interface AnswerInlineQueryMethod<R> {
 	@NamedVariant
 	R answerInlineQuery(@NamedDelegate AnswerInlineQueryMethodObject data);
 
-	R answerInlineQuery(@DelegatesTo(AnswerInlineQueryMethodObject.class) Closure closure);
+	R answerInlineQuery(@DelegatesTo(value = AnswerInlineQueryMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

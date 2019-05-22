@@ -15,5 +15,5 @@ public interface SendChatActionMethod<R> {
 	@NamedVariant
 	R sendChatAction(@NamedDelegate SendChatActionMethodObject data);
 
-	R sendChatAction(@DelegatesTo(SendChatActionMethodObject.class) Closure closure);
+	R sendChatAction(@DelegatesTo(value = SendChatActionMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

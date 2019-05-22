@@ -15,5 +15,5 @@ public interface KickChatMemberMethod<R> {
 	@NamedVariant
 	R kickChatMember(@NamedDelegate KickChatMemberMethodObject data);
 
-	R kickChatMember(@DelegatesTo(KickChatMemberMethodObject.class) Closure closure);
+	R kickChatMember(@DelegatesTo(value = KickChatMemberMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

@@ -15,5 +15,5 @@ public interface SendPollMethod<R> {
 	@NamedVariant
 	R sendPoll(@NamedDelegate SendPollMethodObject data);
 
-	R sendPoll(@DelegatesTo(SendPollMethodObject.class) Closure closure);
+	R sendPoll(@DelegatesTo(value = SendPollMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

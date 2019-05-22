@@ -47,9 +47,10 @@ trait StopMessageLiveLocationMethodTrait implements StopMessageLiveLocationMetho
 	}
 
 	@Override
-	TelegramResult<Object> stopMessageLiveLocation(@DelegatesTo(StopMessageLiveLocationMethodObject) Closure closure) {
+	TelegramResult<Object> stopMessageLiveLocation(@DelegatesTo(value = StopMessageLiveLocationMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		StopMessageLiveLocationMethodObject builder = new StopMessageLiveLocationMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		stopMessageLiveLocation(builder)
 	}

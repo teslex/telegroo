@@ -15,5 +15,5 @@ public interface EditMessageMediaMethod<R> {
 	@NamedVariant
 	R editMessageMedia(@NamedDelegate EditMessageMediaMethodObject data);
 
-	R editMessageMedia(@DelegatesTo(EditMessageMediaMethodObject.class) Closure closure);
+	R editMessageMedia(@DelegatesTo(value = EditMessageMediaMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

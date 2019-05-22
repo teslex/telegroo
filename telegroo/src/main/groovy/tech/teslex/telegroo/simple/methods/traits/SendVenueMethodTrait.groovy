@@ -47,9 +47,10 @@ trait SendVenueMethodTrait implements SendVenueMethod<TelegramResult<Message>> {
 	}
 
 	@Override
-	TelegramResult<Message> sendVenue(@DelegatesTo(SendVenueMethodObject) Closure closure) {
+	TelegramResult<Message> sendVenue(@DelegatesTo(value = SendVenueMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendVenueMethodObject builder = new SendVenueMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendVenue(builder)
 	}

@@ -47,9 +47,10 @@ trait SendInvoiceMethodTrait implements SendInvoiceMethod<TelegramResult<Message
 	}
 
 	@Override
-	TelegramResult<Message> sendInvoice(@DelegatesTo(SendInvoiceMethodObject) Closure closure) {
+	TelegramResult<Message> sendInvoice(@DelegatesTo(value = SendInvoiceMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendInvoiceMethodObject builder = new SendInvoiceMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendInvoice(builder)
 	}

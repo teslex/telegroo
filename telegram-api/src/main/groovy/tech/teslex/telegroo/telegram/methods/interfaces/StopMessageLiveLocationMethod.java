@@ -15,5 +15,5 @@ public interface StopMessageLiveLocationMethod<R> {
 	@NamedVariant
 	R stopMessageLiveLocation(@NamedDelegate StopMessageLiveLocationMethodObject data);
 
-	R stopMessageLiveLocation(@DelegatesTo(StopMessageLiveLocationMethodObject.class) Closure closure);
+	R stopMessageLiveLocation(@DelegatesTo(value = StopMessageLiveLocationMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

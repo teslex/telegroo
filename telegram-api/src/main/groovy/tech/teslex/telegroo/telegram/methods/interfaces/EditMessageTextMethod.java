@@ -15,5 +15,5 @@ public interface EditMessageTextMethod<R> {
 	@NamedVariant
 	R editMessageText(@NamedDelegate EditMessageTextMethodObject data);
 
-	R editMessageText(@DelegatesTo(EditMessageTextMethodObject.class) Closure closure);
+	R editMessageText(@DelegatesTo(value = EditMessageTextMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

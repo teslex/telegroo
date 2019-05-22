@@ -15,5 +15,5 @@ public interface AddStickerToSetMethod<R> {
 	@NamedVariant
 	R addStickerToSet(@NamedDelegate AddStickerToSetMethodObject data);
 
-	R addStickerToSet(@DelegatesTo(AddStickerToSetMethodObject.class) Closure closure);
+	R addStickerToSet(@DelegatesTo(value = AddStickerToSetMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

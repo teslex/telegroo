@@ -47,9 +47,10 @@ trait SendStickerMethodTrait implements SendStickerMethod<TelegramResult<Message
 	}
 
 	@Override
-	TelegramResult<Message> sendSticker(@DelegatesTo(SendStickerMethodObject) Closure closure) {
+	TelegramResult<Message> sendSticker(@DelegatesTo(value = SendStickerMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendStickerMethodObject builder = new SendStickerMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendSticker(builder)
 	}

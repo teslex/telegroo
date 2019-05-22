@@ -46,9 +46,10 @@ trait KickChatMemberMethodTrait implements KickChatMemberMethod<TelegramResult<O
 	}
 
 	@Override
-	TelegramResult<Object> kickChatMember(@DelegatesTo(KickChatMemberMethodObject) Closure closure) {
+	TelegramResult<Object> kickChatMember(@DelegatesTo(value = KickChatMemberMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		KickChatMemberMethodObject builder = new KickChatMemberMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		kickChatMember(builder)
 	}

@@ -40,7 +40,7 @@ class SimpleTelegroo implements SimpleTelegrooTrait {
 
 	String token
 
-	Map<UpdateType, List<UpdateHandler>> handlers = [:]
+	Map<UpdateType, Queue<UpdateHandler>> handlers = [:]
 
 	List<Closure<Boolean>> middlewareList = []
 

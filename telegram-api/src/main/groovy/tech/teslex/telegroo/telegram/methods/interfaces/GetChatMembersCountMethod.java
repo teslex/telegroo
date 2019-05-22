@@ -15,5 +15,5 @@ public interface GetChatMembersCountMethod<R> {
 	@NamedVariant
 	R getChatMembersCount(@NamedDelegate GetChatMembersCountMethodObject data);
 
-	R getChatMembersCount(@DelegatesTo(GetChatMembersCountMethodObject.class) Closure closure);
+	R getChatMembersCount(@DelegatesTo(value = GetChatMembersCountMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

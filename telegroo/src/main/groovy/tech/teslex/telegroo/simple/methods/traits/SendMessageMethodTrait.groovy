@@ -47,9 +47,10 @@ trait SendMessageMethodTrait implements SendMessageMethod<TelegramResult<Message
 	}
 
 	@Override
-	TelegramResult<Message> sendMessage(@DelegatesTo(SendMessageMethodObject) Closure closure) {
+	TelegramResult<Message> sendMessage(@DelegatesTo(value = SendMessageMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendMessageMethodObject builder = new SendMessageMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendMessage(builder)
 	}

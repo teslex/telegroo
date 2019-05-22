@@ -21,12 +21,13 @@ import tech.teslex.telegroo.telegram.types.update.Update;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 public interface UpdateHandlersSolver {
 
-	void solveOne(Update update, Map<UpdateType, List<UpdateHandler>> handlers);
+	void solveOne(Update update, Map<UpdateType, Queue<UpdateHandler>> handlers);
 
-	default void solve(List<Update> updates, Map<UpdateType, List<UpdateHandler>> handlers) {
+	default void solve(List<Update> updates, Map<UpdateType, Queue<UpdateHandler>> handlers) {
 		updates.forEach(update -> solveOne(update, handlers));
 	}
 }

@@ -47,9 +47,10 @@ trait GetChatMethodTrait implements GetChatMethod<TelegramResult<Chat>> {
 	}
 
 	@Override
-	TelegramResult<Chat> getChat(@DelegatesTo(GetChatMethodObject) Closure closure) {
+	TelegramResult<Chat> getChat(@DelegatesTo(value = GetChatMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		GetChatMethodObject builder = new GetChatMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		getChat(builder)
 	}

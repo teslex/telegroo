@@ -48,9 +48,10 @@ trait EditMessageCaptionMethodTrait implements EditMessageCaptionMethod<Telegram
 	}
 
 	@Override
-	TelegramResult<Object> editMessageCaption(@DelegatesTo(EditMessageCaptionMethodObject) Closure closure) {
+	TelegramResult<Object> editMessageCaption(@DelegatesTo(value = EditMessageCaptionMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		EditMessageCaptionMethodObject builder = new EditMessageCaptionMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		editMessageCaption(builder)
 	}

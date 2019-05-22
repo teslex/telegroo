@@ -17,5 +17,5 @@ public interface GetUpdatesMethod<R> {
 	@NamedVariant
 	R getUpdates(@NamedDelegate GetUpdatesMethodObject data);
 
-	R getUpdates(@DelegatesTo(GetUpdatesMethodObject.class) Closure closure);
+	R getUpdates(@DelegatesTo(value = GetUpdatesMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

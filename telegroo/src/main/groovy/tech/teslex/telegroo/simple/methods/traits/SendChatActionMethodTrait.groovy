@@ -46,9 +46,10 @@ trait SendChatActionMethodTrait implements SendChatActionMethod<TelegramResult<O
 	}
 
 	@Override
-	TelegramResult<Object> sendChatAction(@DelegatesTo(SendChatActionMethodObject) Closure closure) {
+	TelegramResult<Object> sendChatAction(@DelegatesTo(value = SendChatActionMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendChatActionMethodObject builder = new SendChatActionMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendChatAction(builder)
 	}

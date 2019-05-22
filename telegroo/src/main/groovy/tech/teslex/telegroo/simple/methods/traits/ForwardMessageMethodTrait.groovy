@@ -48,9 +48,10 @@ trait ForwardMessageMethodTrait implements ForwardMessageMethod<TelegramResult<M
 	}
 
 	@Override
-	TelegramResult<Message> forwardMessage(@DelegatesTo(ForwardMessageMethodObject) Closure closure) {
+	TelegramResult<Message> forwardMessage(@DelegatesTo(value = ForwardMessageMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		ForwardMessageMethodObject builder = new ForwardMessageMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		forwardMessage(builder)
 	}

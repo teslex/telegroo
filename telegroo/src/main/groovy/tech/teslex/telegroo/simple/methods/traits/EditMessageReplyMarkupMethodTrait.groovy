@@ -48,9 +48,10 @@ trait EditMessageReplyMarkupMethodTrait implements EditMessageReplyMarkupMethod<
 	}
 
 	@Override
-	TelegramResult<Object> editMessageReplyMarkup(@DelegatesTo(EditMessageReplyMarkupMethodObject) Closure closure) {
+	TelegramResult<Object> editMessageReplyMarkup(@DelegatesTo(value = EditMessageReplyMarkupMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		EditMessageReplyMarkupMethodObject builder = new EditMessageReplyMarkupMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		editMessageReplyMarkup(builder)
 	}

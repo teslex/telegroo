@@ -46,9 +46,10 @@ trait RestrictChatMemberMethodTrait implements RestrictChatMemberMethod<Telegram
 	}
 
 	@Override
-	TelegramResult<Object> restrictChatMember(@DelegatesTo(RestrictChatMemberMethodObject) Closure closure) {
+	TelegramResult<Object> restrictChatMember(@DelegatesTo(value = RestrictChatMemberMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		RestrictChatMemberMethodObject builder = new RestrictChatMemberMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		restrictChatMember(builder)
 	}

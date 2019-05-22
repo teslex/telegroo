@@ -15,5 +15,5 @@ public interface RestrictChatMemberMethod<R> {
 	@NamedVariant
 	R restrictChatMember(@NamedDelegate RestrictChatMemberMethodObject data);
 
-	R restrictChatMember(@DelegatesTo(RestrictChatMemberMethodObject.class) Closure closure);
+	R restrictChatMember(@DelegatesTo(value = RestrictChatMemberMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

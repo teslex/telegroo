@@ -46,9 +46,10 @@ trait DeleteChatPhotoMethodTrait implements DeleteChatPhotoMethod<TelegramResult
 	}
 
 	@Override
-	TelegramResult<Object> deleteChatPhoto(@DelegatesTo(DeleteChatPhotoMethodObject) Closure closure) {
+	TelegramResult<Object> deleteChatPhoto(@DelegatesTo(value = DeleteChatPhotoMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		DeleteChatPhotoMethodObject builder = new DeleteChatPhotoMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		deleteChatPhoto(builder)
 	}

@@ -47,9 +47,10 @@ trait DeleteMessageMethodTrait implements DeleteMessageMethod<TelegramResult<Obj
 	}
 
 	@Override
-	TelegramResult<Object> deleteMessage(@DelegatesTo(DeleteMessageMethodObject) Closure closure) {
+	TelegramResult<Object> deleteMessage(@DelegatesTo(value = DeleteMessageMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		DeleteMessageMethodObject builder = new DeleteMessageMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		deleteMessage(builder)
 	}

@@ -15,5 +15,5 @@ public interface SendStickerMethod<R> {
 	@NamedVariant
 	R sendSticker(@NamedDelegate SendStickerMethodObject data);
 
-	R sendSticker(@DelegatesTo(SendStickerMethodObject.class) Closure closure);
+	R sendSticker(@DelegatesTo(value = SendStickerMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

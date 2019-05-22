@@ -48,9 +48,10 @@ trait EditMessageMediaMethodTrait implements EditMessageMediaMethod<TelegramResu
 	}
 
 	@Override
-	TelegramResult<Object> editMessageMedia(@DelegatesTo(EditMessageMediaMethodObject) Closure closure) {
+	TelegramResult<Object> editMessageMedia(@DelegatesTo(value = EditMessageMediaMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		EditMessageMediaMethodObject builder = new EditMessageMediaMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		editMessageMedia(builder)
 	}

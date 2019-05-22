@@ -15,5 +15,5 @@ public interface SendContactMethod<R> {
 	@NamedVariant
 	R sendContact(@NamedDelegate SendContactMethodObject data);
 
-	R sendContact(@DelegatesTo(SendContactMethodObject.class) Closure closure);
+	R sendContact(@DelegatesTo(value = SendContactMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

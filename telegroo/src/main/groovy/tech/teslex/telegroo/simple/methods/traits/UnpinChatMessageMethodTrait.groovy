@@ -46,9 +46,10 @@ trait UnpinChatMessageMethodTrait implements UnpinChatMessageMethod<TelegramResu
 	}
 
 	@Override
-	TelegramResult<Object> unpinChatMessage(@DelegatesTo(UnpinChatMessageMethodObject) Closure closure) {
+	TelegramResult<Object> unpinChatMessage(@DelegatesTo(value = UnpinChatMessageMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		UnpinChatMessageMethodObject builder = new UnpinChatMessageMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		unpinChatMessage(builder)
 	}

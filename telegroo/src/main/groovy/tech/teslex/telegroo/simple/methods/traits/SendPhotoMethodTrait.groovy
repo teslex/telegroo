@@ -47,9 +47,10 @@ trait SendPhotoMethodTrait implements SendPhotoMethod<TelegramResult<Message>> {
 	}
 
 	@Override
-	TelegramResult<Message> sendPhoto(@DelegatesTo(SendPhotoMethodObject) Closure closure) {
+	TelegramResult<Message> sendPhoto(@DelegatesTo(value = SendPhotoMethodObject, strategy = Closure.DELEGATE_FIRST) Closure closure) {
 		SendPhotoMethodObject builder = new SendPhotoMethodObject()
 		closure.delegate = builder
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.call()
 		sendPhoto(builder)
 	}

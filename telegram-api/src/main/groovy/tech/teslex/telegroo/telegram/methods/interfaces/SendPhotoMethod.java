@@ -15,5 +15,5 @@ public interface SendPhotoMethod<R> {
 	@NamedVariant
 	R sendPhoto(@NamedDelegate SendPhotoMethodObject data);
 
-	R sendPhoto(@DelegatesTo(SendPhotoMethodObject.class) Closure closure);
+	R sendPhoto(@DelegatesTo(value = SendPhotoMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

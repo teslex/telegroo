@@ -15,5 +15,5 @@ public interface GetStickerSetMethod<R> {
 	@NamedVariant
 	R getStickerSet(@NamedDelegate GetStickerSetMethodObject data);
 
-	R getStickerSet(@DelegatesTo(GetStickerSetMethodObject.class) Closure closure);
+	R getStickerSet(@DelegatesTo(value = GetStickerSetMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }

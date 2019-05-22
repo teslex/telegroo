@@ -15,5 +15,5 @@ public interface UnpinChatMessageMethod<R> {
 	@NamedVariant
 	R unpinChatMessage(@NamedDelegate UnpinChatMessageMethodObject data);
 
-	R unpinChatMessage(@DelegatesTo(UnpinChatMessageMethodObject.class) Closure closure);
+	R unpinChatMessage(@DelegatesTo(value = UnpinChatMessageMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 }
