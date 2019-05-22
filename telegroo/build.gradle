@@ -33,7 +33,7 @@ publishing {
 		maven(MavenPublication) {
 			groupId 'tech.teslex.telegroo'
 			artifactId 'telegroo'
-			version telegrooVersion
+			version version
 
 			from components.java
 			artifact sourcesJar
@@ -89,8 +89,8 @@ bintray {
 	}
 
 	version {
-		name = telegrooVersion
+		name = version
 		released = new Date()
-		vcsTag = telegrooVersion
+		vcsTag = version
 	}
 }
