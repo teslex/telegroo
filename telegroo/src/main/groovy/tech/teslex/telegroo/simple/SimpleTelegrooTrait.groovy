@@ -19,13 +19,13 @@ import java.util.regex.Pattern
 trait SimpleTelegrooTrait implements Telegroo {
 
 	@Override
-	void update(UpdateType updateType, @DelegatesTo(MethodsContext) Closure handler) {
+	void on(UpdateType updateType, @DelegatesTo(MethodsContext) Closure handler) {
 		if (!handlers.containsKey(updateType)) handlers.put(updateType, new LinkedList())
 		handlers[updateType] << new SimpleClosureUpdateHandler(updateType, handler)
 	}
 
 	@Override
-	void update(@DelegatesTo(MethodsContext) Closure handler) {
+	void on(@DelegatesTo(MethodsContext) Closure handler) {
 		if (!handlers.containsKey(UpdateType.UPDATE)) handlers.put(UpdateType.UPDATE, new LinkedList())
 		handlers[UpdateType.UPDATE] << new SimpleClosureUpdateHandler(handler)
 	}
@@ -111,7 +111,7 @@ trait SimpleTelegrooTrait implements Telegroo {
 	@Override
 	void callbackQuery(String callbackData, @DelegatesTo(MethodsContext.class) Closure handler) {
 		if (!handlers.containsKey(UpdateType.CALLBACK_QUERY)) handlers.put(UpdateType.CALLBACK_QUERY, new LinkedList())
-		handlers[UpdateType.CALLBACK_QUERY] << new SimpleClosureCallbackQueryUpdateHandler([callbackData], handler)
+		handlers[UpdateType.CALLBACK_QUERY] << new SimpleClosureCallbackQueryUpdateHandler(callbackData, handler)
 	}
 
 	@Override

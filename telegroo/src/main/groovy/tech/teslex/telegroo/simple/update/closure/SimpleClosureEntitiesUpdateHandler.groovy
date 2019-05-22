@@ -35,11 +35,7 @@ class SimpleClosureEntitiesUpdateHandler implements SimpleEntitiesUpdateHandler 
 	@Override
 	void handle(SimpleMethodsContext context) {
 		closure.delegate = context
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure()
-	}
-
-	@Override
-	List<String> getEntities() {
-		this.entities
 	}
 }

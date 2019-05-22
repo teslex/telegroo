@@ -41,6 +41,7 @@ class SimpleClosureMessagePatternUpdateHandler implements SimpleMessagePatternUp
 	@Override
 	void handle(SimpleMessageContext context) {
 		closure.delegate = context
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure()
 	}
 }

@@ -23,11 +23,11 @@ import tech.teslex.telegroo.simple.update.SimpleCallbackQueryUpdateHandler
 @CompileStatic
 class SimpleClosureCallbackQueryUpdateHandler implements SimpleCallbackQueryUpdateHandler {
 
-	final List<String> callbackData
+	final String callbackData
 
 	final Closure closure
 
-	SimpleClosureCallbackQueryUpdateHandler(List<String> callbackData, Closure closure) {
+	SimpleClosureCallbackQueryUpdateHandler(String callbackData, Closure closure) {
 		this.callbackData = callbackData
 		this.closure = closure
 	}
@@ -35,6 +35,7 @@ class SimpleClosureCallbackQueryUpdateHandler implements SimpleCallbackQueryUpda
 	@Override
 	void handle(SimpleMethodsContext context) {
 		closure.delegate = context
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure()
 	}
 }

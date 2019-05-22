@@ -36,7 +36,7 @@ class SimpleTelegrooDSL implements TelegrooDSL {
 
 	@Override
 	void update(UpdateType type, @DelegatesTo(MethodsContext.class) Closure handler) {
-		telegroo.update(type, handler)
+		telegroo.on(type, handler)
 	}
 
 	@Override
@@ -58,7 +58,7 @@ class SimpleTelegrooDSL implements TelegrooDSL {
 
 	@Override
 	void update(@DelegatesTo(MethodsContext.class) Closure handler) {
-		telegroo.update(handler)
+		telegroo.on(handler)
 	}
 
 	@Override
@@ -68,36 +68,36 @@ class SimpleTelegrooDSL implements TelegrooDSL {
 
 	@Override
 	void editedMessage(@DelegatesTo(MethodsContext.class) Closure handler) {
-		telegroo.update(UpdateType.EDITED_MESSAGE, handler)
+		telegroo.on(UpdateType.EDITED_MESSAGE, handler)
 	}
 
 	@Override
 	void channelPost(@DelegatesTo(MethodsContext.class) Closure handler) {
-		telegroo.update(UpdateType.CHANNEL_POST, handler)
+		telegroo.on(UpdateType.CHANNEL_POST, handler)
 	}
 
 	@Override
 	void inlineQuery(@DelegatesTo(MethodsContext.class) Closure handler) {
-		telegroo.update(UpdateType.INLINE_QUERY, handler)
+		telegroo.on(UpdateType.INLINE_QUERY, handler)
 	}
 
 	@Override
 	void chosenInlineResult(@DelegatesTo(MethodsContext.class) Closure handler) {
-		telegroo.update(UpdateType.CHOSEN_INLINE_QUERY, handler)
+		telegroo.on(UpdateType.CHOSEN_INLINE_QUERY, handler)
 	}
 
 	@Override
 	void callbackQuery(@DelegatesTo(MethodsContext.class) Closure handler) {
-		telegroo.update(UpdateType.CALLBACK_QUERY, handler)
+		telegroo.on(UpdateType.CALLBACK_QUERY, handler)
 	}
 
 	@Override
 	void shippingQuery(@DelegatesTo(MethodsContext.class) Closure handler) {
-		telegroo.update(UpdateType.SHIPPING_QUERY, handler)
+		telegroo.on(UpdateType.SHIPPING_QUERY, handler)
 	}
 
 	@Override
 	void preCheckoutQuery(@DelegatesTo(MethodsContext.class) Closure handler) {
-		telegroo.update(UpdateType.PRE_CHECKOUT_QUERY, handler)
+		telegroo.on(UpdateType.PRE_CHECKOUT_QUERY, handler)
 	}
 }

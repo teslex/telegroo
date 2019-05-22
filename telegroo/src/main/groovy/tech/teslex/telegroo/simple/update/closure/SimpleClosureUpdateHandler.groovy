@@ -41,6 +41,7 @@ class SimpleClosureUpdateHandler implements SimpleUpdateHandler {
 	@Override
 	void handle(SimpleMethodsContext context) {
 		closure.delegate = context
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure()
 	}
 }

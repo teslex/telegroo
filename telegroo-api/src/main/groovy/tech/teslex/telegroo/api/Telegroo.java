@@ -44,9 +44,9 @@ public interface Telegroo {
 
 	MethodsContext<TelegramClient> getMainContext();
 
-	void update(UpdateType type, @DelegatesTo(MethodsContext.class) Closure handler);
+	void on(UpdateType type, @DelegatesTo(MethodsContext.class) Closure handler);
 
-	void update(@DelegatesTo(MethodsContext.class) Closure handler);
+	void on(@DelegatesTo(MethodsContext.class) Closure handler);
 
 	void command(Pattern command, @DelegatesTo(CommandContext.class) Closure handler);
 
@@ -76,6 +76,8 @@ public interface Telegroo {
 	void commandUpdateHandler(CommandPatternUpdateHandler handler);
 
 	void messageUpdateHandler(MessagePatternUpdateHandler handler);
+
+	void callbackQueryUpdateHandler(MessagePatternUpdateHandler handler);
 
 	void middleware(Closure<Boolean> closure);
 }

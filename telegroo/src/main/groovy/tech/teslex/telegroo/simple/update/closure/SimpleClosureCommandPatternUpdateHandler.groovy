@@ -40,6 +40,7 @@ class SimpleClosureCommandPatternUpdateHandler implements SimpleCommandPatternUp
 	@Override
 	void handle(SimpleCommandContext context) {
 		closure.delegate = context
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure()
 	}
 }
