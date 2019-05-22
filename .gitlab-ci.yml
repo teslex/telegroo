@@ -17,11 +17,11 @@ stages:
 publish-teslex:
   stage: publish
   script:
-    - "[ $(gradle properties -q | grep 'isSnapshot:' | awk '{print $2}') == 'true' ] && exit 1"
+    - "[ $(./gradlew properties -q | grep 'isSnapshot:' | awk '{print $2}') == 'true' ] && exit 1"
     - mkdir -p telegroo/src/test/resources
     - echo "token=$TEST_BOT_TOKEN" > telegroo/src/test/resources/test.properties
-    - gradle test
-    - gradle clean publish
+    - ./gradlew test
+    - ./gradlew clean publish
     - git clone https://gitlab.com/teslex/repo
     - cp -r telegram-api/build/repo/* repo
     - cp -r telegroo-api/build/repo/* repo
@@ -40,9 +40,9 @@ publish-teslex:
 publish-teslex-snapshot:
   stage: publish
   script:
-    - "[ $(gradle properties -q | grep 'isSnapshot:' | awk '{print $2}') != 'true' ] && exit 1"
+    - "[ $(./gradlew properties -q | grep 'isSnapshot:' | awk '{print $2}') != 'true' ] && exit 1"
     - HERE=$(pwd)
-    - gradle clean publish
+    - ./gradlew clean publish
     - git clone https://gitlab.com/teslex/repo
     - cd $HERE/repo/snapshots/tech/teslex/telegroo/telegroo && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
     - cd $HERE/repo/snapshots/tech/teslex/telegroo/telegroo-api && find . -type d -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 1)" -not -name "$(find . -type d -printf '%P\n' | sort -r | head -n 2 | sort | head -n 1)" -printf '%P\n' | xargs rm -rf
@@ -65,10 +65,10 @@ publish-teslex-snapshot:
 bintray-upload:
   stage: publish
   script:
-    - "[ $(gradle properties -q | grep 'isSnapshot:' | awk '{print $2}') == 'true' ] && exit 1"
+    - "[ $(./gradlew properties -q | grep 'isSnapshot:' | awk '{print $2}') == 'true' ] && exit 1"
     - mkdir -p telegroo/src/test/resources
     - echo "token=$TEST_BOT_TOKEN" > telegroo/src/test/resources/test.properties
-    - gradle test
-    - gradle bintrayUpload
+    - ./gradlew test
+    - ./gradlew bintrayUpload
   only:
     - master

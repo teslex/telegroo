@@ -15,8 +15,15 @@ class MediaObject {
 @Canonical
 class Media {
 
-	static <T> T with(Class<T> type, T... data) {
-		return data[0]
+	static <T> List<T> with(Class<T> type = MediaObject, T... data) {
+		return data
+	}
+
+	static <T> T with(Class<T> type = MediaObject, @DelegatesTo(type = "T") Closure closure) {
+		T t = type.newInstance()
+		closure.delegate = t
+		closure()
+		t
 	}
 }
 
@@ -25,5 +32,6 @@ static MediaObject object(String object) {
 }
 
 Media.with(MediaObject, object('some'), object('other'))
-Media.with(MediaObject, 'kek')
-Media.with(MediaObject, 1)
+Media.with(object('someThing'))
+Media.with(String, 'kek')
+Media.with(Number, 1)

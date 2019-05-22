@@ -42,6 +42,7 @@ trait MethodsTraits implements
 		GetWebhookInfoMethodTrait,
 
 		ReplyTrait,
+		WithMethodObjectTrait,
 
 		GetMeMethodTrait,
 		SendMessageMethodTrait,

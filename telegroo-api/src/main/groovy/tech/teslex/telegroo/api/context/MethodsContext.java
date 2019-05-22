@@ -18,6 +18,7 @@ package tech.teslex.telegroo.api.context;
 
 import tech.teslex.telegroo.api.TelegramClient;
 import tech.teslex.telegroo.api.methods.reply.ReplyMethod;
+import tech.teslex.telegroo.api.methods.reply.WithMethodObject;
 import tech.teslex.telegroo.telegram.TelegramResult;
 import tech.teslex.telegroo.telegram.methods.interfaces.*;
 import tech.teslex.telegroo.telegram.methods.interfaces.games.GetGameHighScoresMethod;
@@ -52,6 +53,7 @@ public interface MethodsContext<TC extends TelegramClient> extends Context<TC>,
 		GetWebhookInfoMethod<TelegramResult<WebhookInfo>>,
 
 		ReplyMethod,
+		WithMethodObject,
 
 		GetMeMethod<TelegramResult<User>>,
 

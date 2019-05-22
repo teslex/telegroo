@@ -8,37 +8,11 @@ import tech.teslex.telegroo.telegram.types.input.*
 class AttachMedia {
 
 	static InputMedia attach(InputFile inputFile) {
+
 		switch (inputFile.mediaType) {
-			case MediaType.ANIMATION: animation(inputFile); break
-			case MediaType.AUDIO: audio(inputFile); break
 			case MediaType.PHOTO: photo(inputFile); break
 			case MediaType.VIDEO: video(inputFile); break
-			default: document(inputFile); break
 		}
-	}
-
-	static InputMediaAnimation animation(InputFile inputFile) {
-		new InputMediaAnimation().media(inputFile)
-	}
-
-	static InputMediaAnimation animation(File animationFile) {
-		animation(Attach.animation(animationFile))
-	}
-
-	static InputMediaAudio audio(InputFile inputFile) {
-		new InputMediaAudio().media(inputFile)
-	}
-
-	static InputMediaAudio audio(File audioFile) {
-		audio(Attach.audio(audioFile))
-	}
-
-	static InputMediaDocument document(InputFile inputFile) {
-		new InputMediaDocument().media(inputFile)
-	}
-
-	static InputMediaDocument document(File documentFile) {
-		document(Attach.document(documentFile))
 	}
 
 	static InputMediaPhoto photo(InputFile inputFile) {
