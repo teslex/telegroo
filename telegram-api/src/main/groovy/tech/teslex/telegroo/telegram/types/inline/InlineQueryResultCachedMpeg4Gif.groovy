@@ -14,7 +14,7 @@ class InlineQueryResultCachedMpeg4Gif extends InlineQueryResult {
 	/**
 	 * Type of the result, must be mpeg4_gif
 	 */
-	String type
+	String type = 'mpeg4_gif'
 
 	/**
 	 * Unique identifier for this result, 1-64 bytes

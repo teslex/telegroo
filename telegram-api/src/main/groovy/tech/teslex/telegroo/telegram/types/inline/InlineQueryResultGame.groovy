@@ -14,7 +14,7 @@ class InlineQueryResultGame extends InlineQueryResult {
 	/**
 	 * Type of the result, must be game
 	 */
-	String type
+	String type = 'game'
 
 	/**
 	 * Unique identifier for this result, 1-64 bytes

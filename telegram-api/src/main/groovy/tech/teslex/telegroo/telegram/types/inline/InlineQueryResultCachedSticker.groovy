@@ -14,7 +14,7 @@ class InlineQueryResultCachedSticker extends InlineQueryResult {
 	/**
 	 * Type of the result, must be sticker
 	 */
-	String type
+	String type = 'sticker'
 
 	/**
 	 * Unique identifier for this result, 1-64 bytes

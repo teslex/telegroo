@@ -14,7 +14,7 @@ class InlineQueryResultCachedVideo extends InlineQueryResult {
 	/**
 	 * Type of the result, must be video
 	 */
-	String type
+	String type = 'video'
 
 	/**
 	 * Unique identifier for this result, 1-64 bytes

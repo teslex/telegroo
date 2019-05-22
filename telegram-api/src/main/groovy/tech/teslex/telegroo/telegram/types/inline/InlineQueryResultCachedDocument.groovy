@@ -14,7 +14,7 @@ class InlineQueryResultCachedDocument extends InlineQueryResult {
 	/**
 	 * Type of the result, must be document
 	 */
-	String type
+	String type = 'document'
 
 	/**
 	 * Unique identifier for this result, 1-64 bytes

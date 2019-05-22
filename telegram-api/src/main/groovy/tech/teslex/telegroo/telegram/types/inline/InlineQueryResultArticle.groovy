@@ -14,7 +14,7 @@ class InlineQueryResultArticle extends InlineQueryResult {
 	/**
 	 * Type of the result, must be article
 	 */
-	String type
+	String type = 'article'
 
 	/**
 	 * Unique identifier for this result, 1-64 Bytes

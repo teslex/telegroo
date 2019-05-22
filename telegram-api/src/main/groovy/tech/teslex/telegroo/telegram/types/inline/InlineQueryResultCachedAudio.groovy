@@ -14,7 +14,7 @@ class InlineQueryResultCachedAudio extends InlineQueryResult {
 	/**
 	 * Type of the result, must be audio
 	 */
-	String type
+	String type = 'audio'
 
 	/**
 	 * Unique identifier for this result, 1-64 bytes

@@ -14,7 +14,7 @@ class InlineQueryResultVenue extends InlineQueryResult {
 	/**
 	 * Type of the result, must be venue
 	 */
-	String type
+	String type = 'venue'
 
 	/**
 	 * Unique identifier for this result, 1-64 Bytes

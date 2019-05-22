@@ -14,7 +14,7 @@ class InlineQueryResultContact extends InlineQueryResult {
 	/**
 	 * Type of the result, must be contact
 	 */
-	String type
+	String type = 'contact'
 
 	/**
 	 * Unique identifier for this result, 1-64 Bytes

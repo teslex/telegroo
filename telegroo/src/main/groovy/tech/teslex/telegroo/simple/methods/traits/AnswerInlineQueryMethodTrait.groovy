@@ -33,6 +33,8 @@ trait AnswerInlineQueryMethodTrait implements AnswerInlineQueryMethod<TelegramRe
 	@Override
 	@NamedVariant
 	TelegramResult<Object> answerInlineQuery(@NamedDelegate AnswerInlineQueryMethodObject data) {
+		data.inlineQueryId = data.inlineQueryId ?: update.inlineQuery.id
+
 		def type = objectMapper.typeFactory.constructParametricType(TelegramResult, Object)
 
 		telegramClient.go(data).handleResponse { SimpleTelegramClient.handleResponse(it, type) }

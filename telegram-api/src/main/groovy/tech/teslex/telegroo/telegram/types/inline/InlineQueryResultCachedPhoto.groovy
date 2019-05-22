@@ -14,7 +14,7 @@ class InlineQueryResultCachedPhoto extends InlineQueryResult {
 	/**
 	 * Type of the result, must be photo
 	 */
-	String type
+	String type = 'photo'
 
 	/**
 	 * Unique identifier for this result, 1-64 bytes

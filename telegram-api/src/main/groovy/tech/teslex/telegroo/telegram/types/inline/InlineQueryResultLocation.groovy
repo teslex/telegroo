@@ -14,7 +14,7 @@ class InlineQueryResultLocation extends InlineQueryResult {
 	/**
 	 * Type of the result, must be location
 	 */
-	String type
+	String type = 'location'
 
 	/**
 	 * Unique identifier for this result, 1-64 Bytes

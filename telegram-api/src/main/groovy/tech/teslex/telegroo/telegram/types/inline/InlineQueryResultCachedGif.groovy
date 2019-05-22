@@ -14,7 +14,7 @@ class InlineQueryResultCachedGif extends InlineQueryResult {
 	/**
 	 * Type of the result, must be gif
 	 */
-	String type
+	String type = 'gif'
 
 	/**
 	 * Unique identifier for this result, 1-64 bytes

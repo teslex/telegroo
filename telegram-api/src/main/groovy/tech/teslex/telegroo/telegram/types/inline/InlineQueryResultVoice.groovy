@@ -14,7 +14,7 @@ class InlineQueryResultVoice extends InlineQueryResult {
 	/**
 	 * Type of the result, must be voice
 	 */
-	String type
+	String type = 'voice'
 
 	/**
 	 * Unique identifier for this result, 1-64 bytes
