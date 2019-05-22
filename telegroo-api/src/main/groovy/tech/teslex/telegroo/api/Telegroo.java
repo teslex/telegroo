@@ -21,6 +21,7 @@ import groovy.lang.DelegatesTo;
 import tech.teslex.telegroo.api.context.CommandContext;
 import tech.teslex.telegroo.api.context.MessageContext;
 import tech.teslex.telegroo.api.context.MethodsContext;
+import tech.teslex.telegroo.api.update.CallbackQueryUpdateHandler;
 import tech.teslex.telegroo.api.update.CommandPatternUpdateHandler;
 import tech.teslex.telegroo.api.update.MessagePatternUpdateHandler;
 import tech.teslex.telegroo.api.update.UpdateHandler;
@@ -77,7 +78,7 @@ public interface Telegroo {
 
 	void messageUpdateHandler(MessagePatternUpdateHandler handler);
 
-	void callbackQueryUpdateHandler(MessagePatternUpdateHandler handler);
+	void callbackQueryUpdateHandler(CallbackQueryUpdateHandler handler);
 
 	void middleware(Closure<Boolean> closure);
 }

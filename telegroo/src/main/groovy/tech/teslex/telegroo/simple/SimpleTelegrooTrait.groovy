@@ -6,6 +6,7 @@ import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.api.context.CommandContext
 import tech.teslex.telegroo.api.context.MessageContext
 import tech.teslex.telegroo.api.context.MethodsContext
+import tech.teslex.telegroo.api.update.CallbackQueryUpdateHandler
 import tech.teslex.telegroo.api.update.CommandPatternUpdateHandler
 import tech.teslex.telegroo.api.update.MessagePatternUpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandler
@@ -79,6 +80,25 @@ trait SimpleTelegrooTrait implements Telegroo {
 	}
 
 	@Override
+	void entity(String entity, @DelegatesTo(MethodsContext.class) Closure handler) {
+		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
+		handlers[UpdateType.MESSAGE] << new SimpleClosureEntitiesUpdateHandler([entity], handler)
+	}
+
+	@Override
+	void entities(List<String> entities, @DelegatesTo(MethodsContext) Closure handler) {
+		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
+		handlers[UpdateType.MESSAGE] << new SimpleClosureEntitiesUpdateHandler(entities, handler)
+	}
+
+	@Override
+	void callbackQuery(String callbackData, @DelegatesTo(MethodsContext.class) Closure handler) {
+		if (!handlers.containsKey(UpdateType.CALLBACK_QUERY)) handlers.put(UpdateType.CALLBACK_QUERY, new LinkedList())
+		handlers[UpdateType.CALLBACK_QUERY] << new SimpleClosureCallbackQueryUpdateHandler(callbackData, handler)
+	}
+
+
+	@Override
 	void updateHandler(UpdateHandler handler) {
 		if (!handlers.containsKey(UpdateType.UPDATE)) handlers.put(UpdateType.UPDATE, new LinkedList())
 		handlers[UpdateType.UPDATE] << handler
@@ -97,21 +117,9 @@ trait SimpleTelegrooTrait implements Telegroo {
 	}
 
 	@Override
-	void entity(String entity, @DelegatesTo(MethodsContext.class) Closure handler) {
-		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureEntitiesUpdateHandler([entity], handler)
-	}
-
-	@Override
-	void entities(List<String> entities, @DelegatesTo(MethodsContext) Closure handler) {
-		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureEntitiesUpdateHandler(entities, handler)
-	}
-
-	@Override
-	void callbackQuery(String callbackData, @DelegatesTo(MethodsContext.class) Closure handler) {
+	void callbackQueryUpdateHandler(CallbackQueryUpdateHandler handler) {
 		if (!handlers.containsKey(UpdateType.CALLBACK_QUERY)) handlers.put(UpdateType.CALLBACK_QUERY, new LinkedList())
-		handlers[UpdateType.CALLBACK_QUERY] << new SimpleClosureCallbackQueryUpdateHandler(callbackData, handler)
+		handlers[UpdateType.CALLBACK_QUERY] << handler
 	}
 
 	@Override
