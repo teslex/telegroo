@@ -79,6 +79,13 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 						return
 				}
 			}
+		} else if (update.updateType == UpdateType.CALLBACK_QUERY) {
+			handlers.getOrDefault(UpdateType.CALLBACK_QUERY, []).each { handler ->
+				if (handler instanceof CallbackQueryUpdateHandler)
+					handleCallbackQuery(update, handler)
+				else
+					handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
+			}
 		} else {
 			handlers.getOrDefault(update.updateType, []).each { handler ->
 				handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
@@ -122,6 +129,15 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 		return false
 	}
 
+	private boolean handleCallbackQuery(Update update, CallbackQueryUpdateHandler handler) {
+		if (handler.callbackData.contains(update.callbackQuery.data)) {
+			handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
+			return true
+		}
+
+		return false
+	}
+
 	private boolean checkMiddleware(Update update) {
 		for (middleware in telegroo.middlewareList)
 			if (!middleware(update))
@@ -129,4 +145,5 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 
 		return true
 	}
+
 }

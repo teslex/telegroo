@@ -10,7 +10,7 @@ class CallbackQuery {
 	/**
 	 * Unique identifier for this query
 	 */
-	String cid
+	String id
 
 	/**
 	 * Sender

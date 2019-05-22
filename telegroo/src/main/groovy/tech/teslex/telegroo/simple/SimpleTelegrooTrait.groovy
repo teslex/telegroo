@@ -9,10 +9,7 @@ import tech.teslex.telegroo.api.context.MethodsContext
 import tech.teslex.telegroo.api.update.CommandPatternUpdateHandler
 import tech.teslex.telegroo.api.update.MessagePatternUpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandler
-import tech.teslex.telegroo.simple.update.closure.SimpleClosureCommandPatternUpdateHandler
-import tech.teslex.telegroo.simple.update.closure.SimpleClosureEntitiesUpdateHandler
-import tech.teslex.telegroo.simple.update.closure.SimpleClosureMessagePatternUpdateHandler
-import tech.teslex.telegroo.simple.update.closure.SimpleClosureUpdateHandler
+import tech.teslex.telegroo.simple.update.closure.*
 import tech.teslex.telegroo.telegram.enums.UpdateType
 
 import java.util.regex.Pattern
@@ -103,6 +100,12 @@ trait SimpleTelegrooTrait implements Telegroo {
 	void entities(List<String> entities, @DelegatesTo(MethodsContext) Closure handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, [])
 		handlers[UpdateType.MESSAGE] << new SimpleClosureEntitiesUpdateHandler(entities, handler)
+	}
+
+	@Override
+	void callbackQuery(String callbackData, @DelegatesTo(MethodsContext.class) Closure handler) {
+		if (!handlers.containsKey(UpdateType.CALLBACK_QUERY)) handlers.put(UpdateType.CALLBACK_QUERY, [])
+		handlers[UpdateType.CALLBACK_QUERY] << new SimpleClosureCallbackQueryUpdateHandler([callbackData], handler)
 	}
 
 	@Override

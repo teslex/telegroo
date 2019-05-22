@@ -66,6 +66,8 @@ public interface Telegroo {
 
 	void entities(List<String> entities, @DelegatesTo(MethodsContext.class) Closure handler);
 
+	void callbackQuery(String callbackData, @DelegatesTo(MethodsContext.class) Closure closure);
+
 
 	void updateHandler(UpdateHandler handler);
 
