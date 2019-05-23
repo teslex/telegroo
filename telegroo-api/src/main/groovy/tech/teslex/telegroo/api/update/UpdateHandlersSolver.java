@@ -17,7 +17,7 @@
 package tech.teslex.telegroo.api.update;
 
 import tech.teslex.telegroo.telegram.enums.UpdateType;
-import tech.teslex.telegroo.telegram.types.update.Update;
+import tech.teslex.telegroo.telegram.api.types.update.Update;
 
 import java.util.List;
 import java.util.Map;

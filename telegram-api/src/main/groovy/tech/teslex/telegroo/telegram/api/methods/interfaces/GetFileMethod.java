@@ -1,0 +1,19 @@
+package tech.teslex.telegroo.telegram.api.methods.interfaces;
+
+import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
+import groovy.transform.NamedDelegate;
+import groovy.transform.NamedVariant;
+import tech.teslex.telegroo.telegram.api.methods.objects.GetFileMethodObject;
+
+import java.util.Map;
+
+public interface GetFileMethod<R> {
+
+	R getFile(Map data);
+
+	@NamedVariant
+	R getFile(@NamedDelegate GetFileMethodObject data);
+
+	R getFile(@DelegatesTo(value = GetFileMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+}

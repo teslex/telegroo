@@ -21,11 +21,11 @@ import groovy.transform.NamedDelegate
 import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
-import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.interfaces.polls.StopPollMethod
-import tech.teslex.telegroo.telegram.methods.objects.polls.StopPollMethodObject
-import tech.teslex.telegroo.telegram.types.Message
-import tech.teslex.telegroo.telegram.types.Poll
+import tech.teslex.telegroo.telegram.api.TelegramResult
+import tech.teslex.telegroo.telegram.api.methods.interfaces.polls.StopPollMethod
+import tech.teslex.telegroo.telegram.api.methods.objects.polls.StopPollMethodObject
+import tech.teslex.telegroo.telegram.api.types.Message
+import tech.teslex.telegroo.telegram.api.types.Poll
 
 @CompileStatic
 @SelfType(SimpleContext)

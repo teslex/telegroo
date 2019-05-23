@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public interface CommandPatternUpdateHandler<C extends CommandContext> extends EntitiesUpdateHandler<C> {
+public interface CommandPatternUpdateHandler<C extends CommandContext> extends EntityUpdateHandler<C> {
 
 	Pattern getPattern();
 
@@ -31,7 +31,7 @@ public interface CommandPatternUpdateHandler<C extends CommandContext> extends E
 	}
 
 	@Override
-	default List<String> getEntities() {
-		return Collections.singletonList("command");
+	default String getEntity() {
+		return "bot_command";
 	}
 }

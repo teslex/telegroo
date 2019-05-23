@@ -22,9 +22,9 @@ import tech.teslex.telegroo.api.update.UpdateHandler
 import tech.teslex.telegroo.api.update.UpdateHandlersSolver
 import tech.teslex.telegroo.simple.context.SimpleMethodsContext
 import tech.teslex.telegroo.simple.update.SimpleUpdateHandlersSolver
-import tech.teslex.telegroo.telegram.TelegramResult
+import tech.teslex.telegroo.telegram.api.TelegramResult
 import tech.teslex.telegroo.telegram.enums.UpdateType
-import tech.teslex.telegroo.telegram.types.update.Update
+import tech.teslex.telegroo.telegram.api.types.update.Update
 
 /**
  * Simple Telegroo implementation

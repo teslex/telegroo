@@ -18,16 +18,16 @@ package tech.teslex.telegroo.api.methods;
 
 import groovy.lang.Newify;
 import groovy.transform.AnnotationCollector;
-import tech.teslex.telegroo.telegram.methods.objects.*;
-import tech.teslex.telegroo.telegram.methods.objects.games.GetGameHighScoresMethodObject;
-import tech.teslex.telegroo.telegram.methods.objects.games.SendGameMethodObject;
-import tech.teslex.telegroo.telegram.methods.objects.games.SetGameScoreMethodObject;
-import tech.teslex.telegroo.telegram.methods.objects.payments.AnswerPreCheckoutQueryMethodObject;
-import tech.teslex.telegroo.telegram.methods.objects.payments.AnswerShippingQueryMethodObject;
-import tech.teslex.telegroo.telegram.methods.objects.payments.SendInvoiceMethodObject;
-import tech.teslex.telegroo.telegram.methods.objects.webhook.DeleteWebhookMethodObject;
-import tech.teslex.telegroo.telegram.methods.objects.webhook.GetWebhookInfoMethodObject;
-import tech.teslex.telegroo.telegram.methods.objects.webhook.SetWebhookMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.*;
+import tech.teslex.telegroo.telegram.api.methods.objects.games.GetGameHighScoresMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.games.SendGameMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.games.SetGameScoreMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.payments.AnswerPreCheckoutQueryMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.payments.AnswerShippingQueryMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.payments.SendInvoiceMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.webhook.DeleteWebhookMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.webhook.GetWebhookInfoMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.webhook.SetWebhookMethodObject;
 
 @Newify({
 		GetUpdatesMethodObject.class,

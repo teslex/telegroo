@@ -3,8 +3,8 @@ package tech.teslex.telegroo.telegram.markup
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.types.KeyboardButton
-import tech.teslex.telegroo.telegram.types.ReplyKeyboardMarkup
+import tech.teslex.telegroo.telegram.api.types.KeyboardButton
+import tech.teslex.telegroo.telegram.api.types.ReplyKeyboardMarkup
 
 @CompileStatic
 class ReplyKeyboardMarkupMaker {

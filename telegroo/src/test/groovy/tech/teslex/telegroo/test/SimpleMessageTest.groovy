@@ -3,9 +3,9 @@ package tech.teslex.telegroo.test
 import spock.lang.Shared
 import spock.lang.Specification
 import tech.teslex.telegroo.simple.SimpleTelegroo
+import tech.teslex.telegroo.telegram.api.types.InlineKeyboardButton
+import tech.teslex.telegroo.telegram.api.types.InlineKeyboardMarkup
 import tech.teslex.telegroo.telegram.attach.Attach
-import tech.teslex.telegroo.telegram.types.InlineKeyboardButton
-import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
 
 class SimpleMessageTest extends Specification {
 

@@ -20,9 +20,9 @@ import groovy.transform.CompileStatic
 import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
-import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.interfaces.GetMeMethod
-import tech.teslex.telegroo.telegram.types.User
+import tech.teslex.telegroo.telegram.api.TelegramResult
+import tech.teslex.telegroo.telegram.api.methods.interfaces.GetMeMethod
+import tech.teslex.telegroo.telegram.api.types.User
 
 @CompileStatic
 @SelfType(SimpleContext)

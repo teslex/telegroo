@@ -20,7 +20,7 @@ import groovy.transform.CompileStatic
 import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.TelegramClient
 import tech.teslex.telegroo.api.context.CommandContext
-import tech.teslex.telegroo.telegram.types.update.Update
+import tech.teslex.telegroo.telegram.api.types.update.Update
 
 import java.util.regex.Matcher
 

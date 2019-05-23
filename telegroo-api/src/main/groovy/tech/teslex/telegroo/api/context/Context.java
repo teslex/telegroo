@@ -17,7 +17,7 @@
 package tech.teslex.telegroo.api.context;
 
 import tech.teslex.telegroo.api.TelegramClient;
-import tech.teslex.telegroo.telegram.types.update.Update;
+import tech.teslex.telegroo.telegram.api.types.update.Update;
 
 /**
  * Context

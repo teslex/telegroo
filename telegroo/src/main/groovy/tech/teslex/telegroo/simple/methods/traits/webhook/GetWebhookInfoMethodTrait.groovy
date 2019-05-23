@@ -20,10 +20,10 @@ import groovy.transform.CompileStatic
 import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
-import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.interfaces.webhook.GetWebhookInfoMethod
-import tech.teslex.telegroo.telegram.methods.objects.webhook.GetWebhookInfoMethodObject
-import tech.teslex.telegroo.telegram.types.WebhookInfo
+import tech.teslex.telegroo.telegram.api.TelegramResult
+import tech.teslex.telegroo.telegram.api.methods.interfaces.webhook.GetWebhookInfoMethod
+import tech.teslex.telegroo.telegram.api.methods.objects.webhook.GetWebhookInfoMethodObject
+import tech.teslex.telegroo.telegram.api.types.WebhookInfo
 
 @CompileStatic
 @SelfType(SimpleContext)

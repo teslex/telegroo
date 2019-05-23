@@ -26,7 +26,7 @@ import tech.teslex.telegroo.api.update.CommandPatternUpdateHandler;
 import tech.teslex.telegroo.api.update.MessagePatternUpdateHandler;
 import tech.teslex.telegroo.api.update.UpdateHandler;
 import tech.teslex.telegroo.telegram.enums.UpdateType;
-import tech.teslex.telegroo.telegram.types.update.Update;
+import tech.teslex.telegroo.telegram.api.types.update.Update;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -66,8 +66,6 @@ public interface Telegroo {
 	void message(@DelegatesTo(MessageContext.class) Closure handler);
 
 	void entity(String entity, @DelegatesTo(MethodsContext.class) Closure handler);
-
-	void entities(List<String> entities, @DelegatesTo(MethodsContext.class) Closure handler);
 
 	void callbackQuery(String callbackData, @DelegatesTo(MethodsContext.class) Closure closure);
 

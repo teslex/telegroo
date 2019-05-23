@@ -1,0 +1,19 @@
+package tech.teslex.telegroo.telegram.api.methods.interfaces.payments;
+
+import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
+import groovy.transform.NamedDelegate;
+import groovy.transform.NamedVariant;
+import tech.teslex.telegroo.telegram.api.methods.objects.payments.AnswerShippingQueryMethodObject;
+
+import java.util.Map;
+
+public interface AnswerShippingQueryMethod<R> {
+
+	R answerShippingQuery(Map data);
+
+	@NamedVariant
+	R answerShippingQuery(@NamedDelegate AnswerShippingQueryMethodObject data);
+
+	R answerShippingQuery(@DelegatesTo(value = AnswerShippingQueryMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+}

@@ -22,10 +22,10 @@ import groovy.transform.NamedVariant
 import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
-import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.interfaces.GetUserProfilePhotosMethod
-import tech.teslex.telegroo.telegram.methods.objects.GetUserProfilePhotosMethodObject
-import tech.teslex.telegroo.telegram.types.UserProfilePhotos
+import tech.teslex.telegroo.telegram.api.TelegramResult
+import tech.teslex.telegroo.telegram.api.methods.interfaces.GetUserProfilePhotosMethod
+import tech.teslex.telegroo.telegram.api.methods.objects.GetUserProfilePhotosMethodObject
+import tech.teslex.telegroo.telegram.api.types.UserProfilePhotos
 
 @CompileStatic
 @SelfType(SimpleContext)

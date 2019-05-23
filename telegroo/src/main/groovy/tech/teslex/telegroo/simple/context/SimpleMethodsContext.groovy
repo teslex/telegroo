@@ -20,9 +20,8 @@ import groovy.transform.CompileStatic
 import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.TelegramClient
 import tech.teslex.telegroo.api.context.MethodsContext
-import tech.teslex.telegroo.simple.context.SimpleContext
 import tech.teslex.telegroo.simple.methods.MethodsTraits
-import tech.teslex.telegroo.telegram.types.update.Update
+import tech.teslex.telegroo.telegram.api.types.update.Update
 
 @CompileStatic
 class SimpleMethodsContext extends SimpleContext implements MethodsContext, MethodsTraits {

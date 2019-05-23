@@ -1,55 +1,38 @@
-import groovy.transform.Canonical
-import groovy.transform.ToString
+def makes = [
+		'InlineQueryResultCachedAudio',
+		'InlineQueryResultCachedDocument',
+		'InlineQueryResultCachedGif',
+		'InlineQueryResultCachedMpeg4Gif',
+		'InlineQueryResultCachedPhoto',
+		'InlineQueryResultCachedSticker',
+		'InlineQueryResultCachedVideo', 'InlineQueryResultCachedVoice', 'InlineQueryResultArticle', 'InlineQueryResultAudio', 'InlineQueryResultContact', 'InlineQueryResultGame', 'InlineQueryResultDocument', 'InlineQueryResultGif', 'InlineQueryResultLocation', 'InlineQueryResultMpeg4Gif', 'InlineQueryResultPhoto', 'InlineQueryResultVenue', 'InlineQueryResultVideo', 'InlineQueryResultVoice'
+]
 
-def a = ["a", "b", 23]
-def b = ["1", "23", 4]
-def c = [1, 2, "a"]
-
-println !Collections.disjoint(a, b)
-println !Collections.disjoint(a, c)
-
-@ToString
-class MediaObject {
-
-	String object
-
-	MediaObject(@DelegatesTo(MediaObject) Closure closure) {
-		closure.delegate = this
-		closure()
-	}
-
-	MediaObject(String object) {
-		this.object = object
+def getMethodName = { String make ->
+	make.substring(17, make.length()).with {
+		it[0].toLowerCase() + it.substring(1, it.length())
 	}
 }
 
-@Canonical
-@Newify([MediaObject])
-class Media {
+def printMake = { String make ->
+	println """\
+static $make ${getMethodName(make)}(@DelegatesTo(value = $make, strategy = Closure.DELEGATE_FIRST) Closure closure) {
+\t\t$make q = new $make()
+\t\tclosure.delegate = q
+\t\tclosure.resolveStrategy = Closure.DELEGATE_FIRST
+\t\tclosure()
+\t\tq
+\t}
 
-	static some = MediaObject {
-		object = 'obj'
-	}
-
-	static <T> List<T> with(Class<T> type = MediaObject, T... data) {
-		return data
-	}
-
-	static <T> T with(Class<T> type = MediaObject, @DelegatesTo(type = "T") Closure closure) {
-		T t = type.newInstance()
-		closure.delegate = t
-		closure()
-		t
-	}
+\t@NamedVariant
+\tstatic $make ${getMethodName(make)}(@NamedDelegate $make q) {
+\t\tq
+\t}
+"""
 }
 
-static MediaObject object(String object) {
-	new MediaObject(object)
+
+makes.each {
+	println("\n\n")
+	printMake(it)
 }
-
-Media.with(MediaObject, object('some'), object('other'))
-Media.with(object('someThing'))
-Media.with(String, 'kek')
-Media.with(Number, 1)
-
-println Media.some

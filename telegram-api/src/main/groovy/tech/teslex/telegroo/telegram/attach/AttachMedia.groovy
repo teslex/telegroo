@@ -1,19 +1,11 @@
 package tech.teslex.telegroo.telegram.attach
 
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.telegram.enums.util.MediaType
-import tech.teslex.telegroo.telegram.types.input.*
+import tech.teslex.telegroo.telegram.api.types.input.InputMediaPhoto
+import tech.teslex.telegroo.telegram.api.types.input.InputMediaVideo
 
 @CompileStatic
 class AttachMedia {
-
-	static InputMedia attach(InputFile inputFile) {
-
-		switch (inputFile.mediaType) {
-			case MediaType.PHOTO: photo(inputFile); break
-			case MediaType.VIDEO: video(inputFile); break
-		}
-	}
 
 	static InputMediaPhoto photo(InputFile inputFile) {
 		new InputMediaPhoto().media(inputFile)

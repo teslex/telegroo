@@ -1,10 +1,10 @@
 package tech.teslex.telegroo.telegram.markup
 
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.telegram.types.ForceReply
-import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
-import tech.teslex.telegroo.telegram.types.ReplyKeyboardMarkup
-import tech.teslex.telegroo.telegram.types.ReplyKeyboardRemove
+import tech.teslex.telegroo.telegram.api.types.ForceReply
+import tech.teslex.telegroo.telegram.api.types.InlineKeyboardMarkup
+import tech.teslex.telegroo.telegram.api.types.ReplyKeyboardMarkup
+import tech.teslex.telegroo.telegram.api.types.ReplyKeyboardRemove
 
 @CompileStatic
 class Markup {

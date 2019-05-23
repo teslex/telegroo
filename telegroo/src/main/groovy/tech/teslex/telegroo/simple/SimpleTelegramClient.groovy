@@ -27,12 +27,12 @@ import org.apache.http.entity.ContentType
 import org.apache.http.entity.mime.MultipartEntityBuilder
 import tech.teslex.telegroo.api.TelegramClient
 import tech.teslex.telegroo.simple.jackson.JacksonObjectMapper
-import tech.teslex.telegroo.telegram.TelegramErrorException
-import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.MethodObject
-import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile
-import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia
-import tech.teslex.telegroo.telegram.types.input.InputMedia
+import tech.teslex.telegroo.telegram.api.TelegramErrorException
+import tech.teslex.telegroo.telegram.api.TelegramResult
+import tech.teslex.telegroo.telegram.api.methods.MethodObject
+import tech.teslex.telegroo.telegram.api.methods.MethodObjectWithFile
+import tech.teslex.telegroo.telegram.api.methods.MethodObjectWithMedia
+import tech.teslex.telegroo.telegram.api.types.input.InputMedia
 import tech.teslex.telegroo.telegram.attach.FileInputFile
 import tech.teslex.telegroo.telegram.attach.IdInputFile
 

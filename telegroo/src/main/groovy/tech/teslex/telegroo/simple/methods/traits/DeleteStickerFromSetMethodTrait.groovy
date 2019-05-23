@@ -22,9 +22,9 @@ import groovy.transform.NamedVariant
 import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
-import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.interfaces.DeleteStickerFromSetMethod
-import tech.teslex.telegroo.telegram.methods.objects.DeleteStickerFromSetMethodObject
+import tech.teslex.telegroo.telegram.api.TelegramResult
+import tech.teslex.telegroo.telegram.api.methods.interfaces.DeleteStickerFromSetMethod
+import tech.teslex.telegroo.telegram.api.methods.objects.DeleteStickerFromSetMethodObject
 
 @CompileStatic
 @SelfType(SimpleContext)

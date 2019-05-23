@@ -18,7 +18,6 @@ package tech.teslex.telegroo.simple.update
 
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.api.update.CallbackQueryUpdateHandler
-import tech.teslex.telegroo.api.update.EntitiesUpdateHandler
 import tech.teslex.telegroo.simple.context.SimpleMethodsContext
 
 @CompileStatic

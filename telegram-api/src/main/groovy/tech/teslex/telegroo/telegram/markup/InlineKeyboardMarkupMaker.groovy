@@ -3,9 +3,9 @@ package tech.teslex.telegroo.telegram.markup
 import groovy.transform.CompileStatic
 import groovy.transform.NamedDelegate
 import groovy.transform.NamedVariant
-import tech.teslex.telegroo.telegram.types.InlineKeyboardButton
-import tech.teslex.telegroo.telegram.types.InlineKeyboardMarkup
-import tech.teslex.telegroo.telegram.types.games.CallbackGame
+import tech.teslex.telegroo.telegram.api.types.InlineKeyboardButton
+import tech.teslex.telegroo.telegram.api.types.InlineKeyboardMarkup
+import tech.teslex.telegroo.telegram.api.types.games.CallbackGame
 
 @CompileStatic
 class InlineKeyboardMarkupMaker {

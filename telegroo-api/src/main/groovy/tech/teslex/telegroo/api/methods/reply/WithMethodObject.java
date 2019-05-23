@@ -2,8 +2,8 @@ package tech.teslex.telegroo.api.methods.reply;
 
 import groovy.lang.Closure;
 import groovy.lang.DelegatesTo;
-import tech.teslex.telegroo.telegram.TelegramResult;
-import tech.teslex.telegroo.telegram.methods.MethodObject;
+import tech.teslex.telegroo.telegram.api.TelegramResult;
+import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 
 public interface WithMethodObject {
 

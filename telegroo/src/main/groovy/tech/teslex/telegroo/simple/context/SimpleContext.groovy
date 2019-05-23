@@ -22,7 +22,7 @@ import org.apache.http.client.fluent.Response
 import tech.teslex.telegroo.api.TelegramClient
 import tech.teslex.telegroo.api.context.Context
 import tech.teslex.telegroo.simple.jackson.JacksonObjectMapper
-import tech.teslex.telegroo.telegram.types.update.Update
+import tech.teslex.telegroo.telegram.api.types.update.Update
 
 /**
  * Simple Context implementation

@@ -23,8 +23,8 @@ import tech.teslex.telegroo.simple.context.SimpleCommandContext
 import tech.teslex.telegroo.simple.context.SimpleMessageContext
 import tech.teslex.telegroo.simple.context.SimpleMethodsContext
 import tech.teslex.telegroo.telegram.enums.UpdateType
-import tech.teslex.telegroo.telegram.types.MessageEntity
-import tech.teslex.telegroo.telegram.types.update.Update
+import tech.teslex.telegroo.telegram.api.types.MessageEntity
+import tech.teslex.telegroo.telegram.api.types.update.Update
 
 import java.util.regex.Matcher
 
@@ -69,14 +69,13 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 					}
 				}
 
-				if (handler instanceof EntitiesUpdateHandler && update.message.entities) {
+				if (handler instanceof EntityUpdateHandler && update.message.entities) {
 					// handle commands
 					if (handler instanceof CommandPatternUpdateHandler && handleCommand(update, handler))
 						return
 
 					//handle entities
-					if (handleEntities(update, handler))
-						return
+					handleEntity(update, handler)
 				}
 			}
 		} else if (update.updateType == UpdateType.CALLBACK_QUERY) {
@@ -127,8 +126,8 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 		return false
 	}
 
-	private boolean handleEntities(Update update, EntitiesUpdateHandler handler) {
-		if (!Collections.disjoint(update.message.entities*.type, handler.entities)) {
+	private boolean handleEntity(Update update, EntityUpdateHandler handler) {
+		if (update.message.entities*.type.contains(handler.entity)) {
 			handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 			return true
 		}

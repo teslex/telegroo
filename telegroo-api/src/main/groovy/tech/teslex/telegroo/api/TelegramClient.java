@@ -16,9 +16,9 @@
 
 package tech.teslex.telegroo.api;
 
-import tech.teslex.telegroo.telegram.methods.MethodObject;
-import tech.teslex.telegroo.telegram.methods.MethodObjectWithFile;
-import tech.teslex.telegroo.telegram.methods.MethodObjectWithMedia;
+import tech.teslex.telegroo.telegram.api.methods.MethodObject;
+import tech.teslex.telegroo.telegram.api.methods.MethodObjectWithFile;
+import tech.teslex.telegroo.telegram.api.methods.MethodObjectWithMedia;
 
 import java.util.Map;
 

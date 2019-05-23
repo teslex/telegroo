@@ -15,7 +15,7 @@ import groovy.lang.Closure;
 import groovy.lang.DelegatesTo;
 import groovy.transform.NamedDelegate;
 import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.methods.objects.${fileName}Object;
+import tech.teslex.telegroo.telegram.api.methods.objects.${fileName}Object;
 
 import java.util.Map;
 

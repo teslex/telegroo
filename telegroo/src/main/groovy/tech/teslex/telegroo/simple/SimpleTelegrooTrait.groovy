@@ -1,3 +1,19 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * © 2019 TesLex
+ */
+
 package tech.teslex.telegroo.simple
 
 import groovy.transform.CompileStatic
@@ -82,13 +98,7 @@ trait SimpleTelegrooTrait implements Telegroo {
 	@Override
 	void entity(String entity, @DelegatesTo(MethodsContext.class) Closure handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureEntitiesUpdateHandler([entity], handler)
-	}
-
-	@Override
-	void entities(List<String> entities, @DelegatesTo(MethodsContext) Closure handler) {
-		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureEntitiesUpdateHandler(entities, handler)
+		handlers[UpdateType.MESSAGE] << new SimpleClosureEntityUpdateHandler(entity, handler)
 	}
 
 	@Override

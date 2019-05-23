@@ -22,10 +22,10 @@ import groovy.transform.NamedVariant
 import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
-import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.interfaces.UploadStickerFileMethod
-import tech.teslex.telegroo.telegram.methods.objects.UploadStickerFileMethodObject
-import tech.teslex.telegroo.telegram.types.FileObject
+import tech.teslex.telegroo.telegram.api.TelegramResult
+import tech.teslex.telegroo.telegram.api.methods.interfaces.UploadStickerFileMethod
+import tech.teslex.telegroo.telegram.api.methods.objects.UploadStickerFileMethodObject
+import tech.teslex.telegroo.telegram.api.types.FileObject
 
 @CompileStatic
 @SelfType(SimpleContext)

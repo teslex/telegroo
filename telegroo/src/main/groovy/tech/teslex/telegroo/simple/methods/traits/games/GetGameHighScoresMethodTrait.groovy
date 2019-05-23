@@ -23,10 +23,10 @@ import groovy.transform.NamedVariant
 import groovy.transform.SelfType
 import tech.teslex.telegroo.simple.SimpleTelegramClient
 import tech.teslex.telegroo.simple.context.SimpleContext
-import tech.teslex.telegroo.telegram.TelegramResult
-import tech.teslex.telegroo.telegram.methods.interfaces.games.GetGameHighScoresMethod
-import tech.teslex.telegroo.telegram.methods.objects.games.GetGameHighScoresMethodObject
-import tech.teslex.telegroo.telegram.types.games.GameHighScore
+import tech.teslex.telegroo.telegram.api.TelegramResult
+import tech.teslex.telegroo.telegram.api.methods.interfaces.games.GetGameHighScoresMethod
+import tech.teslex.telegroo.telegram.api.methods.objects.games.GetGameHighScoresMethodObject
+import tech.teslex.telegroo.telegram.api.types.games.GameHighScore
 
 @CompileStatic
 @SelfType(SimpleContext)
