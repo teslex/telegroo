@@ -5,7 +5,7 @@
 
 **Telegram Bot framework for [Groovy](http://groovy-lang.org)**
 
-> Version: **[1.0.3](https://gitlab.com/teslex/telegroo/telegroo)**
+> Version: **[1.1-snapshotId-SNAPSHOT](https://gitlab.com/teslex/telegroo/telegroo)**
 
 - [Telegroo Docs](https://teslex.gitlab.io/telegroo)
 - [Telegram Bot API](https://core.telegram.org/bots/api)
@@ -18,17 +18,18 @@
 ```groovy
 repositories {
 	jcenter() // or 'maven { url 'https://teslex.gitlab.io/repo' }'
+	maven { url 'https://teslex.gitlab.io/repo/snapshots' }
 }
 
 dependencies {
-	compile 'tech.teslex.telegroo:telegroo:1.0.3'
+	compile 'tech.teslex.telegroo:telegroo:1.1-snapshotId-SNAPSHOT'
 }
 ```
 
 Sample bot:
 
 ```groovy
-@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '1.0.3')
+@Grab(group = 'tech.teslex.telegroo', module = 'telegroo', version = '1.1-snapshotId-SNAPSHOT')
 
 import tech.teslex.telegroo.simple.SimpleTelegroo
 
@@ -38,8 +39,9 @@ bot.command(/start/) {
 	sendMessage(text: 'Welcome!')
 }
 	
-bot.message(/echo (.+)/) {
-	sendMessage(text: matcher[0][1])
+bot.command(~/echo/, ~/(.+)/) {/
+	if (argsMatcher.find()/)
+		sendMessage(text: argsMatcher.group(1))
 }
 
 bot.start()
