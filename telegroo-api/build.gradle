@@ -83,3 +83,7 @@ bintray {
 		vcsTag = version
 	}
 }
+
+def getVersion() {
+	telegrooVersion
+}

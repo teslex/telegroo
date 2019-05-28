@@ -1,7 +1,9 @@
 ext {
-	telegrooVersion = '1.1'
+	numberVersion = '1.1'
 	isSnapshot = false
 	snapshotId = dateSnapshotId
+
+	telegrooVersion = isSnapshot ? "$numberVersion-${snapshotId}-SNAPSHOT" :numberVersion
 
 	groovyVersion = '2.5.7'
 //	groovyVersion = '3.0.0-beta-1'
@@ -14,11 +16,7 @@ ext {
 }
 
 subprojects {
-	if (isSnapshot)
-		version = "$telegrooVersion-${snapshotId}-SNAPSHOT"
-	else
-		version = telegrooVersion
-
+	version = telegrooVersion
 
 	repositories {
 		mavenCentral()
