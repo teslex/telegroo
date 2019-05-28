@@ -1,6 +1,6 @@
 ext {
 	telegrooVersion = '1.1'
-	isSnapshot = true
+	isSnapshot = false
 	snapshotId = dateSnapshotId
 
 	groovyVersion = '2.5.7'
