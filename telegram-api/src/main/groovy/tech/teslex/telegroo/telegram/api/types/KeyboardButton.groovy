@@ -1,6 +1,5 @@
 package tech.teslex.telegroo.telegram.api.types
 
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.builder.Builder
 import tech.teslex.telegroo.telegram.api.TypeAnnotations

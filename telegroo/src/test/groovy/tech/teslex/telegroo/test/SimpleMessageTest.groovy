@@ -80,8 +80,7 @@ class SimpleMessageTest extends Specification {
 		response.result.caption == testCaption
 	}
 
-	/*
-	def 'send media photos'() {
+	/*def 'send media photos'() {
 		given:
 		def mediaList = [
 				AttachMedia.photo(Attach.byUrl('https://assets.gitlab-static.net/uploads/-/system/project/avatar/7278100/telegroo.png')),
@@ -96,6 +95,5 @@ class SimpleMessageTest extends Specification {
 		then:
 		response.ok
 		response.result
-	}
-	*/
+	}*/
 }

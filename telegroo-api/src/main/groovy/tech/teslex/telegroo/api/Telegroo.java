@@ -25,8 +25,8 @@ import tech.teslex.telegroo.api.update.CallbackQueryUpdateHandler;
 import tech.teslex.telegroo.api.update.CommandPatternUpdateHandler;
 import tech.teslex.telegroo.api.update.MessagePatternUpdateHandler;
 import tech.teslex.telegroo.api.update.UpdateHandler;
-import tech.teslex.telegroo.telegram.enums.UpdateType;
 import tech.teslex.telegroo.telegram.api.types.update.Update;
+import tech.teslex.telegroo.telegram.enums.UpdateType;
 
 import java.util.List;
 import java.util.regex.Pattern;
