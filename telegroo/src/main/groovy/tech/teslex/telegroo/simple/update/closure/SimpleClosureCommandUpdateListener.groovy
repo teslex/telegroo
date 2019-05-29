@@ -17,23 +17,28 @@
 package tech.teslex.telegroo.simple.update.closure
 
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.simple.context.SimpleMethodsContext
-import tech.teslex.telegroo.simple.update.SimpleCallbackQueryUpdateHandler
+import tech.teslex.telegroo.simple.context.SimpleCommandContext
+import tech.teslex.telegroo.simple.update.SimpleCommandUpdateListener
+
+import java.util.regex.Pattern
 
 @CompileStatic
-class SimpleClosureCallbackQueryUpdateHandler implements SimpleCallbackQueryUpdateHandler {
+class SimpleClosureCommandUpdateListener implements SimpleCommandUpdateListener {
 
-	final String callbackData
+	final Pattern pattern
+
+	final Pattern argsPattern
 
 	final Closure closure
 
-	SimpleClosureCallbackQueryUpdateHandler(String callbackData, Closure closure) {
-		this.callbackData = callbackData
+	SimpleClosureCommandUpdateListener(Pattern pattern, Pattern argsPattern = null, Closure closure) {
+		this.pattern = pattern
+		this.argsPattern = argsPattern
 		this.closure = closure
 	}
 
 	@Override
-	void handle(SimpleMethodsContext context) {
+	void handle(SimpleCommandContext context) {
 		closure.delegate = context
 		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure()

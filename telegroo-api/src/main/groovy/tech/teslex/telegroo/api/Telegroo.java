@@ -21,10 +21,10 @@ import groovy.lang.DelegatesTo;
 import tech.teslex.telegroo.api.context.CommandContext;
 import tech.teslex.telegroo.api.context.MessageContext;
 import tech.teslex.telegroo.api.context.MethodsContext;
-import tech.teslex.telegroo.api.update.CallbackQueryUpdateHandler;
-import tech.teslex.telegroo.api.update.CommandPatternUpdateHandler;
-import tech.teslex.telegroo.api.update.MessagePatternUpdateHandler;
-import tech.teslex.telegroo.api.update.UpdateHandler;
+import tech.teslex.telegroo.api.update.CallbackQueryUpdateListener;
+import tech.teslex.telegroo.api.update.CommandUpdateListener;
+import tech.teslex.telegroo.api.update.MessagePatternUpdateListener;
+import tech.teslex.telegroo.api.update.UpdateListener;
 import tech.teslex.telegroo.telegram.api.types.update.Update;
 import tech.teslex.telegroo.telegram.enums.UpdateType;
 
@@ -70,13 +70,13 @@ public interface Telegroo {
 	void callbackQuery(String callbackData, @DelegatesTo(MethodsContext.class) Closure closure);
 
 
-	void updateHandler(UpdateHandler handler);
+	void updateListener(UpdateListener handler);
 
-	void commandUpdateHandler(CommandPatternUpdateHandler handler);
+	void commandUpdateListener(CommandUpdateListener handler);
 
-	void messageUpdateHandler(MessagePatternUpdateHandler handler);
+	void messageUpdateListener(MessagePatternUpdateListener handler);
 
-	void callbackQueryUpdateHandler(CallbackQueryUpdateHandler handler);
+	void callbackQueryUpdateListener(CallbackQueryUpdateListener handler);
 
 	void middleware(Closure<Boolean> closure);
 }

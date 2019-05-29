@@ -8,15 +8,17 @@ plugins {
 dependencies {
 	compile project(':telegroo-api')
 
-	compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
+	implementation group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
 
-	compile group: 'org.apache.httpcomponents', name: 'httpcore', version: apacheHttpCoreVersion
-	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: apacheHttpClientVersion
-	compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: apacheHttpFluentHcVersion
-	compile group: 'org.apache.httpcomponents', name: 'httpmime', version: apacheHttpHttpMimeVersion
+	implementation group: 'org.apache.httpcomponents', name: 'httpcore', version: apacheHttpCoreVersion
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: apacheHttpClientVersion
+	implementation group: 'org.apache.httpcomponents', name: 'fluent-hc', version: apacheHttpFluentHcVersion
+	implementation group: 'org.apache.httpcomponents', name: 'httpmime', version: apacheHttpHttpMimeVersion
 
-	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion
-	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jacksonVersion
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jacksonVersion
+
+	implementation 'space.jasan:groovy-closure-support:0.5.1'
 
 	testCompile 'org.spockframework.spock:spock-core:spock-1.2', {
 		exclude group: 'org.codehaus.groovy', module: 'groovy-all'

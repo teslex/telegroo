@@ -16,17 +16,20 @@
 
 package tech.teslex.telegroo.api.update;
 
-import tech.teslex.telegroo.api.context.MessageContext;
-import tech.teslex.telegroo.telegram.enums.UpdateType;
+import tech.teslex.telegroo.api.context.CommandContext;
 
 import java.util.regex.Pattern;
 
-public interface MessagePatternUpdateHandler<C extends MessageContext> extends UpdateHandler<C> {
+public interface CommandUpdateListener<C extends CommandContext> extends EntityUpdateListener<C> {
 
 	Pattern getPattern();
 
+	default Pattern getArgsPattern() {
+		return Pattern.compile("");
+	}
+
 	@Override
-	default UpdateType getType() {
-		return UpdateType.MESSAGE;
+	default String getEntity() {
+		return "bot_command";
 	}
 }

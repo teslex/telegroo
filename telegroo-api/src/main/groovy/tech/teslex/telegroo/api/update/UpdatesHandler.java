@@ -14,11 +14,20 @@
  * © 2019 TesLex
  */
 
-package tech.teslex.telegroo.simple.update
+package tech.teslex.telegroo.api.update;
 
-import groovy.transform.CompileStatic
-import tech.teslex.telegroo.api.update.CommandPatternUpdateHandler
-import tech.teslex.telegroo.simple.context.SimpleCommandContext
+import tech.teslex.telegroo.telegram.enums.UpdateType;
+import tech.teslex.telegroo.telegram.api.types.update.Update;
 
-@CompileStatic
-interface SimpleCommandPatternUpdateHandler extends CommandPatternUpdateHandler<SimpleCommandContext> {}
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+
+public interface UpdatesHandler {
+
+	void handleOne(Update update, Map<UpdateType, Queue<UpdateListener>> handlers);
+
+	default void handle(List<Update> updates, Map<UpdateType, Queue<UpdateListener>> handlers) {
+		updates.forEach(update -> handleOne(update, handlers));
+	}
+}

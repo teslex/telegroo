@@ -22,45 +22,45 @@ import tech.teslex.telegroo.simple.SimpleTelegroo
 import tech.teslex.telegroo.simple.context.SimpleCommandContext
 import tech.teslex.telegroo.simple.context.SimpleMessageContext
 import tech.teslex.telegroo.simple.context.SimpleMethodsContext
-import tech.teslex.telegroo.telegram.enums.UpdateType
 import tech.teslex.telegroo.telegram.api.types.MessageEntity
 import tech.teslex.telegroo.telegram.api.types.update.Update
+import tech.teslex.telegroo.telegram.enums.UpdateType
 
 import java.util.regex.Matcher
 
 @CompileStatic
-class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
+class SimpleUpdatesHandler implements UpdatesHandler {
 
 	private final SimpleTelegroo telegroo
 
-	SimpleUpdateHandlersSolver(SimpleTelegroo telegroo) {
+	SimpleUpdatesHandler(SimpleTelegroo telegroo) {
 		this.telegroo = telegroo
 	}
 
 	@Override
-	void solve(List<Update> updates, Map<UpdateType, Queue<UpdateHandler>> handlers) {
-		updates.each { update -> solveOne(update, handlers) }
+	void handle(List<Update> updates, Map<UpdateType, Queue<UpdateListener>> handlers) {
+		updates.each { update -> handleOne(update, handlers) }
 	}
 
 	@Override
-	void solveOne(Update update, Map<UpdateType, Queue<UpdateHandler>> handlers) {
+	void handleOne(Update update, Map<UpdateType, Queue<UpdateListener>> handlers) {
 		telegroo.mainContext.update = update
 
 		if (!checkMiddleware(update)) return
 
-		handlers.getOrDefault(UpdateType.UPDATE, new LinkedList<UpdateHandler>()).each { handler ->
+		handlers.getOrDefault(UpdateType.UPDATE, new LinkedList<UpdateListener>()).each { handler ->
 			handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 		}
 
 		if (update.updateType == UpdateType.MESSAGE) {
 
-			handlers.getOrDefault(UpdateType.MESSAGE, new LinkedList<UpdateHandler>()).each { handler ->
-				if (handler instanceof SimpleUpdateHandler)
+			handlers.getOrDefault(UpdateType.MESSAGE, new LinkedList<UpdateListener>()).each { handler ->
+				if (handler instanceof SimpleUpdateListener)
 					handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 
 				if (!update.message.text) return
 
-				if (handler instanceof MessagePatternUpdateHandler) {
+				if (handler instanceof MessagePatternUpdateListener) {
 					Matcher matcher = update.message.text =~ handler.pattern
 
 					if (matcher.matches()) {
@@ -69,30 +69,31 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 					}
 				}
 
-				if (handler instanceof EntityUpdateHandler && update.message.entities) {
-					// handle commands
-					if (handler instanceof CommandPatternUpdateHandler && handleCommand(update, handler))
-						return
-
-					//handle entities
-					handleEntity(update, handler)
+				if (handler instanceof EntityUpdateListener && update.message.entities) {
+					if (handler instanceof CommandUpdateListener) {
+						// handle commands
+						handleCommand(update, handler)
+					} else {
+						//handle entities
+						handleEntity(update, handler)
+					}
 				}
 			}
 		} else if (update.updateType == UpdateType.CALLBACK_QUERY) {
-			handlers.getOrDefault(UpdateType.CALLBACK_QUERY, new LinkedList<UpdateHandler>()).each { handler ->
-				if (handler instanceof CallbackQueryUpdateHandler)
+			handlers.getOrDefault(UpdateType.CALLBACK_QUERY, new LinkedList<UpdateListener>()).each { handler ->
+				if (handler instanceof CallbackQueryUpdateListener)
 					handleCallbackQuery(update, handler)
 				else
 					handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 			}
 		} else {
-			handlers.getOrDefault(update.updateType, new LinkedList<UpdateHandler>()).each { handler ->
+			handlers.getOrDefault(update.updateType, new LinkedList<UpdateListener>()).each { handler ->
 				handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 			}
 		}
 	}
 
-	private boolean handleCommand(Update update, CommandPatternUpdateHandler handler) {
+	private boolean handleCommand(Update update, CommandUpdateListener handler) {
 		MessageEntity entity = update.message.entities.find {
 			it.type == "bot_command"
 		}
@@ -126,8 +127,8 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 		return false
 	}
 
-	private boolean handleEntity(Update update, EntityUpdateHandler handler) {
-		if (update.message.entities*.type.contains(handler.entity)) {
+	private boolean handleEntity(Update update, EntityUpdateListener handler) {
+		if (update.message.entities.find { it.type.contains(handler.entity) }) {
 			handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 			return true
 		}
@@ -135,7 +136,7 @@ class SimpleUpdateHandlersSolver implements UpdateHandlersSolver {
 		return false
 	}
 
-	private boolean handleCallbackQuery(Update update, CallbackQueryUpdateHandler handler) {
+	private boolean handleCallbackQuery(Update update, CallbackQueryUpdateListener handler) {
 		if (handler.callbackData.contains(update.callbackQuery.data)) {
 			handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 			return true

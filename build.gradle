@@ -5,7 +5,7 @@ ext {
 
 	telegrooVersion = isSnapshot ? "$numberVersion-${snapshotId}-SNAPSHOT" :numberVersion
 
-	groovyVersion = '2.5.7'
+	groovyVersion = '2.5.6'
 //	groovyVersion = '3.0.0-beta-1'
 	jacksonVersion = '2.9.6'
 

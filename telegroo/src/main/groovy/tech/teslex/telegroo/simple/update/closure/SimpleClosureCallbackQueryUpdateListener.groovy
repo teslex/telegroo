@@ -18,17 +18,17 @@ package tech.teslex.telegroo.simple.update.closure
 
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.simple.context.SimpleMethodsContext
-import tech.teslex.telegroo.simple.update.SimpleEntityUpdateHandler
+import tech.teslex.telegroo.simple.update.SimpleCallbackQueryUpdateListener
 
 @CompileStatic
-class SimpleClosureEntityUpdateHandler implements SimpleEntityUpdateHandler {
+class SimpleClosureCallbackQueryUpdateListener implements SimpleCallbackQueryUpdateListener {
 
-	final String entity
+	final String callbackData
 
 	final Closure closure
 
-	SimpleClosureEntityUpdateHandler(String entity, Closure closure) {
-		this.entity = entity
+	SimpleClosureCallbackQueryUpdateListener(String callbackData, Closure closure) {
+		this.callbackData = callbackData
 		this.closure = closure
 	}
 

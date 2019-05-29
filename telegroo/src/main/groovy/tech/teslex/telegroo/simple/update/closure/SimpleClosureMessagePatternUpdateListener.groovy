@@ -18,13 +18,13 @@ package tech.teslex.telegroo.simple.update.closure
 
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.simple.context.SimpleMessageContext
-import tech.teslex.telegroo.simple.update.SimpleMessagePatternUpdateHandler
+import tech.teslex.telegroo.simple.update.SimpleMessagePatternUpdateListener
 import tech.teslex.telegroo.telegram.enums.UpdateType
 
 import java.util.regex.Pattern
 
 @CompileStatic
-class SimpleClosureMessagePatternUpdateHandler implements SimpleMessagePatternUpdateHandler {
+class SimpleClosureMessagePatternUpdateListener implements SimpleMessagePatternUpdateListener {
 
 	final UpdateType updateType
 
@@ -32,7 +32,7 @@ class SimpleClosureMessagePatternUpdateHandler implements SimpleMessagePatternUp
 
 	final Closure closure
 
-	SimpleClosureMessagePatternUpdateHandler(Pattern pattern, Closure closure) {
+	SimpleClosureMessagePatternUpdateListener(Pattern pattern, Closure closure) {
 		this.updateType = UpdateType.MESSAGE
 		this.pattern = pattern
 		this.closure = closure

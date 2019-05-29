@@ -14,20 +14,11 @@
  * © 2019 TesLex
  */
 
-package tech.teslex.telegroo.api.update;
+package tech.teslex.telegroo.simple.update
 
-import tech.teslex.telegroo.telegram.enums.UpdateType;
-import tech.teslex.telegroo.telegram.api.types.update.Update;
+import groovy.transform.CompileStatic
+import tech.teslex.telegroo.api.update.MessagePatternUpdateListener
+import tech.teslex.telegroo.simple.context.SimpleMessageContext
 
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-
-public interface UpdateHandlersSolver {
-
-	void solveOne(Update update, Map<UpdateType, Queue<UpdateHandler>> handlers);
-
-	default void solve(List<Update> updates, Map<UpdateType, Queue<UpdateHandler>> handlers) {
-		updates.forEach(update -> solveOne(update, handlers));
-	}
-}
+@CompileStatic
+interface SimpleMessagePatternUpdateListener extends MessagePatternUpdateListener<SimpleMessageContext> {}

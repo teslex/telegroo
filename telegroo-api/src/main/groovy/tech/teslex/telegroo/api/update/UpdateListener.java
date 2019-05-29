@@ -14,11 +14,16 @@
  * © 2019 TesLex
  */
 
-package tech.teslex.telegroo.simple.update
+package tech.teslex.telegroo.api.update;
 
-import groovy.transform.CompileStatic
-import tech.teslex.telegroo.api.update.CallbackQueryUpdateHandler
-import tech.teslex.telegroo.simple.context.SimpleMethodsContext
+import tech.teslex.telegroo.api.context.Context;
+import tech.teslex.telegroo.telegram.enums.UpdateType;
 
-@CompileStatic
-interface SimpleCallbackQueryUpdateHandler extends CallbackQueryUpdateHandler<SimpleMethodsContext> {}
+public interface UpdateListener<C extends Context> {
+
+	void handle(C context);
+
+	default UpdateType getType() {
+		return UpdateType.UPDATE;
+	}
+}

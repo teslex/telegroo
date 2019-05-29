@@ -1,0 +1,9 @@
+---
+micronaut:
+  application:
+    name: telegroo-micronaut-example
+
+---
+bot:
+  token: token
+  webhookUrl: https://xxx.ngrok.io/bot/${bot.token}/handle

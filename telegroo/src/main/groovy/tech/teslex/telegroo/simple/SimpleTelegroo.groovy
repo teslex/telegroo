@@ -18,10 +18,10 @@ package tech.teslex.telegroo.simple
 
 
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.api.update.UpdateHandler
-import tech.teslex.telegroo.api.update.UpdateHandlersSolver
+import tech.teslex.telegroo.api.update.UpdateListener
+import tech.teslex.telegroo.api.update.UpdatesHandler
 import tech.teslex.telegroo.simple.context.SimpleMethodsContext
-import tech.teslex.telegroo.simple.update.SimpleUpdateHandlersSolver
+import tech.teslex.telegroo.simple.update.SimpleUpdatesHandler
 import tech.teslex.telegroo.telegram.api.TelegramResult
 import tech.teslex.telegroo.telegram.enums.UpdateType
 import tech.teslex.telegroo.telegram.api.types.update.Update
@@ -40,11 +40,11 @@ class SimpleTelegroo implements SimpleTelegrooTrait {
 
 	String token
 
-	Map<UpdateType, Queue<UpdateHandler>> handlers = [:]
+	Map<UpdateType, Queue<UpdateListener>> handlers = [:]
 
 	List<Closure<Boolean>> middlewareList = []
 
-	UpdateHandlersSolver updateHandlersSolver
+	UpdatesHandler updateHandlersSolver
 
 	boolean active = false
 
@@ -58,7 +58,7 @@ class SimpleTelegroo implements SimpleTelegrooTrait {
 		this.token = token
 		this.telegramClient = new SimpleTelegramClient(token)
 		this.mainContext = new SimpleMethodsContext(telegramClient, new Update(updateId: 0))
-		this.updateHandlersSolver = new SimpleUpdateHandlersSolver(this)
+		this.updateHandlersSolver = new SimpleUpdatesHandler(this)
 	}
 
 	@Override
@@ -83,6 +83,6 @@ class SimpleTelegroo implements SimpleTelegrooTrait {
 
 	@Override
 	void solveUpdates(List<Update> updates) {
-		updateHandlersSolver.solve(updates, handlers)
+		updateHandlersSolver.handle(updates, handlers)
 	}
 }

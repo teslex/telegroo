@@ -6,7 +6,13 @@ package tech.teslex.telegroo.api.annotation;
  */
 public @interface Command {
 
+	/**
+	 * command pattern
+	 */
 	String value();
 
-	boolean pattern() default false;
+	/**
+	 * arguments pattern
+	 */
+	String argsPattern();
 }

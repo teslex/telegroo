@@ -17,8 +17,8 @@
 package tech.teslex.telegroo.simple.update
 
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.api.update.MessagePatternUpdateHandler
-import tech.teslex.telegroo.simple.context.SimpleMessageContext
+import tech.teslex.telegroo.api.update.CallbackQueryUpdateListener
+import tech.teslex.telegroo.simple.context.SimpleMethodsContext
 
 @CompileStatic
-interface SimpleMessagePatternUpdateHandler extends MessagePatternUpdateHandler<SimpleMessageContext> {}
+interface SimpleCallbackQueryUpdateListener extends CallbackQueryUpdateListener<SimpleMethodsContext> {}

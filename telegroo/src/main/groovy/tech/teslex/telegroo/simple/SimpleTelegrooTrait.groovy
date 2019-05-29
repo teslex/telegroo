@@ -22,10 +22,10 @@ import tech.teslex.telegroo.api.Telegroo
 import tech.teslex.telegroo.api.context.CommandContext
 import tech.teslex.telegroo.api.context.MessageContext
 import tech.teslex.telegroo.api.context.MethodsContext
-import tech.teslex.telegroo.api.update.CallbackQueryUpdateHandler
-import tech.teslex.telegroo.api.update.CommandPatternUpdateHandler
-import tech.teslex.telegroo.api.update.MessagePatternUpdateHandler
-import tech.teslex.telegroo.api.update.UpdateHandler
+import tech.teslex.telegroo.api.update.CallbackQueryUpdateListener
+import tech.teslex.telegroo.api.update.CommandUpdateListener
+import tech.teslex.telegroo.api.update.MessagePatternUpdateListener
+import tech.teslex.telegroo.api.update.UpdateListener
 import tech.teslex.telegroo.simple.update.closure.*
 import tech.teslex.telegroo.telegram.enums.UpdateType
 
@@ -38,96 +38,96 @@ trait SimpleTelegrooTrait implements Telegroo {
 	@Override
 	void on(UpdateType updateType, @DelegatesTo(MethodsContext) Closure handler) {
 		if (!handlers.containsKey(updateType)) handlers.put(updateType, new LinkedList())
-		handlers[updateType] << new SimpleClosureUpdateHandler(updateType, handler)
+		handlers[updateType] << new SimpleClosureUpdateListener(updateType, handler)
 	}
 
 	@Override
 	void on(@DelegatesTo(MethodsContext) Closure handler) {
 		if (!handlers.containsKey(UpdateType.UPDATE)) handlers.put(UpdateType.UPDATE, new LinkedList())
-		handlers[UpdateType.UPDATE] << new SimpleClosureUpdateHandler(handler)
+		handlers[UpdateType.UPDATE] << new SimpleClosureUpdateListener(handler)
 	}
 
 	@Override
 	void command(Pattern command, @DelegatesTo(CommandContext) Closure handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureCommandPatternUpdateHandler(command, handler)
+		handlers[UpdateType.MESSAGE] << new SimpleClosureCommandUpdateListener(command, handler)
 	}
 
 	@Override
 	void command(Pattern command, Pattern argsPattern, @DelegatesTo(CommandContext) Closure handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureCommandPatternUpdateHandler(command, argsPattern, handler)
+		handlers[UpdateType.MESSAGE] << new SimpleClosureCommandUpdateListener(command, argsPattern, handler)
 	}
 
 	@Override
 	void command(String command, @DelegatesTo(CommandContext.class) Closure handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureCommandPatternUpdateHandler(Pattern.compile(command), handler)
+		handlers[UpdateType.MESSAGE] << new SimpleClosureCommandUpdateListener(Pattern.compile(command), handler)
 	}
 
 	@Override
 	void command(String command, Pattern argsPattern, @DelegatesTo(CommandContext.class) Closure handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureCommandPatternUpdateHandler(Pattern.compile(command), argsPattern, handler)
+		handlers[UpdateType.MESSAGE] << new SimpleClosureCommandUpdateListener(Pattern.compile(command), argsPattern, handler)
 	}
 
 	@Override
 	void command(String command, String argsPattern, @DelegatesTo(CommandContext.class) Closure handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureCommandPatternUpdateHandler(Pattern.compile(command), Pattern.compile(argsPattern), handler)
+		handlers[UpdateType.MESSAGE] << new SimpleClosureCommandUpdateListener(Pattern.compile(command), Pattern.compile(argsPattern), handler)
 	}
 
 	@Override
 	void message(Pattern message, @DelegatesTo(MessageContext) Closure handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureMessagePatternUpdateHandler(message, handler)
+		handlers[UpdateType.MESSAGE] << new SimpleClosureMessagePatternUpdateListener(message, handler)
 	}
 
 	@Override
 	void message(String message, @DelegatesTo(MessageContext.class) Closure handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureMessagePatternUpdateHandler(Pattern.compile(message), handler)
+		handlers[UpdateType.MESSAGE] << new SimpleClosureMessagePatternUpdateListener(Pattern.compile(message), handler)
 	}
 
 	@Override
 	void message(@DelegatesTo(MessageContext) Closure handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureUpdateHandler(UpdateType.MESSAGE, handler)
+		handlers[UpdateType.MESSAGE] << new SimpleClosureUpdateListener(UpdateType.MESSAGE, handler)
 	}
 
 	@Override
 	void entity(String entity, @DelegatesTo(MethodsContext.class) Closure handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
-		handlers[UpdateType.MESSAGE] << new SimpleClosureEntityUpdateHandler(entity, handler)
+		handlers[UpdateType.MESSAGE] << new SimpleClosureEntityUpdateListener(entity, handler)
 	}
 
 	@Override
 	void callbackQuery(String callbackData, @DelegatesTo(MethodsContext.class) Closure handler) {
 		if (!handlers.containsKey(UpdateType.CALLBACK_QUERY)) handlers.put(UpdateType.CALLBACK_QUERY, new LinkedList())
-		handlers[UpdateType.CALLBACK_QUERY] << new SimpleClosureCallbackQueryUpdateHandler(callbackData, handler)
+		handlers[UpdateType.CALLBACK_QUERY] << new SimpleClosureCallbackQueryUpdateListener(callbackData, handler)
 	}
 
 
 	@Override
-	void updateHandler(UpdateHandler handler) {
+	void updateListener(UpdateListener handler) {
 		if (!handlers.containsKey(UpdateType.UPDATE)) handlers.put(UpdateType.UPDATE, new LinkedList())
 		handlers[UpdateType.UPDATE] << handler
 	}
 
 	@Override
-	void commandUpdateHandler(CommandPatternUpdateHandler handler) {
+	void commandUpdateListener(CommandUpdateListener handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
 		handlers[UpdateType.MESSAGE] << handler
 	}
 
 	@Override
-	void messageUpdateHandler(MessagePatternUpdateHandler handler) {
+	void messageUpdateListener(MessagePatternUpdateListener handler) {
 		if (!handlers.containsKey(UpdateType.MESSAGE)) handlers.put(UpdateType.MESSAGE, new LinkedList())
 		handlers[UpdateType.MESSAGE] << handler
 	}
 
 	@Override
-	void callbackQueryUpdateHandler(CallbackQueryUpdateHandler handler) {
+	void callbackQueryUpdateListener(CallbackQueryUpdateListener handler) {
 		if (!handlers.containsKey(UpdateType.CALLBACK_QUERY)) handlers.put(UpdateType.CALLBACK_QUERY, new LinkedList())
 		handlers[UpdateType.CALLBACK_QUERY] << handler
 	}

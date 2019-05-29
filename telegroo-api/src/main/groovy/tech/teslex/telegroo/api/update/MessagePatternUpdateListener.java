@@ -14,11 +14,19 @@
  * © 2019 TesLex
  */
 
-package tech.teslex.telegroo.simple.update
+package tech.teslex.telegroo.api.update;
 
-import groovy.transform.CompileStatic
-import tech.teslex.telegroo.api.update.UpdateHandler
-import tech.teslex.telegroo.simple.context.SimpleMethodsContext
+import tech.teslex.telegroo.api.context.MessageContext;
+import tech.teslex.telegroo.telegram.enums.UpdateType;
 
-@CompileStatic
-interface SimpleUpdateHandler extends UpdateHandler<SimpleMethodsContext> {}
+import java.util.regex.Pattern;
+
+public interface MessagePatternUpdateListener<C extends MessageContext> extends UpdateListener<C> {
+
+	Pattern getPattern();
+
+	@Override
+	default UpdateType getType() {
+		return UpdateType.MESSAGE;
+	}
+}

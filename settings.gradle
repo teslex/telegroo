@@ -4,3 +4,5 @@ include 'telegram-api'
 include 'telegroo-api'
 include 'telegroo-dsl'
 include 'telegroo'
+
+include 'micronaut-example'

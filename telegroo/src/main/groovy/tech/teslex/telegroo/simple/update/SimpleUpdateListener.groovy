@@ -14,24 +14,11 @@
  * © 2019 TesLex
  */
 
-package tech.teslex.telegroo.api.update;
+package tech.teslex.telegroo.simple.update
 
-import tech.teslex.telegroo.api.context.CommandContext;
+import groovy.transform.CompileStatic
+import tech.teslex.telegroo.api.update.UpdateListener
+import tech.teslex.telegroo.simple.context.SimpleMethodsContext
 
-import java.util.Collections;
-import java.util.List;
-import java.util.regex.Pattern;
-
-public interface CommandPatternUpdateHandler<C extends CommandContext> extends EntityUpdateHandler<C> {
-
-	Pattern getPattern();
-
-	default Pattern getArgsPattern() {
-		return Pattern.compile("");
-	}
-
-	@Override
-	default String getEntity() {
-		return "bot_command";
-	}
-}
+@CompileStatic
+interface SimpleUpdateListener extends UpdateListener<SimpleMethodsContext> {}

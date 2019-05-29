@@ -14,11 +14,28 @@
  * © 2019 TesLex
  */
 
-package tech.teslex.telegroo.simple.update
+package tech.teslex.telegroo.simple.update.closure
 
 import groovy.transform.CompileStatic
-import tech.teslex.telegroo.api.update.EntityUpdateHandler
 import tech.teslex.telegroo.simple.context.SimpleMethodsContext
+import tech.teslex.telegroo.simple.update.SimpleEntityUpdateListener
 
 @CompileStatic
-interface SimpleEntityUpdateHandler extends EntityUpdateHandler<SimpleMethodsContext> {}
+class SimpleClosureEntityUpdateListener implements SimpleEntityUpdateListener {
+
+	final String entity
+
+	final Closure closure
+
+	SimpleClosureEntityUpdateListener(String entity, Closure closure) {
+		this.entity = entity
+		this.closure = closure
+	}
+
+	@Override
+	void handle(SimpleMethodsContext context) {
+		closure.delegate = context
+		closure.resolveStrategy = Closure.DELEGATE_FIRST
+		closure()
+	}
+}

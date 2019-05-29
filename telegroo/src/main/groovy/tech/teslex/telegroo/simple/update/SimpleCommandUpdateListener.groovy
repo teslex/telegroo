@@ -14,33 +14,11 @@
  * © 2019 TesLex
  */
 
-package tech.teslex.telegroo.simple.update.closure
+package tech.teslex.telegroo.simple.update
 
 import groovy.transform.CompileStatic
+import tech.teslex.telegroo.api.update.CommandUpdateListener
 import tech.teslex.telegroo.simple.context.SimpleCommandContext
-import tech.teslex.telegroo.simple.update.SimpleCommandPatternUpdateHandler
-
-import java.util.regex.Pattern
 
 @CompileStatic
-class SimpleClosureCommandPatternUpdateHandler implements SimpleCommandPatternUpdateHandler {
-
-	final Pattern pattern
-
-	final Pattern argsPattern
-
-	final Closure closure
-
-	SimpleClosureCommandPatternUpdateHandler(Pattern pattern, Pattern argsPattern = null, Closure closure) {
-		this.pattern = pattern
-		this.argsPattern = argsPattern
-		this.closure = closure
-	}
-
-	@Override
-	void handle(SimpleCommandContext context) {
-		closure.delegate = context
-		closure.resolveStrategy = Closure.DELEGATE_FIRST
-		closure()
-	}
-}
+interface SimpleCommandUpdateListener extends CommandUpdateListener<SimpleCommandContext> {}
