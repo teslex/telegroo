@@ -18,6 +18,8 @@ package tech.teslex.telegroo.api;
 
 import groovy.lang.Closure;
 import groovy.lang.DelegatesTo;
+import groovy.transform.NamedParam;
+import groovy.transform.NamedVariant;
 import tech.teslex.telegroo.api.context.CommandContext;
 import tech.teslex.telegroo.api.context.MessageContext;
 import tech.teslex.telegroo.api.context.MethodsContext;
@@ -25,10 +27,12 @@ import tech.teslex.telegroo.api.update.CallbackQueryUpdateListener;
 import tech.teslex.telegroo.api.update.CommandUpdateListener;
 import tech.teslex.telegroo.api.update.MessagePatternUpdateListener;
 import tech.teslex.telegroo.api.update.UpdateListener;
+import tech.teslex.telegroo.telegram.api.TelegramErrorException;
 import tech.teslex.telegroo.telegram.api.types.update.Update;
 import tech.teslex.telegroo.telegram.enums.UpdateType;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 /**
@@ -45,29 +49,43 @@ public interface Telegroo {
 
 	MethodsContext<TelegramClient> getMainContext();
 
-	void on(UpdateType type, @DelegatesTo(MethodsContext.class) Closure handler);
+	@NamedVariant
+	void on(@NamedParam UpdateType type, @DelegatesTo(value = MethodsContext.class, strategy = Closure.DELEGATE_FIRST) Closure handler);
 
-	void on(@DelegatesTo(MethodsContext.class) Closure handler);
+	@NamedVariant
+	void on(@NamedParam UpdateType type, @NamedParam Consumer<TelegramErrorException> error, @DelegatesTo(value = MethodsContext.class, strategy = Closure.DELEGATE_FIRST) Closure handler);
 
-	void command(Pattern command, @DelegatesTo(CommandContext.class) Closure handler);
+	void on(@DelegatesTo(value = MethodsContext.class, strategy = Closure.DELEGATE_FIRST) Closure handler);
 
-	void command(Pattern command, Pattern argsPattern, @DelegatesTo(CommandContext.class) Closure handler);
+	@NamedVariant
+	void command(@NamedParam Pattern command, @DelegatesTo(value = CommandContext.class, strategy = Closure.DELEGATE_FIRST) Closure handler);
 
-	void command(String command, @DelegatesTo(CommandContext.class) Closure handler);
+	@NamedVariant
+	void command(@NamedParam Pattern command, @NamedParam Pattern argsPattern, @DelegatesTo(value = CommandContext.class, strategy = Closure.DELEGATE_FIRST) Closure handler);
 
-	void command(String command, Pattern argsPattern, @DelegatesTo(CommandContext.class) Closure handler);
+	@NamedVariant
+	void command(@NamedParam String command, @DelegatesTo(value = CommandContext.class, strategy = Closure.DELEGATE_FIRST) Closure handler);
 
-	void command(String command, String argsPattern, @DelegatesTo(CommandContext.class) Closure handler);
+	@NamedVariant
+	void command(@NamedParam String command, @NamedParam Pattern argsPattern, @DelegatesTo(value = CommandContext.class, strategy = Closure.DELEGATE_FIRST) Closure handler);
 
-	void message(Pattern message, @DelegatesTo(MessageContext.class) Closure handler);
+	@NamedVariant
+	void command(@NamedParam String command, @NamedParam String argsPattern, @DelegatesTo(value = CommandContext.class, strategy = Closure.DELEGATE_FIRST) Closure handler);
 
-	void message(String message, @DelegatesTo(MessageContext.class) Closure handler);
+	@NamedVariant
+	void message(@NamedParam Pattern message, @DelegatesTo(value = MessageContext.class, strategy = Closure.DELEGATE_FIRST) Closure handler);
 
-	void message(@DelegatesTo(MessageContext.class) Closure handler);
+	@NamedVariant
+	void message(@NamedParam String message, @DelegatesTo(value = MessageContext.class, strategy = Closure.DELEGATE_FIRST) Closure handler);
 
-	void entity(String entity, @DelegatesTo(MethodsContext.class) Closure handler);
+	@NamedVariant
+	void message(@DelegatesTo(value = MessageContext.class, strategy = Closure.DELEGATE_FIRST) Closure handler);
 
-	void callbackQuery(String callbackData, @DelegatesTo(MethodsContext.class) Closure closure);
+	@NamedVariant
+	void entity(@NamedParam String entity, @DelegatesTo(value = MethodsContext.class, strategy = Closure.DELEGATE_FIRST) Closure handler);
+
+	@NamedVariant
+	void callbackQuery(@NamedParam String callbackData, @DelegatesTo(value = MethodsContext.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
 
 
 	void updateListener(UpdateListener handler);

@@ -19,7 +19,15 @@ package tech.teslex.telegroo.simple.update.closure
 import groovy.transform.CompileStatic
 import tech.teslex.telegroo.simple.context.SimpleMethodsContext
 import tech.teslex.telegroo.simple.update.SimpleUpdateListener
+import tech.teslex.telegroo.telegram.api.TelegramErrorException
 import tech.teslex.telegroo.telegram.enums.UpdateType
+
+import java.util.function.Consumer
+
+
+/(
+ERROR CONSUMING!!!!!!!!!!!!!!!!!!
+)/
 
 @CompileStatic
 class SimpleClosureUpdateListener implements SimpleUpdateListener {
@@ -28,9 +36,12 @@ class SimpleClosureUpdateListener implements SimpleUpdateListener {
 
 	final Closure closure
 
+	final Consumer<TelegramErrorException> errorConsumer = { e -> throw e }
+
 	SimpleClosureUpdateListener(Closure closure) {
 		this.updateType = UpdateType.UPDATE
 		this.closure = closure
+		this.errorConsumer = errorConsumer
 	}
 
 	SimpleClosureUpdateListener(UpdateType updateType, Closure closure) {
@@ -43,5 +54,10 @@ class SimpleClosureUpdateListener implements SimpleUpdateListener {
 		closure.delegate = context
 		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure()
+	}
+
+	@Override
+	Consumer<TelegramErrorException> onTelegramError() {
+		errorConsumer
 	}
 }

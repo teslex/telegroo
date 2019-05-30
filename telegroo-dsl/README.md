@@ -1,3 +1,0 @@
-# telegroo-dsl
-
-telegroo dsl

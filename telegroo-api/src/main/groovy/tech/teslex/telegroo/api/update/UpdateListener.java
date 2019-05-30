@@ -17,11 +17,20 @@
 package tech.teslex.telegroo.api.update;
 
 import tech.teslex.telegroo.api.context.Context;
+import tech.teslex.telegroo.telegram.api.TelegramErrorException;
 import tech.teslex.telegroo.telegram.enums.UpdateType;
+
+import java.util.function.Consumer;
 
 public interface UpdateListener<C extends Context> {
 
 	void handle(C context);
+
+	default Consumer<TelegramErrorException> onTelegramError() {
+		return e -> {
+			throw e;
+		};
+	}
 
 	default UpdateType getType() {
 		return UpdateType.UPDATE;

@@ -22,6 +22,7 @@ import tech.teslex.telegroo.simple.SimpleTelegroo
 import tech.teslex.telegroo.simple.context.SimpleCommandContext
 import tech.teslex.telegroo.simple.context.SimpleMessageContext
 import tech.teslex.telegroo.simple.context.SimpleMethodsContext
+import tech.teslex.telegroo.telegram.api.TelegramErrorException
 import tech.teslex.telegroo.telegram.api.types.MessageEntity
 import tech.teslex.telegroo.telegram.api.types.update.Update
 import tech.teslex.telegroo.telegram.enums.UpdateType
@@ -38,57 +39,73 @@ class SimpleUpdatesHandler implements UpdatesHandler {
 	}
 
 	@Override
-	void handle(List<Update> updates, Map<UpdateType, Queue<UpdateListener>> handlers) {
-		updates.each { update -> handleOne(update, handlers) }
+	void handle(List<Update> updates, Map<UpdateType, Queue<UpdateListener>> listeners) {
+		updates.each { update -> handleOne(update, listeners) }
 	}
 
 	@Override
-	void handleOne(Update update, Map<UpdateType, Queue<UpdateListener>> handlers) {
+	void handleOne(Update update, Map<UpdateType, Queue<UpdateListener>> listeners) {
 		telegroo.mainContext.update = update
 
 		if (!checkMiddleware(update)) return
 
-		handlers.getOrDefault(UpdateType.UPDATE, new LinkedList<UpdateListener>()).each { handler ->
-			handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
+		listeners.getOrDefault(UpdateType.UPDATE, new LinkedList<UpdateListener>()).each { listener ->
+			try {
+				listener.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
+			} catch (TelegramErrorException e) {
+				listener.onTelegramError().accept(e)
+			}
 		}
 
 		if (update.updateType == UpdateType.MESSAGE) {
 
-			handlers.getOrDefault(UpdateType.MESSAGE, new LinkedList<UpdateListener>()).each { handler ->
-				if (handler instanceof SimpleUpdateListener)
-					handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
+			listeners.getOrDefault(UpdateType.MESSAGE, new LinkedList<UpdateListener>()).each { listener ->
+				try {
+					if (listener instanceof SimpleUpdateListener)
+						listener.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
 
-				if (!update.message.text) return
+					if (!update.message.text) return
 
-				if (handler instanceof MessagePatternUpdateListener) {
-					Matcher matcher = update.message.text =~ handler.pattern
+					if (listener instanceof MessagePatternUpdateListener) {
+						Matcher matcher = update.message.text =~ listener.pattern
 
-					if (matcher.matches()) {
-						handler.handle(new SimpleMessageContext(telegroo.mainContext.telegramClient, update, matcher))
-						return
+						if (matcher.matches()) {
+							listener.handle(new SimpleMessageContext(telegroo.mainContext.telegramClient, update, matcher))
+							return
+						}
 					}
-				}
 
-				if (handler instanceof EntityUpdateListener && update.message.entities) {
-					if (handler instanceof CommandUpdateListener) {
-						// handle commands
-						handleCommand(update, handler)
-					} else {
-						//handle entities
-						handleEntity(update, handler)
+					if (listener instanceof EntityUpdateListener && update.message.entities) {
+						if (listener instanceof CommandUpdateListener) {
+							// handle commands
+							handleCommand(update, listener)
+						} else {
+							//handle entities
+							handleEntity(update, listener)
+						}
 					}
+				} catch (TelegramErrorException e) {
+					listener.onTelegramError().accept(e)
 				}
 			}
 		} else if (update.updateType == UpdateType.CALLBACK_QUERY) {
-			handlers.getOrDefault(UpdateType.CALLBACK_QUERY, new LinkedList<UpdateListener>()).each { handler ->
-				if (handler instanceof CallbackQueryUpdateListener)
-					handleCallbackQuery(update, handler)
-				else
-					handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
+			listeners.getOrDefault(UpdateType.CALLBACK_QUERY, new LinkedList<UpdateListener>()).each { listener ->
+				try {
+					if (listener instanceof CallbackQueryUpdateListener)
+						handleCallbackQuery(update, listener)
+					else
+						listener.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
+				} catch (TelegramErrorException e) {
+					listener.onTelegramError().accept(e)
+				}
 			}
 		} else {
-			handlers.getOrDefault(update.updateType, new LinkedList<UpdateListener>()).each { handler ->
-				handler.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
+			listeners.getOrDefault(update.updateType, new LinkedList<UpdateListener>()).each { listener ->
+				try {
+					listener.handle(new SimpleMethodsContext(telegroo.mainContext.telegramClient, update))
+				} catch (TelegramErrorException e) {
+					listener.onTelegramError().accept(e)
+				}
 			}
 		}
 	}

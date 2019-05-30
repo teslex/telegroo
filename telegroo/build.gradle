@@ -18,8 +18,6 @@ dependencies {
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion
 	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jacksonVersion
 
-	implementation 'space.jasan:groovy-closure-support:0.5.1'
-
 	testCompile 'org.spockframework.spock:spock-core:spock-1.2', {
 		exclude group: 'org.codehaus.groovy', module: 'groovy-all'
 	}
