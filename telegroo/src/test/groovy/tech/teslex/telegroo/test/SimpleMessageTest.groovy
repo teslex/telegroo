@@ -2,7 +2,7 @@ package tech.teslex.telegroo.test
 
 import spock.lang.Shared
 import spock.lang.Specification
-import tech.teslex.telegroo.simple.SimpleTelegroo
+import tech.teslex.telegroo.simple.SimplePollingTelegroo
 import tech.teslex.telegroo.telegram.api.types.InlineKeyboardButton
 import tech.teslex.telegroo.telegram.api.types.InlineKeyboardMarkup
 import tech.teslex.telegroo.telegram.attach.Attach
@@ -16,7 +16,7 @@ class SimpleMessageTest extends Specification {
 	String token = props.token
 
 	@Shared
-	SimpleTelegroo telegroo = new SimpleTelegroo(token)
+	SimplePollingTelegroo telegroo = new SimplePollingTelegroo(token)
 
 	@Shared
 	def testChatId = -347437795

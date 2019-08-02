@@ -7,8 +7,10 @@ plugins {
 }
 
 dependencies {
-	implementation group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
-	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: jacksonVersion
+	Connect(it).lombok()
+
+//	implementation D.groovy.groovy
+	implementation D.jackson.annontations
 }
 
 task sourcesJar(type: Jar) {

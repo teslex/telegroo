@@ -9,7 +9,14 @@ plugins {
 dependencies {
 	compile project(':telegram-api')
 
-	compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
+	Connect(it).lombok()
+
+	implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxJavaVersion
+
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jacksonVersion
+
+	implementation group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
 }
 
 task sourcesJar(type: Jar) {
@@ -66,7 +73,7 @@ publishing {
 bintray {
 	user = System.getenv('BINTRAY_USER')
 	key = System.getenv('BINTRAY_KEY')
-	
+
 	publications = ['maven']
 
 	pkg {

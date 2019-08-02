@@ -5,14 +5,60 @@ ext {
 
 	telegrooVersion = isSnapshot ? "$numberVersion-${snapshotId}-SNAPSHOT" : numberVersion
 
-	groovyVersion = '2.5.6'
+	groovyVersion = '2.5.7'
 //	groovyVersion = '3.0.0-beta-1'
 	jacksonVersion = '2.9.6'
+
+	lombokVersion = '1.18.8'
+
+	rxJavaVersion = '2.2.9'
+
+	logbackVersion = '1.2.3'
+	logbackContribVersion = '0.1.5'
 
 	apacheHttpCoreVersion = '4.4.10'
 	apacheHttpClientVersion = '4.5.6'
 	apacheHttpFluentHcVersion = '4.5.6'
 	apacheHttpHttpMimeVersion = '4.5.6'
+
+	D = [
+			jackson: [
+					core        : "com.fasterxml.jackson.core:jackson-core:$jacksonVersion",
+					annontations: "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion",
+					datatype    : "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion"
+			],
+
+			groovy : [
+					groovy: "org.codehaus.groovy:groovy:$groovyVersion"
+			],
+
+			lombok : [
+					annotationProcessor: "org.projectlombok:lombok:$lombokVersion",
+					implementation     : "org.projectlombok:lombok:$lombokVersion"
+			],
+
+			logback: [
+					core        : "ch.qos.logback:logback-core:$logbackVersion",
+					classic     : "ch.qos.logback:logback-classic:$logbackVersion",
+					json_classic: "ch.qos.logback.contrib:logback-json-classic:$logbackContribVersion",
+					jackson     : "ch.qos.logback.contrib:logback-jackson:$logbackContribVersion"
+			],
+	]
+
+	Connect = { ctx ->
+		[
+				lombok : {
+					ctx.annotationProcessor(D.lombok.annotationProcessor)
+					ctx.implementation(D.lombok.implementation)
+				},
+
+				logback: {
+					ctx.implementation(D.logback.classic)
+					ctx.implementation(D.logback.json_classic)
+					ctx.implementation(D.logback.jackson)
+				}
+		]
+	}
 }
 
 subprojects {

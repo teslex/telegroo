@@ -3,5 +3,3 @@ rootProject.name = 'telegroo'
 include 'telegram-api'
 include 'telegroo-api'
 include 'telegroo'
-
-include 'micronaut-example'
