@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.SetChatTitleMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.SetChatTitle;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface SetChatTitleMethod<R> {
 
 	R setChatTitle(Map data);
 
-	@NamedVariant
-	R setChatTitle(@NamedDelegate SetChatTitleMethodObject data);
+	R setChatTitle(SetChatTitle data);
 
-	R setChatTitle(@DelegatesTo(value = SetChatTitleMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R setChatTitle(Consumer<SetChatTitle.SetChatTitleBuilder> data);
 }

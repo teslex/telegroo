@@ -17,7 +17,7 @@ public enum ParseMode {
 		return Arrays.stream(values())
 				.filter(parseMode -> parseMode.getValue().equals(string))
 				.findFirst()
-				.orElseThrow();
+				.orElseThrow(RuntimeException::new);
 	}
 
 	public String getValue() {

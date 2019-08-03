@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.ForwardMessageMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.ForwardMessage;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface ForwardMessageMethod<R> {
 
 	R forwardMessage(Map data);
 
-	@NamedVariant
-	R forwardMessage(@NamedDelegate ForwardMessageMethodObject data);
+	R forwardMessage(ForwardMessage data);
 
-	R forwardMessage(@DelegatesTo(value = ForwardMessageMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R forwardMessage(Consumer<ForwardMessage.ForwardMessageBuilder> data);
 }

@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.DeleteStickerFromSetMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.DeleteStickerFromSet;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface DeleteStickerFromSetMethod<R> {
 
 	R deleteStickerFromSet(Map data);
 
-	@NamedVariant
-	R deleteStickerFromSet(@NamedDelegate DeleteStickerFromSetMethodObject data);
+	R deleteStickerFromSet(DeleteStickerFromSet data);
 
-	R deleteStickerFromSet(@DelegatesTo(value = DeleteStickerFromSetMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R deleteStickerFromSet(Consumer<DeleteStickerFromSet.DeleteStickerFromSetBuilder> data);
 }

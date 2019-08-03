@@ -1,27 +1,27 @@
 package tech.teslex.telegroo.simple.client;
 
-import org.apache.http.client.fluent.Response;
+import org.apache.http.HttpResponse;
 import tech.teslex.telegroo.api.client.TelegramHttpResponse;
 
 import java.io.IOException;
 
-public class SimpleTelegramHttpResponse implements TelegramHttpResponse<Response> {
+public class SimpleTelegramHttpResponse implements TelegramHttpResponse<HttpResponse> {
 
-	private Response response;
+	private HttpResponse response;
 
-	public SimpleTelegramHttpResponse(Response response) {
+	public SimpleTelegramHttpResponse(HttpResponse response) {
 		this.response = response;
 	}
 
 	@Override
-	public Response getHttpResponse() {
+	public HttpResponse getHttpResponse() {
 		return response;
 	}
 
 	@Override
 	public String getRawBody() {
 		try {
-			return response.returnContent().asString();
+			return response.getEntity().getContent().toString();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return "";

@@ -13,6 +13,8 @@ ext {
 
 	rxJavaVersion = '2.2.9'
 
+	slf4jVersion = '1.7.26'
+
 	logbackVersion = '1.2.3'
 	logbackContribVersion = '0.1.5'
 
@@ -40,9 +42,20 @@ ext {
 			logback: [
 					core        : "ch.qos.logback:logback-core:$logbackVersion",
 					classic     : "ch.qos.logback:logback-classic:$logbackVersion",
-					json_classic: "ch.qos.logback.contrib:logback-json-classic:$logbackContribVersion",
+					jsonClassic: "ch.qos.logback.contrib:logback-json-classic:$logbackContribVersion",
 					jackson     : "ch.qos.logback.contrib:logback-jackson:$logbackContribVersion"
 			],
+
+			httpcomponents: [
+					httpcore: "org.apache.httpcomponents:httpcore:$apacheHttpCoreVersion",
+					httpclient: "org.apache.httpcomponents:httpclient:$apacheHttpClientVersion",
+					fluentHc: "org.apache.httpcomponents:fluent-hc:$apacheHttpFluentHcVersion",
+					httpmime: "org.apache.httpcomponents:httpmime:$apacheHttpHttpMimeVersion",
+			],
+			slf4j: [
+				api: "org.slf4j:slf4j-api:$slf4jVersion",
+				simple: "org.slf4j:slf4j-simple:$slf4jVersion",
+			]
 	]
 
 	Connect = { ctx ->
@@ -54,8 +67,12 @@ ext {
 
 				logback: {
 					ctx.implementation(D.logback.classic)
-					ctx.implementation(D.logback.json_classic)
+					ctx.implementation(D.logback.jsonClassic)
 					ctx.implementation(D.logback.jackson)
+				},
+				slf4j: {
+					ctx.implementation(D.slf4j.api)
+					ctx.implementation(D.slf4j.simple)
 				}
 		]
 	}

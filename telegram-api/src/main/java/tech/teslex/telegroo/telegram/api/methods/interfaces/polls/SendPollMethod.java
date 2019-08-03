@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces.polls;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.polls.SendPollMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.polls.SendPoll;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface SendPollMethod<R> {
 
 	R sendPoll(Map data);
 
-	@NamedVariant
-	R sendPoll(@NamedDelegate SendPollMethodObject data);
+	R sendPoll(SendPoll data);
 
-	R sendPoll(@DelegatesTo(value = SendPollMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R sendPoll(Consumer<SendPoll.SendPollBuilder> data);
 }

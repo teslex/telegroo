@@ -29,7 +29,7 @@ public enum UpdateType {
 		return Arrays.stream(values())
 				.filter(updateType -> updateType.getValue().equals(string))
 				.findFirst()
-				.orElseThrow();
+				.orElseThrow(RuntimeException::new);
 	}
 
 	public String getValue() {

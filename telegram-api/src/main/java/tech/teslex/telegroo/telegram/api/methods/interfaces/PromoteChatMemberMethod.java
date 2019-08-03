@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.PromoteChatMemberMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.PromoteChatMember;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface PromoteChatMemberMethod<R> {
 
 	R promoteChatMember(Map data);
 
-	@NamedVariant
-	R promoteChatMember(@NamedDelegate PromoteChatMemberMethodObject data);
+	R promoteChatMember(PromoteChatMember data);
 
-	R promoteChatMember(@DelegatesTo(value = PromoteChatMemberMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R promoteChatMember(Consumer<PromoteChatMember.PromoteChatMemberBuilder> data);
 }

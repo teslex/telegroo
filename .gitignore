@@ -9,5 +9,6 @@ build/
 telegroo/src/test/resources/token.txt
 telegroo/src/test/resources/test.properties
 telegroo/src/main/java/tech/teslex/telegroo/Test.java
+telegroo/src/main/java/tech/teslex/telegroo/TestGroovy.groovy
 telegroo/src/main/java/tech/teslex/telegroo/TestJava.java
 telegroo/src/main/java/tech/teslex/telegroo/NextTest.java

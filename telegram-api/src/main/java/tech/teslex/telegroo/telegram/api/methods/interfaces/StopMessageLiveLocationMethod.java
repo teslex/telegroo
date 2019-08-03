@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.StopMessageLiveLocationMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.StopMessageLiveLocation;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface StopMessageLiveLocationMethod<R> {
 
 	R stopMessageLiveLocation(Map data);
 
-	@NamedVariant
-	R stopMessageLiveLocation(@NamedDelegate StopMessageLiveLocationMethodObject data);
+	R stopMessageLiveLocation(StopMessageLiveLocation data);
 
-	R stopMessageLiveLocation(@DelegatesTo(value = StopMessageLiveLocationMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R stopMessageLiveLocation(Consumer<StopMessageLiveLocation.StopMessageLiveLocationBuilder> data);
 }

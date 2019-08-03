@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces.polls;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.polls.StopPollMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.polls.StopPoll;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface StopPollMethod<R> {
 
 	R stopPoll(Map data);
 
-	@NamedVariant
-	R stopPoll(@NamedDelegate StopPollMethodObject data);
+	R stopPoll(StopPoll data);
 
-	R stopPoll(@DelegatesTo(value = StopPollMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R stopPoll(Consumer<StopPoll.StopPollBuilder> data);
 }

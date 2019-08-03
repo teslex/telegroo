@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.DeleteChatPhotoMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.DeleteChatPhoto;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface DeleteChatPhotoMethod<R> {
 
 	R deleteChatPhoto(Map data);
 
-	@NamedVariant
-	R deleteChatPhoto(@NamedDelegate DeleteChatPhotoMethodObject data);
+	R deleteChatPhoto(DeleteChatPhoto data);
 
-	R deleteChatPhoto(@DelegatesTo(value = DeleteChatPhotoMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R deleteChatPhoto(Consumer<DeleteChatPhoto.DeleteChatPhotoBuilder> data);
 }

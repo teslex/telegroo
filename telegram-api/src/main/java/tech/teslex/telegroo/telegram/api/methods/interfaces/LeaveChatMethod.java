@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.LeaveChatMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.LeaveChat;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface LeaveChatMethod<R> {
 
 	R leaveChat(Map data);
 
-	@NamedVariant
-	R leaveChat(@NamedDelegate LeaveChatMethodObject data);
+	R leaveChat(LeaveChat data);
 
-	R leaveChat(@DelegatesTo(value = LeaveChatMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R leaveChat(Consumer<LeaveChat.LeaveChatBuilder> data);
 }

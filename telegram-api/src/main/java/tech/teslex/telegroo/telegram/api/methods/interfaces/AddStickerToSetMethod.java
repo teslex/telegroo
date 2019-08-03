@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.AddStickerToSetMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.AddStickerToSet;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface AddStickerToSetMethod<R> {
 
 	R addStickerToSet(Map data);
 
-	@NamedVariant
-	R addStickerToSet(@NamedDelegate AddStickerToSetMethodObject data);
+	R addStickerToSet(AddStickerToSet data);
 
-	R addStickerToSet(@DelegatesTo(value = AddStickerToSetMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R addStickerToSet(Consumer<AddStickerToSet.AddStickerToSetBuilder> data);
 }

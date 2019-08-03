@@ -1,7 +1,6 @@
 plugins {
 	id 'java'
-	id 'groovy'
-
+	
 	id 'maven-publish'
 	id 'com.jfrog.bintray' version '1.8.4'
 }
@@ -9,13 +8,7 @@ plugins {
 dependencies {
 	Connect(it).lombok()
 
-//	implementation D.groovy.groovy
 	implementation D.jackson.annontations
-}
-
-task sourcesJar(type: Jar) {
-	from sourceSets.main.allSource
-	archiveClassifier = 'sources'
 }
 
 publishing {
@@ -26,7 +19,7 @@ publishing {
 			version version
 
 			from components.java
-			artifact sourcesJar
+//			artifact sourcesJar
 
 			pom {
 				name = 'telegroo'

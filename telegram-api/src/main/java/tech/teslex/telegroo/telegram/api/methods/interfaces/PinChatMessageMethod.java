@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.PinChatMessageMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.PinChatMessage;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface PinChatMessageMethod<R> {
 
 	R pinChatMessage(Map data);
 
-	@NamedVariant
-	R pinChatMessage(@NamedDelegate PinChatMessageMethodObject data);
+	R pinChatMessage(PinChatMessage data);
 
-	R pinChatMessage(@DelegatesTo(value = PinChatMessageMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R pinChatMessage(Consumer<PinChatMessage.PinChatMessageBuilder> data);
 }

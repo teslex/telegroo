@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces.payments;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.payments.AnswerPreCheckoutQueryMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.payments.AnswerPreCheckoutQuery;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface AnswerPreCheckoutQueryMethod<R> {
 
 	R answerPreCheckoutQuery(Map data);
 
-	@NamedVariant
-	R answerPreCheckoutQuery(@NamedDelegate AnswerPreCheckoutQueryMethodObject data);
+	R answerPreCheckoutQuery(AnswerPreCheckoutQuery data);
 
-	R answerPreCheckoutQuery(@DelegatesTo(value = AnswerPreCheckoutQueryMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R answerPreCheckoutQuery(Consumer<AnswerPreCheckoutQuery.AnswerPreCheckoutQueryBuilder> data);
 }

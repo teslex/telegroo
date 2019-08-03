@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.EditMessageReplyMarkupMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.EditMessageReplyMarkup;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface EditMessageReplyMarkupMethod<R> {
 
 	R editMessageReplyMarkup(Map data);
 
-	@NamedVariant
-	R editMessageReplyMarkup(@NamedDelegate EditMessageReplyMarkupMethodObject data);
+	R editMessageReplyMarkup(EditMessageReplyMarkup data);
 
-	R editMessageReplyMarkup(@DelegatesTo(value = EditMessageReplyMarkupMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R editMessageReplyMarkup(Consumer<EditMessageReplyMarkup.EditMessageReplyMarkupBuilder> data);
 }

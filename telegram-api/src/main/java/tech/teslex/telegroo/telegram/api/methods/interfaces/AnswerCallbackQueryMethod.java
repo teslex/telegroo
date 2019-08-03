@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.AnswerCallbackQueryMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.AnswerCallbackQuery;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface AnswerCallbackQueryMethod<R> {
 
 	R answerCallbackQuery(Map data);
 
-	@NamedVariant
-	R answerCallbackQuery(@NamedDelegate AnswerCallbackQueryMethodObject data);
+	R answerCallbackQuery(AnswerCallbackQuery data);
 
-	R answerCallbackQuery(@DelegatesTo(value = AnswerCallbackQueryMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R answerCallbackQuery(Consumer<AnswerCallbackQuery.AnswerCallbackQueryBuilder> data);
 }

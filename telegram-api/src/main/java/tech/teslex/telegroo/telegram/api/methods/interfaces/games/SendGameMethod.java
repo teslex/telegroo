@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces.games;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.games.SendGameMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.games.SendGame;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface SendGameMethod<R> {
 
 	R sendGame(Map data);
 
-	@NamedVariant
-	R sendGame(@NamedDelegate SendGameMethodObject data);
+	R sendGame(SendGame data);
 
-	R sendGame(@DelegatesTo(value = SendGameMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R sendGame(Consumer<SendGame.SendGameBuilder> data);
 }

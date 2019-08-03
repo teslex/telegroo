@@ -18,7 +18,9 @@ package tech.teslex.telegroo.api.context;
 
 import tech.teslex.telegroo.api.client.TelegramClient;
 import tech.teslex.telegroo.api.methods.DefaultDefaultGetUpdatesMethod;
+import tech.teslex.telegroo.api.methods.DefaultDeleteWebhookMethod;
 import tech.teslex.telegroo.api.methods.DefaultSendMessageMethod;
+import tech.teslex.telegroo.api.methods.DefaultSetWebhookMethod;
 import tech.teslex.telegroo.telegram.api.types.update.Update;
 
 /**
@@ -26,7 +28,10 @@ import tech.teslex.telegroo.telegram.api.types.update.Update;
  */
 public interface Context extends
 		DefaultDefaultGetUpdatesMethod,
-		DefaultSendMessageMethod {
+		DefaultSendMessageMethod,
+
+		DefaultSetWebhookMethod,
+		DefaultDeleteWebhookMethod {
 
 	/**
 	 * Returns {@link Update} of the context

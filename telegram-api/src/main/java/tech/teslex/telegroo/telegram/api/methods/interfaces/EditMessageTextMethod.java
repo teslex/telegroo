@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.EditMessageTextMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.EditMessageText;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface EditMessageTextMethod<R> {
 
 	R editMessageText(Map data);
 
-	@NamedVariant
-	R editMessageText(@NamedDelegate EditMessageTextMethodObject data);
+	R editMessageText(EditMessageText data);
 
-	R editMessageText(@DelegatesTo(value = EditMessageTextMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R editMessageText(Consumer<EditMessageText.EditMessageTextBuilder> data);
 }

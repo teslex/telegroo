@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.SendAnimationMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.SendAnimation;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface SendAnimationMethod<R> {
 
 	R sendAnimation(Map data);
 
-	@NamedVariant
-	R sendAnimation(@NamedDelegate SendAnimationMethodObject data);
+	R sendAnimation(SendAnimation data);
 
-	R sendAnimation(@DelegatesTo(value = SendAnimationMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R sendAnimation(Consumer<SendAnimation.SendAnimationBuilder> data);
 }

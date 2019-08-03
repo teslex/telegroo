@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.SendMediaGroupMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.SendMediaGroup;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface SendMediaGroupMethod<R> {
 
 	R sendMediaGroup(Map data);
 
-	@NamedVariant
-	R sendMediaGroup(@NamedDelegate SendMediaGroupMethodObject data);
+	R sendMediaGroup(SendMediaGroup data);
 
-	R sendMediaGroup(@DelegatesTo(value = SendMediaGroupMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R sendMediaGroup(Consumer<SendMediaGroup.SendMediaGroupBuilder> data);
 }

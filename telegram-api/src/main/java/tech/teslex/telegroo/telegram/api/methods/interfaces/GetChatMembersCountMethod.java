@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.GetChatMembersCountMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.GetChatMembersCount;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface GetChatMembersCountMethod<R> {
 
 	R getChatMembersCount(Map data);
 
-	@NamedVariant
-	R getChatMembersCount(@NamedDelegate GetChatMembersCountMethodObject data);
+	R getChatMembersCount(GetChatMembersCount data);
 
-	R getChatMembersCount(@DelegatesTo(value = GetChatMembersCountMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R getChatMembersCount(Consumer<GetChatMembersCount.GetChatMembersCountBuilder> data);
 }

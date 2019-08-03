@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.SendVenueMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.SendVenue;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface SendVenueMethod<R> {
 
 	R sendVenue(Map data);
 
-	@NamedVariant
-	R sendVenue(@NamedDelegate SendVenueMethodObject data);
+	R sendVenue(SendVenue data);
 
-	R sendVenue(@DelegatesTo(value = SendVenueMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R sendVenue(Consumer<SendVenue.SendVenueBuilder> data);
 }

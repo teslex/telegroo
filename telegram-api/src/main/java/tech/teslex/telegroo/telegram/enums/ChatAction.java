@@ -25,7 +25,7 @@ public enum ChatAction {
 		return Arrays.stream(values())
 				.filter(chatAction -> chatAction.getValue().equals(string))
 				.findFirst()
-				.orElseThrow();
+				.orElseThrow(RuntimeException::new);
 	}
 
 	public String getValue() {

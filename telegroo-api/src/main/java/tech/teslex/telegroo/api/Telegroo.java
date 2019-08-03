@@ -16,9 +16,6 @@
 
 package tech.teslex.telegroo.api;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedVariant;
 import tech.teslex.telegroo.api.client.TelegramClient;
 import tech.teslex.telegroo.api.context.CommandContext;
 import tech.teslex.telegroo.api.context.Context;
@@ -46,22 +43,17 @@ public interface Telegroo {
 	 */
 	Optional<Update> handleUpdates(Iterable<Update> updates);
 
-	@NamedVariant
-	void listen(@DelegatesTo(value = Context.class, strategy = Closure.DELEGATE_FIRST) UpdateListener<Context> listener);
+	void listen(UpdateListener<Context> listener);
 
-	@NamedVariant
-	void listenMessage(Pattern pattern, @DelegatesTo(value = Context.class, strategy = Closure.DELEGATE_FIRST) UpdateListener<MessageContext> listener);
+	void listenMessage(Pattern pattern, UpdateListener<MessageContext> listener);
 
-	@NamedVariant
-	void listenCommand(Pattern pattern, @DelegatesTo(value = Context.class, strategy = Closure.DELEGATE_FIRST) UpdateListener<CommandContext> listener);
+	void listenCommand(Pattern pattern, UpdateListener<CommandContext> listener);
 
-	@NamedVariant
-	default void listenMessage(String pattern, @DelegatesTo(value = Context.class, strategy = Closure.DELEGATE_FIRST) UpdateListener<MessageContext> listener) {
+	default void listenMessage(String pattern, UpdateListener<MessageContext> listener) {
 		listenMessage(Pattern.compile(pattern), listener);
 	}
 
-	@NamedVariant
-	default void listenCommand(String pattern, @DelegatesTo(value = Context.class, strategy = Closure.DELEGATE_FIRST) UpdateListener<CommandContext> listener) {
+	default void listenCommand(String pattern, UpdateListener<CommandContext> listener) {
 		listenCommand(Pattern.compile(pattern), listener);
 	}
 }

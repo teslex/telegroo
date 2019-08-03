@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.GetChatAdministratorsMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.GetChatAdministrators;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface GetChatAdministratorsMethod<R> {
 
 	R getChatAdministrators(Map data);
 
-	@NamedVariant
-	R getChatAdministrators(@NamedDelegate GetChatAdministratorsMethodObject data);
+	R getChatAdministrators(GetChatAdministrators data);
 
-	R getChatAdministrators(@DelegatesTo(value = GetChatAdministratorsMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R getChatAdministrators(Consumer<GetChatAdministrators.GetChatAdministratorsBuilder> data);
 }

@@ -1,5 +1,5 @@
 plugins {
-	id 'groovy'
+	id 'java'
 
 	id 'maven-publish'
 	id 'com.jfrog.bintray' version '1.8.4'
@@ -10,28 +10,21 @@ dependencies {
 
 	Connect(it).lombok()
 
-	implementation group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
-
-	implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxJavaVersion
-
-	implementation group: 'org.apache.httpcomponents', name: 'httpcore', version: apacheHttpCoreVersion
-	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: apacheHttpClientVersion
-	implementation group: 'org.apache.httpcomponents', name: 'fluent-hc', version: apacheHttpFluentHcVersion
-	implementation group: 'org.apache.httpcomponents', name: 'httpmime', version: apacheHttpHttpMimeVersion
+//	implementation D.httpcomponents.httpcore
+//	implementation D.httpcomponents.httpclient
+//	implementation D.httpcomponents.fluentHc
+//	implementation D.httpcomponents.httpmime
 
 	implementation D.jackson.core
 	implementation D.jackson.datatype
 
-	Connect(it).logback()
+	implementation 'com.konghq:unirest-java:2.3.14'
+
+	Connect(it).slf4j()
 
 //	testCompile 'org.spockframework.spock:spock-core:spock-1.2', {
 //		exclude group: 'org.codehaus.groovy', module: 'groovy-all'
 //	}
-}
-
-task sourcesJar(type: Jar) {
-	from sourceSets.main.allSource
-	archiveClassifier = 'sources'
 }
 
 publishing {
@@ -42,7 +35,7 @@ publishing {
 			version version
 
 			from components.java
-			artifact sourcesJar
+//			artifact sourcesJar
 
 			pom {
 				name = 'telegroo'

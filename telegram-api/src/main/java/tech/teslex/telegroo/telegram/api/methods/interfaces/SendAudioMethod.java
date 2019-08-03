@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.SendAudioMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.SendAudio;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface SendAudioMethod<R> {
 
 	R sendAudio(Map data);
 
-	@NamedVariant
-	R sendAudio(@NamedDelegate SendAudioMethodObject data);
+	R sendAudio(SendAudio data);
 
-	R sendAudio(@DelegatesTo(value = SendAudioMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R sendAudio(Consumer<SendAudio.SendAudioBuilder> data);
 }

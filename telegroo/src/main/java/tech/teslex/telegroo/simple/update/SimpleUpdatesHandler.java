@@ -1,6 +1,7 @@
 package tech.teslex.telegroo.simple.update;
 
 import lombok.extern.slf4j.Slf4j;
+import lombok.var;
 import tech.teslex.telegroo.api.client.TelegramClient;
 import tech.teslex.telegroo.api.update.CommandUpdateListener;
 import tech.teslex.telegroo.api.update.MessagePatternUpdateListener;
@@ -109,7 +110,7 @@ public class SimpleUpdatesHandler implements UpdatesHandler {
 				.stream()
 				.filter(entity -> entity.getType().equals("bot_command"))
 				.findFirst()
-				.orElseThrow();
+				.orElseThrow(RuntimeException::new);
 
 		final int startPosition = commandEntity.getOffset() + 1;
 		final int endPosition = commandEntity.getOffset() + commandEntity.getLength();
@@ -133,7 +134,7 @@ public class SimpleUpdatesHandler implements UpdatesHandler {
 				final var matcher = commandPattern.matcher(commandString);
 
 				if (matcher.matches()) {
-					if (argsPattern.isEmpty()) {
+					if (!argsPattern.isPresent()) {
 						listener.onUpdate(new SimpleCommandContext(telegramClient, update, matcher, null, argsString));
 						return true;
 					} else {

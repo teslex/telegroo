@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.CreateNewStickerSetMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.CreateNewStickerSet;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface CreateNewStickerSetMethod<R> {
 
 	R createNewStickerSet(Map data);
 
-	@NamedVariant
-	R createNewStickerSet(@NamedDelegate CreateNewStickerSetMethodObject data);
+	R createNewStickerSet(CreateNewStickerSet data);
 
-	R createNewStickerSet(@DelegatesTo(value = CreateNewStickerSetMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R createNewStickerSet(Consumer<CreateNewStickerSet.CreateNewStickerSetBuilder> data);
 }

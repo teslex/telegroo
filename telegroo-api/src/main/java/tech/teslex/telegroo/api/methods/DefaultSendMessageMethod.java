@@ -1,19 +1,17 @@
 package tech.teslex.telegroo.api.methods;
 
 import com.fasterxml.jackson.databind.JavaType;
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
+import tech.teslex.telegroo.api.client.TelegramClient;
 import tech.teslex.telegroo.api.context.Context;
 import tech.teslex.telegroo.api.jackson.JacksonObjectMapper;
-import tech.teslex.telegroo.api.methods.next.ClassUtils;
 import tech.teslex.telegroo.telegram.api.TelegramResult;
 import tech.teslex.telegroo.telegram.api.methods.interfaces.SendMessageMethod;
-import tech.teslex.telegroo.telegram.api.methods.objects.SendMessageMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.SendMessage;
 import tech.teslex.telegroo.telegram.api.types.Message;
+import tech.teslex.telegroo.telegram.api.types.update.Update;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface DefaultSendMessageMethod extends SendMessageMethod<TelegramResult<Message>> {
 
@@ -29,7 +27,7 @@ public interface DefaultSendMessageMethod extends SendMessageMethod<TelegramResu
 
 	default TelegramResult<Message> sendMessage(String text) {
 		return sendMessage(
-				SendMessageMethodObject
+				SendMessage
 						.builder()
 						.text(text)
 						.build()
@@ -37,9 +35,9 @@ public interface DefaultSendMessageMethod extends SendMessageMethod<TelegramResu
 	}
 
 	@Override
-	default TelegramResult<Message> sendMessage(String text, Long chatId) {
+	default TelegramResult<Message> sendMessage(Long chatId, String text) {
 		return sendMessage(
-				SendMessageMethodObject
+				SendMessage
 						.builder()
 						.chatId(chatId)
 						.text(text)
@@ -48,16 +46,19 @@ public interface DefaultSendMessageMethod extends SendMessageMethod<TelegramResu
 	}
 
 	@Override
-	default TelegramResult<Message> sendMessage(@DelegatesTo(value = SendMessageMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure) {
-		return sendMessage(ClassUtils.delegate(SendMessageMethodObject.builder().build(), closure));
+	default TelegramResult<Message> sendMessage(Consumer<SendMessage.SendMessageBuilder> data) {
+		SendMessage.SendMessageBuilder builder = SendMessage.builder();
+		data.accept(builder);
+		SendMessage builtData = builder.build();
+
+		return sendMessage(builtData);
 	}
 
 	@Override
-	@NamedVariant
-	default TelegramResult<Message> sendMessage(@NamedDelegate SendMessageMethodObject data) {
-		final var context = getContext();
-		final var currentUpdate = context.getCurrentUpdate();
-		final var telegramClient = context.getTelegramClient();
+	default TelegramResult<Message> sendMessage(SendMessage data) {
+		final Context context = getContext();
+		final Update currentUpdate = context.getCurrentUpdate();
+		final TelegramClient telegramClient = context.getTelegramClient();
 
 		if (data.getChatId() == null && currentUpdate != null && currentUpdate.getChatId() != null && currentUpdate.getChatId() != -1)
 			data.setChatId(currentUpdate.getChatId());

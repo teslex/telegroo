@@ -1,13 +1,10 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.SendMessageMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.SendMessage;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface SendMessageMethod<R> {
 
@@ -15,10 +12,9 @@ public interface SendMessageMethod<R> {
 
 	R sendMessage(String text);
 
-	R sendMessage(String text, Long chatId);
+	R sendMessage(Long chatId, String text);
 
-	@NamedVariant
-	R sendMessage(@NamedDelegate SendMessageMethodObject data) throws IOException;
+	R sendMessage(SendMessage data);
 
-	R sendMessage(@DelegatesTo(value = SendMessageMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure) throws IOException;
+	R sendMessage(Consumer<SendMessage.SendMessageBuilder> data);
 }

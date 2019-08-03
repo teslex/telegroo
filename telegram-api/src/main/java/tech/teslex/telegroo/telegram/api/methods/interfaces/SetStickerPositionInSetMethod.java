@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.SetStickerPositionInSetMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.SetStickerPositionInSet;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface SetStickerPositionInSetMethod<R> {
 
 	R setStickerPositionInSet(Map data);
 
-	@NamedVariant
-	R setStickerPositionInSet(@NamedDelegate SetStickerPositionInSetMethodObject data);
+	R setStickerPositionInSet(SetStickerPositionInSet data);
 
-	R setStickerPositionInSet(@DelegatesTo(value = SetStickerPositionInSetMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R setStickerPositionInSet(Consumer<SetStickerPositionInSet.SetStickerPositionInSetBuilder> data);
 }

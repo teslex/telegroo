@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.SendStickerMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.SendSticker;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface SendStickerMethod<R> {
 
 	R sendSticker(Map data);
 
-	@NamedVariant
-	R sendSticker(@NamedDelegate SendStickerMethodObject data);
+	R sendSticker(SendSticker data);
 
-	R sendSticker(@DelegatesTo(value = SendStickerMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R sendSticker(Consumer<SendSticker.SendStickerBuilder> data);
 }

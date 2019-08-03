@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.SendVideoMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.SendVideo;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface SendVideoMethod<R> {
 
 	R sendVideo(Map data);
 
-	@NamedVariant
-	R sendVideo(@NamedDelegate SendVideoMethodObject data);
+	R sendVideo(SendVideo data);
 
-	R sendVideo(@DelegatesTo(value = SendVideoMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R sendVideo(Consumer<SendVideo.SendVideoBuilder> data);
 }

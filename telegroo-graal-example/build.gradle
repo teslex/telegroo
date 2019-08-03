@@ -1,0 +1,26 @@
+plugins {
+	id 'application'
+
+	id 'com.github.johnrengelman.shadow' version '5.1.0'
+	id 'com.palantir.graal' version '0.4.0'
+
+}
+
+mainClassName = 'tech.teslex.telegroo.Test'
+
+dependencies {
+	compile project(':telegroo')
+
+	Connect(it).lombok()
+	Connect(it).logback()
+	
+	implementation "javax.xml.bind:jaxb-api:2.3.1"
+	implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.2'
+}
+
+shadowJar {
+	dependencies {
+		exclude(dependency(D.lombok.annotationProcessor))
+		exclude(dependency(D.lombok.implementation))
+	}
+}

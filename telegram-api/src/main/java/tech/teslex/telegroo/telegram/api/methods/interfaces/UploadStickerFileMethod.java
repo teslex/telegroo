@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.UploadStickerFileMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.UploadStickerFile;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface UploadStickerFileMethod<R> {
 
 	R uploadStickerFile(Map data);
 
-	@NamedVariant
-	R uploadStickerFile(@NamedDelegate UploadStickerFileMethodObject data);
+	R uploadStickerFile(UploadStickerFile data);
 
-	R uploadStickerFile(@DelegatesTo(value = UploadStickerFileMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R uploadStickerFile(Consumer<UploadStickerFile.UploadStickerFileBuilder> data);
 }

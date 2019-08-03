@@ -1,19 +1,15 @@
 package tech.teslex.telegroo.telegram.api.methods.interfaces;
 
-import groovy.lang.Closure;
-import groovy.lang.DelegatesTo;
-import groovy.transform.NamedDelegate;
-import groovy.transform.NamedVariant;
-import tech.teslex.telegroo.telegram.api.methods.objects.UnbanChatMemberMethodObject;
+import tech.teslex.telegroo.telegram.api.methods.objects.UnbanChatMember;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface UnbanChatMemberMethod<R> {
 
 	R unbanChatMember(Map data);
 
-	@NamedVariant
-	R unbanChatMember(@NamedDelegate UnbanChatMemberMethodObject data);
+	R unbanChatMember(UnbanChatMember data);
 
-	R unbanChatMember(@DelegatesTo(value = UnbanChatMemberMethodObject.class, strategy = Closure.DELEGATE_FIRST) Closure closure);
+	R unbanChatMember(Consumer<UnbanChatMember.UnbanChatMemberBuilder> data);
 }
