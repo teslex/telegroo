@@ -11,5 +11,5 @@ public interface DeleteChatPhotoMethod<R> {
 
 	R deleteChatPhoto(DeleteChatPhoto data);
 
-	R deleteChatPhoto(Consumer<DeleteChatPhoto.DeleteChatPhotoBuilder> data);
+	R deleteChatPhoto(Consumer<DeleteChatPhoto> data);
 }

@@ -11,5 +11,5 @@ public interface SendContactMethod<R> {
 
 	R sendContact(SendContact data);
 
-	R sendContact(Consumer<SendContact.SendContactBuilder> data);
+	R sendContact(Consumer<SendContact> data);
 }

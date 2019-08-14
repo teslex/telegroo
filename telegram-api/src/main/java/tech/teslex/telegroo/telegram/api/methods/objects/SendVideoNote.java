@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObjectWithFile;
 import tech.teslex.telegroo.telegram.attach.InputFile;
@@ -12,11 +12,10 @@ import tech.teslex.telegroo.telegram.attach.InputFile;
  * sendVideoNote
  * As of v.4.0, Telegram clients support rounded square mp4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendVideoNote implements MethodObjectWithFile {
-
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
@@ -60,6 +59,10 @@ public class SendVideoNote implements MethodObjectWithFile {
 	@JsonProperty(value = "reply_markup", required = false)
 	private Object replyMarkup;
 
+	public static SendVideoNote create() {
+		return new SendVideoNote();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
@@ -68,7 +71,47 @@ public class SendVideoNote implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	public InputFile getFile() {
+	public InputFile getInputFile() {
 		return this.videoNote;
+	}
+
+	public SendVideoNote chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendVideoNote videoNote(InputFile videoNote) {
+		this.videoNote = videoNote;
+		return this;
+	}
+
+	public SendVideoNote duration(Integer duration) {
+		this.duration = duration;
+		return this;
+	}
+
+	public SendVideoNote length(Integer length) {
+		this.length = length;
+		return this;
+	}
+
+	public SendVideoNote thumb(InputFile thumb) {
+		this.thumb = thumb;
+		return this;
+	}
+
+	public SendVideoNote disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendVideoNote replyToMessageId(Integer replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	public SendVideoNote replyMarkup(Object replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

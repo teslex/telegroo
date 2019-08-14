@@ -11,5 +11,5 @@ public interface SendInvoiceMethod<R> {
 
 	R sendInvoice(SendInvoice data);
 
-	R sendInvoice(Consumer<SendInvoice.SendInvoiceBuilder> data);
+	R sendInvoice(Consumer<SendInvoice> data);
 }

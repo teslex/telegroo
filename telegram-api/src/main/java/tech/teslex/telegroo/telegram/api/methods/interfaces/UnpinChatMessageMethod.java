@@ -11,5 +11,5 @@ public interface UnpinChatMessageMethod<R> {
 
 	R unpinChatMessage(UnpinChatMessage data);
 
-	R unpinChatMessage(Consumer<UnpinChatMessage.UnpinChatMessageBuilder> data);
+	R unpinChatMessage(Consumer<UnpinChatMessage> data);
 }

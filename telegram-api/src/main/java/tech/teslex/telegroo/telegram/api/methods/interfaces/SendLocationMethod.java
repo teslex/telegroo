@@ -11,5 +11,5 @@ public interface SendLocationMethod<R> {
 
 	R sendLocation(SendLocation data);
 
-	R sendLocation(Consumer<SendLocation.SendLocationBuilder> data);
+	R sendLocation(Consumer<SendLocation> data);
 }

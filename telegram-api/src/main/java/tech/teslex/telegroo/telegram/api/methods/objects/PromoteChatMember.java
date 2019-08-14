@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 
@@ -11,11 +11,10 @@ import tech.teslex.telegroo.telegram.api.methods.MethodObject;
  * promoteChatMember
  * Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Pass False for all boolean parameters to demote a user. Returns True on success.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PromoteChatMember implements MethodObject {
-
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
@@ -67,9 +66,63 @@ public class PromoteChatMember implements MethodObject {
 	@JsonProperty(value = "can_promote_members", required = false)
 	private Boolean canPromoteMembers;
 
+	public static PromoteChatMember create() {
+		return new PromoteChatMember();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "promoteChatMember";
+	}
+
+	public PromoteChatMember chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public PromoteChatMember userId(Integer userId) {
+		this.userId = userId;
+		return this;
+	}
+
+	public PromoteChatMember canChangeInfo(Boolean canChangeInfo) {
+		this.canChangeInfo = canChangeInfo;
+		return this;
+	}
+
+	public PromoteChatMember canPostMessages(Boolean canPostMessages) {
+		this.canPostMessages = canPostMessages;
+		return this;
+	}
+
+	public PromoteChatMember canEditMessages(Boolean canEditMessages) {
+		this.canEditMessages = canEditMessages;
+		return this;
+	}
+
+	public PromoteChatMember canDeleteMessages(Boolean canDeleteMessages) {
+		this.canDeleteMessages = canDeleteMessages;
+		return this;
+	}
+
+	public PromoteChatMember canInviteUsers(Boolean canInviteUsers) {
+		this.canInviteUsers = canInviteUsers;
+		return this;
+	}
+
+	public PromoteChatMember canRestrictMembers(Boolean canRestrictMembers) {
+		this.canRestrictMembers = canRestrictMembers;
+		return this;
+	}
+
+	public PromoteChatMember canPinMessages(Boolean canPinMessages) {
+		this.canPinMessages = canPinMessages;
+		return this;
+	}
+
+	public PromoteChatMember canPromoteMembers(Boolean canPromoteMembers) {
+		this.canPromoteMembers = canPromoteMembers;
+		return this;
 	}
 }

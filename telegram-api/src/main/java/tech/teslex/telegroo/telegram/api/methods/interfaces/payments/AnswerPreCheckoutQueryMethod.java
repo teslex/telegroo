@@ -11,5 +11,5 @@ public interface AnswerPreCheckoutQueryMethod<R> {
 
 	R answerPreCheckoutQuery(AnswerPreCheckoutQuery data);
 
-	R answerPreCheckoutQuery(Consumer<AnswerPreCheckoutQuery.AnswerPreCheckoutQueryBuilder> data);
+	R answerPreCheckoutQuery(Consumer<AnswerPreCheckoutQuery> data);
 }

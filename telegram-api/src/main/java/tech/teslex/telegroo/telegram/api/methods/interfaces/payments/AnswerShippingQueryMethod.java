@@ -11,5 +11,5 @@ public interface AnswerShippingQueryMethod<R> {
 
 	R answerShippingQuery(AnswerShippingQuery data);
 
-	R answerShippingQuery(Consumer<AnswerShippingQuery.AnswerShippingQueryBuilder> data);
+	R answerShippingQuery(Consumer<AnswerShippingQuery> data);
 }

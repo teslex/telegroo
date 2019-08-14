@@ -11,5 +11,5 @@ public interface AddStickerToSetMethod<R> {
 
 	R addStickerToSet(AddStickerToSet data);
 
-	R addStickerToSet(Consumer<AddStickerToSet.AddStickerToSetBuilder> data);
+	R addStickerToSet(Consumer<AddStickerToSet> data);
 }

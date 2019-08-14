@@ -1,9 +1,9 @@
 package tech.teslex.telegroo.api.methods;
 
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import tech.teslex.telegroo.api.client.TelegramClient;
 import tech.teslex.telegroo.api.context.Context;
-import tech.teslex.telegroo.api.jackson.JacksonObjectMapper;
 import tech.teslex.telegroo.telegram.api.TelegramResult;
 import tech.teslex.telegroo.telegram.api.methods.interfaces.webhook.SetWebhookMethod;
 import tech.teslex.telegroo.telegram.api.methods.objects.webhook.SetWebhook;
@@ -11,41 +11,42 @@ import tech.teslex.telegroo.telegram.api.methods.objects.webhook.SetWebhook;
 import java.util.Map;
 import java.util.function.Consumer;
 
-public interface DefaultSetWebhookMethod extends SetWebhookMethod<Object> {
+public interface DefaultSetWebhookMethod extends SetWebhookMethod<TelegramResult<Object>> {
 
 	/**
 	 * @return update context
 	 */
 	Context getContext();
 
+	/**
+	 * @return object mapper
+	 */
+	ObjectMapper getObjectMapper();
+
 	@Override
-	default Object setWebhook(Map data) {
+	default TelegramResult<Object> setWebhook(Map data) {
 		throw new AssertionError();
 	}
 
 	@Override
-	default Object setWebhook(Consumer<SetWebhook.SetWebhookBuilder> data) {
-		SetWebhook.SetWebhookBuilder builder = SetWebhook.builder();
-		data.accept(builder);
-		SetWebhook builtData = builder.build();
+	default TelegramResult<Object> setWebhook(Consumer<SetWebhook> data) {
+		SetWebhook method = SetWebhook.create();
+		data.accept(method);
 
-		return setWebhook(builtData);
+		return setWebhook(method);
 	}
 
 	@Override
-	default Object setWebhook(SetWebhook data) {
+	default TelegramResult<Object> setWebhook(SetWebhook data) {
 		final Context context = getContext();
 		final TelegramClient telegramClient = context.getTelegramClient();
 
-		JavaType type = JacksonObjectMapper
-				.getObjectMapper()
+		JavaType type = getObjectMapper()
 				.getTypeFactory()
-				.constructParametricType(
-						TelegramResult.class,
-						Object.class
-				);
+				.constructType(Object.class);
 
 		return telegramClient
-				.handleTelegramResponse(telegramClient.go(data), type);
+				.call(data)
+				.asTelegramResult(type);
 	}
 }

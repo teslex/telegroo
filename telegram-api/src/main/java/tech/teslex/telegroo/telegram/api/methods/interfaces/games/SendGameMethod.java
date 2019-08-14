@@ -11,5 +11,5 @@ public interface SendGameMethod<R> {
 
 	R sendGame(SendGame data);
 
-	R sendGame(Consumer<SendGame.SendGameBuilder> data);
+	R sendGame(Consumer<SendGame> data);
 }

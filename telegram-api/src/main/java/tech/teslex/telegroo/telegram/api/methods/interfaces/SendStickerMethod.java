@@ -11,5 +11,5 @@ public interface SendStickerMethod<R> {
 
 	R sendSticker(SendSticker data);
 
-	R sendSticker(Consumer<SendSticker.SendStickerBuilder> data);
+	R sendSticker(Consumer<SendSticker> data);
 }

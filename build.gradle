@@ -3,7 +3,7 @@ ext {
 	isSnapshot = true
 	snapshotId = dateSnapshotId
 
-	telegrooVersion = isSnapshot ? "$numberVersion-${snapshotId}-SNAPSHOT" : numberVersion
+	telegrooVersion = isSnapshot ? "$numberVersion-${snapshotId}-snapshot" : numberVersion
 
 	groovyVersion = '2.5.7'
 //	groovyVersion = '3.0.0-beta-1'
@@ -22,6 +22,9 @@ ext {
 	apacheHttpClientVersion = '4.5.6'
 	apacheHttpFluentHcVersion = '4.5.6'
 	apacheHttpHttpMimeVersion = '4.5.6'
+
+	javaxAnnotation = '1.3.2'
+	javaxValidation = '2.0.0.Final'
 
 	D = [
 			jackson: [
@@ -55,7 +58,12 @@ ext {
 			slf4j: [
 				api: "org.slf4j:slf4j-api:$slf4jVersion",
 				simple: "org.slf4j:slf4j-simple:$slf4jVersion",
-			]
+			],
+
+			javax                 : [
+					annotationApi: "javax.annotation:javax.annotation-api:$javaxAnnotation",
+					validationApi: "javax.validation:validation-api:$javaxValidation",
+			],
 	]
 
 	Connect = { ctx ->
@@ -85,7 +93,7 @@ subprojects {
 		mavenCentral()
 		maven { url 'https://jitpack.io' }
 
-		if (version.endsWith('SNAPSHOT'))
+		if (version.toLowerCase().endsWith('SNAPSHOT'))
 			maven { url 'https://teslex.gitlab.io/repo/snapshots' }
 	}
 }

@@ -11,5 +11,5 @@ public interface StopMessageLiveLocationMethod<R> {
 
 	R stopMessageLiveLocation(StopMessageLiveLocation data);
 
-	R stopMessageLiveLocation(Consumer<StopMessageLiveLocation.StopMessageLiveLocationBuilder> data);
+	R stopMessageLiveLocation(Consumer<StopMessageLiveLocation> data);
 }

@@ -11,5 +11,5 @@ public interface SendVenueMethod<R> {
 
 	R sendVenue(SendVenue data);
 
-	R sendVenue(Consumer<SendVenue.SendVenueBuilder> data);
+	R sendVenue(Consumer<SendVenue> data);
 }

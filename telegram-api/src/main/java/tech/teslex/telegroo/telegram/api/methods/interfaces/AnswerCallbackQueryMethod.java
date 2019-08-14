@@ -11,5 +11,5 @@ public interface AnswerCallbackQueryMethod<R> {
 
 	R answerCallbackQuery(AnswerCallbackQuery data);
 
-	R answerCallbackQuery(Consumer<AnswerCallbackQuery.AnswerCallbackQueryBuilder> data);
+	R answerCallbackQuery(Consumer<AnswerCallbackQuery> data);
 }

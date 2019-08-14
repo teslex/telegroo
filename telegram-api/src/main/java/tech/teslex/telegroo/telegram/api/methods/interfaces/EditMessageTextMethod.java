@@ -11,5 +11,5 @@ public interface EditMessageTextMethod<R> {
 
 	R editMessageText(EditMessageText data);
 
-	R editMessageText(Consumer<EditMessageText.EditMessageTextBuilder> data);
+	R editMessageText(Consumer<EditMessageText> data);
 }

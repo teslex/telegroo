@@ -11,5 +11,5 @@ public interface SendVideoNoteMethod<R> {
 
 	R sendVideoNote(SendVideoNote data);
 
-	R sendVideoNote(Consumer<SendVideoNote.SendVideoNoteBuilder> data);
+	R sendVideoNote(Consumer<SendVideoNote> data);
 }

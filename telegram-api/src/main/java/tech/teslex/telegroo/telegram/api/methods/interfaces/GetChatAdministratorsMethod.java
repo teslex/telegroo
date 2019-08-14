@@ -11,5 +11,5 @@ public interface GetChatAdministratorsMethod<R> {
 
 	R getChatAdministrators(GetChatAdministrators data);
 
-	R getChatAdministrators(Consumer<GetChatAdministrators.GetChatAdministratorsBuilder> data);
+	R getChatAdministrators(Consumer<GetChatAdministrators> data);
 }

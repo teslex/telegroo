@@ -11,5 +11,5 @@ public interface SetGameScoreMethod<R> {
 
 	R setGameScore(SetGameScore data);
 
-	R setGameScore(Consumer<SetGameScore.SetGameScoreBuilder> data);
+	R setGameScore(Consumer<SetGameScore> data);
 }

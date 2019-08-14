@@ -11,5 +11,5 @@ public interface SendVideoMethod<R> {
 
 	R sendVideo(SendVideo data);
 
-	R sendVideo(Consumer<SendVideo.SendVideoBuilder> data);
+	R sendVideo(Consumer<SendVideo> data);
 }

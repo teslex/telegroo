@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObjectWithFile;
 import tech.teslex.telegroo.telegram.attach.InputFile;
@@ -12,11 +12,10 @@ import tech.teslex.telegroo.telegram.attach.InputFile;
  * sendVoice
  * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent as Audio or Document). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendVoice implements MethodObjectWithFile {
-
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
@@ -60,6 +59,10 @@ public class SendVoice implements MethodObjectWithFile {
 	@JsonProperty(value = "reply_markup", required = false)
 	private Object replyMarkup;
 
+	public static SendVoice create() {
+		return new SendVoice();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
@@ -68,7 +71,47 @@ public class SendVoice implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	public InputFile getFile() {
+	public InputFile getInputFile() {
 		return this.voice;
+	}
+
+	public SendVoice chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendVoice voice(InputFile voice) {
+		this.voice = voice;
+		return this;
+	}
+
+	public SendVoice caption(String caption) {
+		this.caption = caption;
+		return this;
+	}
+
+	public SendVoice parseMode(String parseMode) {
+		this.parseMode = parseMode;
+		return this;
+	}
+
+	public SendVoice duration(Integer duration) {
+		this.duration = duration;
+		return this;
+	}
+
+	public SendVoice disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendVoice replyToMessageId(Integer replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	public SendVoice replyMarkup(Object replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

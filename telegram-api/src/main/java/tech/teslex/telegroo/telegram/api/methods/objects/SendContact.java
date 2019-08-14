@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 
@@ -11,11 +11,10 @@ import tech.teslex.telegroo.telegram.api.methods.MethodObject;
  * sendContact
  * Use this method to send phone contacts. On success, the sent Message is returned.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendContact implements MethodObject {
-
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
@@ -59,9 +58,53 @@ public class SendContact implements MethodObject {
 	@JsonProperty(value = "reply_markup", required = false)
 	private Object replyMarkup;
 
+	public static SendContact create() {
+		return new SendContact();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "sendContact";
+	}
+
+	public SendContact chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendContact phoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+		return this;
+	}
+
+	public SendContact firstName(String firstName) {
+		this.firstName = firstName;
+		return this;
+	}
+
+	public SendContact lastName(String lastName) {
+		this.lastName = lastName;
+		return this;
+	}
+
+	public SendContact vcard(String vcard) {
+		this.vcard = vcard;
+		return this;
+	}
+
+	public SendContact disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendContact replyToMessageId(Integer replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	public SendContact replyMarkup(Object replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

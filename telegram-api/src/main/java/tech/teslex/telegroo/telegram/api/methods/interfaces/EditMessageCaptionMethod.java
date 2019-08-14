@@ -11,5 +11,5 @@ public interface EditMessageCaptionMethod<R> {
 
 	R editMessageCaption(EditMessageCaption data);
 
-	R editMessageCaption(Consumer<EditMessageCaption.EditMessageCaptionBuilder> data);
+	R editMessageCaption(Consumer<EditMessageCaption> data);
 }

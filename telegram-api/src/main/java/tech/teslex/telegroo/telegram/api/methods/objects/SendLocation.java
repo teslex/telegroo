@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 
@@ -11,11 +11,10 @@ import tech.teslex.telegroo.telegram.api.methods.MethodObject;
  * sendLocation
  * Use this method to send point on the map. On success, the sent Message is returned.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendLocation implements MethodObject {
-
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
@@ -54,9 +53,48 @@ public class SendLocation implements MethodObject {
 	@JsonProperty(value = "reply_markup", required = false)
 	private Object replyMarkup;
 
+	public static SendLocation create() {
+		return new SendLocation();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "sendLocation";
+	}
+
+	public SendLocation chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendLocation latitude(Float latitude) {
+		this.latitude = latitude;
+		return this;
+	}
+
+	public SendLocation longitude(Float longitude) {
+		this.longitude = longitude;
+		return this;
+	}
+
+	public SendLocation livePeriod(Integer livePeriod) {
+		this.livePeriod = livePeriod;
+		return this;
+	}
+
+	public SendLocation disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendLocation replyToMessageId(Integer replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	public SendLocation replyMarkup(Object replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

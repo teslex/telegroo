@@ -11,5 +11,5 @@ public interface SetChatTitleMethod<R> {
 
 	R setChatTitle(SetChatTitle data);
 
-	R setChatTitle(Consumer<SetChatTitle.SetChatTitleBuilder> data);
+	R setChatTitle(Consumer<SetChatTitle> data);
 }

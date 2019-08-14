@@ -11,5 +11,5 @@ public interface SetChatStickerSetMethod<R> {
 
 	R setChatStickerSet(SetChatStickerSet data);
 
-	R setChatStickerSet(Consumer<SetChatStickerSet.SetChatStickerSetBuilder> data);
+	R setChatStickerSet(Consumer<SetChatStickerSet> data);
 }

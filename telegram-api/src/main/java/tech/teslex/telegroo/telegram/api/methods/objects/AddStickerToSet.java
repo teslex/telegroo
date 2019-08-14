@@ -3,8 +3,8 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 import tech.teslex.telegroo.telegram.api.types.stickers.MaskPosition;
 import tech.teslex.telegroo.telegram.attach.InputFile;
@@ -13,11 +13,10 @@ import tech.teslex.telegroo.telegram.attach.InputFile;
  * addStickerToSet
  * Use this method to add a new sticker to a set created by the bot. Returns True on success.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AddStickerToSet implements MethodObject {
-
 	/**
 	 * User identifier of sticker set owner
 	 */
@@ -44,9 +43,38 @@ public class AddStickerToSet implements MethodObject {
 	@JsonProperty(value = "mask_position", required = false)
 	private MaskPosition maskPosition;
 
+	public static AddStickerToSet create() {
+		return new AddStickerToSet();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "addStickerToSet";
+	}
+
+	public AddStickerToSet userId(Integer userId) {
+		this.userId = userId;
+		return this;
+	}
+
+	public AddStickerToSet name(String name) {
+		this.name = name;
+		return this;
+	}
+
+	public AddStickerToSet pngSticker(InputFile pngSticker) {
+		this.pngSticker = pngSticker;
+		return this;
+	}
+
+	public AddStickerToSet emojis(String emojis) {
+		this.emojis = emojis;
+		return this;
+	}
+
+	public AddStickerToSet maskPosition(MaskPosition maskPosition) {
+		this.maskPosition = maskPosition;
+		return this;
 	}
 }

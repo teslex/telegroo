@@ -11,5 +11,5 @@ public interface GetChatMembersCountMethod<R> {
 
 	R getChatMembersCount(GetChatMembersCount data);
 
-	R getChatMembersCount(Consumer<GetChatMembersCount.GetChatMembersCountBuilder> data);
+	R getChatMembersCount(Consumer<GetChatMembersCount> data);
 }

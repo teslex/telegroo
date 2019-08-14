@@ -3,8 +3,8 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 import tech.teslex.telegroo.telegram.api.types.inline.InlineQueryResult;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * Use this method to send answers to an inline query. On success, True is returned.
  * No more than 50 results per query are allowed.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AnswerInlineQuery implements MethodObject {
@@ -56,9 +56,49 @@ public class AnswerInlineQuery implements MethodObject {
 	@JsonProperty(value = "switch_pm_parameter", required = false)
 	private String switchPmParameter;
 
+	public static AnswerInlineQuery create() {
+		return new AnswerInlineQuery();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "answerInlineQuery";
+	}
+
+
+	public AnswerInlineQuery inlineQueryId(String inlineQueryId) {
+		this.inlineQueryId = inlineQueryId;
+		return this;
+	}
+
+	public AnswerInlineQuery results(List<InlineQueryResult> results) {
+		this.results = results;
+		return this;
+	}
+
+	public AnswerInlineQuery cacheTime(Integer cacheTime) {
+		this.cacheTime = cacheTime;
+		return this;
+	}
+
+	public AnswerInlineQuery personal(Boolean personal) {
+		isPersonal = personal;
+		return this;
+	}
+
+	public AnswerInlineQuery nextOffset(String nextOffset) {
+		this.nextOffset = nextOffset;
+		return this;
+	}
+
+	public AnswerInlineQuery switchPmText(String switchPmText) {
+		this.switchPmText = switchPmText;
+		return this;
+	}
+
+	public AnswerInlineQuery switchPmParameter(String switchPmParameter) {
+		this.switchPmParameter = switchPmParameter;
+		return this;
 	}
 }

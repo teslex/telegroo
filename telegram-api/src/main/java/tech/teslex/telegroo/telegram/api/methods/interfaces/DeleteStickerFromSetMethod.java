@@ -11,5 +11,5 @@ public interface DeleteStickerFromSetMethod<R> {
 
 	R deleteStickerFromSet(DeleteStickerFromSet data);
 
-	R deleteStickerFromSet(Consumer<DeleteStickerFromSet.DeleteStickerFromSetBuilder> data);
+	R deleteStickerFromSet(Consumer<DeleteStickerFromSet> data);
 }

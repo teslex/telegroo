@@ -11,5 +11,5 @@ public interface SendMediaGroupMethod<R> {
 
 	R sendMediaGroup(SendMediaGroup data);
 
-	R sendMediaGroup(Consumer<SendMediaGroup.SendMediaGroupBuilder> data);
+	R sendMediaGroup(Consumer<SendMediaGroup> data);
 }

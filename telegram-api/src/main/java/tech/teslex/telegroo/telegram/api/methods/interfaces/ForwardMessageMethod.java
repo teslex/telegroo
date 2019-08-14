@@ -11,5 +11,5 @@ public interface ForwardMessageMethod<R> {
 
 	R forwardMessage(ForwardMessage data);
 
-	R forwardMessage(Consumer<ForwardMessage.ForwardMessageBuilder> data);
+	R forwardMessage(Consumer<ForwardMessage> data);
 }

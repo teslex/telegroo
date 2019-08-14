@@ -11,5 +11,5 @@ public interface SendChatActionMethod<R> {
 
 	R sendChatAction(SendChatAction data);
 
-	R sendChatAction(Consumer<SendChatAction.SendChatActionBuilder> data);
+	R sendChatAction(Consumer<SendChatAction> data);
 }

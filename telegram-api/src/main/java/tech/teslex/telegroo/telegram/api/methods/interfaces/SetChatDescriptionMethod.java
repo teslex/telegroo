@@ -11,5 +11,5 @@ public interface SetChatDescriptionMethod<R> {
 
 	R setChatDescription(SetChatDescription data);
 
-	R setChatDescription(Consumer<SetChatDescription.SetChatDescriptionBuilder> data);
+	R setChatDescription(Consumer<SetChatDescription> data);
 }

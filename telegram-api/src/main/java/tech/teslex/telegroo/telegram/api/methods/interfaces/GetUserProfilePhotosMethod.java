@@ -11,5 +11,5 @@ public interface GetUserProfilePhotosMethod<R> {
 
 	R getUserProfilePhotos(GetUserProfilePhotos data);
 
-	R getUserProfilePhotos(Consumer<GetUserProfilePhotos.GetUserProfilePhotosBuilder> data);
+	R getUserProfilePhotos(Consumer<GetUserProfilePhotos> data);
 }

@@ -11,5 +11,5 @@ public interface SendPhotoMethod<R> {
 
 	R sendPhoto(SendPhoto data);
 
-	R sendPhoto(Consumer<SendPhoto.SendPhotoBuilder> data);
+	R sendPhoto(Consumer<SendPhoto> data);
 }

@@ -10,21 +10,16 @@ dependencies {
 
 	Connect(it).lombok()
 
-//	implementation D.httpcomponents.httpcore
-//	implementation D.httpcomponents.httpclient
-//	implementation D.httpcomponents.fluentHc
-//	implementation D.httpcomponents.httpmime
+	implementation D.httpcomponents.httpclient
+	implementation D.httpcomponents.httpmime
 
 	implementation D.jackson.core
 	implementation D.jackson.datatype
 
-	implementation 'com.konghq:unirest-java:2.3.14'
-
+	Connect(it).logback()
 	Connect(it).slf4j()
 
-//	testCompile 'org.spockframework.spock:spock-core:spock-1.2', {
-//		exclude group: 'org.codehaus.groovy', module: 'groovy-all'
-//	}
+	testCompile 'org.spockframework.spock:spock-core:spock-1.3'
 }
 
 publishing {

@@ -11,5 +11,5 @@ public interface SendDocumentMethod<R> {
 
 	R sendDocument(SendDocument data);
 
-	R sendDocument(Consumer<SendDocument.SendDocumentBuilder> data);
+	R sendDocument(Consumer<SendDocument> data);
 }

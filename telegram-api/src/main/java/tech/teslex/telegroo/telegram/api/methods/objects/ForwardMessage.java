@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 
@@ -11,11 +11,10 @@ import tech.teslex.telegroo.telegram.api.methods.MethodObject;
  * forwardMessage
  * Use this method to forward messages of any kind. On success, the sent Message is returned.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ForwardMessage implements MethodObject {
-
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 * <p>
@@ -41,9 +40,33 @@ public class ForwardMessage implements MethodObject {
 	@JsonProperty(value = "message_id", required = true)
 	private Integer messageId;
 
+	public static ForwardMessage create() {
+		return new ForwardMessage();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "forwardMessage";
+	}
+
+	public ForwardMessage chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public ForwardMessage fromChatId(Object fromChatId) {
+		this.fromChatId = fromChatId;
+		return this;
+	}
+
+	public ForwardMessage disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public ForwardMessage messageId(Integer messageId) {
+		this.messageId = messageId;
+		return this;
 	}
 }

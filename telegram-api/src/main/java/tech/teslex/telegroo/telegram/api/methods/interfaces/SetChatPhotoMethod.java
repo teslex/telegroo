@@ -11,5 +11,5 @@ public interface SetChatPhotoMethod<R> {
 
 	R setChatPhoto(SetChatPhoto data);
 
-	R setChatPhoto(Consumer<SetChatPhoto.SetChatPhotoBuilder> data);
+	R setChatPhoto(Consumer<SetChatPhoto> data);
 }

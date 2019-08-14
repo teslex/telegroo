@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 
@@ -11,7 +11,7 @@ import tech.teslex.telegroo.telegram.api.methods.MethodObject;
  * kickChatMember
  * Use this method to kick a user from a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the group on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class KickChatMember implements MethodObject {
@@ -31,9 +31,28 @@ public class KickChatMember implements MethodObject {
 	@JsonProperty(value = "until_date", required = false)
 	private Integer untilDate;
 
+	public static KickChatMember create() {
+		return new KickChatMember();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "kickChatMember";
+	}
+
+	public KickChatMember chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public KickChatMember userId(Integer userId) {
+		this.userId = userId;
+		return this;
+	}
+
+	public KickChatMember untilDate(Integer untilDate) {
+		this.untilDate = untilDate;
+		return this;
 	}
 }

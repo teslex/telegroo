@@ -11,5 +11,5 @@ public interface SendAnimationMethod<R> {
 
 	R sendAnimation(SendAnimation data);
 
-	R sendAnimation(Consumer<SendAnimation.SendAnimationBuilder> data);
+	R sendAnimation(Consumer<SendAnimation> data);
 }

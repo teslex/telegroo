@@ -11,5 +11,5 @@ public interface ExportChatInviteLinkMethod<R> {
 
 	R exportChatInviteLink(ExportChatInviteLink data);
 
-	R exportChatInviteLink(Consumer<ExportChatInviteLink.ExportChatInviteLinkBuilder> data);
+	R exportChatInviteLink(Consumer<ExportChatInviteLink> data);
 }

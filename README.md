@@ -3,9 +3,9 @@
 	<h1>telegroo</h1>
 </p>
 
-**Telegram Bot framework for [Groovy](http://groovy-lang.org)**
+**Simple Telegram Bot wrapper for Java & [Groovy](http://groovy-lang.org)**
 
-> Version: **[1.1](https://gitlab.com/teslex/telegroo/telegroo)**
+> Version: **[0.0.1](https://gitlab.com/teslex/telegroo/telegroo)**
 
 - [Telegroo Docs](https://teslex.gitlab.io/telegroo)
 - [Telegram Bot API](https://core.telegram.org/bots/api)
@@ -21,27 +21,46 @@ repositories {
 }
 
 dependencies {
-	compile 'tech.teslex.telegroo:telegroo:1.1'
+	implementation "tech.teslex.telegroo:telegroo:$telegrooVersion"
 }
 ```
 
-Sample bot:
+### Java Example:
+```java
+import tech.teslex.telegroo.api.PollingTelegroo;
+import tech.teslex.telegroo.simple.SimplePollingTelegroo;
 
-```groovy
-@Grab('tech.teslex.telegroo:telegroo:1.1')
-
-import tech.teslex.telegroo.simple.SimpleTelegroo
-
-def bot = new SimpleTelegroo('TOKEN')
-
-bot.command(/start/) {
-	sendMessage(text: 'Welcome!')
-}
+class Bot {
 	
-bot.command(~/echo/, ~/(.+)/) {/
-	if (argsMatcher.find()/)
-		sendMessage(text: argsMatcher.group(1))
+	private static final String TOKEN = "...";
+	private static final PollingTelegroo telegroo = new SimplePollingTelegroo(TOKEN);
+	
+	public static void main(String[] args){
+		telegroo.listenCommand("start", (context, methods) -> methods.sendMessage("Hello!"));
+		telegroo.listenCommand("echo", (context, methods) -> methods.sendMessage(context.getArgsText()));
+		
+		telegroo.startPolling();
+	}
+}
+```
+
+### Groovy Example:
+```groovy
+final String TOKEN = "..."
+final PollingTelegroo telegroo = new SimplePollingTelegroo(TOKEN)
+
+telegroo.listenCommand("start") { context, methods -> 
+	methods.sendMessage("Hello!")
 }
 
-bot.start()
+telegroo.listenCommand(~/echo/) { context, methods -> 
+	methods.sendMessage(context.getArgsText())
+}
+		
+telegroo.startPolling()	
+```
+
+#### Grapes
+```groovy
+@Grab("tech.teslex.telegroo:telegroo:$telegrooVersion")
 ```

@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 import tech.teslex.telegroo.telegram.enums.ChatAction;
@@ -12,7 +12,7 @@ import tech.teslex.telegroo.telegram.enums.ChatAction;
  * sendChatAction
  * Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns True on success.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendChatAction implements MethodObject {
@@ -27,6 +27,10 @@ public class SendChatAction implements MethodObject {
 	@JsonProperty(required = true)
 	private String action;
 
+	public static SendChatAction create() {
+		return new SendChatAction();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
@@ -36,5 +40,15 @@ public class SendChatAction implements MethodObject {
 	@JsonIgnore
 	public void setAction(ChatAction action) {
 		this.action = action.getValue();
+	}
+
+	public SendChatAction chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendChatAction action(String action) {
+		this.action = action;
+		return this;
 	}
 }

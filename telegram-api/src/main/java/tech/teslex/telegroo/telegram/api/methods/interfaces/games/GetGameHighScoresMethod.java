@@ -11,5 +11,5 @@ public interface GetGameHighScoresMethod<R> {
 
 	R getGameHighScores(GetGameHighScores data);
 
-	R getGameHighScores(Consumer<GetGameHighScores.GetGameHighScoresBuilder> data);
+	R getGameHighScores(Consumer<GetGameHighScores> data);
 }

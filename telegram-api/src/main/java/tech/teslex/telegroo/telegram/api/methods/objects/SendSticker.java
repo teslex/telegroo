@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 import tech.teslex.telegroo.telegram.attach.InputFile;
@@ -12,11 +12,10 @@ import tech.teslex.telegroo.telegram.attach.InputFile;
  * sendSticker
  * Use this method to send .webp stickers. On success, the sent Message is returned.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendSticker implements MethodObject {
-
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
@@ -45,9 +44,38 @@ public class SendSticker implements MethodObject {
 	@JsonProperty(value = "reply_markup", required = false)
 	private Object replyMarkup;
 
+	public static SendSticker create() {
+		return new SendSticker();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "sendSticker";
+	}
+
+	public SendSticker chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendSticker sticker(InputFile sticker) {
+		this.sticker = sticker;
+		return this;
+	}
+
+	public SendSticker disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendSticker replyToMessageId(Integer replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	public SendSticker replyMarkup(Object replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

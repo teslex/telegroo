@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObjectWithFile;
 import tech.teslex.telegroo.telegram.attach.InputFile;
@@ -12,11 +12,10 @@ import tech.teslex.telegroo.telegram.attach.InputFile;
  * sendVideo
  * Use this method to send video files, Telegram clients support mp4 videos (other formats may be sent as Document). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendVideo implements MethodObjectWithFile {
-
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
@@ -80,6 +79,10 @@ public class SendVideo implements MethodObjectWithFile {
 	@JsonProperty(value = "reply_markup", required = false)
 	private Object replyMarkup;
 
+	public static SendVideo create() {
+		return new SendVideo();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
@@ -88,7 +91,67 @@ public class SendVideo implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	public InputFile getFile() {
+	public InputFile getInputFile() {
 		return this.video;
+	}
+
+	public SendVideo chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendVideo video(InputFile video) {
+		this.video = video;
+		return this;
+	}
+
+	public SendVideo duration(Integer duration) {
+		this.duration = duration;
+		return this;
+	}
+
+	public SendVideo width(Integer width) {
+		this.width = width;
+		return this;
+	}
+
+	public SendVideo height(Integer height) {
+		this.height = height;
+		return this;
+	}
+
+	public SendVideo thumb(InputFile thumb) {
+		this.thumb = thumb;
+		return this;
+	}
+
+	public SendVideo caption(String caption) {
+		this.caption = caption;
+		return this;
+	}
+
+	public SendVideo parseMode(String parseMode) {
+		this.parseMode = parseMode;
+		return this;
+	}
+
+	public SendVideo supportsStreaming(Boolean supportsStreaming) {
+		this.supportsStreaming = supportsStreaming;
+		return this;
+	}
+
+	public SendVideo disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendVideo replyToMessageId(Integer replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	public SendVideo replyMarkup(Object replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

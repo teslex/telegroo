@@ -11,5 +11,5 @@ public interface SetWebhookMethod<R> {
 
 	R setWebhook(SetWebhook data);
 
-	R setWebhook(Consumer<SetWebhook.SetWebhookBuilder> data);
+	R setWebhook(Consumer<SetWebhook> data);
 }

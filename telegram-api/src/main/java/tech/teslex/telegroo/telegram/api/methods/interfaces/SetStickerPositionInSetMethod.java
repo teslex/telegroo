@@ -11,5 +11,5 @@ public interface SetStickerPositionInSetMethod<R> {
 
 	R setStickerPositionInSet(SetStickerPositionInSet data);
 
-	R setStickerPositionInSet(Consumer<SetStickerPositionInSet.SetStickerPositionInSetBuilder> data);
+	R setStickerPositionInSet(Consumer<SetStickerPositionInSet> data);
 }

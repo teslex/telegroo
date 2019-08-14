@@ -11,5 +11,5 @@ public interface GetUpdatesMethod<R> {
 
 	R getUpdates(GetUpdates data);
 
-	R getUpdates(Consumer<GetUpdates.GetUpdatesBuilder> data);
+	R getUpdates(Consumer<GetUpdates> data);
 }

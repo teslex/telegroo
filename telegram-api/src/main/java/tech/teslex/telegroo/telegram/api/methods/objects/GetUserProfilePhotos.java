@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 
@@ -11,7 +11,7 @@ import tech.teslex.telegroo.telegram.api.methods.MethodObject;
  * getUserProfilePhotos
  * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetUserProfilePhotos implements MethodObject {
@@ -31,9 +31,28 @@ public class GetUserProfilePhotos implements MethodObject {
 	@JsonProperty(required = false)
 	private Integer limit;
 
+	public static GetUserProfilePhotos create() {
+		return new GetUserProfilePhotos();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "getUserProfilePhotos";
+	}
+
+	public GetUserProfilePhotos userId(Integer userId) {
+		this.userId = userId;
+		return this;
+	}
+
+	public GetUserProfilePhotos offset(Integer offset) {
+		this.offset = offset;
+		return this;
+	}
+
+	public GetUserProfilePhotos limit(Integer limit) {
+		this.limit = limit;
+		return this;
 	}
 }

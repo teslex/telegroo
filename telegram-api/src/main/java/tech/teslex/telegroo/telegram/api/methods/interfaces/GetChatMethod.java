@@ -11,5 +11,5 @@ public interface GetChatMethod<R> {
 
 	R getChat(GetChat data);
 
-	R getChat(Consumer<GetChat.GetChatBuilder> data);
+	R getChat(Consumer<GetChat> data);
 }

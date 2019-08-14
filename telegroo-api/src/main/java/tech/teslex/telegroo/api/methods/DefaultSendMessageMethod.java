@@ -1,9 +1,9 @@
 package tech.teslex.telegroo.api.methods;
 
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import tech.teslex.telegroo.api.client.TelegramClient;
 import tech.teslex.telegroo.api.context.Context;
-import tech.teslex.telegroo.api.jackson.JacksonObjectMapper;
 import tech.teslex.telegroo.telegram.api.TelegramResult;
 import tech.teslex.telegroo.telegram.api.methods.interfaces.SendMessageMethod;
 import tech.teslex.telegroo.telegram.api.methods.objects.SendMessage;
@@ -20,6 +20,11 @@ public interface DefaultSendMessageMethod extends SendMessageMethod<TelegramResu
 	 */
 	Context getContext();
 
+	/**
+	 * @return object mapper
+	 */
+	ObjectMapper getObjectMapper();
+
 	@Override
 	default TelegramResult<Message> sendMessage(Map data) {
 		throw new AssertionError("not implemented");
@@ -28,30 +33,27 @@ public interface DefaultSendMessageMethod extends SendMessageMethod<TelegramResu
 	default TelegramResult<Message> sendMessage(String text) {
 		return sendMessage(
 				SendMessage
-						.builder()
+						.create()
 						.text(text)
-						.build()
 		);
 	}
 
 	@Override
-	default TelegramResult<Message> sendMessage(Long chatId, String text) {
+	default TelegramResult<Message> sendMessage(Object chatId, String text) {
 		return sendMessage(
 				SendMessage
-						.builder()
+						.create()
 						.chatId(chatId)
 						.text(text)
-						.build()
 		);
 	}
 
 	@Override
-	default TelegramResult<Message> sendMessage(Consumer<SendMessage.SendMessageBuilder> data) {
-		SendMessage.SendMessageBuilder builder = SendMessage.builder();
-		data.accept(builder);
-		SendMessage builtData = builder.build();
+	default TelegramResult<Message> sendMessage(Consumer<SendMessage> data) {
+		SendMessage method = SendMessage.create();
+		data.accept(method);
 
-		return sendMessage(builtData);
+		return sendMessage(method);
 	}
 
 	@Override
@@ -60,20 +62,16 @@ public interface DefaultSendMessageMethod extends SendMessageMethod<TelegramResu
 		final Update currentUpdate = context.getCurrentUpdate();
 		final TelegramClient telegramClient = context.getTelegramClient();
 
-		if (data.getChatId() == null && currentUpdate != null && currentUpdate.getChatId() != null && currentUpdate.getChatId() != -1)
-			data.setChatId(currentUpdate.getChatId());
-		else
-			throw new IllegalArgumentException("chat id is null");
+		data.useDefault(currentUpdate);
 
-		JavaType type = JacksonObjectMapper
-				.getObjectMapper()
+		System.out.println(data);
+
+//		System.exit(0);
+
+		JavaType type = getObjectMapper()
 				.getTypeFactory()
-				.constructParametricType(
-						TelegramResult.class,
-						Message.class
-				);
+				.constructType(Message.class);
 
-		return telegramClient
-				.handleTelegramResponse(telegramClient.go(data), type);
+		return telegramClient.call(data).asTelegramResult(type);
 	}
 }

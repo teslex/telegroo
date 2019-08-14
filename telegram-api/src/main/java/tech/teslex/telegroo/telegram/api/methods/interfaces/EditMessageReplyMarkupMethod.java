@@ -11,5 +11,5 @@ public interface EditMessageReplyMarkupMethod<R> {
 
 	R editMessageReplyMarkup(EditMessageReplyMarkup data);
 
-	R editMessageReplyMarkup(Consumer<EditMessageReplyMarkup.EditMessageReplyMarkupBuilder> data);
+	R editMessageReplyMarkup(Consumer<EditMessageReplyMarkup> data);
 }

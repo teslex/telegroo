@@ -3,10 +3,10 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
+import tech.teslex.telegroo.telegram.api.types.update.Update;
 import tech.teslex.telegroo.telegram.enums.UpdateType;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * getUpdates
  * Use this method to receive incoming updates using long polling (wiki). An Array of Update objects is returned.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetUpdates implements MethodObject {
@@ -39,9 +39,33 @@ public class GetUpdates implements MethodObject {
 	@JsonProperty(value = "allowed_updates", required = false)
 	private List<UpdateType> allowedUpdates;
 
+	public static GetUpdates create() {
+		return new GetUpdates();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "getUpdates";
+	}
+
+	public GetUpdates offset(Long offset) {
+		this.offset = offset;
+		return this;
+	}
+
+	public GetUpdates limit(Long limit) {
+		this.limit = limit;
+		return this;
+	}
+
+	public GetUpdates timeout(Long timeout) {
+		this.timeout = timeout;
+		return this;
+	}
+
+	public GetUpdates allowedUpdates(List<UpdateType> allowedUpdates) {
+		this.allowedUpdates = allowedUpdates;
+		return this;
 	}
 }

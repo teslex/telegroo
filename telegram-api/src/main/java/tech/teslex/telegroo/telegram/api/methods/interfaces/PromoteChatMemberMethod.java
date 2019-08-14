@@ -11,5 +11,5 @@ public interface PromoteChatMemberMethod<R> {
 
 	R promoteChatMember(PromoteChatMember data);
 
-	R promoteChatMember(Consumer<PromoteChatMember.PromoteChatMemberBuilder> data);
+	R promoteChatMember(Consumer<PromoteChatMember> data);
 }

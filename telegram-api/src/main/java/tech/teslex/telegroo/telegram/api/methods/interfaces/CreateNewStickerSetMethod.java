@@ -11,5 +11,5 @@ public interface CreateNewStickerSetMethod<R> {
 
 	R createNewStickerSet(CreateNewStickerSet data);
 
-	R createNewStickerSet(Consumer<CreateNewStickerSet.CreateNewStickerSetBuilder> data);
+	R createNewStickerSet(Consumer<CreateNewStickerSet> data);
 }

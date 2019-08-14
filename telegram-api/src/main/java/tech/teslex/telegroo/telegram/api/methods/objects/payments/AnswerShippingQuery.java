@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects.payments;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 import tech.teslex.telegroo.telegram.api.types.payments.ShippingOption;
@@ -14,11 +14,10 @@ import java.util.List;
  * answerShippingQuery
  * If you sent an invoice requesting a shipping address and the parameter is_flexible was specified, the Bot API will send an Update with a shipping_query field to the bot. Use this method to reply to shipping queries. On success, True is returned.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AnswerShippingQuery implements MethodObject {
-
 	/**
 	 * Unique identifier for the query to be answered
 	 */
@@ -40,9 +39,33 @@ public class AnswerShippingQuery implements MethodObject {
 	@JsonProperty(value = "error_message", required = false)
 	private String errorMessage;
 
+	public static AnswerShippingQuery create() {
+		return new AnswerShippingQuery();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "answerShippingQuery";
+	}
+
+	public AnswerShippingQuery shippingQueryId(String shippingQueryId) {
+		this.shippingQueryId = shippingQueryId;
+		return this;
+	}
+
+	public AnswerShippingQuery ok(Boolean ok) {
+		this.ok = ok;
+		return this;
+	}
+
+	public AnswerShippingQuery shippingOptions(List<ShippingOption> shippingOptions) {
+		this.shippingOptions = shippingOptions;
+		return this;
+	}
+
+	public AnswerShippingQuery errorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+		return this;
 	}
 }

@@ -11,5 +11,5 @@ public interface LeaveChatMethod<R> {
 
 	R leaveChat(LeaveChat data);
 
-	R leaveChat(Consumer<LeaveChat.LeaveChatBuilder> data);
+	R leaveChat(Consumer<LeaveChat> data);
 }

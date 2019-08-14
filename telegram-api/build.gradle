@@ -9,6 +9,9 @@ dependencies {
 	Connect(it).lombok()
 
 	implementation D.jackson.annontations
+	implementation D.jackson.datatype
+
+	implementation D.javax.validationApi
 }
 
 publishing {

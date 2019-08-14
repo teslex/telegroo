@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObjectWithFile;
 import tech.teslex.telegroo.telegram.attach.InputFile;
@@ -12,11 +12,10 @@ import tech.teslex.telegroo.telegram.attach.InputFile;
  * sendDocument
  * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any value of up to 50 MB in size, this limit may be changed in the future.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendDocument implements MethodObjectWithFile {
-
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
@@ -55,6 +54,10 @@ public class SendDocument implements MethodObjectWithFile {
 	@JsonProperty(value = "reply_markup", required = false)
 	private Object replyMarkup;
 
+	public static SendDocument create() {
+		return new SendDocument();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
@@ -63,7 +66,42 @@ public class SendDocument implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	public InputFile getFile() {
+	public InputFile getInputFile() {
 		return this.document;
+	}
+
+	public SendDocument chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendDocument document(InputFile document) {
+		this.document = document;
+		return this;
+	}
+
+	public SendDocument thumb(InputFile thumb) {
+		this.thumb = thumb;
+		return this;
+	}
+
+	public SendDocument caption(String caption) {
+		this.caption = caption;
+		return this;
+	}
+
+	public SendDocument parseMode(String parseMode) {
+		this.parseMode = parseMode;
+		return this;
+	}
+
+	public SendDocument disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendDocument replyMarkup(Object replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

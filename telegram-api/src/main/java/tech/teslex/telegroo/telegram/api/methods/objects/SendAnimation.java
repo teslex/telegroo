@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObjectWithFile;
 import tech.teslex.telegroo.telegram.attach.InputFile;
@@ -12,11 +12,10 @@ import tech.teslex.telegroo.telegram.attach.InputFile;
  * sendAnimation
  * Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendAnimation implements MethodObjectWithFile {
-
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
@@ -75,6 +74,10 @@ public class SendAnimation implements MethodObjectWithFile {
 	@JsonProperty(value = "reply_markup", required = false)
 	private Object replyMarkup;
 
+	public static SendAnimation create() {
+		return new SendAnimation();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
@@ -83,7 +86,62 @@ public class SendAnimation implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	public InputFile getFile() {
+	public InputFile getInputFile() {
 		return this.animation;
+	}
+
+	public SendAnimation chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendAnimation animation(InputFile animation) {
+		this.animation = animation;
+		return this;
+	}
+
+	public SendAnimation duration(Integer duration) {
+		this.duration = duration;
+		return this;
+	}
+
+	public SendAnimation width(Integer width) {
+		this.width = width;
+		return this;
+	}
+
+	public SendAnimation height(Integer height) {
+		this.height = height;
+		return this;
+	}
+
+	public SendAnimation thumb(InputFile thumb) {
+		this.thumb = thumb;
+		return this;
+	}
+
+	public SendAnimation caption(String caption) {
+		this.caption = caption;
+		return this;
+	}
+
+	public SendAnimation parseMode(String parseMode) {
+		this.parseMode = parseMode;
+		return this;
+	}
+
+	public SendAnimation disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendAnimation replyToMessageId(Integer replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	public SendAnimation replyMarkup(Object replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

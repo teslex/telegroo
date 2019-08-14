@@ -11,5 +11,5 @@ public interface PinChatMessageMethod<R> {
 
 	R pinChatMessage(PinChatMessage data);
 
-	R pinChatMessage(Consumer<PinChatMessage.PinChatMessageBuilder> data);
+	R pinChatMessage(Consumer<PinChatMessage> data);
 }

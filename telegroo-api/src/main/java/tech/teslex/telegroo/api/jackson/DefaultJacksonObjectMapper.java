@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 
-public final class JacksonObjectMapper {
+public final class DefaultJacksonObjectMapper {
 
 	private static ObjectMapper objectMapper;
 

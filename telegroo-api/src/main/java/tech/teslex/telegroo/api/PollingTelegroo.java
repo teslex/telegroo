@@ -17,11 +17,22 @@
 package tech.teslex.telegroo.api;
 
 /**
- * Polling telegroo
+ * LongPolling Telegroo
  */
 public interface PollingTelegroo extends Telegroo {
 
+	/**
+	 * Starts LongPolling loop..
+	 */
 	void startPolling();
 
+	/**
+	 * Stops LongPolling..
+	 */
 	void stopPolling();
+
+	/**
+	 * @return is telegroo polling
+	 */
+	boolean isPolling();
 }

@@ -11,5 +11,5 @@ public interface UploadStickerFileMethod<R> {
 
 	R uploadStickerFile(UploadStickerFile data);
 
-	R uploadStickerFile(Consumer<UploadStickerFile.UploadStickerFileBuilder> data);
+	R uploadStickerFile(Consumer<UploadStickerFile> data);
 }

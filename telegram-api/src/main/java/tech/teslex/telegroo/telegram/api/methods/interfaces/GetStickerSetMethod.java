@@ -11,5 +11,5 @@ public interface GetStickerSetMethod<R> {
 
 	R getStickerSet(GetStickerSet data);
 
-	R getStickerSet(Consumer<GetStickerSet.GetStickerSetBuilder> data);
+	R getStickerSet(Consumer<GetStickerSet> data);
 }

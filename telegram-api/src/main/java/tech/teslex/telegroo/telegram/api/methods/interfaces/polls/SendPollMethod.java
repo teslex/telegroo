@@ -11,5 +11,5 @@ public interface SendPollMethod<R> {
 
 	R sendPoll(SendPoll data);
 
-	R sendPoll(Consumer<SendPoll.SendPollBuilder> data);
+	R sendPoll(Consumer<SendPoll> data);
 }

@@ -11,5 +11,5 @@ public interface RestrictChatMemberMethod<R> {
 
 	R restrictChatMember(RestrictChatMember data);
 
-	R restrictChatMember(Consumer<RestrictChatMember.RestrictChatMemberBuilder> data);
+	R restrictChatMember(Consumer<RestrictChatMember> data);
 }

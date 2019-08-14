@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects.polls;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 
@@ -13,11 +13,10 @@ import java.util.List;
  * sendPoll
  * Use this method to send a native poll. A native poll can't be sent to a private chat. On success, the sent Message is returned.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendPoll implements MethodObject {
-
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
@@ -51,9 +50,43 @@ public class SendPoll implements MethodObject {
 	@JsonProperty(value = "reply_markup", required = false)
 	private Object replyMarkup;
 
+	public static SendPoll create() {
+		return new SendPoll();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "sendPoll";
+	}
+
+	public SendPoll chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendPoll question(String question) {
+		this.question = question;
+		return this;
+	}
+
+	public SendPoll options(List<String> options) {
+		this.options = options;
+		return this;
+	}
+
+	public SendPoll disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendPoll replyToMessageId(Integer replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	public SendPoll replyMarkup(Object replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

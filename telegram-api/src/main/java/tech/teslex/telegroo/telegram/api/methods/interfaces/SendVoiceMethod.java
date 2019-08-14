@@ -11,5 +11,5 @@ public interface SendVoiceMethod<R> {
 
 	R sendVoice(SendVoice data);
 
-	R sendVoice(Consumer<SendVoice.SendVoiceBuilder> data);
+	R sendVoice(Consumer<SendVoice> data);
 }

@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects.games;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 import tech.teslex.telegroo.telegram.api.types.InlineKeyboardMarkup;
@@ -12,11 +12,10 @@ import tech.teslex.telegroo.telegram.api.types.InlineKeyboardMarkup;
  * sendGame
  * Use this method to send a game. On success, the sent Message is returned.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendGame implements MethodObject {
-
 	/**
 	 * Unique identifier for the target chat
 	 */
@@ -43,9 +42,38 @@ public class SendGame implements MethodObject {
 	@JsonProperty(value = "reply_markup", required = false)
 	private InlineKeyboardMarkup replyMarkup;
 
+	public static SendGame create() {
+		return new SendGame();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "sendGame";
+	}
+
+	public SendGame chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendGame gameShortName(String gameShortName) {
+		this.gameShortName = gameShortName;
+		return this;
+	}
+
+	public SendGame disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendGame replyToMessageId(Integer replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	public SendGame replyMarkup(InlineKeyboardMarkup replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

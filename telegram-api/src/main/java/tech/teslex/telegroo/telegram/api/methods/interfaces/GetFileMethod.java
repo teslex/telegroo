@@ -11,5 +11,5 @@ public interface GetFileMethod<R> {
 
 	R getFile(GetFile data);
 
-	R getFile(Consumer<GetFile.GetFileBuilder> data);
+	R getFile(Consumer<GetFile> data);
 }

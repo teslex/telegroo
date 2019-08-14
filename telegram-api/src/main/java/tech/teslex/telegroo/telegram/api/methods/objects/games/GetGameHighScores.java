@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects.games;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 
@@ -13,11 +13,10 @@ import tech.teslex.telegroo.telegram.api.methods.MethodObject;
  * <p>
  * This method will currently return scores for the target user, plus two of his closest neighbors on each side. Will also return the top three users if the user and his neighbors are not among them. Please note that this behavior is subject to change.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetGameHighScores implements MethodObject {
-
 	/**
 	 * Target user id
 	 */
@@ -39,9 +38,33 @@ public class GetGameHighScores implements MethodObject {
 	@JsonProperty(value = "inline_message_id", required = false)
 	private String inlineMessageId;
 
+	public static GetGameHighScores create() {
+		return new GetGameHighScores();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "getGameHighScores";
+	}
+
+	public GetGameHighScores userId(Integer userId) {
+		this.userId = userId;
+		return this;
+	}
+
+	public GetGameHighScores chatId(Integer chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public GetGameHighScores messageId(Integer messageId) {
+		this.messageId = messageId;
+		return this;
+	}
+
+	public GetGameHighScores inlineMessageId(String inlineMessageId) {
+		this.inlineMessageId = inlineMessageId;
+		return this;
 	}
 }

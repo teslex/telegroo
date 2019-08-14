@@ -11,5 +11,5 @@ public interface StopPollMethod<R> {
 
 	R stopPoll(StopPoll data);
 
-	R stopPoll(Consumer<StopPoll.StopPollBuilder> data);
+	R stopPoll(Consumer<StopPoll> data);
 }

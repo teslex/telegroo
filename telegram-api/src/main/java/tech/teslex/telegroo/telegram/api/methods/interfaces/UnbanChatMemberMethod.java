@@ -11,5 +11,5 @@ public interface UnbanChatMemberMethod<R> {
 
 	R unbanChatMember(UnbanChatMember data);
 
-	R unbanChatMember(Consumer<UnbanChatMember.UnbanChatMemberBuilder> data);
+	R unbanChatMember(Consumer<UnbanChatMember> data);
 }

@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 
@@ -17,7 +17,7 @@ import tech.teslex.telegroo.telegram.api.methods.MethodObject;
  * - If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.
  * Returns True on success.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DeleteMessage implements MethodObject {
@@ -32,9 +32,23 @@ public class DeleteMessage implements MethodObject {
 	@JsonProperty(value = "message_id", required = true)
 	private Integer messageId;
 
+	public static DeleteMessage create() {
+		return new DeleteMessage();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "deleteMessage";
+	}
+
+	public DeleteMessage chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public DeleteMessage messageId(Integer messageId) {
+		this.messageId = messageId;
+		return this;
 	}
 }

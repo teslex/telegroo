@@ -5,7 +5,7 @@ import tech.teslex.telegroo.telegram.api.types.input.InputMediaVideo;
 
 import java.io.File;
 
-public final class AttachMedia {
+public final class Media {
 
 	public static InputMediaPhoto photo(InputFile inputFile) {
 		return InputMediaPhoto.builder().media(inputFile).build();
@@ -22,5 +22,4 @@ public final class AttachMedia {
 	public static InputMediaVideo video(File videoFile) {
 		return video(Attach.video(videoFile));
 	}
-
 }

@@ -22,19 +22,7 @@ public final class Attach {
 		return Attach.document(file, MediaType.DOCUMENT);
 	}
 
-	public static FileInputFile document(String file, MediaType type) {
-		return new FileInputFile(new File(file), type);
-	}
-
-	public static FileInputFile document(String file) {
-		return Attach.document(file, MediaType.DOCUMENT);
-	}
-
 	public static FileInputFile photo(File photoFile) {
-		return document(photoFile, MediaType.PHOTO);
-	}
-
-	public static FileInputFile photo(String photoFile) {
 		return document(photoFile, MediaType.PHOTO);
 	}
 
@@ -42,15 +30,7 @@ public final class Attach {
 		return document(photoFile, MediaType.ANIMATION);
 	}
 
-	public static FileInputFile animation(String photoFile) {
-		return document(photoFile, MediaType.ANIMATION);
-	}
-
 	public static FileInputFile sticker(File photoFile) {
-		return document(photoFile, MediaType.STICKER);
-	}
-
-	public static FileInputFile sticker(String photoFile) {
 		return document(photoFile, MediaType.STICKER);
 	}
 
@@ -58,15 +38,7 @@ public final class Attach {
 		return document(photoFile, MediaType.VIDEO);
 	}
 
-	public static FileInputFile video(String photoFile) {
-		return document(photoFile, MediaType.VIDEO);
-	}
-
 	public static FileInputFile videoNote(File photoFile) {
-		return document(photoFile, MediaType.VIDEO_NOTE);
-	}
-
-	public static FileInputFile videoNote(String photoFile) {
 		return document(photoFile, MediaType.VIDEO_NOTE);
 	}
 
@@ -74,16 +46,7 @@ public final class Attach {
 		return document(photoFile, MediaType.VOICE);
 	}
 
-	public static FileInputFile voice(String photoFile) {
-		return document(photoFile, MediaType.VOICE);
-	}
-
 	public static FileInputFile audio(File photoFile) {
 		return document(photoFile, MediaType.AUDIO);
 	}
-
-	public static FileInputFile audio(String photoFile) {
-		return document(photoFile, MediaType.AUDIO);
-	}
-
 }

@@ -11,5 +11,5 @@ public interface SendAudioMethod<R> {
 
 	R sendAudio(SendAudio data);
 
-	R sendAudio(Consumer<SendAudio.SendAudioBuilder> data);
+	R sendAudio(Consumer<SendAudio> data);
 }

@@ -12,9 +12,9 @@ public interface SendMessageMethod<R> {
 
 	R sendMessage(String text);
 
-	R sendMessage(Long chatId, String text);
+	R sendMessage(Object chatId, String text);
 
 	R sendMessage(SendMessage data);
 
-	R sendMessage(Consumer<SendMessage.SendMessageBuilder> data);
+	R sendMessage(Consumer<SendMessage> data);
 }

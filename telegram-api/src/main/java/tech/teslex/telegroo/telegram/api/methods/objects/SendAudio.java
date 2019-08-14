@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObjectWithFile;
 import tech.teslex.telegroo.telegram.attach.InputFile;
@@ -14,7 +14,7 @@ import tech.teslex.telegroo.telegram.attach.InputFile;
  * <p>
  * For sending voice messages, use the sendVoice method instead.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendAudio implements MethodObjectWithFile {
@@ -76,6 +76,10 @@ public class SendAudio implements MethodObjectWithFile {
 	@JsonProperty(value = "reply_markup", required = false)
 	private Object replyMarkup;
 
+	public static SendAudio create() {
+		return new SendAudio();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
@@ -84,7 +88,62 @@ public class SendAudio implements MethodObjectWithFile {
 
 	@Override
 	@JsonIgnore
-	public InputFile getFile() {
+	public InputFile getInputFile() {
 		return this.audio;
+	}
+
+	public SendAudio chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendAudio audio(InputFile audio) {
+		this.audio = audio;
+		return this;
+	}
+
+	public SendAudio caption(String caption) {
+		this.caption = caption;
+		return this;
+	}
+
+	public SendAudio parseMode(String parseMode) {
+		this.parseMode = parseMode;
+		return this;
+	}
+
+	public SendAudio duration(Integer duration) {
+		this.duration = duration;
+		return this;
+	}
+
+	public SendAudio performer(String performer) {
+		this.performer = performer;
+		return this;
+	}
+
+	public SendAudio title(String title) {
+		this.title = title;
+		return this;
+	}
+
+	public SendAudio thumb(InputFile thumb) {
+		this.thumb = thumb;
+		return this;
+	}
+
+	public SendAudio disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendAudio replyToMessageId(Integer replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	public SendAudio replyMarkup(Object replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

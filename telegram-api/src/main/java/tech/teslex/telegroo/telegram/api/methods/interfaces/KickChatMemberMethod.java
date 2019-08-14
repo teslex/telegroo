@@ -11,5 +11,5 @@ public interface KickChatMemberMethod<R> {
 
 	R kickChatMember(KickChatMember data);
 
-	R kickChatMember(Consumer<KickChatMember.KickChatMemberBuilder> data);
+	R kickChatMember(Consumer<KickChatMember> data);
 }

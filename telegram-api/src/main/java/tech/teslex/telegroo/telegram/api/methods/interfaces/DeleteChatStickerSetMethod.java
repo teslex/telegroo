@@ -11,5 +11,5 @@ public interface DeleteChatStickerSetMethod<R> {
 
 	R deleteChatStickerSet(DeleteChatStickerSet data);
 
-	R deleteChatStickerSet(Consumer<DeleteChatStickerSet.DeleteChatStickerSetBuilder> data);
+	R deleteChatStickerSet(Consumer<DeleteChatStickerSet> data);
 }

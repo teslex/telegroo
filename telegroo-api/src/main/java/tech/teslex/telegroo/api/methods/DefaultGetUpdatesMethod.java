@@ -1,8 +1,8 @@
 package tech.teslex.telegroo.api.methods;
 
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import tech.teslex.telegroo.api.context.Context;
-import tech.teslex.telegroo.api.jackson.JacksonObjectMapper;
 import tech.teslex.telegroo.telegram.api.TelegramResult;
 import tech.teslex.telegroo.telegram.api.methods.interfaces.GetUpdatesMethod;
 import tech.teslex.telegroo.telegram.api.methods.objects.GetUpdates;
@@ -13,12 +13,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-public interface DefaultDefaultGetUpdatesMethod extends GetUpdatesMethod<TelegramResult<List<Update>>> {
+public interface DefaultGetUpdatesMethod extends GetUpdatesMethod<TelegramResult<List<Update>>> {
 
 	/**
 	 * @return update context
 	 */
 	Context getContext();
+
+	/**
+	 * @return object mapper
+	 */
+	ObjectMapper getObjectMapper();
 
 	@Override
 	default TelegramResult<List<Update>> getUpdates(Map data) {
@@ -26,26 +31,22 @@ public interface DefaultDefaultGetUpdatesMethod extends GetUpdatesMethod<Telegra
 	}
 
 	@Override
-	default TelegramResult<List<Update>> getUpdates(Consumer<GetUpdates.GetUpdatesBuilder> data) {
-		GetUpdates.GetUpdatesBuilder builder = GetUpdates.builder();
-		data.accept(builder);
-		GetUpdates builtData = builder.build();
+	default TelegramResult<List<Update>> getUpdates(Consumer<GetUpdates> data) {
+		GetUpdates method = GetUpdates.create();
+		data.accept(method);
 
-		return getUpdates(builtData);
+		return getUpdates(method);
 	}
 
 	@Override
 	default TelegramResult<List<Update>> getUpdates(GetUpdates data) {
-		JavaType type = JacksonObjectMapper
-				.getObjectMapper()
+		JavaType type = getObjectMapper()
 				.getTypeFactory()
-				.constructParametricType(
-						TelegramResult.class,
-						JacksonObjectMapper.getObjectMapper().getTypeFactory()
-								.constructCollectionLikeType(ArrayList.class, Update.class)
-				);
+				.constructCollectionType(ArrayList.class, Update.class);
 
-		return getContext().getTelegramClient().handleTelegramResponse(
-				getContext().getTelegramClient().go(data), type);
+		return getContext()
+				.getTelegramClient()
+				.call(data)
+				.asTelegramResult(type);
 	}
 }

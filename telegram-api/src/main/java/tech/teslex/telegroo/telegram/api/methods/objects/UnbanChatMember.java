@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 
@@ -11,7 +11,7 @@ import tech.teslex.telegroo.telegram.api.methods.MethodObject;
  * unbanChatMember
  * Use this method to unban a previously kicked user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. Returns True on success.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UnbanChatMember implements MethodObject {
@@ -25,6 +25,10 @@ public class UnbanChatMember implements MethodObject {
 	 */
 	@JsonProperty(value = "user_id", required = true)
 	private Integer userId;
+
+	public static UnbanChatMember create() {
+		return new UnbanChatMember();
+	}
 
 	@Override
 	@JsonIgnore
@@ -46,5 +50,15 @@ public class UnbanChatMember implements MethodObject {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public UnbanChatMember chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public UnbanChatMember userId(Integer userId) {
+		this.userId = userId;
+		return this;
 	}
 }

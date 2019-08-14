@@ -1,0 +1,93 @@
+plugins {
+	id 'groovy'
+
+	id 'maven-publish'
+	id 'com.jfrog.bintray' version '1.8.4'
+}
+
+dependencies {
+	implementation project(':telegroo')
+
+	Connect(it).lombok()
+
+	implementation D.groovy.groovy
+
+	implementation D.jackson.core
+	implementation D.jackson.datatype
+
+	Connect(it).logback()
+	Connect(it).slf4j()
+
+//	testCompile 'org.spockframework.spock:spock-core:spock-1.2'
+}
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			groupId 'tech.teslex.telegroo'
+			artifactId 'telegroo'
+			version version
+
+			from components.java
+//			artifact sourcesJar
+
+			pom {
+				name = 'telegroo'
+				url = 'https://gitlab.com/teslex/telegroo/telegroo'
+				licenses {
+					license {
+						name = 'The Apache License, Version 2.0'
+						url = 'https://gitlab.com/teslex/telegroo/telegroo/blob/master/LICENSE'
+					}
+				}
+
+				developers {
+					developer {
+						id = 'expexes'
+						name = 'Davyd Kohut'
+						email = 'expexes@gmail.com'
+					}
+				}
+
+				scm {
+					connection = 'scm:git:git://gitlab.com/teslex/telegroo/telegroo.git'
+					developerConnection = 'scm:git:ssh://gitlab.com/teslex/telegroo/telegroo.git'
+					url = 'https://gitlab.com/teslex/telegroo/telegroo'
+				}
+			}
+		}
+	}
+
+	repositories {
+		maven {
+			def releasesRepoUrl = "$buildDir/repo"
+			def snapshotsRepoUrl = "$buildDir/repo/snapshots"
+			url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+		}
+	}
+}
+
+bintray {
+	user = System.getenv('BINTRAY_USER')
+	key = System.getenv('BINTRAY_KEY')
+
+	publications = ['maven']
+
+	pkg {
+		repo = 'telegroo'
+		name = 'telegroo-reactive'
+		userOrg = 'expexes'
+		licenses = ['Apache-2.0']
+		vcsUrl = 'https://gitlab.com/teslex/telegroo/telegroo.git'
+	}
+
+	version {
+		name = version
+		released = new Date()
+		vcsTag = version
+	}
+}
+
+def getVersion() {
+	telegrooVersion
+}

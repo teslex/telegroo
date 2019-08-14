@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 import tech.teslex.telegroo.telegram.api.types.InlineKeyboardMarkup;
@@ -15,11 +15,10 @@ import java.util.List;
  * editMessageMedia
  * Use this method to edit animation, audio, document, photo, or video messages. If a message is a part of a message album, then it can be edited only to a photo or a video. Otherwise, message value can be changed arbitrarily. When inline message is edited, new file can't be uploaded. Use previously uploaded file via its file_id or specify a URL. On success, if the edited message was sent by the bot, the edited Message is returned, otherwise True is returned.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EditMessageMedia implements MethodObject {
-
 	/**
 	 * Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 */
@@ -46,9 +45,38 @@ public class EditMessageMedia implements MethodObject {
 	@JsonProperty(value = "reply_markup", required = false)
 	private InlineKeyboardMarkup replyMarkup;
 
+	public static EditMessageMedia create() {
+		return new EditMessageMedia();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "editMessageMedia";
+	}
+
+	public EditMessageMedia chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public EditMessageMedia messageId(Integer messageId) {
+		this.messageId = messageId;
+		return this;
+	}
+
+	public EditMessageMedia inlineMessageId(String inlineMessageId) {
+		this.inlineMessageId = inlineMessageId;
+		return this;
+	}
+
+	public EditMessageMedia media(List<InputMedia> media) {
+		this.media = media;
+		return this;
+	}
+
+	public EditMessageMedia replyMarkup(InlineKeyboardMarkup replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

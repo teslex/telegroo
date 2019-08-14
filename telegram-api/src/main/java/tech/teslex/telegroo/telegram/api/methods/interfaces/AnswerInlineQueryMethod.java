@@ -11,5 +11,5 @@ public interface AnswerInlineQueryMethod<R> {
 
 	R answerInlineQuery(AnswerInlineQuery data);
 
-	R answerInlineQuery(Consumer<AnswerInlineQuery.AnswerInlineQueryBuilder> data);
+	R answerInlineQuery(Consumer<AnswerInlineQuery> data);
 }

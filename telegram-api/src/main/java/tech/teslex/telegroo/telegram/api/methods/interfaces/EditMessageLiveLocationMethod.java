@@ -11,5 +11,5 @@ public interface EditMessageLiveLocationMethod<R> {
 
 	R editMessageLiveLocation(EditMessageLiveLocation data);
 
-	R editMessageLiveLocation(Consumer<EditMessageLiveLocation.EditMessageLiveLocationBuilder> data);
+	R editMessageLiveLocation(Consumer<EditMessageLiveLocation> data);
 }

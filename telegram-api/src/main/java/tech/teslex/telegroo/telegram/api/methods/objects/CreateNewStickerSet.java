@@ -3,8 +3,8 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 import tech.teslex.telegroo.telegram.api.types.stickers.MaskPosition;
 import tech.teslex.telegroo.telegram.attach.InputFile;
@@ -13,7 +13,7 @@ import tech.teslex.telegroo.telegram.attach.InputFile;
  * createNewStickerSet
  * Use this method to create new sticker set owned by a user. The bot will be able to edit the created sticker set. Returns True on success.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CreateNewStickerSet implements MethodObject {
@@ -53,9 +53,48 @@ public class CreateNewStickerSet implements MethodObject {
 	@JsonProperty(value = "mask_position", required = false)
 	private MaskPosition maskPosition;
 
+	public static CreateNewStickerSet create() {
+		return new CreateNewStickerSet();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "createNewStickerSet";
+	}
+
+	public CreateNewStickerSet userId(Integer userId) {
+		this.userId = userId;
+		return this;
+	}
+
+	public CreateNewStickerSet name(String name) {
+		this.name = name;
+		return this;
+	}
+
+	public CreateNewStickerSet title(String title) {
+		this.title = title;
+		return this;
+	}
+
+	public CreateNewStickerSet pngSticker(InputFile pngSticker) {
+		this.pngSticker = pngSticker;
+		return this;
+	}
+
+	public CreateNewStickerSet emojis(String emojis) {
+		this.emojis = emojis;
+		return this;
+	}
+
+	public CreateNewStickerSet containsMasks(Boolean containsMasks) {
+		this.containsMasks = containsMasks;
+		return this;
+	}
+
+	public CreateNewStickerSet maskPosition(MaskPosition maskPosition) {
+		this.maskPosition = maskPosition;
+		return this;
 	}
 }

@@ -3,20 +3,23 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import tech.teslex.telegroo.telegram.api.methods.MethodObjectWithDefaultParams;
 import tech.teslex.telegroo.telegram.api.methods.MethodObjectWithFile;
+import tech.teslex.telegroo.telegram.api.types.update.Update;
 import tech.teslex.telegroo.telegram.attach.InputFile;
+
+import java.util.Objects;
 
 /**
  * sendPhoto
  * Use this method to send photos. On success, the sent Message is returned.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SendPhoto implements MethodObjectWithFile {
-
+public class SendPhoto implements MethodObjectWithFile, MethodObjectWithDefaultParams {
 	/**
 	 * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 	 * <p>
@@ -57,9 +60,13 @@ public class SendPhoto implements MethodObjectWithFile {
 	@JsonProperty(value = "reply_markup", required = false)
 	private Object replyMarkup;
 
+	public static SendPhoto create() {
+		return new SendPhoto();
+	}
+
 	@Override
 	@JsonIgnore
-	public InputFile getFile() {
+	public InputFile getInputFile() {
 		return this.photo;
 	}
 
@@ -67,5 +74,51 @@ public class SendPhoto implements MethodObjectWithFile {
 	@JsonIgnore
 	public String getPathMethod() {
 		return "sendPhoto";
+	}
+
+	public SendPhoto chatId(Object chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendPhoto photo(InputFile photo) {
+		this.photo = photo;
+		return this;
+	}
+
+	public SendPhoto caption(String caption) {
+		this.caption = caption;
+		return this;
+	}
+
+	public SendPhoto parseMode(String parseMode) {
+		this.parseMode = parseMode;
+		return this;
+	}
+
+	public SendPhoto disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendPhoto replyToMessageId(Integer replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	public SendPhoto replyMarkup(Object replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
+	}
+
+	@Override
+	public void useDefault(Update update) {
+		Objects.requireNonNull(update);
+		Objects.requireNonNull(update.getMessage());
+		Objects.requireNonNull(update.getMessage().getChat());
+		Objects.requireNonNull(update.getMessage().getChat().getId());
+
+		if (this.getChatId() == null)
+			this.setChatId(update.getMessage().getChat().getId());
 	}
 }

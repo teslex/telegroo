@@ -3,7 +3,7 @@ package tech.teslex.telegroo.telegram.api.methods.objects.payments;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 import tech.teslex.telegroo.telegram.api.types.InlineKeyboardMarkup;
@@ -15,11 +15,10 @@ import java.util.List;
  * sendInvoice
  * Use this method to send invoices. On success, the sent Message is returned.
  */
-@Builder
+@NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SendInvoice implements MethodObject {
-
 	/**
 	 * Unique identifier for the target private chat
 	 */
@@ -136,9 +135,128 @@ public class SendInvoice implements MethodObject {
 	@JsonProperty(value = "reply_markup", required = false)
 	private InlineKeyboardMarkup replyMarkup;
 
+	public static SendInvoice create() {
+		return new SendInvoice();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "sendInvoice";
+	}
+
+	public SendInvoice chatId(Integer chatId) {
+		this.chatId = chatId;
+		return this;
+	}
+
+	public SendInvoice title(String title) {
+		this.title = title;
+		return this;
+	}
+
+	public SendInvoice description(String description) {
+		this.description = description;
+		return this;
+	}
+
+	public SendInvoice payload(String payload) {
+		this.payload = payload;
+		return this;
+	}
+
+	public SendInvoice providerToken(String providerToken) {
+		this.providerToken = providerToken;
+		return this;
+	}
+
+	public SendInvoice startParameter(String startParameter) {
+		this.startParameter = startParameter;
+		return this;
+	}
+
+	public SendInvoice currency(String currency) {
+		this.currency = currency;
+		return this;
+	}
+
+	public SendInvoice prices(List<LabeledPrice> prices) {
+		this.prices = prices;
+		return this;
+	}
+
+	public SendInvoice providerData(String providerData) {
+		this.providerData = providerData;
+		return this;
+	}
+
+	public SendInvoice photoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
+		return this;
+	}
+
+	public SendInvoice photoSize(Integer photoSize) {
+		this.photoSize = photoSize;
+		return this;
+	}
+
+	public SendInvoice photoWidth(Integer photoWidth) {
+		this.photoWidth = photoWidth;
+		return this;
+	}
+
+	public SendInvoice photoHeight(Integer photoHeight) {
+		this.photoHeight = photoHeight;
+		return this;
+	}
+
+	public SendInvoice needName(Boolean needName) {
+		this.needName = needName;
+		return this;
+	}
+
+	public SendInvoice needPhoneNumber(Boolean needPhoneNumber) {
+		this.needPhoneNumber = needPhoneNumber;
+		return this;
+	}
+
+	public SendInvoice needEmail(Boolean needEmail) {
+		this.needEmail = needEmail;
+		return this;
+	}
+
+	public SendInvoice needShippingAddress(Boolean needShippingAddress) {
+		this.needShippingAddress = needShippingAddress;
+		return this;
+	}
+
+	public SendInvoice sendPhoneNumberToProvider(Boolean sendPhoneNumberToProvider) {
+		this.sendPhoneNumberToProvider = sendPhoneNumberToProvider;
+		return this;
+	}
+
+	public SendInvoice sendEmailToProvider(Boolean sendEmailToProvider) {
+		this.sendEmailToProvider = sendEmailToProvider;
+		return this;
+	}
+
+	public SendInvoice flexible(Boolean flexible) {
+		isFlexible = flexible;
+		return this;
+	}
+
+	public SendInvoice disableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+		return this;
+	}
+
+	public SendInvoice replyToMessageId(Integer replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+		return this;
+	}
+
+	public SendInvoice replyMarkup(InlineKeyboardMarkup replyMarkup) {
+		this.replyMarkup = replyMarkup;
+		return this;
 	}
 }

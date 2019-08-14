@@ -3,7 +3,6 @@ package tech.teslex.telegroo.telegram.api.methods.objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
 
@@ -11,11 +10,9 @@ import tech.teslex.telegroo.telegram.api.methods.MethodObject;
  * answerCallbackQuery
  * Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned.
  */
-@Builder
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AnswerCallbackQuery implements MethodObject {
-
 	/**
 	 * Unique identifier for the query to be answered
 	 */
@@ -42,9 +39,38 @@ public class AnswerCallbackQuery implements MethodObject {
 	@JsonProperty(value = "cache_time", required = false)
 	private Integer cacheTime;
 
+	public static AnswerCallbackQuery create() {
+		return new AnswerCallbackQuery();
+	}
+
 	@Override
 	@JsonIgnore
 	public String getPathMethod() {
 		return "answerCallbackQuery";
+	}
+
+	public AnswerCallbackQuery callbackQueryId(String callbackQueryId) {
+		this.callbackQueryId = callbackQueryId;
+		return this;
+	}
+
+	public AnswerCallbackQuery text(String text) {
+		this.text = text;
+		return this;
+	}
+
+	public AnswerCallbackQuery showAlert(Boolean showAlert) {
+		this.showAlert = showAlert;
+		return this;
+	}
+
+	public AnswerCallbackQuery url(String url) {
+		this.url = url;
+		return this;
+	}
+
+	public AnswerCallbackQuery cacheTime(Integer cacheTime) {
+		this.cacheTime = cacheTime;
+		return this;
 	}
 }

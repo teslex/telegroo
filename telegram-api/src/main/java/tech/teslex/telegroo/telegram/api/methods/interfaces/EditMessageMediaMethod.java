@@ -11,5 +11,5 @@ public interface EditMessageMediaMethod<R> {
 
 	R editMessageMedia(EditMessageMedia data);
 
-	R editMessageMedia(Consumer<EditMessageMedia.EditMessageMediaBuilder> data);
+	R editMessageMedia(Consumer<EditMessageMedia> data);
 }

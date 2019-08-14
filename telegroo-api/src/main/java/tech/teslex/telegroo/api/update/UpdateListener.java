@@ -17,11 +17,12 @@
 package tech.teslex.telegroo.api.update;
 
 import tech.teslex.telegroo.api.context.Context;
+import tech.teslex.telegroo.api.methods.Methods;
 import tech.teslex.telegroo.telegram.enums.UpdateType;
 
 public interface UpdateListener<C extends Context> {
 
-	void onUpdate(C context);
+	void onUpdate(C context, Methods methods);
 
 	default UpdateType getType() {
 		return UpdateType.UPDATE;

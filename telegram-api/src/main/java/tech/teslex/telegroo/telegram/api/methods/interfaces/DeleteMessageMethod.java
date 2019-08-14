@@ -11,5 +11,5 @@ public interface DeleteMessageMethod<R> {
 
 	R deleteMessage(DeleteMessage data);
 
-	R deleteMessage(Consumer<DeleteMessage.DeleteMessageBuilder> data);
+	R deleteMessage(Consumer<DeleteMessage> data);
 }
