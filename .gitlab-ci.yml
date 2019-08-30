@@ -5,6 +5,8 @@ stages:
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
+  - apt-get update -yqq
+  - apt-get install git -yqq
 
 # test:
 #   stage: test
