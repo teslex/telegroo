@@ -1,4 +1,4 @@
-image: gradle:latest-jdk-11
+image: maven:3-jdk-11
 
 stages:
   - publish
