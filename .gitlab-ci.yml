@@ -24,13 +24,13 @@ publish-teslex-snapshot:
   stage: publish
   script:
     - bash deploy/publish-teslex-snapshot.sh
-    only:
-      - master
-
-
-bintray-upload:
-  stage: publish
-  script:
-    - bash deploy/publish-bintray.sh
   only:
     - master
+
+
+#bintray-upload:
+#  stage: publish
+#  script:
+#    - bash deploy/publish-bintray.sh
+#  only:
+#    - bintray
