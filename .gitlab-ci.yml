@@ -5,6 +5,7 @@ stages:
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
+  - apk update && apk add git
 
 # test:
 #   stage: test
