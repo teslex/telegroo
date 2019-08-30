@@ -26,7 +26,6 @@ publish-teslex:
 publish-teslex-snapshot:
   stage: publish
   script:
-    - git clone https://gitlab.com/teslex/repo
     - bash deploy/publish-teslex-snapshot.sh
   only:
     - master
