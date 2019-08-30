@@ -1,8 +1,10 @@
-image: gradle:latest
+image: java:12-jdk
 
 stages:
   - publish
 
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
 
 # test:
 #   stage: test
