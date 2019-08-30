@@ -1,7 +1,7 @@
 image: openjdk:12
 
 services:
-  - docker:dind
+  - git
 
 stages:
   - publish
