@@ -5,8 +5,6 @@ stages:
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
-  - apt-get update -yqq
-  - apt-get install git -yqq
 
 # test:
 #   stage: test
@@ -27,6 +25,7 @@ publish-teslex:
 publish-teslex-snapshot:
   stage: publish
   script:
+    - git clone https://gitlab.com/teslex/repo
     - bash deploy/publish-teslex-snapshot.sh
   only:
     - master
