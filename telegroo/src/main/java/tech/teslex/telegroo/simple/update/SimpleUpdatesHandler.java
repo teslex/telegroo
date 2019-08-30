@@ -32,21 +32,17 @@ public class SimpleUpdatesHandler implements UpdatesHandler {
 	}
 
 	@Override
-	public Function<TelegramClient, Optional<Update>> handle(Map<UpdateType, Collection<UpdateListener>> listeners, Iterable<Update> updates) {
+	public <C extends Collection<UpdateListener>> Function<TelegramClient, Optional<Update>> handle(Map<UpdateType, C> listeners, Iterable<Update> updates) {
 		return telegramClient -> {
 			Update lastHandledUpdate = null;
 
-			for (Object update : updates) {
-				System.out.println(update.getClass());
-			}
-
-			for (Update update : updates) {
+			for (var update : updates) {
 				log.debug("resolving update: " + update);
 
 				final var updateType = update.getUpdateType();
 
-				@SuppressWarnings("unchecked") final var plainUpdateListeners = listeners.getOrDefault(UpdateType.UPDATE, (Collection<UpdateListener>) Collections.EMPTY_LIST);
-				@SuppressWarnings("unchecked") final var updateListeners = listeners.getOrDefault(updateType, (Collection<UpdateListener>) Collections.EMPTY_LIST);
+				@SuppressWarnings("unchecked") final var plainUpdateListeners = listeners.getOrDefault(UpdateType.UPDATE, (C) Collections.EMPTY_LIST);
+				@SuppressWarnings("unchecked") final var updateListeners = listeners.getOrDefault(updateType, (C) Collections.EMPTY_LIST);
 
 				if (plainUpdateHandler(plainUpdateListeners, update, telegramClient))
 					lastHandledUpdate = update;
@@ -76,19 +72,19 @@ public class SimpleUpdatesHandler implements UpdatesHandler {
 		};
 	}
 
-	@SuppressWarnings("unchecked")
+	//	@SuppressWarnings("unchecked")
 	private boolean plainUpdateHandler(Collection<UpdateListener> listeners, Update update, TelegramClient telegramClient) {
 		if (update == null)
 			return false;
 
 		log.debug("resolving plain update: " + update.getUpdateId());
-		/* unchecked */
-		listeners
-				.forEach(updateListener -> {
-					final var context = new SimpleContext(telegramClient, update);
-					final var methods = new SimpleMethods(context, objectMapper);
-					updateListener.onUpdate(context, methods);
-				});
+
+		for (var updateListener : listeners) {
+			final var context = new SimpleContext(telegramClient, update);
+			final var methods = new SimpleMethods(context, objectMapper);
+
+			updateListener.onUpdate(context, methods); /* unchecked */
+		}
 
 		return true;
 	}

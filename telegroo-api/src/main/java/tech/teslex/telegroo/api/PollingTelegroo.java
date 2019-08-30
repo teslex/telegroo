@@ -23,16 +23,20 @@ public interface PollingTelegroo extends Telegroo {
 
 	/**
 	 * Starts LongPolling loop..
+	 *
+	 * @throws IllegalStateException when bot is already polling
 	 */
 	void startPolling();
 
 	/**
 	 * Stops LongPolling..
+	 *
+	 * @throws IllegalStateException when bot is not polling
 	 */
 	void stopPolling();
 
 	/**
-	 * @return is telegroo polling
+	 * @return true if bot is polling
 	 */
 	boolean isPolling();
 }

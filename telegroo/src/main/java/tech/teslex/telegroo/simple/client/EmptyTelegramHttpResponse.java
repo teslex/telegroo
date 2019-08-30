@@ -8,7 +8,6 @@ import org.apache.http.message.BasicStatusLine;
 import tech.teslex.telegroo.api.client.TelegramHttpResponse;
 import tech.teslex.telegroo.telegram.api.TelegramResult;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 class EmptyTelegramHttpResponse implements TelegramHttpResponse<HttpResponse> {
@@ -27,7 +26,7 @@ class EmptyTelegramHttpResponse implements TelegramHttpResponse<HttpResponse> {
 	public InputStream getRawBody() {
 		return new InputStream() {
 			@Override
-			public int read() throws IOException {
+			public int read() {
 				return 0;
 			}
 		};

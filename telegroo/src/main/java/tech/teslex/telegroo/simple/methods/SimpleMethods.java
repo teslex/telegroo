@@ -7,7 +7,6 @@ import tech.teslex.telegroo.api.methods.Methods;
 public class SimpleMethods implements Methods {
 
 	private final Context context;
-
 	private final ObjectMapper objectMapper;
 
 	public SimpleMethods(Context context, ObjectMapper objectMapper) {

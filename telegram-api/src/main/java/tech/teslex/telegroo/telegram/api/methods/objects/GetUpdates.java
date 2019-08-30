@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import tech.teslex.telegroo.telegram.api.methods.MethodObject;
-import tech.teslex.telegroo.telegram.api.types.update.Update;
 import tech.teslex.telegroo.telegram.enums.UpdateType;
 
 import java.util.List;

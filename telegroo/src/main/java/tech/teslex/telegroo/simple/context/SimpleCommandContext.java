@@ -9,9 +9,7 @@ import java.util.regex.Matcher;
 public class SimpleCommandContext extends SimpleContext implements CommandContext {
 
 	private final Matcher matcher;
-
 	private final Matcher argsMatcher;
-
 	private final String argsText;
 
 	public SimpleCommandContext(TelegramClient telegramClient, Update lastUpdate, Matcher matcher, Matcher argsMatcher, String argsText) {

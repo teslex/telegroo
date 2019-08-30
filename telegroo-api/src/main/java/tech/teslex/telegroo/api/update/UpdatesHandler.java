@@ -27,5 +27,5 @@ import java.util.function.Function;
 
 public interface UpdatesHandler {
 
-	Function<TelegramClient, Optional<Update>> handle(Map<UpdateType, Collection<UpdateListener>> listeners, Iterable<Update> updates);
+	<C extends Collection<UpdateListener>> Function<TelegramClient, Optional<Update>> handle(Map<UpdateType, C> listeners, Iterable<Update> updates);
 }

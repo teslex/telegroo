@@ -24,16 +24,19 @@ public class SimplePollingTelegroo extends AbstractTelegroo implements PollingTe
 	@Override
 	public void startPolling() {
 		if (polling.get()) {
-			log.warn("bot is already polling");
-			return;
+			throw new IllegalStateException("bot is already polling");
 		}
+
+		log.debug("start polling");
 
 		polling.set(true);
 
 		while (polling.get()) {
-			TelegramResult<List<Update>> response = methods.getUpdates(
-					GetUpdates.create()
-							.offset(mainContext.getCurrentUpdate().getUpdateId() + 1));
+			GetUpdates method = GetUpdates
+					.create()
+					.offset(mainContext.getCurrentUpdate().getUpdateId() + 1);
+
+			TelegramResult<List<Update>> response = methods.getUpdates(method);
 
 			handleUpdates(response.getResult())
 					.ifPresent(mainContext::setCurrentUpdate);
@@ -43,6 +46,12 @@ public class SimplePollingTelegroo extends AbstractTelegroo implements PollingTe
 
 	@Override
 	public void stopPolling() {
+		if (!polling.get()) {
+			throw new IllegalStateException("bot is not polling");
+		}
+
+		log.debug("stop polling");
+
 		polling.set(false);
 	}
 

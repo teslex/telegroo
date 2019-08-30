@@ -64,10 +64,6 @@ public interface DefaultSendMessageMethod extends SendMessageMethod<TelegramResu
 
 		data.useDefault(currentUpdate);
 
-		System.out.println(data);
-
-//		System.exit(0);
-
 		JavaType type = getObjectMapper()
 				.getTypeFactory()
 				.constructType(Message.class);

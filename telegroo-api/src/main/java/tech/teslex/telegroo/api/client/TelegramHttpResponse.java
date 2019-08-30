@@ -1,8 +1,6 @@
 package tech.teslex.telegroo.api.client;
 
 import com.fasterxml.jackson.databind.JavaType;
-import tech.teslex.telegroo.api.jackson.DefaultJacksonObjectMapper;
-import tech.teslex.telegroo.telegram.api.TelegramErrorException;
 import tech.teslex.telegroo.telegram.api.TelegramResult;
 
 import java.io.BufferedReader;
@@ -18,14 +16,15 @@ public interface TelegramHttpResponse<T> {
 
 	default String getRawBodyAsString() throws IOException {
 		StringBuilder sb = new StringBuilder();
-		BufferedReader br = new BufferedReader(new InputStreamReader(getRawBody()));
-		String read;
 
-		while ((read = br.readLine()) != null) {
-			sb.append(read);
+		try (var br = new BufferedReader(new InputStreamReader(getRawBody()))) {
+			String read;
+
+			while ((read = br.readLine()) != null) {
+				sb.append(read);
+			}
 		}
 
-		br.close();
 		return sb.toString();
 	}
 

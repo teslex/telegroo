@@ -10,7 +10,6 @@ import tech.teslex.telegroo.telegram.api.types.update.Update;
 public class SimpleContext implements Context {
 
 	private final TelegramClient telegramClient;
-
 	private final Update currentUpdate;
 
 	public SimpleContext(TelegramClient telegramClient, Update currentUpdate) {

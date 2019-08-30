@@ -112,6 +112,17 @@ public interface Telegroo {
 	void listenCommand(Pattern pattern, UpdateListener<CommandContext> listener);
 
 	/**
+	 * Adds commands listener with args.
+	 *
+	 * @param pattern  command pattern
+	 * @param args     command arguments pattern
+	 * @param listener update listener with {@link CommandContext}
+	 * @see CommandContext
+	 * @see tech.teslex.telegroo.api.update.CommandUpdateListener
+	 */
+	void listenCommand(Pattern pattern, Pattern args, UpdateListener<CommandContext> listener);
+
+	/**
 	 * Adds commands listener.
 	 *
 	 * @param listener command listener
@@ -130,6 +141,32 @@ public interface Telegroo {
 	 */
 	default void listenCommand(String pattern, UpdateListener<CommandContext> listener) {
 		listenCommand(Pattern.compile(pattern), listener);
+	}
+
+	/**
+	 * Adds commands listener with args.
+	 *
+	 * @param pattern  command pattern as string
+	 * @param args     command arguments pattern
+	 * @param listener update listener with {@link CommandContext}
+	 * @see CommandContext
+	 * @see tech.teslex.telegroo.api.update.CommandUpdateListener
+	 */
+	default void listenCommand(String pattern, Pattern args, UpdateListener<CommandContext> listener) {
+		listenCommand(Pattern.compile(pattern), args, listener);
+	}
+
+	/**
+	 * Adds commands listener with args.
+	 *
+	 * @param pattern  command pattern as string
+	 * @param args     command arguments pattern
+	 * @param listener update listener with {@link CommandContext}
+	 * @see CommandContext
+	 * @see tech.teslex.telegroo.api.update.CommandUpdateListener
+	 */
+	default void listenCommand(String pattern, String args, UpdateListener<CommandContext> listener) {
+		listenCommand(Pattern.compile(pattern), Pattern.compile(args), listener);
 	}
 
 	/**

@@ -2,12 +2,15 @@ package tech.teslex.telegroo.telegram.api.types;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 import tech.teslex.telegroo.telegram.api.types.games.CallbackGame;
 
 @Data
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class InlineKeyboardButton {
+
 	/**
 	 * Label text on the button
 	 */

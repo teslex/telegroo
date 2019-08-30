@@ -5,7 +5,7 @@
 
 **Simple Telegram Bot wrapper for Java & [Groovy](http://groovy-lang.org)**
 
-> Version: **[0.0.1](https://gitlab.com/teslex/telegroo/telegroo)**
+> Version: **[0.1.0](https://gitlab.com/teslex/repo#telegroo)**
 
 - [Telegroo Docs](https://teslex.gitlab.io/telegroo)
 - [Telegram Bot API](https://core.telegram.org/bots/api)

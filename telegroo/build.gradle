@@ -1,5 +1,6 @@
 plugins {
 	id 'java'
+	id 'groovy'
 
 	id 'maven-publish'
 	id 'com.jfrog.bintray' version '1.8.4'
@@ -19,7 +20,10 @@ dependencies {
 	Connect(it).logback()
 	Connect(it).slf4j()
 
-	testCompile 'org.spockframework.spock:spock-core:spock-1.3'
+//	testImplementation(D.spock) {
+//		exclude 'org.codehaus.groovy:groovy'
+//	}
+	testImplementation D.groovy.groovy
 }
 
 publishing {

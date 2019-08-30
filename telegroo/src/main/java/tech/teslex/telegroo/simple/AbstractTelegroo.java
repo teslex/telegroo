@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
 public abstract class AbstractTelegroo implements Telegroo {
 
 	protected final static Map<UpdateType, Collection<UpdateListener>> listeners = new HashMap<>();
+
 	protected final String token;
 	protected final ObjectMapper objectMapper;
 	protected final TelegramClient telegramClient;
@@ -74,6 +75,11 @@ public abstract class AbstractTelegroo implements Telegroo {
 	}
 
 	@Override
+	public void listenCommand(Pattern pattern, Pattern args, UpdateListener<CommandContext> listener) {
+		addListener(new SimpleCommandUpdateListener(pattern, args, listener));
+	}
+
+	@Override
 	public TelegramClient getTelegramClient() {
 		return telegramClient;
 	}
@@ -111,8 +117,9 @@ public abstract class AbstractTelegroo implements Telegroo {
 	protected void addListener(UpdateListener listener) {
 		log.debug("adding new listener: " + listener);
 
-		if (!listeners.containsKey(listener.getType()))
+		if (!listeners.containsKey(listener.getType())) {
 			listeners.put(listener.getType(), new ArrayList<>());
+		}
 
 		listeners
 				.get(listener.getType())
@@ -123,7 +130,7 @@ public abstract class AbstractTelegroo implements Telegroo {
 
 		private Update currentUpdate = new Update();
 
-		MainContext(TelegramClient telegramClient, Update lastUpdate) {
+		protected MainContext(TelegramClient telegramClient, Update lastUpdate) {
 			super(telegramClient, lastUpdate);
 		}
 
