@@ -1,4 +1,4 @@
-image: java:12-jdk
+image: gradle:latest-jdk12
 
 stages:
   - publish
