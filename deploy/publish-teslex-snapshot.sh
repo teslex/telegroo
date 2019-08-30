@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-"[ $(./gradlew properties -q | grep 'isSnapshot:' | awk '{print $2}') != 'true' ] && exit 1"
+[[ $(./gradlew properties -q | grep 'isSnapshot:' | awk '{print $2}') != 'true' ]] && exit 1
 
 __telegroo_version=$(./gradlew properties -q | grep 'telegrooVersion:' | awk '{print $2}')
 __here=$(pwd)
@@ -8,7 +8,7 @@ __here=$(pwd)
 mkdir -p telegroo/src/test/resources
 echo "token=${TEST_BOT_TOKEN}" > telegroo/src/test/resources/test.properties
 
-./gradlew test
+#./gradlew test
 ./gradlew clean publish
 
 git clone https://gitlab.com/teslex/repo

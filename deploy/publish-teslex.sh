@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-"[ $(./gradlew properties -q | grep 'isSnapshot:' | awk '{print $2}') == 'true' ] && exit 1"
+[[ $(./gradlew properties -q | grep 'isSnapshot:' | awk '{print $2}') == 'true' ]] && exit 1
 
 __telegroo_version=$(./gradlew properties -q | grep 'telegrooVersion:' | awk '{print $2}')
 
