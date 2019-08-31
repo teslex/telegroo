@@ -22,9 +22,9 @@ cd repo
 git config user.name 'teslex.bot'
 git config user.email 'teslex.bot@gmail.com'
 
-git add .
-git commit -m "Update telegroo"
-
 bash update_readme.sh "telegroo-stable" "$__telegroo_version"
+
+git add .
+git commit -m "Update stable telegroo"
 
 git push https://teslex.bot:${GITLAB_PRIVATE_KEY}@gitlab.com/teslex/repo

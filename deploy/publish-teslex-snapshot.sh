@@ -34,9 +34,9 @@ cd ${__here}/repo
 git config user.name 'teslex.bot'
 git config user.email 'teslex.bot@gmail.com'
 
+bash update_readme.sh "telegroo-snapshot" "$__telegroo_version" || exit 4
+
 git add .
 git commit -m "Update telegroo snapshot"
-
-bash update_readme.sh "telegroo-snapshot" "$__telegroo_version" || exit 4
 
 git push https://teslex.bot:${GITLAB_PRIVATE_KEY}@gitlab.com/teslex/repo || exit 5
