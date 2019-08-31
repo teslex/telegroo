@@ -31,8 +31,8 @@ cp -r ${__here}/telegroo/build/repo/* repo || exit 3
 
 cd ${__here}/repo
 
-git config --global user.name 'teslex.bot'
-git config --global user.email 'teslex.bot@gmail.com'
+git config user.name 'teslex.bot'
+git config user.email 'teslex.bot@gmail.com'
 
 git add .
 git commit -m "Update telegroo snapshot"

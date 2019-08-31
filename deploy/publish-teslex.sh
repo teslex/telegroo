@@ -19,8 +19,8 @@ cp -r telegroo/build/repo/* repo
 
 cd repo
 
-git config --global user.name 'teslex.bot'
-git config --global user.email 'teslex.bot@gmail.com'
+git config user.name 'teslex.bot'
+git config user.email 'teslex.bot@gmail.com'
 
 git add .
 git commit -m "Update telegroo"
