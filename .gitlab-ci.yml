@@ -3,7 +3,7 @@ image: maven:3-jdk-11
 stages:
   - publish
 before_script:
-  - apk install gawk
+  - apt-get install gawk
 
 
 # test:
