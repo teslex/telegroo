@@ -6,7 +6,6 @@ import tech.teslex.telegroo.api.client.TelegramClient;
 import tech.teslex.telegroo.api.update.CommandUpdateListener;
 import tech.teslex.telegroo.api.update.MessagePatternUpdateListener;
 import tech.teslex.telegroo.api.update.UpdateListener;
-import tech.teslex.telegroo.api.update.UpdatesHandler;
 import tech.teslex.telegroo.simple.context.SimpleCommandContext;
 import tech.teslex.telegroo.simple.context.SimpleContext;
 import tech.teslex.telegroo.simple.context.SimpleMessageContext;
@@ -37,7 +36,7 @@ public class SimpleUpdatesHandler implements UpdatesHandler {
 			Update lastHandledUpdate = null;
 
 			for (var update : updates) {
-				log.debug("resolving update: " + update);
+				log.debug("Resolving update: " + update);
 
 				final var updateType = update.getUpdateType();
 
@@ -77,7 +76,7 @@ public class SimpleUpdatesHandler implements UpdatesHandler {
 		if (update == null)
 			return false;
 
-		log.debug("resolving plain update: " + update.getUpdateId());
+		log.debug("Resolving plain update: " + update.getUpdateId());
 
 		for (var updateListener : listeners) {
 			final var context = new SimpleContext(telegramClient, update);
@@ -91,7 +90,7 @@ public class SimpleUpdatesHandler implements UpdatesHandler {
 
 	@SuppressWarnings("unchecked")
 	private boolean messageUpdateHandler(Collection<UpdateListener> listeners, Update update, TelegramClient telegramClient) {
-		log.debug("resolving message update: " + update.getUpdateId());
+		log.debug("Resolving message update: " + update.getUpdateId());
 		for (UpdateListener listener : listeners) {
 			if (listener instanceof MessagePatternUpdateListener) {
 				final var pattern = ((MessagePatternUpdateListener) listener).getPattern();
@@ -122,7 +121,7 @@ public class SimpleUpdatesHandler implements UpdatesHandler {
 
 	@SuppressWarnings("unchecked")
 	private boolean commandUpdateHandler(Collection<UpdateListener> listeners, Update update, TelegramClient telegramClient) {
-		log.debug("resolving command update: " + update.getUpdateId());
+		log.debug("Resolving command update: " + update.getUpdateId());
 
 		final var commandEntity = update
 				.getMessage()

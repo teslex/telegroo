@@ -1,7 +1,7 @@
 package tech.teslex.telegroo.simple.update;
 
 import tech.teslex.telegroo.api.context.MessageContext;
-import tech.teslex.telegroo.api.methods.Methods;
+import tech.teslex.telegroo.api.methods.defaults.Methods;
 import tech.teslex.telegroo.api.update.MessagePatternUpdateListener;
 import tech.teslex.telegroo.api.update.UpdateListener;
 import tech.teslex.telegroo.simple.context.SimpleMessageContext;

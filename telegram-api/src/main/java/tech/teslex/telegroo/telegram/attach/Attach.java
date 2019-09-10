@@ -14,12 +14,12 @@ public final class Attach {
 		return new IdInputFile(fileId);
 	}
 
-	public static FileInputFile document(File file, MediaType type) {
+	private static FileInputFile document(File file, MediaType type) {
 		return new FileInputFile(file, type);
 	}
 
 	public static FileInputFile document(File file) {
-		return Attach.document(file, MediaType.DOCUMENT);
+		return document(file, MediaType.DOCUMENT);
 	}
 
 	public static FileInputFile photo(File photoFile) {

@@ -17,6 +17,8 @@
 package tech.teslex.telegroo.api.update;
 
 import tech.teslex.telegroo.api.context.CommandContext;
+import tech.teslex.telegroo.telegram.api.types.Message;
+import tech.teslex.telegroo.telegram.api.types.MessageEntity;
 
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -31,6 +33,6 @@ public interface CommandUpdateListener<C extends CommandContext> extends EntityU
 
 	@Override
 	default String getEntity() {
-		return "bot_command";
+		return MessageEntity.Entity.BOT_COMMAND.getCode();
 	}
 }

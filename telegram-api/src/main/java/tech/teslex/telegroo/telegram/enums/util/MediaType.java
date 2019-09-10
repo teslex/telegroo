@@ -11,13 +11,13 @@ public enum MediaType {
 	VIDEO_NOTE("video_note"),
 	STICKER("sticker");
 
-	private String value;
+	private String type;
 
-	MediaType(String value) {
-		this.value = value;
+	MediaType(String type) {
+		this.type = type;
 	}
 
-	public String getValue() {
-		return this.value;
+	public String getType() {
+		return type;
 	}
 }

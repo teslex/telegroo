@@ -1,12 +1,15 @@
 plugins {
-	id 'java'
+	id "java"
 
-	id 'maven-publish'
-	id 'com.jfrog.bintray' version '1.8.4'
+	id "maven-publish"
+	id "com.jfrog.bintray" version "1.8.4"
 }
 
+sourceCompatibility = 11
+targetCompatibility = 11
+
 dependencies {
-	compile project(':telegram-api')
+	compile project(":telegram-api")
 
 	Connect(it).lombok()
 
@@ -14,38 +17,50 @@ dependencies {
 	implementation D.jackson.datatype
 }
 
+task sourcesJar(type: Jar) {
+	from sourceSets.main.allJava
+	archiveClassifier = "sources"
+}
+
+task javadocJar(type: Jar) {
+	from javadoc
+	archiveClassifier = "javadoc"
+}
+
 publishing {
 	publications {
 		maven(MavenPublication) {
-			groupId 'tech.teslex.telegroo'
-			artifactId 'telegroo-api'
+			groupId "tech.teslex.telegroo"
+			artifactId "telegroo-api"
 			version version
 
 			from components.java
-//			artifact sourcesJar
-
+			
+			artifact sourcesJar
+			artifact javadocJar
+			
 			pom {
-				name = 'telegroo-api'
-				url = 'https://gitlab.com/teslex/telegroo/telegroo'
+				name = "telegroo-api"
+				url = "https://gitlab.com/teslex/telegroo/telegroo"
 				licenses {
 					license {
-						name = 'The Apache License, Version 2.0'
-						url = 'https://gitlab.com/teslex/telegroo/telegroo/blob/master/LICENSE'
+						name = "The Apache License, Version 2.0"
+						url = "https://gitlab.com/teslex/telegroo/telegroo/blob/master/LICENSE"
 					}
 				}
 
 				developers {
 					developer {
-						id = 'expexes'
-						name = 'Davyd Kohut'
-						email = 'expexes@gmail.com'
+						id = "expexes"
+						name = "Davyd Kohut"
+						email = "expexes@gmail.com"
 					}
 				}
 
 				scm {
-					connection = 'scm:git:git://gitlab.com/teslex/telegroo/telegroo.git'
-					developerConnection = 'scm:git:ssh://gitlab.com/teslex/telegroo/telegroo.git'
-					url = 'https://gitlab.com/teslex/telegroo/telegroo'
+					connection = "scm:git:git://gitlab.com/teslex/telegroo/telegroo.git"
+					developerConnection = "scm:git:ssh://gitlab.com/teslex/telegroo/telegroo.git"
+					url = "https://gitlab.com/teslex/telegroo/telegroo"
 				}
 			}
 		}
@@ -55,23 +70,23 @@ publishing {
 		maven {
 			def releasesRepoUrl = "$buildDir/repo"
 			def snapshotsRepoUrl = "$buildDir/repo/snapshots"
-			url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+			url = version.endsWith("SNAPSHOT") ? snapshotsRepoUrl : releasesRepoUrl
 		}
 	}
 }
 
 bintray {
-	user = System.getenv('BINTRAY_USER')
-	key = System.getenv('BINTRAY_KEY')
+	user = System.getenv("BINTRAY_USER")
+	key = System.getenv("BINTRAY_KEY")
 
-	publications = ['maven']
+	publications = ["maven"]
 
 	pkg {
-		repo = 'telegroo'
-		name = 'telegroo-api'
-		userOrg = 'expexes'
-		licenses = ['Apache-2.0']
-		vcsUrl = 'https://gitlab.com/teslex/telegroo/telegroo.git'
+		repo = "telegroo"
+		name = "telegroo-api"
+		userOrg = "expexes"
+		licenses = ["Apache-2.0"]
+		vcsUrl = "https://gitlab.com/teslex/telegroo/telegroo.git"
 	}
 
 	version {

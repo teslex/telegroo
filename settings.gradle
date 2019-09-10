@@ -6,4 +6,4 @@ include 'telegroo'
 //include 'telegroo-groovy'
 
 //include 'telegroo-graal-example'
-//include 'micronaut-example'
+include 'micronaut-example'

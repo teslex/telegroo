@@ -39,7 +39,7 @@ public class SendChatAction implements MethodObject {
 
 	@JsonIgnore
 	public void setAction(ChatAction action) {
-		this.action = action.getValue();
+		this.action = action.getAction();
 	}
 
 	public SendChatAction chatId(Object chatId) {

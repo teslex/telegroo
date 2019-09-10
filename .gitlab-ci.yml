@@ -2,8 +2,9 @@ image: maven:3-jdk-11
 
 stages:
   - publish
+
 before_script:
-  - apt-get update -qq && apt-get install util-linux coreutils binutils findutils grep gawk -y
+  - apt-get update -qq && apt-get install grep gawk -y
 
 
 # test:

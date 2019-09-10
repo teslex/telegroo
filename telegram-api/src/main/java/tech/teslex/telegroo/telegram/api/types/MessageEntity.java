@@ -9,6 +9,8 @@ import lombok.Data;
 public class MessageEntity {
 	/**
 	 * Type of the entity. Can be mention (@username), hashtag, cashtag, bot_command, url, email, phone_number, bold (bold text), italic (italic text), code (monowidth string), pre (monowidth block), text_link (for clickable text URLs), text_mention (for users without usernames)
+	 *
+	 * @see Entity
 	 */
 	private String type;
 	/**
@@ -29,4 +31,30 @@ public class MessageEntity {
 	 */
 	@JsonProperty(required = false)
 	private User user;
+
+	public enum Entity {
+		MENTION("mention"),
+		HASHTAG("hashtag"),
+		CASHTAG("cashtag"),
+		BOT_COMMAND("bot_command"),
+		URL("url"),
+		EMAIL("email"),
+		PHONE_NUMBER("phone_number"),
+		BOLD("bold"),
+		ITALIC("italic"),
+		CODE("code"),
+		PRE("pre"),
+		TEXT_LINK("text_link"),
+		TEXT_MENTION("text_mention");
+
+		private final String code;
+
+		Entity(String code) {
+			this.code = code;
+		}
+
+		public String getCode() {
+			return code;
+		}
+	}
 }

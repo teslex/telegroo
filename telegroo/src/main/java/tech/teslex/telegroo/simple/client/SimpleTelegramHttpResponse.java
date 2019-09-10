@@ -2,14 +2,18 @@ package tech.teslex.telegroo.simple.client;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import tech.teslex.telegroo.api.client.TelegramHttpResponse;
 import tech.teslex.telegroo.telegram.api.TelegramErrorException;
 import tech.teslex.telegroo.telegram.api.TelegramResult;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+@Slf4j
 public class SimpleTelegramHttpResponse implements TelegramHttpResponse<HttpResponse> {
 
 	private final HttpResponse response;
@@ -35,7 +39,7 @@ public class SimpleTelegramHttpResponse implements TelegramHttpResponse<HttpResp
 
 		return new InputStream() {
 			@Override
-			public int read() throws IOException {
+			public int read() {
 				return 0;
 			}
 		};
@@ -46,6 +50,12 @@ public class SimpleTelegramHttpResponse implements TelegramHttpResponse<HttpResp
 		TelegramResult<R> result;
 
 		Throwable throwable = null;
+
+		try {
+			log.debug(getRawBodyAsString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		try {
 			result = objectMapper.readValue(getRawBody(), objectMapper.getTypeFactory().constructParametricType(TelegramResult.class, type));

@@ -108,7 +108,7 @@ public class SendMessage implements MethodObjectWithDefaultParams {
 	}
 
 	public SendMessage parseMode(@NotNull ParseMode parseMode) {
-		this.parseMode = parseMode.getValue();
+		this.parseMode = parseMode.getMode();
 		return this;
 	}
 

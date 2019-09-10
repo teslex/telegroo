@@ -1,3 +1,5 @@
+import org.gradle.api.internal.artifacts.dsl.dependencies.DefaultDependencyHandler
+
 ext {
 	numberVersion = '0.1.0'
 	isSnapshot = true
@@ -70,7 +72,7 @@ ext {
 			spock         : "org.spockframework.spock:spock-core:spock-$spockVersion"
 	]
 
-	Connect = { ctx ->
+	Connect = { DefaultDependencyHandler ctx ->
 		[
 				lombok : {
 					ctx.annotationProcessor(D.lombok.annotationProcessor)
@@ -82,9 +84,9 @@ ext {
 					ctx.implementation(D.logback.jsonClassic)
 					ctx.implementation(D.logback.jackson)
 				},
+
 				slf4j  : {
 					ctx.implementation(D.slf4j.api)
-					ctx.implementation(D.slf4j.simple)
 				}
 		]
 	}

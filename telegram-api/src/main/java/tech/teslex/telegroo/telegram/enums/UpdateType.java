@@ -19,20 +19,20 @@ public enum UpdateType {
 	PRE_CHECKOUT_QUERY("pre_checkout_query"),
 	POLL("poll");
 
-	private String value;
+	private String type;
 
-	UpdateType(String value) {
-		this.value = value;
+	UpdateType(String type) {
+		this.type = type;
 	}
 
 	public static UpdateType fromString(final String string) {
 		return Arrays.stream(values())
-				.filter(updateType -> updateType.getValue().equals(string))
+				.filter(updateType -> updateType.getType().equals(string))
 				.findFirst()
 				.orElseThrow(RuntimeException::new);
 	}
 
-	public String getValue() {
-		return this.value;
+	public String getType() {
+		return type;
 	}
 }

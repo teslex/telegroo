@@ -15,20 +15,20 @@ public enum ChatAction {
 	RECORD_VIDEO_NOTE("record_video_note"),
 	UPLOAD_VIDEO_NOTE("upload_video_note");
 
-	private String value;
+	private String action;
 
-	ChatAction(String value) {
-		this.value = value;
+	ChatAction(String action) {
+		this.action = action;
 	}
 
 	public static ChatAction fromString(final String string) {
 		return Arrays.stream(values())
-				.filter(chatAction -> chatAction.getValue().equals(string))
+				.filter(chatAction -> chatAction.getAction().equals(string))
 				.findFirst()
 				.orElseThrow(RuntimeException::new);
 	}
 
-	public String getValue() {
-		return this.value;
+	public String getAction() {
+		return action;
 	}
 }

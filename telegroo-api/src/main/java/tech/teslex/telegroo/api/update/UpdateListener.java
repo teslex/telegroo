@@ -17,10 +17,12 @@
 package tech.teslex.telegroo.api.update;
 
 import tech.teslex.telegroo.api.context.Context;
-import tech.teslex.telegroo.api.methods.Methods;
+import tech.teslex.telegroo.api.methods.defaults.Methods;
 import tech.teslex.telegroo.telegram.enums.UpdateType;
 
-public interface UpdateListener<C extends Context> {
+import java.util.EventListener;
+
+public interface UpdateListener<C extends Context> extends EventListener {
 
 	void onUpdate(C context, Methods methods);
 

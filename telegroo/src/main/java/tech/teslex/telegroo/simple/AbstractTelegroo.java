@@ -8,11 +8,11 @@ import tech.teslex.telegroo.api.context.CommandContext;
 import tech.teslex.telegroo.api.context.Context;
 import tech.teslex.telegroo.api.context.MessageContext;
 import tech.teslex.telegroo.api.jackson.DefaultJacksonObjectMapper;
-import tech.teslex.telegroo.api.methods.Methods;
+import tech.teslex.telegroo.api.methods.defaults.Methods;
 import tech.teslex.telegroo.api.update.CommandUpdateListener;
 import tech.teslex.telegroo.api.update.MessagePatternUpdateListener;
 import tech.teslex.telegroo.api.update.UpdateListener;
-import tech.teslex.telegroo.api.update.UpdatesHandler;
+import tech.teslex.telegroo.simple.update.UpdatesHandler;
 import tech.teslex.telegroo.simple.client.SimpleTelegramClient;
 import tech.teslex.telegroo.simple.context.SimpleContext;
 import tech.teslex.telegroo.simple.methods.SimpleMethods;
@@ -31,14 +31,14 @@ import java.util.regex.Pattern;
 @Slf4j
 public abstract class AbstractTelegroo implements Telegroo {
 
-	protected final static Map<UpdateType, Collection<UpdateListener>> listeners = new HashMap<>();
+	protected static Map<UpdateType, Collection<UpdateListener>> listeners = new HashMap<>();
 
-	protected final String token;
-	protected final ObjectMapper objectMapper;
-	protected final TelegramClient telegramClient;
-	protected final UpdatesHandler updatesHandler;
-	protected final MainContext mainContext;
-	protected final Methods methods;
+	protected String token;
+	protected ObjectMapper objectMapper;
+	protected TelegramClient telegramClient;
+	protected UpdatesHandler updatesHandler;
+	protected MainContext mainContext;
+	protected Methods methods;
 
 	public AbstractTelegroo(String token) {
 		this.token = token;
@@ -115,7 +115,7 @@ public abstract class AbstractTelegroo implements Telegroo {
 	}
 
 	protected void addListener(UpdateListener listener) {
-		log.debug("adding new listener: " + listener);
+		log.debug("Adding new listener: " + listener);
 
 		if (!listeners.containsKey(listener.getType())) {
 			listeners.put(listener.getType(), new ArrayList<>());

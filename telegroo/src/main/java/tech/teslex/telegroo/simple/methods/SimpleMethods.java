@@ -2,7 +2,7 @@ package tech.teslex.telegroo.simple.methods;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import tech.teslex.telegroo.api.context.Context;
-import tech.teslex.telegroo.api.methods.Methods;
+import tech.teslex.telegroo.api.methods.defaults.Methods;
 
 public class SimpleMethods implements Methods {
 

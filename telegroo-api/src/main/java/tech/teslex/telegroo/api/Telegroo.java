@@ -20,7 +20,7 @@ import tech.teslex.telegroo.api.client.TelegramClient;
 import tech.teslex.telegroo.api.context.CommandContext;
 import tech.teslex.telegroo.api.context.Context;
 import tech.teslex.telegroo.api.context.MessageContext;
-import tech.teslex.telegroo.api.methods.Methods;
+import tech.teslex.telegroo.api.methods.defaults.Methods;
 import tech.teslex.telegroo.api.update.CommandUpdateListener;
 import tech.teslex.telegroo.api.update.MessagePatternUpdateListener;
 import tech.teslex.telegroo.api.update.UpdateListener;

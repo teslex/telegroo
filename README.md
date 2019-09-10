@@ -5,7 +5,9 @@
 
 **Simple Telegram Bot wrapper for Java & [Groovy](http://groovy-lang.org)**
 
-> Version: **[0.1.0](https://gitlab.com/teslex/repo#telegroo)**
+Currently under <del>active</del> development. **Compatible only with Java 12.**
+
+> Version: **[0.1.0-{}-SNAPSHOT](https://gitlab.com/teslex/repo#telegroo)**
 
 - [Telegroo Docs](https://teslex.gitlab.io/telegroo)
 - [Telegram Bot API](https://core.telegram.org/bots/api)
@@ -64,3 +66,9 @@ telegroo.startPolling()
 ```groovy
 @Grab("tech.teslex.telegroo:telegroo:$telegrooVersion")
 ```
+
+## Snapshots
+
+- Snapshots repo: `https://teslex.gitlab.io/repo/snapshots`
+- Current snapshot version here: https://gitlab.com/teslex/repo/blob/master/snapshots/tech/teslex/telegroo/telegroo/maven-metadata.xml
+

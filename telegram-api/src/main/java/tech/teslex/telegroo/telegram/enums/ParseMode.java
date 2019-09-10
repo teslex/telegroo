@@ -7,20 +7,20 @@ public enum ParseMode {
 	MARKDOWN("Markdown"),
 	HTML("HTML");
 
-	private String value;
+	private String mode;
 
-	ParseMode(String value) {
-		this.value = value;
+	ParseMode(String mode) {
+		this.mode = mode;
 	}
 
 	public static ParseMode fromString(final String string) {
 		return Arrays.stream(values())
-				.filter(parseMode -> parseMode.getValue().equals(string))
+				.filter(parseMode -> parseMode.getMode().equals(string))
 				.findFirst()
 				.orElseThrow(RuntimeException::new);
 	}
 
-	public String getValue() {
-		return this.value;
+	public String getMode() {
+		return mode;
 	}
 }

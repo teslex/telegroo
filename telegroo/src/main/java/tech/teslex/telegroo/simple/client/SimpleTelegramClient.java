@@ -144,7 +144,7 @@ public class SimpleTelegramClient implements TelegramClient {
 			}
 
 			httpEntityBuilder
-					.addBinaryBody(data.getInputFile().getMediaType().getValue(), ((FileInputFile) data.getInputFile()).getFile(), ContentType.MULTIPART_FORM_DATA, data.getInputFile().getMediaType().getValue());
+					.addBinaryBody(data.getInputFile().getMediaType().getType(), ((FileInputFile) data.getInputFile()).getFile(), ContentType.MULTIPART_FORM_DATA, data.getInputFile().getMediaType().getType());
 
 			httpPost.setEntity(httpEntityBuilder.build());
 			return httpPost;
@@ -199,7 +199,7 @@ public class SimpleTelegramClient implements TelegramClient {
 				.stream()
 				.filter(inputMedia -> inputMedia.getMedia() instanceof FileInputFile)
 				.forEach(inputMedia -> httpEntityBuilder
-						.addBinaryBody(inputMedia.getMedia().getMediaType().getValue(), ((FileInputFile) inputMedia.getMedia()).getFile(), ContentType.MULTIPART_FORM_DATA, inputMedia.getMedia().getMediaType().getValue()));
+						.addBinaryBody(inputMedia.getMedia().getMediaType().getType(), ((FileInputFile) inputMedia.getMedia()).getFile(), ContentType.MULTIPART_FORM_DATA, inputMedia.getMedia().getMediaType().getType()));
 
 		httpPost.setEntity(httpEntityBuilder.build());
 

@@ -24,10 +24,10 @@ public class SimplePollingTelegroo extends AbstractTelegroo implements PollingTe
 	@Override
 	public void startPolling() {
 		if (polling.get()) {
-			throw new IllegalStateException("bot is already polling");
+			throw new IllegalStateException("Bot is already polling.");
 		}
 
-		log.debug("start polling");
+		log.debug("Starting polling..");
 
 		polling.set(true);
 
@@ -47,10 +47,10 @@ public class SimplePollingTelegroo extends AbstractTelegroo implements PollingTe
 	@Override
 	public void stopPolling() {
 		if (!polling.get()) {
-			throw new IllegalStateException("bot is not polling");
+			throw new IllegalStateException("Bot is not polling.");
 		}
 
-		log.debug("stop polling");
+		log.debug("Stopping polling..");
 
 		polling.set(false);
 	}
